@@ -1,9 +1,14 @@
 <div id="form"><?php echo $this->form ?></div>
+
+<?php if (count($this->books) <> 0) { ?>
 <div id="list">
     <?php foreach($this->books as $book) { ?>
         <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book)) ?>
     <?php } ?>
 </div>
+<?php } else { ?>
+    <p>No results found</p>
+<?php } ?>
 
 <div class="overlay" id="book_info">
     <div style="float:left; margin: 0em 1.3em 0em 0em; width: 400px;">

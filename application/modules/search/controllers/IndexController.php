@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 class Search_IndexController extends Babel_Action
 {
@@ -13,19 +13,28 @@ class Search_IndexController extends Babel_Action
         $form = new Search_Form_Search();
         $form->isValid($_GET);
 
+        $books = array();
+
         $index = Zend_Search_Lucene::open(APPLICATION_PATH . '/../data/lucene');
         $hits = $index->find($form->getElement('q')->getValue());
+        foreach ($hits as $hit) {
+            $class = new Books_Book_Empty();
 
-      /*  foreach ($hits as $hit) {
-            var_dump($hit->title);
-            var_dump($hit->score);
-            echo '<hr/>';
+            $class->id = $hit->id;
+            $class->score = $hit->score;
+
+            $class->book = $hit->book;
+            $class->title = $hit->title;
+            $class->author = $hit->author;
+            $class->publisher = $hit->publisher;
+            $class->language = $hit->language;
+
+            $class->avatar = $hit->avatar;
+
+            $books[] = $class;
         }
-die;*/
-
-        $model_books = new Books();
-        $this->view->books = $model_books->fetchAll();
 
         $this->view->form = $form;
+        $this->view->books = $books;
     }
 }

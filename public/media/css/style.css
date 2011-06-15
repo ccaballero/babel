@@ -132,6 +132,11 @@ body {
     padding: 0.30em 0em;
 }
 
+#main h2 {
+    font-size: 1.7em;
+    padding: 0.36em 0em;
+}
+
 #main .message {
     width: 840px;
     margin: 0.3em auto;

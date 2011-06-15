@@ -22,8 +22,8 @@
                 </td>
                 <td class="left"><?php echo $book->title ?></td>
                 <td class="left"><?php echo $book->author ?></td>
-                <td class="left"><?php echo $book->publisher ?></td>
-                <td class="left"><?php echo $book->language ?></td>
+                <td class="center"><?php echo $book->publisher ?></td>
+                <td class="center"><?php echo $book->language ?></td>
                 <td class="left"><?php echo $book->getPath() ?></td>
                 <td class="center">
                 <?php if ($book->avatar) { ?>
