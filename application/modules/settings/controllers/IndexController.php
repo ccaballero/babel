@@ -3,6 +3,8 @@
 class Settings_IndexController extends Babel_Action
 {
     public function indexAction() {
+        $this->requireLogin();
+
         $request = $this->getRequest();
         $form = new Settings_Form_Setting();
 

@@ -2,17 +2,17 @@
 DROP TABLE IF EXISTS `babel_users`;
 CREATE TABLE `babel_users` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
-    `email`             varchar(128)                                                NOT NULL,
-    `password`          varchar(40)                                                NOT NULL,
+    `username`          varchar(128)                                                NOT NULL,
+    `password`          varchar(40)                                                 NOT NULL,
     `fullname`          varchar(128)                                                NOT NULL DEFAULT '',
     `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`email`)
+    UNIQUE INDEX (`username`)
 ) DEFAULT CHARACTER SET UTF8;
 
-INSERT INTO `babel_users` (`fullname`, `email`, `password`) VALUES
-('Carlos Caballero',  'cijkb.j@gmail.com', '63ca26f56c5730ede6b21c7b681b917e2fb37765');
+INSERT INTO `babel_users` (`fullname`, `username`, `password`) VALUES
+('Carlos Caballero',  'jacobian', '63ca26f56c5730ede6b21c7b681b917e2fb37765');
 
 DROP TABLE IF EXISTS `babel_books_collection`;
 CREATE TABLE `babel_books_collection` (
@@ -59,4 +59,4 @@ CREATE TABLE `babel_catalogs` (
 ) DEFAULT CHARACTER SET UTF8;
 
 INSERT INTO `babel_catalogs` (`label`, `url`, `description`) VALUES
-('Ciencias y Tecnologia', 'ciencias-y-tecnologia', '');
+('Sistema de clasificación decimal Dewey', 'sistema-de-clasificacion-dewey', '');

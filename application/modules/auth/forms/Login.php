@@ -5,13 +5,12 @@ class Auth_Form_Login extends Zend_Form
     public function init() {
         $this->setMethod('post');
 
-        $email = $this->createElement('text', 'email');
+        $email = $this->createElement('text', 'username');
         $email->setRequired(true)
-              ->setLabel('Email')
-              ->setAttrib('class', 'focus email')
+              ->setLabel('Username')
+              ->setAttrib('class', 'focus user')
               ->addFilter('StringTrim')
-              ->addValidator('StringLength', false, array(0, 64))
-              ->addValidator('EmailAddress', false);
+              ->addValidator('StringLength', false, array(0, 128));
 
         $password = $this->createElement('password', 'password');
         $password->setRequired(true)

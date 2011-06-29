@@ -278,6 +278,11 @@ div.tool-panel {
     height: 100px;
 }
 
+#list .catalog {
+    width: 333px;
+    height: 100px;
+}
+
 table .title {
     height: 1.6em;
     font-weight: bold;

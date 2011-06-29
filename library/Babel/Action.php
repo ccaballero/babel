@@ -33,4 +33,11 @@ class Babel_Action extends Zend_Controller_Action
         $this->view->render('frontpage/views/scripts/menubar.php');
         $this->view->render('frontpage/views/scripts/messages.php');
     }
+
+    public function requireLogin() {
+        if ($this->auth == null) {
+            $this->_helper->flashMessenger->addMessage('You must be logged');
+            $this->_helper->redirector('in', 'index', 'auth');
+        }
+    }
 }

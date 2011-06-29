@@ -13,16 +13,16 @@ class Users_Form_Create extends Zend_Form
                  ->addValidator('StringLength', false, array(0, 128))
                  ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
 
-        $email = $this->createElement('text', 'email');
-        $email->setRequired(true)
-              ->setLabel('Email')
-              ->setAttrib('class', 'email')
-              ->addFilter('StringTrim')
-              ->addValidator('StringLength', false, array(0, 64))
-              ->addValidator('EmailAddress', false);
+        $username = $this->createElement('text', 'username');
+        $username->setRequired(true)
+                 ->setLabel('Username')
+                 ->setAttrib('class', 'email')
+                 ->addFilter('StringTrim')
+                 ->addValidator('StringLength', false, array(0, 128))
+                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
 
         $this->addElement($fullname);
-        $this->addElement($email);
+        $this->addElement($username);
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Create',));
     }
 }

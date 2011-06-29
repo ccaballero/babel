@@ -14,11 +14,11 @@ class Auth_IndexController extends Babel_Action
                 $dbAdapter = Zend_Db_Table::getDefaultAdapter();
                 $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
                 $authAdapter->setTableName('babel_users')
-                            ->setIdentityColumn('email')
+                            ->setIdentityColumn('username')
                             ->setCredentialColumn('password')
                             ->setCredentialTreatment("SHA1(CONCAT('$key',?,'$key'))");
 
-                $authAdapter->setIdentity($form->getElement('email')->getValue());
+                $authAdapter->setIdentity($form->getElement('username')->getValue());
                 $authAdapter->setCredential($form->getElement('password')->getValue());
 
                 $auth = Zend_Auth::getInstance();
@@ -28,7 +28,7 @@ class Auth_IndexController extends Babel_Action
                     $auth->getStorage()->write($user);
                     $this->_helper->redirector('index', 'index', 'frontpage');
                 }
-                $form->getElement('email')->addErrorMessage('Incorrect information')->markAsError();
+                $form->getElement('username')->addErrorMessage('Incorrect information')->markAsError();
             }
         }
 

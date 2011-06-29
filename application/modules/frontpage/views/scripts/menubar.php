@@ -19,6 +19,7 @@
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_shared') ?>">Books</a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_collection') ?>">Collection</a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_examine') ?>">Files</a>
+<a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'search_index') ?>">Index</a>
 
 <?php } ?>
 

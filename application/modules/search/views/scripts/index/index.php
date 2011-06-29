@@ -22,7 +22,7 @@
             <p><span class="bold">Language: </span><span id="book_language" class="italic"></span></p>
         </div>
         <div style="margin: 1.2em 0em 0em 0em;">
-            <a id="book_download" href="" target="_BLANK"><img src="/media/img/icons/cart_put.png" alt="Download" title="Download" /></a>
+            <a id="book_download" href="" target="_BLANK"><img src="/media/img/icons/basket_put.png" alt="Download" title="Download" /></a>
             (<span id="book_downloads_number"></span>)
         </div>
     </div>

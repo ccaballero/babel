@@ -3,6 +3,8 @@
 class Search_CronController extends Babel_Action
 {
     public function indexAction() {
+        $this->requireLogin();
+
         $index = Zend_Search_Lucene::create(APPLICATION_PATH . '/../data/lucene');
 
         $model_books = new Books();
@@ -22,5 +24,8 @@ class Search_CronController extends Babel_Action
         }
 
         $index->optimize();
+
+        $this->_helper->flashMessenger->addMessage('Indexation done');
+        $this->_helper->redirector('index', 'index', 'frontpage');
     }
 }

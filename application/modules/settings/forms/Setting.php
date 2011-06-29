@@ -15,16 +15,16 @@ class Settings_Form_Setting extends Zend_Form
                  ->addValidator('StringLength', false, array(0, 128))
                  ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
 
-        $email = $information_subform->createElement('text', 'email');
-        $email->setRequired(true)
-              ->setLabel('Email')
-              ->setAttrib('class', 'email')
-              ->addFilter('StringTrim')
-              ->addValidator('StringLength', false, array(0, 64))
-              ->addValidator('EmailAddress', false);
+        $username = $information_subform->createElement('text', 'username');
+        $username->setRequired(true)
+                 ->setLabel('Username')
+                 ->setAttrib('class', 'email')
+                 ->addFilter('StringTrim')
+                 ->addValidator('StringLength', false, array(0, 128))
+                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
 
         $information_subform->addElement($fullname);
-        $information_subform->addElement($email);
+        $information_subform->addElement($username);
 
         $photo_subform = new Zend_Form_SubForm();
         $photo = $photo_subform->createElement('file', 'photo');
@@ -64,6 +64,6 @@ class Settings_Form_Setting extends Zend_Form
 
     public function setUser($user) {
         $this->getSubForm('information')->getElement('fullname')->setValue($user->fullname);
-        $this->getSubForm('information')->getElement('email')->setValue($user->email);
+        $this->getSubForm('information')->getElement('username')->setValue($user->username);
     }
 }

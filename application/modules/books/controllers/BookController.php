@@ -90,6 +90,8 @@ class Books_BookController extends Babel_Action
     }
 
     public function fileAction() {
+        $this->requireLogin();
+
         $form = new Books_Form_Collection();
 
         $request = $this->getRequest();
@@ -125,6 +127,8 @@ class Books_BookController extends Babel_Action
     }
 
     public function bookAction() {
+        $this->requireLogin();
+
         $form = new Books_Form_Shared();
 
         $request = $this->getRequest();

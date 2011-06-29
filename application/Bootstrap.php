@@ -40,6 +40,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'delimiter' => ','
         ));
 
+        // PHP's settings for encoding
+        mb_internal_encoding('UTF-8');
+        mb_http_output('UTF-8');
+
+        // Set for localization
+        setlocale(LC_CTYPE, 'en_US.UTF8');
+        Zend_Locale::setDefault('en_US.UTF8');
+
         //$translate->addTranslation(array('content' => APPLICATION_PATH . '/../i18n/es.csv', 'locale' => 'es'));
         Zend_Registry::set('Zend_Translate', $translate);
         Zend_Form::setDefaultTranslator($translate);

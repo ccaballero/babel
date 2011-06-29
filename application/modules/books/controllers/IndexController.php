@@ -3,6 +3,8 @@
 class Books_IndexController extends Babel_Action
 {
     public function sharedAction() {
+        $this->requireLogin();
+
         $model_shared = new Books();
         $books = $model_shared->fetchAll();
 
@@ -24,6 +26,8 @@ class Books_IndexController extends Babel_Action
     }
 
     public function indexAction() {
+        $this->requireLogin();
+
         $model_collection = new Books_Collection();
         $model_shared = new Books();
 
@@ -64,6 +68,8 @@ class Books_IndexController extends Babel_Action
     }
 
     public function examineAction() {
+        $this->requireLogin();
+
         $model_collection = new Books_Collection();
 
         $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
@@ -100,8 +106,8 @@ class Books_IndexController extends Babel_Action
         $model_collection = new Books_Collection();
         $books = array();
 
-        $warnings_filenames = array();
-        $warnings_md5_files = array();
+        $warning_filenames = array();
+        $warning_md5_files = array();
 
         foreach($bookstores as $bookstore) {
             $files = $this->_scan_files($bookstore);
