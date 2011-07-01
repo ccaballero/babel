@@ -22,9 +22,10 @@ class Users_IndexController extends Babel_Action
 
                 $key = Zend_Registry::get('Config')->babel->properties->key;
 
-                $user->fullname = $request->getParam('fullname');
-                $user->username = $request->getParam('username');
+                $user->fullname = $form->getElement('fullname')->getValue();
+                $user->username = $form->getElement('username')->getValue();
                 $user->password = sha1($key . '.asdf.' . $key);
+                $user->tsregister = time();
 
                 $user->save();
                 $this->_helper->flashMessenger->addMessage('The user ' . $user->fullname . ' was created');

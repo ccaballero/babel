@@ -55,8 +55,10 @@ CREATE TABLE `babel_catalogs` (
     `description`       text                                                        NOT NULL DEFAULT '',
     `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL,
-    PRIMARY KEY (`ident`)
+    PRIMARY KEY (`ident`),
+    UNIQUE INDEX (`label`),
+    UNIQUE INDEX (`url`)
 ) DEFAULT CHARACTER SET UTF8;
 
 INSERT INTO `babel_catalogs` (`label`, `url`, `description`) VALUES
-('Sistema de clasificación decimal Dewey', 'sistema-de-clasificacion-dewey', '');
+('Sistema de clasificacion decimal Dewey', 'sistema-de-clasificacion-decimal-dewey', '');

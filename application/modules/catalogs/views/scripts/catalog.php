@@ -4,7 +4,7 @@
     </div>
     <div>
         <p>
-            <span class="bold"><?php echo $this->none($this->catalog->label) ?></span>
+            <a href="<?php echo $this->url(array('catalog' => $this->catalog->url), 'catalogs_view') ?>"><span class="bold"><?php echo $this->catalog->label ?></span></a>
             <?php echo $this->catalog->description ?>
         </p>
     </div>
