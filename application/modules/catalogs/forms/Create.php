@@ -11,8 +11,16 @@ class Catalogs_Form_Create extends Zend_Form
               ->setLabel('Label')
               ->setAttrib('class', 'focus label')
               ->addFilter('StringTrim')
-              ->addValidator('StringLength', false, array(0, 128))
+              ->addValidator('StringLength', false, array(1, 128))
               ->addValidator('Alnum', false, array('allowWhiteSpace' => true));
+
+        $code = $information_subform->createElement('text', 'code');
+        $code->setRequired(true)
+             ->setLabel('Code')
+             ->setAttrib('class', 'key')
+             ->addFilter('StringTrim')
+             ->addValidator('StringLength', false, array(1, 8))
+             ->addValidator('Alnum', false, array('allowWhiteSpace' => false));
 
         $description = $information_subform->createElement('textarea', 'description');
         $description->setRequired(false)
@@ -21,6 +29,7 @@ class Catalogs_Form_Create extends Zend_Form
                     ->addFilter('StripTags');
 
         $information_subform->addElement($label);
+        $information_subform->addElement($code);
         $information_subform->addElement($description);
 
         $photo_subform = new Zend_Form_SubForm();

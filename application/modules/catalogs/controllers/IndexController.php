@@ -4,7 +4,7 @@ class Catalogs_IndexController extends Babel_Action
 {
     public function indexAction() {
         $model_catalogs = new Catalogs();
-        $this->view->catalogs = $model_catalogs->fetchAll();
+        $this->view->catalogs = $model_catalogs->selectRoots();
     }
 
     public function newAction() {

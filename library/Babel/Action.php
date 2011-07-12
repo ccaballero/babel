@@ -32,6 +32,7 @@ class Babel_Action extends Zend_Controller_Action
         $this->view->render('frontpage/views/scripts/toolbar.php');
         $this->view->render('frontpage/views/scripts/menubar.php');
         $this->view->render('frontpage/views/scripts/messages.php');
+        $this->view->render('frontpage/views/scripts/footer.php');
     }
 
     public function requireLogin() {

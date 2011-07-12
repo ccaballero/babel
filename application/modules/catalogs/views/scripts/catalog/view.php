@@ -1,7 +1,12 @@
-<?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-?>
+<h1><?php echo $this->catalog->label ?></h1>
+<div id="breadcrumb">
+    <a href="<?php echo $this->url(array(), 'catalogs') ?>">Catalogs</a>
+    <?php foreach ($this->breadcrumb($this->catalog) as $catalog) { ?>
+        <a href="<?php echo $this->url(array('catalog' => $catalog->ident), 'catalogs_view') ?>"><?php echo $catalog->label ?></a>
+    <?php } ?>
+</div>
+<div id="list">
+    <?php foreach ($this->catalogs as $catalog) { ?>
+        <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('catalog' => $catalog)) ?>
+    <?php } ?>
+</div>

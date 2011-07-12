@@ -6,15 +6,22 @@ class Catalogs extends Babel_Models_Table
     protected $_primary = 'ident';
     protected $_rowClass = 'Catalogs_Catalog';
 
+    protected $_dependentTables = array('Catalogs');
+    protected $_referenceMap    = array(
+        'Parent'                => array(
+            'columns'           => 'parent',
+            'refTableClass'     => 'Catalogs',
+            'refColumns'        => 'ident',
+            'onDelete'          => self::CASCADE,
+            'onUpdate'          => self::RESTRICT
+        ),
+    );
+
     public function findByIdent($ident) {
         return $this->fetchRow($this->select()->where('ident = ?', $ident));
     }
 
-    public function findByLabel($label) {
-        return $this->fetchRow($this->select()->where('label = ?', $label));
-    }
-
-    public function findByUrl($url) {
-        return $this->fetchRow($this->select()->where('url = ?', $url));
+    public function selectRoots() {
+        return $this->fetchAll($this->select()->where('parent IS NULL'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class ErrorController extends Zend_Controller_Action
+class ErrorController extends Babel_Action
 {
     public function errorAction() {
         $errors = $this->_getParam('error_handler');
@@ -37,7 +37,7 @@ class ErrorController extends Zend_Controller_Action
             $this->view->exception = $errors->exception;
         }
         
-        $this->view->request   = $errors->request;
+        $this->view->request = $errors->request;
     }
 
     public function getLog() {
