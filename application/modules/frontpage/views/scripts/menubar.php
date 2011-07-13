@@ -4,9 +4,6 @@
 
 <a id="catalogs_menu" class="main color2" href="<?php echo $this->url(array(), 'catalogs') ?>"><?php echo $this->translate->_('Catalogs') ?></a>
 <a class="catalogs <?php echo $this->isHidden($this->route, 'catalogs') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'catalogs') ?>">List</a>
-<?php if ($this->auth->hasIdentity()) { ?>
-<a class="catalogs <?php echo $this->isHidden($this->route, 'catalogs') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'catalogs_new') ?>">New</a>
-<?php } ?>
 <a class="catalogs <?php echo $this->isHidden($this->route, 'catalogs') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'tags') ?>">Tagcloud</a>
 
 <?php if ($this->auth->hasIdentity()) { ?>

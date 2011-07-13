@@ -302,6 +302,10 @@ div.tool-panel {
     height: 100px;
 }
 
+#list .new {
+    width: 103px;
+}
+
 #list a {
     color: #ffffff;
 }

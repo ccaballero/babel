@@ -151,17 +151,19 @@ class Books_IndexController extends Babel_Action
         $files = array();
 
         $subdirectories = @scandir($directory);
-        foreach ($subdirectories as $file) {
-            if (($file <> '.') && ($file <> '..')) {
-                if (is_dir($directory . '/' . $file)) {
-                    $files = @array_merge($files, $this->_scan_files($directory . '/' . $file));
-                } else if (is_file($directory . '/' . $file)) {
-                    if (substr(strtolower($file), -3) == 'pdf') {
-                        $files[] = array(
-                            'md5' => md5($directory . '/' . $file),
-                            'directory' => $directory,
-                            'file' => $file,
-                        );
+        if ($subdirectories) {
+            foreach ($subdirectories as $file) {
+                if (($file <> '.') && ($file <> '..')) {
+                    if (is_dir($directory . '/' . $file)) {
+                        $files = @array_merge($files, $this->_scan_files($directory . '/' . $file));
+                    } else if (is_file($directory . '/' . $file)) {
+                        if (substr(strtolower($file), -3) == 'pdf') {
+                            $files[] = array(
+                                'md5' => md5($directory . '/' . $file),
+                                'directory' => $directory,
+                                'file' => $file,
+                            );
+                        }
                     }
                 }
             }

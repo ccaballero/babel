@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `babel_catalogs`;
 CREATE TABLE `babel_catalogs` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(128)                                                NOT NULL,
-    `code`              varchar(8)                                                  NOT NULL,
+    `code`              varchar(8)                                                  NOT NULL DEFAULT '',
     `level`             int unsigned                                                NOT NULL,
     `description`       text                                                        NOT NULL DEFAULT '',
     `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,

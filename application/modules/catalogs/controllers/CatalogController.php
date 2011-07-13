@@ -13,5 +13,14 @@ class Catalogs_CatalogController extends Babel_Action
 
         $this->view->catalog = $catalog;
         $this->view->catalogs = $children;
+
+        if ($this->auth <> null) {
+            $url = new Zend_Controller_Action_Helper_Url();
+
+            $form = new Catalogs_Form_Create();
+            $form->setAction($url->url(array('catalog' => $catalog->ident), 'catalogs_catalog_new'));
+
+            $this->view->form = $form;
+        }
     }
 }
