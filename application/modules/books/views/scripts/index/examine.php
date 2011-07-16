@@ -31,7 +31,8 @@
                         <?php } ?>
                     </td>
                     <td class="left">
-                        <?php echo strtoupper($book->md5_file) ?>
+                        <?php /*echo strtoupper($book->md5_file) */?>
+                        <?php echo strtoupper($book->md5_path) ?>
                         <?php if (!$this->warnings_md5_files[$book->md5_file]) { ?>
                             <img style="float:right;" src="/media/img/icons/error.png" alt="" title="" />
                         <?php } ?>

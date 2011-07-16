@@ -4,8 +4,12 @@
     </div>
     <div>
         <p><span class="bold">Title: </span><?php echo $this->none($this->book->title) ?></p>
-        <p><span class="bold">Author: </span><?php echo $this->none($this->book->author) ?></p>
-        <p><span class="bold">Publisher: </span><?php echo $this->none($this->book->publisher) ?></p>
+    <?php if (!empty($this->book->author)) { ?>
+        <p><span class="bold">Author: </span><?php echo $this->book->author ?></p>
+    <?php } ?>
+    <?php if (!empty($this->book->publisher)) { ?>
+        <p><span class="bold">Publisher: </span><?php echo $this->book->publisher ?></p>
+    <?php } ?>
         <p><span class="bold">Language: </span><?php echo $this->none($this->book->language) ?></p>
     </div>
 </div>

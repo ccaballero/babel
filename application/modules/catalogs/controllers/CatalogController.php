@@ -9,6 +9,10 @@ class Catalogs_CatalogController extends Babel_Action
         $model_catalogs = new Catalogs();
         $catalog = $model_catalogs->findByIdent($ident_catalog);
 
+        if ($catalog == NULL) {
+            $this->_helper->redirector('index', 'index', 'catalogs');
+        }
+        
         $children = $catalog->findDependentRowset('Catalogs');
 
         $this->view->catalog = $catalog;

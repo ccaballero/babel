@@ -21,6 +21,12 @@ fieldset {
     border: none;
 }
 
+blockquote {
+    margin: 1.0em 3.0em;
+    padding: 1.0em 3.0em;
+    border: 1px dashed #ffffff;
+}
+
 table {
     width: 100%;
     border-collapse:collapse;
@@ -37,7 +43,7 @@ body {
 .hidden { display: none; }
 .showed { display: inline; }
 
-.bold { font-weight: bold; }
+.bold { font-weight: bold; color: #74B7E7; padding-right: 0.25em; }
 .italic { font-style: italic; }
 
 #head {

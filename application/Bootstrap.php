@@ -76,8 +76,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->doctype($options['resources']['view']['doctype']);
         $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
         $view->headLink()->appendStylesheet('/media/css/style.css');
-        $view->headScript()->appendFile('/media/js/jquery-1.3.2.min.js', 'text/javascript')
+        $view->headLink()->appendStylesheet('/media/css/jquery-ui.css');
+        $view->headScript()->appendFile('/media/js/jquery-1.6.2.min.js', 'text/javascript')
                            ->appendFile('/media/js/jquery.tools.min.js', 'text/javascript')
+                           ->appendFile('/media/js/jquery-ui.min.js', 'text/javascript')
                            ->appendFile('/media/js/initial_load.js', 'text/javascript');
 
         return $view;

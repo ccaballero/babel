@@ -15,8 +15,10 @@ class Search_IndexController extends Babel_Action
 
         $books = array();
 
+        Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(0);
+
         $index = Zend_Search_Lucene::open(APPLICATION_PATH . '/../data/lucene');
-        $hits = $index->find($form->getElement('q')->getValue());
+        $hits = $index->find(strtolower($form->getElement('q')->getValue()));
         foreach ($hits as $hit) {
             $class = new Books_Book_Empty();
 
