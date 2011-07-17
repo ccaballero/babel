@@ -6,7 +6,7 @@ class Books_Collection extends Babel_Models_Table
     protected $_primary = 'ident';
 
     protected $_rowClass = 'Books_Collection_File';
-    protected $_dependentTables = array('Books');
+    protected $_dependentTables = array('Books', 'Books_Stats');
     
     public function selectByBookstore($bookstore) {
         return $this->fetchAll($this->select()->where('bookstore = ?', $bookstore)->order('file ASC'));

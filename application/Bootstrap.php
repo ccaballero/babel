@@ -80,7 +80,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headScript()->appendFile('/media/js/jquery-1.6.2.min.js', 'text/javascript')
                            ->appendFile('/media/js/jquery.tools.min.js', 'text/javascript')
                            ->appendFile('/media/js/jquery-ui.min.js', 'text/javascript')
-                           ->appendFile('/media/js/initial_load.js', 'text/javascript');
+                           ->appendFile('/media/js/babel.js', 'text/javascript');
 
         return $view;
     }

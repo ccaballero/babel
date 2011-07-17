@@ -11,7 +11,7 @@ class Books_Stats extends Babel_Models_Table
             'refTableClass'     => 'Books_Collection',
             'refColumns'        => 'ident',
             'onDelete'          => self::CASCADE,
-            'onUpdate'          => self::RESTRICT
+            'onUpdate'          => self::CASCADE
         ),
     );
 

@@ -23,7 +23,7 @@ class Catalogs_IndexController extends Babel_Action
                 $catalog = $model_catalogs->createRow();
 
                 $catalog->label = $form->getSubForm('information')->getElement('label')->getValue();
-                $catalog->code = $form->getSubForm('information')->getElement('code')->getValue();
+                //$catalog->code = $form->getSubForm('information')->getElement('code')->getValue();
                 $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
                 $catalog->tsregister = time();
 
@@ -32,6 +32,11 @@ class Catalogs_IndexController extends Babel_Action
                 $parent = $model_catalogs->findByIdent($id_parent);
                 if ($parent <> NULL) {
                     $catalog->parent = $parent->ident;
+                    if ($parent->root <> NULL) {
+                        $catalog->root = $parent->root;
+                    } else {
+                        $catalog->root = $parent->ident;
+                    }
                 }
 
                 $catalog->save();

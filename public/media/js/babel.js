@@ -81,8 +81,9 @@ $(document).ready(function(){
                 $('#book_author').html(json.book.author);
                 $('#book_publisher').html(json.book.publisher);
                 $('#book_language').html(json.book.language);
-                $('#book_downloads_number').html(json.book.downloads);
-                $('#book_download').attr('href','/books/'+book.substring(5)+'/download');
+
+                $('#book_download').attr('href',json.book.url.download);
+                $('#book_catalog').attr('href',json.book.url.catalog);
             });
         }});
     $('#catalog_new').overlay({left:'center',top:90});

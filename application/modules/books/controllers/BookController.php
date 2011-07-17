@@ -11,14 +11,18 @@ class Books_BookController extends Babel_Action
 
         $class = new StdClass();
         if (!empty($book)) {
-            $class->bookstore = $book->bookstore;
-            $class->directory = $book->directory;
-            $class->file = $book->file;
-            $class->size = $book->size;
-            $class->md5 = $book->md5_file;
+            if ($this->auth <> null) {
+                $class->bookstore = $book->bookstore;
+                $class->directory = $book->directory;
+                $class->file = $book->file;
+                $class->size = $book->size;
+                $class->md5 = $book->md5_file;
+            }
 
             $model_shared = new Books();
             $book = $model_shared->findByBook($book->ident);
+
+            $url = new Zend_Controller_Action_Helper_Url();
 
             if (!empty($book)) {
                 $class->title = $book->title;
@@ -26,8 +30,8 @@ class Books_BookController extends Babel_Action
                 $class->publisher = $book->publisher;
                 $class->language = $book->language;
 
-                $stats = $book->getStats();
-                $class->downloads = $stats->downloads;
+                $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
+                $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
             }
         }
 
@@ -36,6 +40,47 @@ class Books_BookController extends Babel_Action
         header('Content-Type: application/json');
         echo json_encode(array('book' => $class));
         die;
+    }
+
+    public function catalogAction() {
+        $request = $this->getRequest();
+        $ident = $request->getParam('book');
+
+        $model_shared = new Books();
+        $model_books_catalogs = new Books_Catalogs();
+        $model_catalogs = new Catalogs();
+
+        $book = $model_shared->findByBook($ident);
+        if (!empty($book)) {
+            if ($request->isPost()) {
+                $catalogs = $request->getParam('catalogs');
+
+                $model_books_catalogs->cleanCatalogs($book->book);
+                foreach ($catalogs as $catalog) {
+                    $catalog = $model_catalogs->findByIdent($catalog);
+                    if (!empty($catalog)) {
+                        $book_catalog = $model_books_catalogs->createRow();
+                        $book_catalog->book = $book->book;
+                        $book_catalog->catalog = $catalog->ident;
+                        $book_catalog->save();
+                    }
+                }
+                $this->_helper->flashMessenger->addMessage('The catalogs were updated');
+
+                $url = new Zend_Controller_Action_Helper_Url();
+                $this->_redirect($url->url(array('book' => $book->book), 'books_book_catalog'));
+            }
+
+            $ob_catalogs = $book->findCatalogsViaBooks_Catalogs();
+            $catalogs = array();
+            foreach ($ob_catalogs as $ob_catalog) {
+                $catalogs[] = $ob_catalog->ident;
+            }
+
+            $this->view->book = $book;
+            $this->view->roots = $model_catalogs->selectRoots();
+            $this->view->catalogs = $catalogs;
+        }
     }
 
     public function downloadAction() {
