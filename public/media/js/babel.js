@@ -45,7 +45,7 @@ $(document).ready(function(){
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});
     $('.update_file').overlay({
-        left:'center',top:90,
+        left:'center',top:45,
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
                 $('#bookstore option').each(function() {
@@ -61,19 +61,20 @@ $(document).ready(function(){
         }});
     $('.update_book').click(function(){book=$(this).attr('name');});
     $('.update_book').overlay({
-        left:'center',top:90,
+        left:'center',top:45,
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
                 $('#title').focus();$('#title').attr('value',json.book.title);
                 $('#author').attr('value',json.book.author);
                 $('#publisher').attr('value',json.book.publisher);
                 $('#language').attr('value',json.book.language);
+                $('#year').attr('value',json.book.year);
                 $('#form_book').attr('action','/books/shared/'+book.substring(5)+'/edit');$('#thumb').attr('src','/books/'+book.substring(5)+'/thumb/1');
             });
         }});
     $('div.book').click(function(){book=$(this).attr('name');});
     $('div.book').overlay({
-        left:'center',top:90,
+        left:'center',top:45,
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
                 $('#thumb').attr('src','/media/img/books/'+book.substring(5)+'.png');
@@ -81,7 +82,7 @@ $(document).ready(function(){
                 $('#book_author').html(json.book.author);
                 $('#book_publisher').html(json.book.publisher);
                 $('#book_language').html(json.book.language);
-
+                $('#book_year').html(json.book.year);
                 $('#book_download').attr('href',json.book.url.download);
                 $('#book_catalog').attr('href',json.book.url.catalog);
             });

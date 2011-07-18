@@ -284,6 +284,7 @@ div.tool-panel {
 #form input.directory { background: #ffffff url('../img/icons/folder.png') no-repeat 8px 7px;  }
 #form input.world { background: #ffffff url('../img/icons/world.png') no-repeat 8px 7px;  }
 #form input.flag { background: #ffffff url('../img/icons/flag_yellow.png') no-repeat 8px 7px;  }
+#form input.calendar { background: #ffffff url('../img/icons/calendar.png') no-repeat 8px 7px;  }
 
 #breadcrumb {
     padding: 2px 0px 3px 8px;
@@ -331,7 +332,7 @@ div.tool-panel {
 }
 
 #list .catalog {
-    width: 300px;
+    width: 333px;
     height: 100px;
 }
 

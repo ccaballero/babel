@@ -14,7 +14,6 @@ hgignore-dist
 .hgignore
 .project
 .htaccess
-info.php
 library/Zend
 public/media/img/thumbnails/users/*.jpg
 public/media/img/thumbnails/books/*.jpg

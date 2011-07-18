@@ -30,10 +30,17 @@ class Books_Form_Shared extends Zend_Form
                  ->setAttrib('class', 'flag')
                  ->addFilter('StringTrim');
 
+        $year = $this->createElement('text', 'year');
+        $year->setRequired(false)
+             ->setLabel('Year')
+             ->setAttrib('class', 'calendar')
+             ->addFilter('Int');
+
         $this->addElement($title);
         $this->addElement($author);
         $this->addElement($publisher);
         $this->addElement($language);
+        $this->addElement($year);
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
     }
 }

@@ -29,6 +29,7 @@ class Books_BookController extends Babel_Action
                 $class->author = $book->author;
                 $class->publisher = $book->publisher;
                 $class->language = $book->language;
+                $class->year = $book->year;
 
                 $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
                 $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
@@ -49,37 +50,62 @@ class Books_BookController extends Babel_Action
         $model_shared = new Books();
         $model_books_catalogs = new Books_Catalogs();
         $model_catalogs = new Catalogs();
+        $model_stats = new Catalogs_Stats();
 
         $book = $model_shared->findByBook($ident);
         if (!empty($book)) {
-            if ($request->isPost()) {
-                $catalogs = $request->getParam('catalogs');
+            $db_catalogs = $book->findCatalogsViaBooks_Catalogs();
+            $catalogs_list = array();
+            $current_catalogs = array();
 
-                $model_books_catalogs->cleanCatalogs($book->book);
-                foreach ($catalogs as $catalog) {
-                    $catalog = $model_catalogs->findByIdent($catalog);
+            foreach ($db_catalogs as $db_catalog) {
+                $catalogs_list[] = $db_catalog->ident;
+                $current_catalogs[$db_catalog->ident] = $db_catalog;
+            }
+
+            if ($request->isPost()) {
+                $new_catalogs = $request->getParam('catalogs');
+
+                foreach ($new_catalogs as $key1 => $new_catalog) {
+                    $new_catalog = intval($new_catalog);
+                    foreach ($catalogs_list as $key2 => $old_catalog) {
+                        if ($new_catalog == $old_catalog) {
+                            unset($new_catalogs[$key1]);
+                            unset($catalogs_list[$key2]);
+                        }
+                    }
+                }
+
+                foreach ($new_catalogs as $new_catalog) {
+                    $catalog = $model_catalogs->findByIdent($new_catalog);
                     if (!empty($catalog)) {
                         $book_catalog = $model_books_catalogs->createRow();
                         $book_catalog->book = $book->book;
                         $book_catalog->catalog = $catalog->ident;
                         $book_catalog->save();
+
+                        $model_stats->increaseBook($catalog);
                     }
                 }
+
+                foreach ($catalogs_list as $old_catalog) {
+                    $catalog = $current_catalogs[$old_catalog];
+                    if (!empty($catalog)) {
+                        $model_books_catalogs->deleteBookAndCatalog($book->book, $catalog->ident);
+
+                        $model_stats->decreaseBook($catalog);
+                    }
+                }
+
                 $this->_helper->flashMessenger->addMessage('The catalogs were updated');
 
                 $url = new Zend_Controller_Action_Helper_Url();
                 $this->_redirect($url->url(array('book' => $book->book), 'books_book_catalog'));
             }
 
-            $ob_catalogs = $book->findCatalogsViaBooks_Catalogs();
-            $catalogs = array();
-            foreach ($ob_catalogs as $ob_catalog) {
-                $catalogs[] = $ob_catalog->ident;
-            }
-
             $this->view->book = $book;
             $this->view->roots = $model_catalogs->selectRoots();
-            $this->view->catalogs = $catalogs;
+            $this->view->catalogs = $catalogs_list;
         }
     }
 
@@ -188,6 +214,7 @@ class Books_BookController extends Babel_Action
                 $book->author = $request->getParam('author');
                 $book->publisher = $request->getParam('publisher');
                 $book->language = $request->getParam('language');
+                $book->year = $request->getParam('year');
 
                 // Avatar
                 try {

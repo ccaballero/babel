@@ -8,6 +8,7 @@
         <p><span class="bold">Author: </span><?php echo $this->book->author ?></p>
         <p><span class="bold">Publisher: </span><?php echo $this->book->publisher ?></p>
         <p><span class="bold">Language: </span><?php echo $this->none($this->book->language) ?></p>
+        <p><span class="bold">Year: </span><?php echo $this->none($this->book->year) ?></p>
 
         <h2>Catalogs:</h2>
         <form method="post" action="" accept-charset="utf-8">

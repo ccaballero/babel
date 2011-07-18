@@ -18,6 +18,7 @@ class Search_CronController extends Babel_Action
             $doc->addField(Zend_Search_Lucene_Field::Text('author', $book->author, 'utf-8'));
             $doc->addField(Zend_Search_Lucene_Field::Text('publisher', $book->publisher, 'utf-8'));
             $doc->addField(Zend_Search_Lucene_Field::Text('language', $book->language, 'utf-8'));
+            $doc->addField(Zend_Search_Lucene_Field::Text('year', $book->year));
             $doc->addField(Zend_Search_Lucene_Field::unIndexed('avatar', $book->avatar));
 
             $index->addDocument($doc);

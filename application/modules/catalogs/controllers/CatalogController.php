@@ -14,9 +14,11 @@ class Catalogs_CatalogController extends Babel_Action
         }
         
         $children = $catalog->findDependentRowset('Catalogs');
+        $books = $catalog->findBooksViaBooks_Catalogs();
 
         $this->view->catalog = $catalog;
         $this->view->catalogs = $children;
+        $this->view->books = $books;
 
         if ($this->auth <> null) {
             $url = new Zend_Controller_Action_Helper_Url();

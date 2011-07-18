@@ -31,68 +31,70 @@ DROP TABLE IF EXISTS `babel_books_shared`;
 CREATE TABLE `babel_books_shared` (
     `book`              int unsigned                                                NOT NULL,
     `title`             varchar(1024)                                               NOT NULL,
-    `author`            varchar(1024)                                               NOT NULL,
-    `publisher`         varchar(1024)                                               NOT NULL,
+    `author`            varchar(1024)                                               NOT NULL DEFAULT '',
+    `publisher`         varchar(1024)                                               NOT NULL DEFAULT '',
     `language`          varchar(1024)                                               NOT NULL,
+    `year`              varchar(4)                                                  NOT NULL DEFAULT '',
     `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     INDEX (`book`),
     FOREIGN KEY (`book`) REFERENCES `babel_books_collection`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;
 
-INSERT INTO `babel_books_collection` (`ident`, `size`, `md5_file`, `md5_path`, `bookstore`, `directory`, `file`, `tsregister`) VALUES
-( 1,  2758792, '63609929ffebe3925d0ef38bf1701545', '', '/home/carlos/Books/Examples', '', 'Addison.Wesley.Dojo.Using.the.Dojo.JavaScript.Library.to.Build.Ajax.Applications.Jun.2008.pdf', 1310699334),
-( 2, 13119033, '55e8f1dd651a992b062b0148d292f7ef', '', '/home/carlos/Books/Examples', '', '2_[Ebook][Algorithm] Introduction to Algorithms ( MIT Press 2nd Edition).pdf', 1310699334),
-( 3,  2067498, '532a39252994fc8c2788d0d3f8020712', '', '/home/carlos/Books/Examples', '', 'Algorithms (Dasgupta, Papadimitriou and Vazirani) (2006).pdf', 1310699334),
-( 4,  2494061, 'f41dc141cccc52c5556c33adf46aa2d0', '', '/home/carlos/Books/Examples', '', 'Algoritmos y estructura de datos (Storti, D\'Elía, Paz, Dalcín y Pucheta) (2007).pdf', 1310699334),
-( 5,  1863122, 'ed6343384b8380aed009c14df0cf7515', '', '/home/carlos/Books/Examples', '', 'Art_of_Programming_Contest_SE_for_uva.pdf', 1310699334),
-( 6,  4617070, '956100dec00e6675a69ea5d34a968a8a', '', '/home/carlos/Books/Examples', '', 'Programming_Challenges.pdf', 1310699334),
-( 7,   813141, '0758b4cdcaffb9d9d133176ef2c10aa6', '', '/home/carlos/Books/Examples', '', 'preliminares.pdf', 1310699334),
-( 8,  2344121, 'e47e49ebf9c374ff7a49d4c2258cdb53', '', '/home/carlos/Books/Examples', '', 'O\'reilly RESTful Web Services Cookbook March 2010.pdf', 1310699334),
-( 9,  5028427, '20f760f3221e494ff7e3b57f6083938b', '', '/home/carlos/Books/Examples', '', 'OReilly.Dojo.The.Definitive.Guide.Jun.2008.pdf', 1310699334),
-(10,  1026322, 'd677dc5e9a763c0bc8ac4652b6464ae1', '', '/home/carlos/Books/Examples', '', 'OReilly.Regular.Expression.Pocket.Reference.2nd.Edition.Jul.2007.pdf', 1310699334),
-(11, 11293606, '1bcb6397b88d19fae2d16453f652aa94', '', '/home/carlos/Books/Examples', '', 'PacktPub.Learning.ExtJS.3.2.pdf', 1310699334),
-(12, 11661369, '3927603916034c37bbb178189f0c4f3d', '', '/home/carlos/Books/Examples', '', 'Pragmatic.Bookshelf.Mastering.Dojo.Jun.2008.pdf', 1310699334),
-(13,  5871276, 'b76d91f9b96a353ef3362ab4acce4ca4', '', '/home/carlos/Books/Examples', '', 'web-2-0-architectures-what-entrepreneurs-and-information-architects-need-to-know.pdf', 1310699334),
-(14,  4573005, 'b7d338d3b6c339b6eb16cb438357d9b7', '', '/home/carlos/Books/Examples', '', 'xslt.pdf', 1310699334),
-(15, 13311351, '2b3b86dd51a550846fa8ba34dffc4c1f', '', '/home/carlos/Books/Examples', '', 'RESTful_PHP_Web_Services.pdf', 1310699334),
-(16,    68485, 'fd2f6e2417c1a6208f8d25587e785158', '', '/home/carlos/Books/Examples', '', 'STL_ext.pdf', 1310699334),
-(17,  6560031, 'b05ce21b6a43be322eac3803539fecec', '', '/home/carlos/Books/Examples', '', 'Thewebfoto-Curso-de-fotografia-digital.pdf', 1310699334),
-(18,   935155, '998c6a618de1c46488c2831dd252864e', '', '/home/carlos/Books/Examples', '', 'howTo-openMosixES_0.4beta.pdf', 1310699334),
-(19, 12697961, '992248bd69f1439e00c6162d3c5c17d4', '', '/home/carlos/Books/Examples', '', 'ireport.pdf', 1310699334),
-(20,  1669421, '1d2e4a9f1fc69002f192289da35fa56f', '', '/home/carlos/Books/Examples', '', 'jasper.pdf', 1310699334),
-(21,  5236552, 'ffbb7dd28f2e3017170492e038b8cc44', '', '/home/carlos/Books/Examples', '', 'learning_extjs.pdf', 1310699334),
-(22,  8282228, 'ee38f8079c8d78374ff62ffd6b600e48', '', '/home/carlos/Books/Examples', '', 'php-manual-es.pdf', 1310699334),
-(23,  3850701, '690c0a4f002593c988c2eb68a3a7232b', '', '/home/carlos/Books/Examples', '', 'vimbook-OPL.pdf', 1310699334);
+INSERT INTO `babel_books_collection` (`ident`, `size`, `tsregister`, `md5_file`, `md5_path`, `bookstore`, `directory`, `file`) VALUES
+( 1,  2758792, 1310699334, '63609929ffebe3925d0ef38bf1701545', '', '/home/carlos/Books/Examples', '', 'Addison.Wesley.Dojo.Using.the.Dojo.JavaScript.Library.to.Build.Ajax.Applications.Jun.2008.pdf'),
+( 2, 13119033, 1310699334, '55e8f1dd651a992b062b0148d292f7ef', '', '/home/carlos/Books/Examples', '', '2_[Ebook][Algorithm] Introduction to Algorithms ( MIT Press 2nd Edition).pdf'),
+( 3,  2067498, 1310699334, '532a39252994fc8c2788d0d3f8020712', '', '/home/carlos/Books/Examples', '', 'Algorithms (Dasgupta, Papadimitriou and Vazirani) (2006).pdf'),
+( 4,  2494061, 1310699334, 'f41dc141cccc52c5556c33adf46aa2d0', '', '/home/carlos/Books/Examples', '', 'Algoritmos y estructura de datos (Storti, D\'Elía, Paz, Dalcín y Pucheta) (2007).pdf'),
+( 5,  1863122, 1310699334, 'ed6343384b8380aed009c14df0cf7515', '', '/home/carlos/Books/Examples', '', 'Art_of_Programming_Contest_SE_for_uva.pdf'),
+( 6,  4617070, 1310699334, '956100dec00e6675a69ea5d34a968a8a', '', '/home/carlos/Books/Examples', '', 'Programming_Challenges.pdf'),
+( 7,   813141, 1310699334, '0758b4cdcaffb9d9d133176ef2c10aa6', '', '/home/carlos/Books/Examples', '', 'preliminares.pdf'),
+( 8,  2344121, 1310699334, 'e47e49ebf9c374ff7a49d4c2258cdb53', '', '/home/carlos/Books/Examples', '', 'O\'reilly RESTful Web Services Cookbook March 2010.pdf'),
+( 9,  5028427, 1310699334, '20f760f3221e494ff7e3b57f6083938b', '', '/home/carlos/Books/Examples', '', 'OReilly.Dojo.The.Definitive.Guide.Jun.2008.pdf'),
+(10,  1026322, 1310699334, 'd677dc5e9a763c0bc8ac4652b6464ae1', '', '/home/carlos/Books/Examples', '', 'OReilly.Regular.Expression.Pocket.Reference.2nd.Edition.Jul.2007.pdf'),
+(11, 11293606, 1310699334, '1bcb6397b88d19fae2d16453f652aa94', '', '/home/carlos/Books/Examples', '', 'PacktPub.Learning.ExtJS.3.2.pdf'),
+(12, 11661369, 1310699334, '3927603916034c37bbb178189f0c4f3d', '', '/home/carlos/Books/Examples', '', 'Pragmatic.Bookshelf.Mastering.Dojo.Jun.2008.pdf'),
+(13,  5871276, 1310699334, 'b76d91f9b96a353ef3362ab4acce4ca4', '', '/home/carlos/Books/Examples', '', 'web-2-0-architectures-what-entrepreneurs-and-information-architects-need-to-know.pdf'),
+(14,  4573005, 1310699334, 'b7d338d3b6c339b6eb16cb438357d9b7', '', '/home/carlos/Books/Examples', '', 'xslt.pdf'),
+(15, 13311351, 1310699334, '2b3b86dd51a550846fa8ba34dffc4c1f', '', '/home/carlos/Books/Examples', '', 'RESTful_PHP_Web_Services.pdf'),
+(16,    68485, 1310699334, 'fd2f6e2417c1a6208f8d25587e785158', '', '/home/carlos/Books/Examples', '', 'STL_ext.pdf'),
+(17,  6560031, 1310699334, 'b05ce21b6a43be322eac3803539fecec', '', '/home/carlos/Books/Examples', '', 'Thewebfoto-Curso-de-fotografia-digital.pdf'),
+(18,   935155, 1310699334, '998c6a618de1c46488c2831dd252864e', '', '/home/carlos/Books/Examples', '', 'howTo-openMosixES_0.4beta.pdf'),
+(19, 12697961, 1310699334, '992248bd69f1439e00c6162d3c5c17d4', '', '/home/carlos/Books/Examples', '', 'ireport.pdf'),
+(20,  1669421, 1310699334, '1d2e4a9f1fc69002f192289da35fa56f', '', '/home/carlos/Books/Examples', '', 'jasper.pdf'),
+(21,  5236552, 1310699334, 'ffbb7dd28f2e3017170492e038b8cc44', '', '/home/carlos/Books/Examples', '', 'learning_extjs.pdf'),
+(22,  8282228, 1310699334, 'ee38f8079c8d78374ff62ffd6b600e48', '', '/home/carlos/Books/Examples', '', 'php-manual-es.pdf'),
+(23,  3850701, 1310699334, '690c0a4f002593c988c2eb68a3a7232b', '', '/home/carlos/Books/Examples', '', 'vimbook-OPL.pdf');
 
-INSERT INTO `babel_books_shared` (`book`, `title`, `author`, `publisher`, `language`, `avatar`) VALUES
-( 1, 'Dojo. Using the Dojo JavaScript Library to Build Ajax Applications','James E. Harmon','Addison-Wesley','English',1),
-( 2, 'Introduction to Algorithms, Second Edition','Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein','McGraw-Hill','English',1),
-( 3, 'Algorithms','S. Dasgupta, C.H. Papadimitriou, U.V. Vazirani','','English',1),
-( 4, 'Algoritmos y Estructuras de Datos','Mario Storli, Jorge D\'Elía, Rodrigo Paz, Lisandro Dalcín, Martín Pucheta','','English',1),
-( 5, 'Art of Programming Contest','Ahmed Shamsul Arefin','','English',1),
-( 6, 'Programming Challenges','Steven S. Skiena, Miguel A. Revilla','Springer','English',1),
-( 7, 'Fundamentos de la Programación','Jorge Humberto Terán Pomier','','Español',1),
-( 8, 'RESTful Web Services Cookbook','Subbu Allamaraju','O\'Reilly','English',1),
-( 9, 'Dojo. The Definitive Guide','Matthew A. Russell','O\'Reilly','English',1),
-(10, 'Regular Expression. Pocket Reference','Tony Stubblebine','O\'Reilly','English',1),
-(11, 'Learning Ext JS 3.2','Shea Frederick, Steve \'Cutter\' Blades','PACKT','English',1),
-(12, 'Mastering Dojo. JavaScript and Ajax Tools for Great Web Experiences','Rawld Gill, Craig Riecke, Alex Russell','The Pragmatic Programmers','English',1),
-(13, 'Web 2.0 Architectures','James Governor, Dion Hinchcliffe','O\'Reilly','English',1),
-(14, 'XSLT','Doug Tidwell','O\'Reilly','English',1),
-(15, 'RESTful PHP','Samisa Abeysinghe','PACKT','English',1),
-(16, 'C++ Standard Template Library','','','Español',1),
-(17, 'Curso de fotografía digital','Jesús Rodríguez','','Español',1),
-(18, 'El manual para el clustering con openMosix','Miquel Catalán i Coït','','Español',1),
-(19, 'The Definitive Guide to iReport','Giulio Toffoli','Apress','English',1),
-(20, 'The Definitive Guide to JasperReports','Teodor Danciu, Lucian Chirita','Apress','English',1),
-(21, 'Learning Ext JS','Shea Frederick, Colin Ramsay, Steve \'Cutter\' Blades','PACKT','English',1),
-(22, 'Manual de PHP','Stig Sæther Bakken, Alexander Aulbach, Egon Schmid, Jim Winstead, Lars Torben Wilson, Rasmus Lerdorf, Zeev Suraski, Andrei Zmievski, Jouni Ahto','','Español',1),
-(23, 'Vim. The Tutorial','','','English',1);
+INSERT INTO `babel_books_shared` (`book`, `avatar`, `language`, `year`, `title`, `author`, `publisher`) VALUES
+( 1, 1, 'English', '2008', 'Dojo. Using the Dojo JavaScript Library to Build Ajax Applications', 'James E. Harmon', 'Addison-Wesley'),
+( 2, 1, 'English', '2001', 'Introduction to Algorithms, Second Edition', 'Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein', 'McGraw-Hill'),
+( 3, 1, 'English', '2006', 'Algorithms', 'S. Dasgupta, C.H. Papadimitriou, U.V. Vazirani', ''),
+( 4, 1, 'English', '2007', 'Algoritmos y Estructuras de Datos', 'Mario Storli, Jorge D\'Elía, Rodrigo Paz, Lisandro Dalcín, Martín Pucheta', ''),
+( 5, 1, 'English', '2006', 'Art of Programming Contest', 'Ahmed Shamsul Arefin', ''),
+( 6, 1, 'English', '2003', 'Programming Challenges', 'Steven S. Skiena, Miguel A. Revilla', 'Springer'),
+( 7, 1, 'Español', '2006', 'Fundamentos de la Programación', 'Jorge Humberto Terán Pomier', ''),
+( 8, 1, 'English', '2010', 'RESTful Web Services Cookbook', 'Subbu Allamaraju', 'O\'Reilly'),
+( 9, 1, 'English', '2008', 'Dojo. The Definitive Guide', 'Matthew A. Russell', 'O\'Reilly'),
+(10, 1, 'English', '2007', 'Regular Expression. Pocket Reference', 'Tony Stubblebine', 'O\'Reilly'),
+(11, 1, 'English', '2010', 'Learning Ext JS 3.2', 'Shea Frederick, Steve \'Cutter\' Blades', 'PACKT'),
+(12, 1, 'English', '2008', 'Mastering Dojo. JavaScript and Ajax Tools for Great Web Experiences', 'Rawld Gill, Craig Riecke, Alex Russell', 'The Pragmatic Programmers'),
+(13, 1, 'English', '2009', 'Web 2.0 Architectures', 'James Governor, Dion Hinchcliffe', 'O\'Reilly'),
+(14, 1, 'English', '2008', 'XSLT', 'Doug Tidwell', 'O\'Reilly'),
+(15, 1, 'English', '2008', 'RESTful PHP', 'Samisa Abeysinghe', 'PACKT'),
+(16, 1, 'Español', '2006', 'C++ Standard Template Library', '', ''),
+(17, 1, 'Español', '2008', 'Curso de fotografía digital', 'Jesús Rodríguez', ''),
+(18, 1, 'Español', '2002', 'El manual para el clustering con openMosix', 'Miquel Catalán i Coït', ''),
+(19, 1, 'English', '2007', 'The Definitive Guide to iReport', 'Giulio Toffoli', 'Apress'),
+(20, 1, 'English', '2007', 'The Definitive Guide to JasperReports', 'Teodor Danciu, Lucian Chirita', 'Apress'),
+(21, 1, 'English', '2008', 'Learning Ext JS', 'Shea Frederick, Colin Ramsay, Steve \'Cutter\' Blades', 'PACKT'),
+(22, 1, 'Español', '2001', 'Manual de PHP', 'Stig Sæther Bakken, Alexander Aulbach, Egon Schmid, Jim Winstead, Lars Torben Wilson, Rasmus Lerdorf, Zeev Suraski, Andrei Zmievski, Jouni Ahto', ''),
+(23, 1, 'English', '2002', 'Vim. The Tutorial', '', '');
 
 DROP TABLE IF EXISTS `babel_books_stats`;
 CREATE TABLE `babel_books_stats` (
     `book`              int unsigned                                                NOT NULL,
     `downloads`         int unsigned                                                NOT NULL DEFAULT 0,
+    PRIMARY KEY (`book`),
     INDEX (`book`),
     FOREIGN KEY (`book`) REFERENCES `babel_books_collection`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;
@@ -108,6 +110,7 @@ CREATE TABLE `babel_catalogs` (
     `tsregister`        int unsigned                                                NOT NULL,
     `parent`            int unsigned                                                NULL,
     `root`              int unsigned                                                NULL,
+    `books`             int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),
     INDEX (`parent`),
     FOREIGN KEY (`parent`) REFERENCES `babel_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
@@ -317,6 +320,15 @@ INSERT INTO `babel_catalogs` (`root`, `parent`, `code`, `level`, `label`) VALUES
 (159, 159, '2010119', 1, 'Metodología y Planificación de Proyecto de Grado'),
 (159, 159, '2010048', 1, 'Taller de Desarrollo de un Ambiente de Aplicación'),
 (159, 159, '2010122', 1, 'Proyecto Final');
+
+DROP TABLE IF EXISTS `babel_catalogs_stats`;
+CREATE TABLE `babel_catalogs_stats` (
+    `catalog`           int unsigned                                                NOT NULL,
+    `books`             int unsigned                                                NOT NULL DEFAULT 0,
+    PRIMARY KEY (`catalog`),
+    INDEX (`catalog`),
+    FOREIGN KEY (`catalog`) REFERENCES `babel_books_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
+) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_books_catalogs`;
 CREATE TABLE `babel_books_catalogs` (

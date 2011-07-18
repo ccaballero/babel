@@ -5,6 +5,7 @@
     </div>
     <div>
         <h2><?php echo $this->catalog->label ?></h2>
+        <p>(<?php echo $this->catalog->getStats()->books ?>)</p>
     </div>
 </div>
 </a>

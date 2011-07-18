@@ -22,6 +22,13 @@ class Books_Catalogs extends Babel_Models_Table
     );
 
     public function cleanCatalogs($book) {
-        $this->delete($this->getAdapter()->quoteInto('book = ?', $book));
+        $this->delete($this->getAdapter()->quoteInto('book = ?', $book, 'INTEGER'));
+    }
+
+    public function deleteBookAndCatalog($book, $catalog) {
+        $this->delete(array(
+            $this->getAdapter()->quoteInto('book = ?', $book, 'INTEGER'),
+            $this->getAdapter()->quoteInto('catalog = ?', $catalog, 'INTEGER'),
+        ));
     }
 }
