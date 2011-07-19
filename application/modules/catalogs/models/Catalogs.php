@@ -28,4 +28,14 @@ class Catalogs extends Babel_Models_Table
     public function selectElementsByRoot($root) {
         return $this->fetchAll($this->select()->where('root = ?', $root)->order('code ASC')->order('label ASC'));
     }
+
+    public function selectByStats() {
+        $select = $this->select();
+        $select->setIntegrityCheck(false);
+        return $this->fetchAll(
+            $select->from('babel_catalogs')
+                   ->join('babel_catalogs_stats', 'babel_catalogs.ident = babel_catalogs_stats.catalog')
+                   ->where('babel_catalogs_stats.books > 0')
+            );
+    }
 }

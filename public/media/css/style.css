@@ -407,3 +407,18 @@ table tr a {
     height: 35px;
     width: 35px;
 }
+
+div.tag {
+    float: left;
+    display: inline;
+    line-height: 2.6em;
+}
+
+.tag a {
+    color: #ffffff;
+    font-size: 1.40em;
+    padding: 0.2em 0.4em;
+    margin: 0em 0.3em;
+    border: 1px dashed #aaaaaa;
+    background: #303030;
+}

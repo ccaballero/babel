@@ -6,7 +6,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $loader = Zend_Loader_Autoloader::getInstance();
 
         $resourceTypes = array('form' => array('path' => 'forms/', 'namespace' => 'Form',),);
-        $modules = array('auth', 'books', 'catalogs', 'frontpage', 'help', 'search', 'settings', 'users');
+        $modules = array('auth', 'books', 'catalogs', 'frontpage', 'help', 'search', 'settings', 'tags', 'users');
 
         foreach ($modules as $module) {
             $loader->pushAutoloader(new Zend_Application_Module_Autoloader(
