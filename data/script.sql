@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS `babel_search_keywords`;
+CREATE TABLE `babel_search_keywords` (
+    `ident`             int unsigned                                                NOT NULL auto_increment,
+    `keyword`           varchar(1024)                                               NOT NULL,
+    `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
+    PRIMARY KEY (`ident`),
+    INDEX (`keyword`)
+) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_users`;
 CREATE TABLE `babel_users` (

@@ -1,6 +1,6 @@
 <h1><?php echo $this->catalog->label ?></h1>
 <div id="breadcrumb">
-    <a href="<?php echo $this->url(array(), 'catalogs') ?>">Catalogs</a>
+    <a href="<?php echo $this->url(array(), 'catalogs') ?>"><?php echo $this->translate->_('Catalogs') ?></a>
     <?php foreach ($this->breadcrumb($this->catalog) as $catalog) { ?>
         <a href="<?php echo $this->url(array('catalog' => $catalog->ident), 'catalogs_catalog_view') ?>"><?php echo $catalog->label ?></a>
     <?php } ?>

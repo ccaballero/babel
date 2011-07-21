@@ -1,4 +1,4 @@
 <div id="classic">
-    <h1>New user</h1>
+    <h1><?php echo $this->translate->_('New user') ?></h1>
     <div id="form"><?php echo $this->form ?></div>
 </div>

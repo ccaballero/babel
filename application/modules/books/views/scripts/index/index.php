@@ -1,15 +1,15 @@
-<h1>Books collection</h1>
+<h1><?php echo $this->translate->_('Books collection') ?></h1>
 <form method="post" action="" accept-charset="utf-8">
     <div class="tool-panel">
-        <input type="submit" name="add" value="Share to everybody" />
-        <input type="submit" name="delete" value="Remove from collection" />
+        <input type="submit" name="add" value="<?php echo $this->translate->_('Share to everybody') ?>" />
+        <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
     <table>
         <tr>
             <th style="width:20px;">&nbsp;</th>
             <th style="width:30px;"><img src="/media/img/icons/book_edit.png" alt="" title="" /></th>
-            <th>Directory</th>
-            <th>File</th>
+            <th><?php echo $this->translate->_('Directory') ?></th>
+            <th><?php echo $this->translate->_('File') ?></th>
             <th style="width:30px;"><img src="/media/img/icons/database.png" alt="" title="" /></th>
             <th style="width:30px;"><img src="/media/img/icons/eye.png" alt="" title="" /></th>
         </tr>
@@ -24,13 +24,13 @@
                 <tr class="<?= $key % 2 == 0 ? 'even' : 'odd' ?>">
                     <td class="center"><input type="checkbox" class="ratio-<?php echo $i ?>" name="books[]" value="<?php echo $book->ident ?>" /></td>
                     <td class="center">
-                        <a class="update_file" name="edit_<?php echo $book->ident ?>" rel="#update_file"><img src="/media/img/icons/pencil.png" alt="Edit" title="Edit" /></a>
+                        <a class="update_file" name="edit_<?php echo $book->ident ?>" rel="#update_file"><img src="/media/img/icons/pencil.png" alt="<?php echo $this->translate->_('Edit') ?>" title="Edit" /></a>
                     </td>
                     <td class="left"><?php echo $book->directory ?></td>
                     <td class="left"><?php echo $book->file ?></td>
                     <td class="center">
                     <?php if ($book->inDisk()) { ?>
-                        <img src="/media/img/icons/tick.png" alt="Yes" title="Yes" />
+                        <img src="/media/img/icons/tick.png" alt="" title="" />
                     <?php } ?>
                     </td>
                     <td class="center">
@@ -45,12 +45,12 @@
         <?php } ?>
     </table>
     <div class="tool-panel">
-        <input type="submit" name="add" value="Share to everybody" />
-        <input type="submit" name="delete" value="Remove from collection" />
+        <input type="submit" name="add" value="<?php echo $this->translate->_('Share to everybody') ?>" />
+        <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
 </form>
 
 <div class="overlay" id="update_file">
-    <h1>Edit information</h1>
+    <h1><?php echo $this->translate->_('Edit information') ?></h1>
     <div id="form"><?php echo $this->form ?></div>
 </div>

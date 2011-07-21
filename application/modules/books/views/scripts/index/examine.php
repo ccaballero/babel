@@ -1,16 +1,16 @@
-<h1>Books directories</h1>
+<h1><?php echo $this->translate->_('Books directories') ?></h1>
 <form method="post" action="" accept-charset="utf-8">
     <div class="tool-panel">
-        <input type="submit" name="add" value="Add to collection" />
-        <input type="submit" name="delete" value="Remove from collection" />
+        <input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" />
+        <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
     <table>
         <tr>
             <th style="width:20px;">&nbsp;</th>
-            <th>Directory</th>
-            <th>File</th>
-            <th>MD5</th>
-            <th>Size</th>
+            <th><?php echo $this->translate->_('Directory') ?></th>
+            <th><?php echo $this->translate->_('File') ?></th>
+            <th><?php echo $this->translate->_('MD5') ?></th>
+            <th><?php echo $this->translate->_('Size') ?></th>
             <th style="width:30px;"><img src="/media/img/icons/book.png" alt="" title="" /></th>
             <th style="width:30px;"><img src="/media/img/icons/eye.png" alt="" title="" /></th>
         </tr>
@@ -27,13 +27,13 @@
                     <td class="left">
                         <?php echo $book->file ?>
                         <?php if (!$this->warnings_filenames[$book->file]) { ?>
-                            <img style="float:right;" src="/media/img/icons/error.png" alt="Filename repeated" title="Filename repeated" />
+                            <img style="float:right;" src="/media/img/icons/error.png" alt="<?php echo $this->translate->_('Filename repeated') ?>" title="<?php echo $this->translate->_('Filename repeated') ?>" />
                         <?php } ?>
                     </td>
                     <td class="left">
                         <?php echo strtoupper($book->md5_path) ?>
                         <?php if (!$this->warnings_md5_files[$book->md5_file]) { ?>
-                            <img style="float:right;" src="/media/img/icons/error.png" alt="Repeated checksum" title="Repeated checksum" />
+                            <img style="float:right;" src="/media/img/icons/error.png" alt="<?php echo $this->translate->_('Repeated checksum') ?>" title="<?php echo $this->translate->_('Repeated checksum') ?>" />
                         <?php } ?>
                     </td>
                     <td class="right"><?php echo $this->size($book->size) ?></td>
@@ -53,7 +53,7 @@
         <?php } ?>
     </table>
     <div class="tool-panel">
-        <input type="submit" name="add" value="Add to collection" />
-        <input type="submit" name="delete" value="Remove from collection" />
+        <input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" />
+        <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
 </form>
