@@ -151,7 +151,7 @@ class Books_BookController extends Babel_Action
             try {
                 $image = new Imagick($book->getPath() . '[0]');
                 $image->setImageFormat('png');
-                $image->thumbnailImage(400, 0);
+                $image->thumbnailImage(0, 390);
                 header('Content-Type: image/png');
                 echo $image;
             } catch (Exception $e) {}
@@ -220,7 +220,7 @@ class Books_BookController extends Babel_Action
                 try {
                     $image = new Imagick($book->getPath() . '[0]');
                     $image->setImageFormat('png');
-                    $image->thumbnailImage(400, 0);
+                    $image->thumbnailImage(0, 390);
                     $image->writeImage(APPLICATION_PATH . '/../public/media/img/books/' . $book->book . '.png');
 
                     $thumbnail = new Yachay_Helpers_Thumbnail();

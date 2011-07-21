@@ -93,13 +93,27 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage('Books removed successfully');
             }
-
             $this->_helper->redirector('index', 'index', 'books');
         }
 
         $this->view->books = $scan[0];
         $this->view->warnings_filenames = $scan[1];
         $this->view->warnings_md5_files = $scan[2];
+    }
+
+    public function refreshAction() {
+        $this->requireLogin();
+
+        $model_collection = new Books_Collection();
+        $collection = $model_collection->fetchAll();
+
+        foreach ($collection as $file) {
+            $file->md5_path = md5($file->getPath());
+            $file->save();
+        }
+
+        $this->_helper->flashMessenger->addMessage('MD5 refreshed');
+        $this->_helper->redirector('examine', 'index', 'books');
     }
 
     private function _scan_bookstores($bookstores, $adapters = null) {

@@ -387,7 +387,7 @@ table tr a {
 
 .overlay {
     display: none;
-    padding: 2.0em;
+    padding: 2.0em 2.0em 1.0em 2.0em;
     background: #000000;
     border: 3px solid #ffffff;
 

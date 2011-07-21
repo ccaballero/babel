@@ -1,5 +1,5 @@
 <div class="overlay" id="book_info">
-    <div style="float:left; margin: 0em 1.3em 0em 0em; width: 400px;">
+    <div style="float:left; margin: 0em 1.3em 0em 0em; height: 400px;">
         <a id="book_download" href="" target="_BLANK"><img id="thumb" src="" alt="" title="" /></a>
     </div>
     <div style="float:left; width: 200px;">

@@ -24,7 +24,9 @@ CREATE TABLE `babel_books_collection` (
     `directory`         varchar(2048)                                               NOT NULL,
     `file`              varchar(2048)                                               NOT NULL,
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
-    PRIMARY KEY (`ident`)
+    PRIMARY KEY (`ident`),
+    INDEX (`md5_file`),
+    INDEX (`md5_path`)
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_books_shared`;
@@ -41,29 +43,29 @@ CREATE TABLE `babel_books_shared` (
 ) DEFAULT CHARACTER SET UTF8;
 
 INSERT INTO `babel_books_collection` (`ident`, `size`, `tsregister`, `md5_file`, `md5_path`, `bookstore`, `directory`, `file`) VALUES
-( 1,  2758792, 1310699334, '63609929ffebe3925d0ef38bf1701545', '', '/home/carlos/Books/Examples', '', 'Addison.Wesley.Dojo.Using.the.Dojo.JavaScript.Library.to.Build.Ajax.Applications.Jun.2008.pdf'),
-( 2, 13119033, 1310699334, '55e8f1dd651a992b062b0148d292f7ef', '', '/home/carlos/Books/Examples', '', '2_[Ebook][Algorithm] Introduction to Algorithms ( MIT Press 2nd Edition).pdf'),
-( 3,  2067498, 1310699334, '532a39252994fc8c2788d0d3f8020712', '', '/home/carlos/Books/Examples', '', 'Algorithms (Dasgupta, Papadimitriou and Vazirani) (2006).pdf'),
-( 4,  2494061, 1310699334, 'f41dc141cccc52c5556c33adf46aa2d0', '', '/home/carlos/Books/Examples', '', 'Algoritmos y estructura de datos (Storti, D\'Elía, Paz, Dalcín y Pucheta) (2007).pdf'),
-( 5,  1863122, 1310699334, 'ed6343384b8380aed009c14df0cf7515', '', '/home/carlos/Books/Examples', '', 'Art_of_Programming_Contest_SE_for_uva.pdf'),
-( 6,  4617070, 1310699334, '956100dec00e6675a69ea5d34a968a8a', '', '/home/carlos/Books/Examples', '', 'Programming_Challenges.pdf'),
-( 7,   813141, 1310699334, '0758b4cdcaffb9d9d133176ef2c10aa6', '', '/home/carlos/Books/Examples', '', 'preliminares.pdf'),
-( 8,  2344121, 1310699334, 'e47e49ebf9c374ff7a49d4c2258cdb53', '', '/home/carlos/Books/Examples', '', 'O\'reilly RESTful Web Services Cookbook March 2010.pdf'),
-( 9,  5028427, 1310699334, '20f760f3221e494ff7e3b57f6083938b', '', '/home/carlos/Books/Examples', '', 'OReilly.Dojo.The.Definitive.Guide.Jun.2008.pdf'),
-(10,  1026322, 1310699334, 'd677dc5e9a763c0bc8ac4652b6464ae1', '', '/home/carlos/Books/Examples', '', 'OReilly.Regular.Expression.Pocket.Reference.2nd.Edition.Jul.2007.pdf'),
-(11, 11293606, 1310699334, '1bcb6397b88d19fae2d16453f652aa94', '', '/home/carlos/Books/Examples', '', 'PacktPub.Learning.ExtJS.3.2.pdf'),
-(12, 11661369, 1310699334, '3927603916034c37bbb178189f0c4f3d', '', '/home/carlos/Books/Examples', '', 'Pragmatic.Bookshelf.Mastering.Dojo.Jun.2008.pdf'),
-(13,  5871276, 1310699334, 'b76d91f9b96a353ef3362ab4acce4ca4', '', '/home/carlos/Books/Examples', '', 'web-2-0-architectures-what-entrepreneurs-and-information-architects-need-to-know.pdf'),
-(14,  4573005, 1310699334, 'b7d338d3b6c339b6eb16cb438357d9b7', '', '/home/carlos/Books/Examples', '', 'xslt.pdf'),
-(15, 13311351, 1310699334, '2b3b86dd51a550846fa8ba34dffc4c1f', '', '/home/carlos/Books/Examples', '', 'RESTful_PHP_Web_Services.pdf'),
-(16,    68485, 1310699334, 'fd2f6e2417c1a6208f8d25587e785158', '', '/home/carlos/Books/Examples', '', 'STL_ext.pdf'),
-(17,  6560031, 1310699334, 'b05ce21b6a43be322eac3803539fecec', '', '/home/carlos/Books/Examples', '', 'Thewebfoto-Curso-de-fotografia-digital.pdf'),
-(18,   935155, 1310699334, '998c6a618de1c46488c2831dd252864e', '', '/home/carlos/Books/Examples', '', 'howTo-openMosixES_0.4beta.pdf'),
-(19, 12697961, 1310699334, '992248bd69f1439e00c6162d3c5c17d4', '', '/home/carlos/Books/Examples', '', 'ireport.pdf'),
-(20,  1669421, 1310699334, '1d2e4a9f1fc69002f192289da35fa56f', '', '/home/carlos/Books/Examples', '', 'jasper.pdf'),
-(21,  5236552, 1310699334, 'ffbb7dd28f2e3017170492e038b8cc44', '', '/home/carlos/Books/Examples', '', 'learning_extjs.pdf'),
-(22,  8282228, 1310699334, 'ee38f8079c8d78374ff62ffd6b600e48', '', '/home/carlos/Books/Examples', '', 'php-manual-es.pdf'),
-(23,  3850701, 1310699334, '690c0a4f002593c988c2eb68a3a7232b', '', '/home/carlos/Books/Examples', '', 'vimbook-OPL.pdf');
+( 1,  2758792, 1310699334, '63609929ffebe3925d0ef38bf1701545', '', '/home/carlos/Books/Carlos', '', 'Addison.Wesley.Dojo.Using.the.Dojo.JavaScript.Library.to.Build.Ajax.Applications.Jun.2008.pdf'),
+( 2, 13119033, 1310699334, '55e8f1dd651a992b062b0148d292f7ef', '', '/home/carlos/Books/Carlos', '', '2_[Ebook][Algorithm] Introduction to Algorithms ( MIT Press 2nd Edition).pdf'),
+( 3,  2067498, 1310699334, '532a39252994fc8c2788d0d3f8020712', '', '/home/carlos/Books/Carlos', '', 'Algorithms (Dasgupta, Papadimitriou and Vazirani) (2006).pdf'),
+( 4,  2494061, 1310699334, 'f41dc141cccc52c5556c33adf46aa2d0', '', '/home/carlos/Books/Carlos', '', 'Algoritmos y estructura de datos (Storti, D\'Elía, Paz, Dalcín y Pucheta) (2007).pdf'),
+( 5,  1863122, 1310699334, 'ed6343384b8380aed009c14df0cf7515', '', '/home/carlos/Books/Carlos', '', 'Art_of_Programming_Contest_SE_for_uva.pdf'),
+( 6,  4617070, 1310699334, '956100dec00e6675a69ea5d34a968a8a', '', '/home/carlos/Books/Carlos', '', 'Programming_Challenges.pdf'),
+( 7,   813141, 1310699334, '0758b4cdcaffb9d9d133176ef2c10aa6', '', '/home/carlos/Books/Carlos', '', 'preliminares.pdf'),
+( 8,  2344121, 1310699334, 'e47e49ebf9c374ff7a49d4c2258cdb53', '', '/home/carlos/Books/Carlos', '', 'O\'reilly RESTful Web Services Cookbook March 2010.pdf'),
+( 9,  5028427, 1310699334, '20f760f3221e494ff7e3b57f6083938b', '', '/home/carlos/Books/Carlos', '', 'OReilly.Dojo.The.Definitive.Guide.Jun.2008.pdf'),
+(10,  1026322, 1310699334, 'd677dc5e9a763c0bc8ac4652b6464ae1', '', '/home/carlos/Books/Carlos', '', 'OReilly.Regular.Expression.Pocket.Reference.2nd.Edition.Jul.2007.pdf'),
+(11, 11293606, 1310699334, '1bcb6397b88d19fae2d16453f652aa94', '', '/home/carlos/Books/Carlos', '', 'PacktPub.Learning.ExtJS.3.2.pdf'),
+(12, 11661369, 1310699334, '3927603916034c37bbb178189f0c4f3d', '', '/home/carlos/Books/Carlos', '', 'Pragmatic.Bookshelf.Mastering.Dojo.Jun.2008.pdf'),
+(13,  5871276, 1310699334, 'b76d91f9b96a353ef3362ab4acce4ca4', '', '/home/carlos/Books/Carlos', '', 'web-2-0-architectures-what-entrepreneurs-and-information-architects-need-to-know.pdf'),
+(14,  4573005, 1310699334, 'b7d338d3b6c339b6eb16cb438357d9b7', '', '/home/carlos/Books/Carlos', '', 'xslt.pdf'),
+(15, 13311351, 1310699334, '2b3b86dd51a550846fa8ba34dffc4c1f', '', '/home/carlos/Books/Carlos', '', 'RESTful_PHP_Web_Services.pdf'),
+(16,    68485, 1310699334, 'fd2f6e2417c1a6208f8d25587e785158', '', '/home/carlos/Books/Carlos', '', 'STL_ext.pdf'),
+(17,  6560031, 1310699334, 'b05ce21b6a43be322eac3803539fecec', '', '/home/carlos/Books/Carlos', '', 'Thewebfoto-Curso-de-fotografia-digital.pdf'),
+(18,   935155, 1310699334, '998c6a618de1c46488c2831dd252864e', '', '/home/carlos/Books/Carlos', '', 'howTo-openMosixES_0.4beta.pdf'),
+(19, 12697961, 1310699334, '992248bd69f1439e00c6162d3c5c17d4', '', '/home/carlos/Books/Carlos', '', 'ireport.pdf'),
+(20,  1669421, 1310699334, '1d2e4a9f1fc69002f192289da35fa56f', '', '/home/carlos/Books/Carlos', '', 'jasper.pdf'),
+(21,  5236552, 1310699334, 'ffbb7dd28f2e3017170492e038b8cc44', '', '/home/carlos/Books/Carlos', '', 'learning_extjs.pdf'),
+(22,  8282228, 1310699334, 'ee38f8079c8d78374ff62ffd6b600e48', '', '/home/carlos/Books/Carlos', '', 'php-manual-es.pdf'),
+(23,  3850701, 1310699334, '690c0a4f002593c988c2eb68a3a7232b', '', '/home/carlos/Books/Carlos', '', 'vimbook-OPL.pdf');
 
 INSERT INTO `babel_books_shared` (`book`, `avatar`, `language`, `year`, `title`, `author`, `publisher`) VALUES
 ( 1, 1, 'English', '2008', 'Dojo. Using the Dojo JavaScript Library to Build Ajax Applications', 'James E. Harmon', 'Addison-Wesley'),

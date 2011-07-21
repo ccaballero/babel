@@ -10,6 +10,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Publisher</th>
+            <th style="width:50px;">Year</th>
             <th>Language</th>
             <th>Path</th>
             <th style="width:30px;"><img src="/media/img/icons/photo.png" alt="" title="" /></th>
@@ -23,6 +24,7 @@
                 <td class="left"><?php echo $book->title ?></td>
                 <td class="left"><?php echo $book->author ?></td>
                 <td class="center"><?php echo $book->publisher ?></td>
+                <td class="center"><?php echo $book->year ?></td>
                 <td class="center"><?php echo $book->language ?></td>
                 <td class="left"><?php echo $book->getPath() ?></td>
                 <td class="center">
@@ -39,7 +41,7 @@
 </form>
 
 <div class="overlay" id="update_book">
-    <div style="float:left; margin: 0em 1.3em 0em 0em; width: 400px;">
+    <div style="float:left; margin: 0em 1.3em 0em 0em; height: 400px;">
         <img id="thumb" src="" alt="" title="" />
     </div>
     <div style="float:left;">
