@@ -23,12 +23,13 @@ class Books_BookController extends Babel_Action
             $book = $model_shared->findByBook($book->ident);
 
             $url = new Zend_Controller_Action_Helper_Url();
+            $language = new Babel_Helpers_Language();
 
             if (!empty($book)) {
                 $class->title = $book->title;
                 $class->author = $book->author;
                 $class->publisher = $book->publisher;
-                $class->language = $book->language;
+                $class->language = $language->language($book->language);
                 $class->year = $book->year;
 
                 $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');

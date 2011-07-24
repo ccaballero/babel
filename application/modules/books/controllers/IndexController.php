@@ -6,7 +6,7 @@ class Books_IndexController extends Babel_Action
         $this->requireLogin();
 
         $model_shared = new Books();
-        $books = $model_shared->fetchAll();
+        $books = $model_shared->selectByStats();
 
         $request = $this->getRequest();
         if ($request->isPost()) {

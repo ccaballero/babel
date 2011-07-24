@@ -11,7 +11,7 @@ class Catalogs_Form_Create extends Zend_Form
         $information_subform = new Zend_Form_SubForm();
         $label = $information_subform->createElement('text', 'label');
         $label->setRequired(true)
-              ->setLabel('Label (*)')
+              ->setLabel('Label')
               ->setAttrib('class', 'focus label')
               ->addFilter('StringTrim')
               ->addValidator('StringLength', false, array(1, 128))

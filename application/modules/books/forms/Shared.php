@@ -24,23 +24,29 @@ class Books_Form_Shared extends Zend_Form
                   ->setAttrib('class', 'world')
                   ->addFilter('StringTrim');
 
-        $language = $this->createElement('text', 'language');
-        $language->setRequired(false)
-                 ->setLabel('Language')
-                 ->setAttrib('class', 'flag')
-                 ->addFilter('StringTrim');
-
         $year = $this->createElement('text', 'year');
         $year->setRequired(false)
              ->setLabel('Year')
              ->setAttrib('class', 'calendar')
              ->addFilter('Int');
 
+        $language = $this->createElement('select', 'language');
+        $language->setRequired(false)
+                 ->setLabel('Language')
+                 ->setAttrib('class', 'flag')
+                 ->addFilter('StringTrim')
+                 ->addValidator('InArray', true, array('haystack' => array('', 'EN', 'ES')))
+                 ->setMultiOptions(array(
+                     ''   => '----------',
+                     'EN' => 'English',
+                     'ES' => 'Spanish',
+                 ));
+
         $this->addElement($title);
         $this->addElement($author);
         $this->addElement($publisher);
-        $this->addElement($language);
         $this->addElement($year);
+        $this->addElement($language);
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
     }
 }

@@ -3,10 +3,9 @@
         <img src="<?php echo $this->book->getUrlPhoto() ?>" alt="<?php echo $this->book->title ?>" title="<?php echo $this->book->title ?>" />
     </div>
     <div>
-        <p><span class="bold">Title: </span><?php echo $this->none($this->book->title) ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Title') ?>:</span> <?php echo $this->none($this->book->title) ?></p>
     <?php if (!empty($this->book->author)) { ?>
-        <p><span class="bold">Author: </span><?php echo $this->book->author ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Author') ?>:</span> <?php echo $this->book->author ?></p>
     <?php } ?>
-        <p><span class="bold">Language: </span><?php echo $this->none($this->book->language) ?></p>
     </div>
 </div>

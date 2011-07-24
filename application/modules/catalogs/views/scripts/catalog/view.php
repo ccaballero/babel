@@ -7,17 +7,17 @@
 </div>
 <div id="list">
     <?php foreach ($this->catalogs as $catalog) { ?>
-        <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('catalog' => $catalog)) ?>
+        <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('catalog' => $catalog, 'translate' => $this->translate)) ?>
     <?php } ?>
     <?php foreach ($this->books as $book) { ?>
-        <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book)) ?>
+        <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book, 'translate' => $this->translate)) ?>
     <?php } ?>
     <?php if ($this->auth->hasIdentity()) { ?>
-        <?php echo $this->partial('catalogs/views/scripts/new.php') ?>
+        <?php echo $this->partial('catalogs/views/scripts/new.php', array('translate' => $this->translate)) ?>
     <?php } ?>
 </div>
 
 <?php if ($this->auth->hasIdentity()) { ?>
-    <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form)) ?>
+    <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form, 'translate' => $this->translate)) ?>
 <?php } ?>
-<?php echo $this->partial('books/views/scripts/info.php') ?>
+<?php echo $this->partial('books/views/scripts/info.php', array('translate' => $this->translate)) ?>

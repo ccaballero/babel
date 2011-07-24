@@ -4,13 +4,13 @@
         <img src="/media/img/books/<?php echo $this->book->book ?>.png" alt="" title="" />
     </div>
     <div>
-        <p><span class="bold">Title: </span><?php echo $this->none($this->book->title) ?></p>
-        <p><span class="bold">Author: </span><?php echo $this->book->author ?></p>
-        <p><span class="bold">Publisher: </span><?php echo $this->book->publisher ?></p>
-        <p><span class="bold">Language: </span><?php echo $this->none($this->book->language) ?></p>
-        <p><span class="bold">Year: </span><?php echo $this->none($this->book->year) ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Title') ?>:</span> <?php echo $this->none($this->book->title) ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Author') ?>:</span> <?php echo $this->book->author ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Publisher') ?>:</span> <?php echo $this->book->publisher ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Language') ?>:</span> <?php echo $this->language($this->book->language) ?></p>
+        <p><span class="bold"><?php echo $this->translate->_('Year') ?>:</span> <?php echo $this->none($this->book->year) ?></p>
 
-        <h2>Catalogs:</h2>
+        <h2><?php echo $this->translate->_('Catalogs') ?>:</h2>
         <form method="post" action="" accept-charset="utf-8">
             <table>
         <?php foreach ($this->roots as $root) { ?>
@@ -21,11 +21,9 @@
         <?php } ?>
                 <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" value="Update" /></td>
+                    <td><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
-
-
