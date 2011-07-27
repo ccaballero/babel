@@ -1,0 +1,29 @@
+#menubar a.main {
+    box-shadow: 0px 0px 5px 2px #000000;
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+#form input[type="text"], #form input[type="password"], #form input[type="file"], #form textarea {
+    box-shadow: 2px 2px 4px 2px #000000;
+    border-radius: 0.5em;
+}
+
+#breadcrumb a {
+    box-shadow: 0px 0px 8px 2px #888888;
+    border-radius: 5px;
+}
+
+#list .element {
+    box-shadow: 0px 0px 8px 2px #888888;
+    border-radius: 10px;
+}
+
+#list .element:hover {
+    box-shadow: 0px 0px 8px 2px #ffffff;
+}
+
+.overlay {
+    box-shadow: 0 0 50px #ccc;
+    border-radius: 6px;
+}

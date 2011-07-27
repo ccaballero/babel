@@ -45,7 +45,6 @@ $(document).ready(function(){
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});
     $('.update_file').overlay({
-        left:'center',top:45,
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
                 $('#bookstore option').each(function() {
@@ -61,7 +60,6 @@ $(document).ready(function(){
         }});
     $('.update_book').click(function(){book=$(this).attr('name');});
     $('.update_book').overlay({
-        left:'center',top:45,
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
                 $('#title').focus();$('#title').attr('value',json.book.title);
@@ -74,7 +72,6 @@ $(document).ready(function(){
         }});
     $('div.book').click(function(){book=$(this).attr('name');});
     $('div.book').overlay({
-        left:'center',top:45,
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
                 $('#thumb').attr('src','/media/img/books/'+book.substring(5)+'.png');

@@ -1,0 +1,55 @@
+#head {
+    background: -moz-linear-gradient(top, #888888, #ffffff);
+    border: none;
+}
+
+#menubar a.main {
+    -moz-box-shadow: 0px 0px 5px 2px #000000;
+    -moz-border-radius-bottomleft: 0.5em;
+    -moz-border-radius-bottomright: 0.5em;
+}
+
+.color1 {
+    background: -moz-linear-gradient(top, #5a065d, #e36de7);
+}
+
+.color2 {
+    background: -moz-linear-gradient(top, #8f5509, #f7be74);
+}
+
+.color3 {
+    background: -moz-linear-gradient(top, #758a08, #e1f673);
+}
+
+.color4 {
+    background: -moz-linear-gradient(top, #08395c, #74b7e7);
+}
+
+.color5 {
+    background: -moz-linear-gradient(top, #ffffff, #888888);
+}
+
+#form input[type="text"], #form input[type="password"], #form input[type="file"], #form textarea {
+    -moz-border-radius: 0.5em;
+    -moz-box-shadow: 2px 2px 4px 2px #000000;
+}
+
+#breadcrumb a {
+    -moz-border-radius: 5px;
+    -moz-box-shadow: 0px 0px 8px 2px #888888;
+}
+
+#list .element {
+    -moz-border-radius: 10px;
+    -moz-box-shadow: 0px 0px 8px 2px #888888;
+}
+
+#list .element:hover {
+    -moz-box-shadow: 0px 0px 8px 2px #ffffff;
+    background: -moz-linear-gradient(top, #000000, #303030);
+}
+
+.overlay {
+    -moz-border-radius: 6px;
+    -moz-box-shadow: 0 0 50px #ccc;
+}
