@@ -1,6 +1,6 @@
 <?php
 
-class ImagesController extends Babel_Action
+class ImageController extends Babel_Action
 {
     public function indexAction() {
         $base = $this->getFrontController()->getBaseUrl();
@@ -20,7 +20,7 @@ class ImagesController extends Babel_Action
         header("HTTP/1.1 200 OK");
         header("Status: 200 OK");
         header('Content-Type: application/json');
-        echo json_encode(array('images' => $array));
+        echo json_encode(array('image' => $array[rand(0, count($array) - 1)]));
         die;
     }
 }

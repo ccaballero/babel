@@ -380,3 +380,11 @@ div.tag {
     border: 1px dashed #aaaaaa;
     background: #303030;
 }
+
+.user > img {
+    margin-left: 4px;
+}
+
+.user > img, .catalog > .photo > img {
+    height: 100px;
+}

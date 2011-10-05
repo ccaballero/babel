@@ -75,7 +75,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle($options['babel']['properties']['title']);
         $view->doctype($options['resources']['view']['doctype']);
         $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
-        $view->headLink(array('rel' => 'icon', 'href' => '/babel_1.png'));
+        $view->headLink(array('rel' => 'icon', 'href' => '/babel.png'));
         $view->headScript()->appendFile('/media/js/jquery-1.6.2.min.js', 'text/javascript')
                            ->appendFile('/media/js/jquery.tools.min.js', 'text/javascript')
                            ->appendFile('/media/js/babel.js', 'text/javascript');

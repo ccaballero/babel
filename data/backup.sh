@@ -8,6 +8,7 @@ DATABASE='babel'
 
 DATE=$(date +%Y%m%d)
 
-mysqldump --user=$USER --password=$PASSWORD --default-character-set=$CHARACTER_SET $DATABASE > $DIRECTORY/$DATE.sql
-tar -cz --remove-files --file $DIRECTORY/backup/$DATE.tar.gz $DIRECTORY/$DATE.sql
+cd $DIRECTORY
+mysqldump --user=$USER --password=$PASSWORD --default-character-set=$CHARACTER_SET $DATABASE > $DATE.sql
+tar -cz --remove-files --file $DIRECTORY/backup/$DATE.tar.gz $DATE.sql
 

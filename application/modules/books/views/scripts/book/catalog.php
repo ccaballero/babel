@@ -1,7 +1,7 @@
 <div id="classic">
     <h1><?php echo $this->book->title ?></h1>
     <div class="photo">
-        <img src="/media/img/books/<?php echo $this->book->book ?>.png" alt="" title="" />
+        <a id="book_download" href="<?php echo $this->url(array('book' => $this->book->book), 'books_book_download') ?>" target="_BLANK"><img src="/media/img/books/<?php echo $this->book->book ?>.png" alt="" title="" /></a>
     </div>
     <div>
         <p><span class="bold"><?php echo $this->translate->_('Title') ?>:</span> <?php echo $this->none($this->book->title) ?></p>

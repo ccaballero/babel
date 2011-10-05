@@ -28,9 +28,8 @@ $(document).ready(function(){
             $(this).animate({top:'0.5em'},100);
         });
 
-    $.getJSON('/images.json',function(json){
-        var images=json.images;
-        var image=images[Math.floor(Math.random()*images.length)];
+    $.getJSON('/image.json',function(json){
+        var image=json.image;
         $('img.switcher').attr('src',image).animate({opacity: 1.0},3500);
     });
 

@@ -6,7 +6,7 @@ class Users_User extends Zend_Db_Table_Row_Abstract
         if ($this->avatar) {
             return '/media/img/thumbnails/users/' . $this->ident . '.jpg';
         } else {
-            return '/media/img/user.png';
+            return '/babel.png';
         }
     }
 }

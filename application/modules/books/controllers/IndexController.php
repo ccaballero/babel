@@ -69,6 +69,7 @@ class Books_IndexController extends Babel_Action
 
     public function examineAction() {
         $this->requireLogin();
+        $request = $this->getRequest();
 
         $model_collection = new Books_Collection();
 
@@ -77,7 +78,6 @@ class Books_IndexController extends Babel_Action
         $adapters = array();
         $scan = $this->_scan_bookstores($bookstores, &$adapters);
 
-        $request = $this->getRequest();
         if ($request->isPost()) {
             $md5_paths = $request->getParam('books');
             if ($request->getParam('add')) {
