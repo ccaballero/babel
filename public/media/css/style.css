@@ -143,6 +143,19 @@ body {
     margin: 0px 2px 0px 0px;
 }
 
+#wall {
+    
+}
+
+#column1, #column2, #column3 {
+    float: left;
+    height: 100%;
+}
+
+#column3 {
+    margin-left: 10px;
+}
+
 #central {
     position: absolute;
     width: 840px;
@@ -381,10 +394,24 @@ div.tag {
     background: #303030;
 }
 
+.tag a:hover {
+    background-color: #606060;
+}
+
+.tag.active a {
+    background-color: #ffffff;
+    color: #000000;
+}
+
 .user > img {
     margin-left: 4px;
 }
 
 .user > img, .catalog > .photo > img {
     height: 100px;
+}
+
+.vertical {
+    display: block;
+    clear: both;
 }

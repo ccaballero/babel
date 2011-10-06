@@ -67,17 +67,56 @@ class Books_IndexController extends Babel_Action
         $this->view->form = new Books_Form_Collection();
     }
 
+    /*public function refreshAction() {
+        $this->requireLogin();
+
+        $model_collection = new Books_Collection();
+        $collection = $model_collection->fetchAll();
+
+        foreach ($collection as $file) {
+            $file->md5_path = md5($file->getPath());
+            $file->save();
+        }
+
+        $this->_helper->flashMessenger->addMessage('MD5 refreshed');
+        $this->_helper->redirector('examine', 'index', 'books');
+    }*/
+
     public function examineAction() {
         $this->requireLogin();
         $request = $this->getRequest();
 
-        $model_collection = new Books_Collection();
+        $index_bookstore = intval($request->getParam('bookstore'));
+        $index_directory = intval($request->getParam('directory'));
 
         $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
+        $bookstores = $bookstores->toArray();
 
+        if (!isset($bookstores[$index_bookstore])) {
+            $index_bookstore = 0;
+        }
+        $bookstore = $bookstores[$index_bookstore];
+
+        $directories = array();
+        $scan = scandir($bookstore);
+        foreach ($scan as $i => $file) {
+            if ($file == "." || $file == ".." || !is_dir("$bookstore/$file")) {
+                unset($scan[$i]);
+            }
+        }
+        foreach ($scan as $file) {
+            $directories[] = $file;
+        }
+        if (!isset($directories[$index_directory])) {
+            $index_directory = 0;
+        }
+        $directory = $directories[$index_directory];
+
+        $books = $this->_scan_files("$bookstore/$directory");
+
+        /*$model_collection = new Books_Collection();
         $adapters = array();
         $scan = $this->_scan_bookstores($bookstores, &$adapters);
-
         if ($request->isPost()) {
             $md5_paths = $request->getParam('books');
             if ($request->getParam('add')) {
@@ -95,28 +134,18 @@ class Books_IndexController extends Babel_Action
             }
             $this->_helper->redirector('index', 'index', 'books');
         }
-
-        $this->view->books = $scan[0];
         $this->view->warnings_filenames = $scan[1];
         $this->view->warnings_md5_files = $scan[2];
+         */
+
+        $this->view->bookstores = $bookstores;
+        $this->view->bookstore = $index_bookstore;
+        $this->view->directories = $directories;
+        $this->view->directory = $index_directory;
+        $this->view->books = $books;
     }
 
-    public function refreshAction() {
-        $this->requireLogin();
-
-        $model_collection = new Books_Collection();
-        $collection = $model_collection->fetchAll();
-
-        foreach ($collection as $file) {
-            $file->md5_path = md5($file->getPath());
-            $file->save();
-        }
-
-        $this->_helper->flashMessenger->addMessage('MD5 refreshed');
-        $this->_helper->redirector('examine', 'index', 'books');
-    }
-
-    private function _scan_bookstores($bookstores, $adapters = null) {
+    /*private function _scan_bookstores($bookstores, $adapters = null) {
         $model_collection = new Books_Collection();
         $books = array();
 
@@ -159,7 +188,7 @@ class Books_IndexController extends Babel_Action
         }
 
         return array($books, $warning_filenames, $warning_md5_files);
-    }
+    }*/
 
     private function _scan_files($directory) {
         $files = array();
@@ -173,7 +202,6 @@ class Books_IndexController extends Babel_Action
                     } else if (is_file($directory . '/' . $file)) {
                         if (substr(strtolower($file), -3) == 'pdf') {
                             $files[] = array(
-                                'md5' => md5($directory . '/' . $file),
                                 'directory' => $directory,
                                 'file' => $file,
                             );

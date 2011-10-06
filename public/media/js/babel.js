@@ -13,8 +13,12 @@ var width=function(){
 var resize=function(){
     $('#wrapper').css('height',height()+'px');
     $('#main').css('height',(height()-60)+'px');
+    $('#wall').css('height',(height()-120)+'px');
     $('#wrapper').css('width',width()+'px');
     $('#main').css('width',(width()-20)+'px');
+    $('#wall').css('width',(width()-35)+'px');
+
+    $('#column3').css('width',(width() - (60 + $('#column1').width() + $('#column2').width()))+'px');
 };
 
 $(window).resize(resize);

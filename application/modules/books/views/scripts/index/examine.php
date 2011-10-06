@@ -1,4 +1,40 @@
 <h1><?php echo $this->translate->_('Books directories') ?></h1>
+<div id="wall">
+    <div id="column1">
+    <?php foreach ($this->bookstores as $i => $bookstore) { ?>
+        <div class="vertical tag<?php echo ($i == $this->bookstore) ? ' active' : '' ?>">
+            <a href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo $bookstore ?></a>
+        </div>
+    <?php } ?>
+    </div>
+    <div id="column2">
+    <?php foreach ($this->directories as $i => $directory) { ?>
+        <div class="vertical tag<?php echo ($i == $this->directory) ? ' active' : '' ?>">
+            <a href="<?php echo $this->url(array('bookstore' => $this->bookstore, 'directory' => $i), 'books_examine') ?>"><?php echo $directory ?></a>
+        </div>
+    <?php } ?>
+    </div>
+    <div id="column3">
+        <table>
+            <tr>
+                <th style="width:20px;">&nbsp;</th>
+                <th><?php echo $this->translate->_('Directory') ?></th>
+                <th><?php echo $this->translate->_('File') ?></th>
+            </tr>
+        <?php foreach ($this->books as $i => $book) { ?>
+            <tr class="<?= $i % 2 == 0 ? 'even' : 'odd' ?>">
+                <td>&nbsp;</td>
+                <td><?php echo $book['directory'] ?></td>
+                <td><?php echo $book['file'] ?></td>
+            </tr>
+        <?php } ?>
+        </table>
+    </div>
+</div>
+
+
+
+<?php /*
 <form method="post" action="" accept-charset="utf-8">
     <div class="tool-panel">
         <input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" />
@@ -57,3 +93,4 @@
         <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
 </form>
+*/ ?>
