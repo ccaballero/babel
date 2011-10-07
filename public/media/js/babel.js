@@ -18,7 +18,7 @@ var resize=function(){
     $('#main').css('width',(width()-20)+'px');
     $('#wall').css('width',(width()-35)+'px');
 
-    $('#column3').css('width',(width() - (60 + $('#column1').width() + $('#column2').width()))+'px');
+    $('#column3').css('width',(width() - (55 + $('#column1').width() + $('#column2').width()))+'px');
 };
 
 $(window).resize(resize);
@@ -32,14 +32,9 @@ $(document).ready(function(){
             $(this).animate({top:'0.5em'},100);
         });
 
-    $.getJSON('/image.json',function(json){
-        var image=json.image;
-        $('img.switcher').attr('src',image).animate({opacity: 1.0},3500);
-    });
-
     $('input[type="text"].focus').focus();
     $('.closeable').click(function(){$(this).parent().fadeOut();});
-    $('input[name="groupall"]').click(function(){$('input[class="'+$(this).attr('class')+'"]').attr('checked',$(this).attr('checked'));});
+    $('input[class="groupall"]').click(function(){if ($(this).attr('checked') == 'checked') {$('input[class="check"]').attr('checked', 'checked');} else {$('input[class="check"]').removeAttr('checked');}});
 
     $('#catalogs_menu').click(function(){$('#menubar .catalogs').fadeIn(1000);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeOut(950);return false;});
     $('#users_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeIn(1000);$('#menubar .books').fadeOut(950);return false;});

@@ -31,22 +31,17 @@ class Books_IndexController extends Babel_Action
         $model_collection = new Books_Collection();
         $model_shared = new Books();
 
-        $books = array();
-
-        $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
-        foreach($bookstores as $bookstore) {
-            $books[$bookstore] = $model_collection->selectByBookstore($bookstore);
-        }
+        $books = $model_collection->fetchAll($model_collection->select()->order('CONCAT(directory,\'/\',file) ASC'));
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $ident_books = $request->getParam('books');
+            $hashes = $request->getParam('books');
             if ($request->getParam('add')) {
-                foreach ($ident_books as $ident) {
-                    $book = $model_shared->findByBook($ident);
+                foreach ($hashes as $hash) {
+                    $book = $model_shared->findByHash($hash);
                     if ($book == null) {
                         $book = $model_shared->createRow();
-                        $book->book = $ident;
+                        $book->hash = $hash;
                         $book->save();
                     }
                 }
@@ -54,8 +49,8 @@ class Books_IndexController extends Babel_Action
                 $this->_helper->redirector('shared', 'index', 'books');
             }
             if ($request->getParam('delete')) {
-                foreach ($ident_books as $ident) {
-                    $book = $model_collection->findByIdent($ident);
+                foreach ($hashes as $hash) {
+                    $book = $model_collection->findByHash($hash);
                     $book->delete();
                 }
                 $this->_helper->flashMessenger->addMessage('Books removed successfully');
@@ -66,21 +61,6 @@ class Books_IndexController extends Babel_Action
         $this->view->books = $books;
         $this->view->form = new Books_Form_Collection();
     }
-
-    /*public function refreshAction() {
-        $this->requireLogin();
-
-        $model_collection = new Books_Collection();
-        $collection = $model_collection->fetchAll();
-
-        foreach ($collection as $file) {
-            $file->md5_path = md5($file->getPath());
-            $file->save();
-        }
-
-        $this->_helper->flashMessenger->addMessage('MD5 refreshed');
-        $this->_helper->redirector('examine', 'index', 'books');
-    }*/
 
     public function examineAction() {
         $this->requireLogin();
@@ -112,83 +92,67 @@ class Books_IndexController extends Babel_Action
         }
         $directory = $directories[$index_directory];
 
-        $books = $this->_scan_files("$bookstore/$directory");
-
-        /*$model_collection = new Books_Collection();
         $adapters = array();
-        $scan = $this->_scan_bookstores($bookstores, &$adapters);
+        $warnings = array();
+        $books = $this->_scan_collection("$bookstore/$directory", &$adapters, &$warnings);
+
         if ($request->isPost()) {
-            $md5_paths = $request->getParam('books');
+            $hashes = $request->getParam('books');
             if ($request->getParam('add')) {
-                foreach ($md5_paths as $md5) {
-                    $adapters[$md5]->tsregister = time();
-                    $adapters[$md5]->save();
+                foreach ($hashes as $hash) {
+                    $adapters[$hash]->tsregister = time();
+                    $adapters[$hash]->save();
                 }
                 $this->_helper->flashMessenger->addMessage('Books added successfully');
             }
             if ($request->getParam('delete')) {
-                foreach ($md5_paths as $md5) {
-                    $adapters[$md5]->delete();
+                foreach ($hashes as $hash) {
+                    $adapters[$hash]->delete();
                 }
                 $this->_helper->flashMessenger->addMessage('Books removed successfully');
             }
             $this->_helper->redirector('index', 'index', 'books');
         }
-        $this->view->warnings_filenames = $scan[1];
-        $this->view->warnings_md5_files = $scan[2];
-         */
 
         $this->view->bookstores = $bookstores;
         $this->view->bookstore = $index_bookstore;
         $this->view->directories = $directories;
         $this->view->directory = $index_directory;
         $this->view->books = $books;
+        $this->view->warnings = $warnings;
     }
 
-    /*private function _scan_bookstores($bookstores, $adapters = null) {
+    private function _scan_collection($bookstore, $adapters = null, $warnings = null) {
         $model_collection = new Books_Collection();
-        $books = array();
+        $scan = array();
 
-        $warning_filenames = array();
-        $warning_md5_files = array();
+        $dict_books = array();
+        $books = $model_collection->selectByDirectory($bookstore);
+        foreach ($books as $book) {
+            $dict_books[$book->hash] = $book;
+        }
 
-        foreach($bookstores as $bookstore) {
-            $files = $this->_scan_files($bookstore);
-
-            foreach ($files as $file) {
-                $book = $model_collection->findByMD5($file['md5']);
-                if ($book == null) {
-                    $book = $model_collection->createRow();
-                    $book->size = filesize($file['directory'] . '/' . $file['file']);
-                    $book->bookstore = $bookstore;
-                    $book->directory = substr($file['directory'], strlen($bookstore) + 1);
-                    $book->file = $file['file'];
-                    $book->md5_file = @md5_file($file['directory'] . '/' . $file['file']);
-                    $book->md5_path = @md5($file['directory'] . '/' . $file['file']);
+        $files = $this->_scan_files($bookstore);
+        foreach ($files as $file) {
+            if (isset($dict_books[$file['hash']])) {
+                $book = $dict_books[$file['hash']];
+                if ($book->getPath() <> "{$file['directory']}/{$file['file']}") {
+                    $book = $model_collection->createRow($file);
+                    $warnings[$book->getPath()] = $dict_books[$file['hash']]->getPath();
                 }
+            } else {
+                $book = $model_collection->createRow($file);
+            }
 
-                if (isset($warning_filenames[$book->file])) {
-                    $warning_filenames[$book->file] = false;
-                } else {
-                    $warning_filenames[$book->file] = true;
-                }
+            $scan[] = $book;
 
-                if (isset($warning_md5_files[$book->md5_file])) {
-                    $warning_md5_files[$book->md5_file] = false;
-                } else {
-                    $warning_md5_files[$book->md5_file] = true;
-                }
-
-                if (isset($adapters)) {
-                    $adapters[$book->md5_path] = $book;
-                }
-
-                $books[$bookstore][] = $book;
+            if (isset($adapters)) {
+                $adapters[$book->hash] = $book;
             }
         }
 
-        return array($books, $warning_filenames, $warning_md5_files);
-    }*/
+        return $scan;
+    }
 
     private function _scan_files($directory) {
         $files = array();
@@ -197,13 +161,16 @@ class Books_IndexController extends Babel_Action
         if ($subdirectories) {
             foreach ($subdirectories as $file) {
                 if (($file <> '.') && ($file <> '..')) {
-                    if (is_dir($directory . '/' . $file)) {
-                        $files = @array_merge($files, $this->_scan_files($directory . '/' . $file));
-                    } else if (is_file($directory . '/' . $file)) {
+                    $path = "$directory/$file";
+                    if (is_dir($path)) {
+                        $files = @array_merge($files, $this->_scan_files($path));
+                    } else if (is_file($path)) {
                         if (substr(strtolower($file), -3) == 'pdf') {
                             $files[] = array(
                                 'directory' => $directory,
                                 'file' => $file,
+                                'size' => filesize($path),
+                                'hash' => md5_file($path),
                             );
                         }
                     }

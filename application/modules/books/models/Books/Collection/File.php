@@ -3,12 +3,11 @@
 class Books_Collection_File extends Zend_Db_Table_Row_Abstract
 {
     public function inDisk() {
-        $path = $this->getPath();
-        return file_exists($path);
+        return file_exists($this->getPath());
     }
 
     public function inCollection() {
-        return !empty($this->ident);
+        return !empty($this->tsregister);
     }
 
     public function isShared() {
@@ -19,10 +18,6 @@ class Books_Collection_File extends Zend_Db_Table_Row_Abstract
     }
 
     public function getPath() {
-        if (empty($this->directory)) {
-            return $this->bookstore . '/' . $this->file;
-        } else {
-            return $this->bookstore . '/' . $this->directory . '/' .$this->file;
-        }
+        return "{$this->directory}/{$this->file}";
     }
 }

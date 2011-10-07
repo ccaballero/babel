@@ -44,6 +44,8 @@
 "Value is required and can't be empty","El campo es requerido y no puede estar vacio"
 "Invalid type given. String expected","El campo esperaba una linea de texto"
 "'%value%' exceeds the allowed length","'%value%' excede el tamaño disponible"
+"'%value%' is less than %min% characters long","'%value%' tiene menos de %min% caracteres"
+"'%value%' is more than %max% characters long","'%value%' tiene mas de %max% caracteres"
 "Incorrect information","Información incorrecta"
 "Fullname","Nombre completo"
 "Photo","Fotografía"

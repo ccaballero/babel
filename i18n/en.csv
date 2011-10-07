@@ -44,6 +44,8 @@
 "Value is required and can't be empty"
 "Invalid type given. String expected"
 "'%value%' exceeds the allowed length"
+"'%value%' is less than %min% characters long"
+"'%value%' is more than %max% characters long"
 "Incorrect information"
 "Fullname"
 "Photo"

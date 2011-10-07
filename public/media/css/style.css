@@ -150,10 +150,11 @@ body {
 #column1, #column2, #column3 {
     float: left;
     height: 100%;
+    border-left: 1px dashed #ffffff;
 }
 
 #column3 {
-    margin-left: 10px;
+    padding-left: 10px;
 }
 
 #central {

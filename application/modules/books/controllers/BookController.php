@@ -4,23 +4,22 @@ class Books_BookController extends Babel_Action
 {
     public function infoAction() {
         $request = $this->getRequest();
-        $ident = $request->getParam('book');
+        $hash = $request->getParam('book');
 
         $model_collection = new Books_Collection();
-        $book = $model_collection->findByIdent($ident);
+        $book = $model_collection->findByHash($hash);
 
         $class = new StdClass();
         if (!empty($book)) {
             if ($this->auth <> null) {
-                $class->bookstore = $book->bookstore;
                 $class->directory = $book->directory;
                 $class->file = $book->file;
                 $class->size = $book->size;
-                $class->md5 = $book->md5_file;
+                $class->hash = $book->hash;
             }
 
-            $model_shared = new Books();
-            $book = $model_shared->findByBook($book->ident);
+            /*$model_shared = new Books();
+            $book = $model_shared->findByBook($book->hash);
 
             $url = new Zend_Controller_Action_Helper_Url();
             $language = new Babel_Helpers_Language();
@@ -34,7 +33,7 @@ class Books_BookController extends Babel_Action
 
                 $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
                 $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
-            }
+            }*/
         }
 
         header("HTTP/1.1 200 OK");
@@ -171,23 +170,15 @@ class Books_BookController extends Babel_Action
             if ($form->isValid($request->getPost())) {
                 $model_collection = new Books_Collection();
 
-                $ident = $request->getParam('book');
-                $book = $model_collection->findByIdent($ident);
+                $hash = $request->getParam('book');
+                $book = $model_collection->findByHash($hash);
 
-                $bookstores = array();
-                foreach(Zend_Registry::get('Config')->babel->properties->bookstores as $bookstore) {
-                    $bookstores[] = $bookstore;
-                }
-
-                $book->bookstore = $bookstores[$request->getParam('bookstore')];
                 $book->directory = $request->getParam('directory');
                 $book->file = $request->getParam('file');
 
                 if ($book->inDisk()) {
                     $book->size = filesize($book->getPath());
-                    $book->md5_file = @md5_file($book->getPath());
-                    $book->md5_path = @md5($book->getPath());
-
+                    $book->hash = @md5_file($book->getPath());
                     $book->save();
                     $this->_helper->flashMessenger->addMessage('The book was edited successfully');
                 } else {

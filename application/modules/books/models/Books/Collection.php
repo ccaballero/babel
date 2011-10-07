@@ -3,20 +3,16 @@
 class Books_Collection extends Babel_Models_Table
 {
     protected $_name = 'babel_books_collection';
-    protected $_primary = 'ident';
+    protected $_primary = 'hash';
 
     protected $_rowClass = 'Books_Collection_File';
     protected $_dependentTables = array('Books', 'Books_Stats');
-    
-    public function selectByBookstore($bookstore) {
-        return $this->fetchAll($this->select()->where('bookstore = ?', $bookstore)->order('file ASC'));
+
+    public function selectByDirectory($directory) {
+        return $this->fetchAll($this->select()->where('directory = ?', $directory));
     }
 
-    public function findByIdent($ident) {
-        return $this->fetchRow($this->select()->where('ident = ?', $ident));
-    }
-
-    public function findByMD5($md5) {
-        return $this->fetchRow($this->select()->where('md5_path = ?', $md5));
+    public function findByHash($hash) {
+        return $this->fetchRow($this->select()->where('hash = ?', $hash));
     }
 }

@@ -9,7 +9,7 @@ class Books_Stats extends Babel_Models_Table
         'Book'                  => array(
             'columns'           => 'book',
             'refTableClass'     => 'Books_Collection',
-            'refColumns'        => 'ident',
+            'refColumns'        => 'hash',
             'onDelete'          => self::CASCADE,
             'onUpdate'          => self::CASCADE
         ),
