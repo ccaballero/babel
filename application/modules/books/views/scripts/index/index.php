@@ -1,7 +1,8 @@
 <h1><?php echo $this->translate->_('Books collection') ?></h1>
 <form method="post" action="" accept-charset="utf-8">
     <div class="tool-panel">
-        <input type="submit" name="add" value="<?php echo $this->translate->_('Share to everybody') ?>" />
+        <input type="submit" name="publish" value="<?php echo $this->translate->_('Publish the book') ?>" />
+        <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
         <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
     <table>
@@ -29,7 +30,7 @@
                 <?php } ?>
                 </td>
                 <td class="center">
-                    <?php if ($book->isShared()) { ?>
+                    <?php if ($book->inSearch()) { ?>
                         <img src="/media/img/icons/tick.png" alt="" title="" />
                     <?php } ?>
                 </td>
@@ -37,7 +38,8 @@
         <?php } ?>
     </table>
     <div class="tool-panel">
-        <input type="submit" name="add" value="<?php echo $this->translate->_('Share to everybody') ?>" />
+        <input type="submit" name="publish" value="<?php echo $this->translate->_('Publish the book') ?>" />
+        <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
         <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
     </div>
 </form>

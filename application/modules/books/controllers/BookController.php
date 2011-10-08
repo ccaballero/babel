@@ -7,19 +7,19 @@ class Books_BookController extends Babel_Action
         $hash = $request->getParam('book');
 
         $model_collection = new Books_Collection();
-        $book = $model_collection->findByHash($hash);
+        $file = $model_collection->findByHash($hash);
 
         $class = new StdClass();
-        if (!empty($book)) {
+        if (!empty($file)) {
             if ($this->auth <> null) {
-                $class->directory = $book->directory;
-                $class->file = $book->file;
-                $class->size = $book->size;
-                $class->hash = $book->hash;
+                $class->directory = $file->directory;
+                $class->file = $file->file;
+                $class->size = $file->size;
+                $class->hash = $file->hash;
             }
 
-            /*$model_shared = new Books();
-            $book = $model_shared->findByBook($book->hash);
+            $model_metas = new Books_Meta();
+            $book = $model_metas->findByHash($file->hash);
 
             $url = new Zend_Controller_Action_Helper_Url();
             $language = new Babel_Helpers_Language();
@@ -28,12 +28,21 @@ class Books_BookController extends Babel_Action
                 $class->title = $book->title;
                 $class->author = $book->author;
                 $class->publisher = $book->publisher;
-                $class->language = $language->language($book->language);
+                $class->language = $book->language;
                 $class->year = $book->year;
 
                 $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
                 $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
-            }*/
+            } else {
+                $class->title = '';
+                $class->author = '';
+                $class->publisher = '';
+                $class->language = $language->language('');
+                $class->year = '';
+
+                $class->url->catalog = $url->url(array('book' => $file->hash), 'books_book_catalog');
+                $class->url->download = $url->url(array('book' => $file->hash), 'books_book_download');
+            }
         }
 
         header("HTTP/1.1 200 OK");
@@ -138,14 +147,14 @@ class Books_BookController extends Babel_Action
 
     public function thumbAction() {
         $request = $this->getRequest();
-        $ident = $request->getParam('book');
+        $hash = $request->getParam('book');
 
         $page = $request->getParam('page', 1);
         $page = intval($page);
         $page = $page <= 0 ? 1 : $page;
 
         $model_collection = new Books_Collection();
-        $book = $model_collection->findByIdent($ident);
+        $book = $model_collection->findByHash($hash);
 
         if (!empty($book)) {
             try {
@@ -182,50 +191,57 @@ class Books_BookController extends Babel_Action
                     $book->save();
                     $this->_helper->flashMessenger->addMessage('The book was edited successfully');
                 } else {
-                    $this->_helper->flashMessenger->addMessage('The file can not be found in {' . $book->getPath() . '}');
+                    $this->_helper->flashMessenger->addMessage('The file can not be found in: ' . $book->getPath());
                 }
             }
             $this->_helper->redirector('index', 'index', 'books');
         }
     }
 
-    public function bookAction() {
+    public function editAction() {
         $this->requireLogin();
 
-        $form = new Books_Form_Shared();
+        $form = new Books_Form_Meta();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $model_books = new Books();
+                $model_collection = new Books_Collection();
+                $model_metas = new Books_Meta();
 
-                $ident = $request->getParam('book');
-                $book = $model_books->findByBook($ident);
+                $hash = $request->getParam('book');
+                $file = $model_collection->findByHash($hash);
 
+                $book = $model_metas->findByHash($hash);
+                if (empty($book)) {
+                    $book = $model_metas->createRow();
+                    $book->book = $hash;
+                }
                 $book->title = $request->getParam('title');
                 $book->author = $request->getParam('author');
                 $book->publisher = $request->getParam('publisher');
                 $book->language = $request->getParam('language');
                 $book->year = $request->getParam('year');
+                $book->save();
 
-                // Avatar
+                $this->_helper->flashMessenger->addMessage('The book was edited successfully');
+
+                // Thumb
                 try {
-                    $image = new Imagick($book->getPath() . '[0]');
-                    $image->setImageFormat('png');
+                    $image = new Imagick($file->getPath() . '[0]');
+                    $image->setImageFormat('jpg');
                     $image->thumbnailImage(0, 390);
-                    $image->writeImage(APPLICATION_PATH . '/../public/media/img/books/' . $book->book . '.png');
+                    $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg');
 
                     $thumbnail = new Yachay_Helpers_Thumbnail();
-                    $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/books/' . $book->book . '.png',
-                                          APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg', 100, 100);
-                    $book->avatar = true;
+                    $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg',
+                                          APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 100, 100);
                     $this->_helper->flashMessenger->addMessage('The thumb was generated successfully');
-                } catch (Exception $e) {}
-
-                $book->save();
-                $this->_helper->flashMessenger->addMessage('The book was edited successfully');
+                } catch (Exception $e) {
+                    $this->_helper->flashMessenger->addMessage('The thumb wasn\'t generated');
+                }
             }
-            $this->_helper->redirector('shared', 'index', 'books');
+            $this->_helper->redirector('published', 'index', 'books');
         }
     }
 }

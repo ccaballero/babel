@@ -26,6 +26,7 @@ class Babel_Action extends Zend_Controller_Action
 
         $this->view->route = $this->getFrontController()->getRouter()->getCurrentRouteName();
         $this->route = $this->view->route;
+        $this->url = $request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri();
     }
 
     public function postDispatch() {

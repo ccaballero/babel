@@ -1,6 +1,6 @@
 <?php
 
-class Books_Form_Shared extends Zend_Form
+class Books_Form_Meta extends Zend_Form
 {
     public function init() {
         $this->setMethod('post');

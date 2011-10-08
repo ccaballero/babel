@@ -25,30 +25,28 @@ CREATE TABLE `babel_books_collection` (
     `size`              int unsigned                                                NOT NULL,
     `directory`         varchar(2048)                                               NOT NULL,
     `file`              varchar(2048)                                               NOT NULL,
+    `published`         boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`hash`),
     INDEX (`directory`)
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `babel_books_shared`;
-CREATE TABLE `babel_books_shared` (
-    `hash`              char(32)                                                    NOT NULL,
+DROP TABLE IF EXISTS `babel_books_stats`;
+CREATE TABLE `babel_books_stats` (
+    `book`              char(32)                                                    NOT NULL,
+    `downloads`         int unsigned                                                NOT NULL DEFAULT 0,
+    PRIMARY KEY (`book`)
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `babel_books_meta`;
+CREATE TABLE `babel_books_meta` (
+    `book`              char(32)                                                    NOT NULL,
     `title`             varchar(1024)                                               NOT NULL,
     `author`            varchar(1024)                                               NOT NULL DEFAULT '',
     `publisher`         varchar(1024)                                               NOT NULL DEFAULT '',
     `language`          varchar(1024)                                               NOT NULL,
     `year`              varchar(4)                                                  NOT NULL DEFAULT '',
-    `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
-    PRIMARY KEY (`hash`),
-    FOREIGN KEY (`hash`) REFERENCES `babel_books_collection`(`hash`) ON UPDATE CASCADE ON DELETE CASCADE
-) DEFAULT CHARACTER SET UTF8;
-
-DROP TABLE IF EXISTS `babel_books_stats`;
-CREATE TABLE `babel_books_stats` (
-    `hash`              char(32)                                                    NOT NULL,
-    `downloads`         int unsigned                                                NOT NULL DEFAULT 0,
-    PRIMARY KEY (`hash`),
-    FOREIGN KEY (`hash`) REFERENCES `babel_books_collection`(`hash`) ON UPDATE CASCADE ON DELETE CASCADE
+    PRIMARY KEY (`book`)
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_catalogs`;
@@ -83,7 +81,7 @@ CREATE TABLE `babel_books_catalogs` (
     `catalog`           int unsigned                                                NOT NULL,
     PRIMARY KEY (`book`, `catalog`),
     INDEX (`book`),
-    FOREIGN KEY (`book`) REFERENCES `babel_books_shared`(`hash`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`book`) REFERENCES `babel_books_collection`(`hash`) ON UPDATE CASCADE ON DELETE CASCADE,
     INDEX (`catalog`),
     FOREIGN KEY (`catalog`) REFERENCES `babel_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;

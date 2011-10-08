@@ -13,10 +13,14 @@ var width=function(){
 var resize=function(){
     $('#wrapper').css('height',height()+'px');
     $('#main').css('height',(height()-60)+'px');
+
+    $('#column2').css('min-height',$('#column1').height()+'px');
+    $('#column3').css('min-height',Math.max((height()-130), $('#column2').height()+32)+'px');
+
     $('#wrapper').css('width',width()+'px');
     $('#main').css('width',(width()-20)+'px');
     $('#wall').css('width',(width()-35)+'px');
-    $('#column3').css('width',(width() - (50 + $('#column1').width() + $('#column2').width()))+'px');
+    $('#column3').css('width',(width() - (55 + $('#column1').width() + $('#column2').width()))+'px');
 };
 
 $(window).resize(resize);
@@ -50,12 +54,6 @@ $(document).ready(function(){
     $('.update_file').overlay({
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
-                $('#bookstore option').each(function() {
-                    if($(this).attr('label')==json.book.bookstore){
-                        $(this).attr('selected','selected');
-                    }else{
-                        $(this).removeAttr('selected');
-                    }});
                 $('#bookstore').focus();$('#directory').attr('value',json.book.directory);
                 $('#file').attr('value',json.book.file);
                 $('#form_file').attr('action','/books/collection/'+book.substring(5)+'/edit');
@@ -70,7 +68,8 @@ $(document).ready(function(){
                 $('#publisher').attr('value',json.book.publisher);
                 $('#language').attr('value',json.book.language);
                 $('#year').attr('value',json.book.year);
-                $('#form_book').attr('action','/books/shared/'+book.substring(5)+'/edit');$('#thumb').attr('src','/books/'+book.substring(5)+'/thumb/1');
+                $('#form_book').attr('action','/books/shared/'+book.substring(5)+'/edit');
+                $('#thumb').css('background-image','url(/books/'+book.substring(5)+'/thumb/1)');
             });
         }});
     $('div.book').click(function(){book=$(this).attr('name');});

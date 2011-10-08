@@ -152,15 +152,14 @@ body {
 }
 
 #column1, #column2 {
-    margin-top: 2.3em;
-}
-
-#column2, #column3 {
-    border-left: 2px solid #ffffff;
+    margin-top: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 #column3 {
     padding: 2px 5px;
+    border-left: 2px solid #888888;
 }
 
 a.list {
@@ -282,11 +281,15 @@ a.list.active {
 
 #form input[type="submit"] {
     font-size: 1.4em;
-    padding: 0.1em 0.36em;
+    padding: 0.31em 0.36em;
 }
 
 div.tool-panel {
     margin: 0.3em 0em 0.5em 0em;
+}
+
+div.tool-panel input[type="submit"] {
+    padding: 0.2em 0.4em;
 }
 
 #form input.find  { background: #ffffff url('../img/icons/find.png') no-repeat 8px 7px; }
@@ -388,7 +391,7 @@ table tr a {
 
 .overlay {
     display: none;
-    padding: 2.0em 2.0em 1.0em 2.0em;
+    padding: 2.0em 2.0em 1.8em 2.0em;
     background: #000000;
     border: 3px solid #ffffff;
 }
@@ -401,6 +404,11 @@ table tr a {
     cursor: pointer;
     height: 35px;
     width: 35px;
+}
+
+#thumb {
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
 }
 
 div.tag {

@@ -2,56 +2,69 @@
 
 class Books_IndexController extends Babel_Action
 {
-    public function sharedAction() {
+    public function publishedAction() {
         $this->requireLogin();
 
-        $model_shared = new Books();
-        $books = $model_shared->selectByStats();
+        $model_collection = new Books_Collection();
+        $books = $model_collection->selectWithMetas();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $ident_books = $request->getParam('books');
-            if ($request->getParam('delete')) {
-                foreach ($ident_books as $ident) {
-                    $book = $model_shared->findByBook($ident);
-                    $book->delete();
+            $hashes = $request->getParam('books');
+            if ($request->getParam('unpublish')) {
+                foreach ($hashes as $hash) {
+                    $book = $model_collection->findByHash($hash);
+                    if ($book <> null) {
+                        $book->published = false;
+                    }
+                    $book->save();
                 }
-                $this->_helper->flashMessenger->addMessage('Books removed successfully');
-                $this->_helper->redirector('shared', 'index', 'books');
+                $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
+                $this->_helper->redirector('published', 'index', 'books');
             }
         }
 
         $this->view->books = $books;
-        $this->view->form = new Books_Form_Shared();
+        $this->view->form = new Books_Form_Meta();
     }
 
     public function indexAction() {
         $this->requireLogin();
 
         $model_collection = new Books_Collection();
-        $model_shared = new Books();
-
         $books = $model_collection->fetchAll($model_collection->select()->order('CONCAT(directory,\'/\',file) ASC'));
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $hashes = $request->getParam('books');
-            if ($request->getParam('add')) {
+            if ($request->getParam('publish')) {
                 foreach ($hashes as $hash) {
-                    $book = $model_shared->findByHash($hash);
-                    if ($book == null) {
-                        $book = $model_shared->createRow();
-                        $book->hash = $hash;
-                        $book->save();
+                    $book = $model_collection->findByHash($hash);
+                    if ($book <> null) {
+                        $book->published = true;
                     }
+                    $book->save();
                 }
-                $this->_helper->flashMessenger->addMessage('Books shared successfully');
-                $this->_helper->redirector('shared', 'index', 'books');
+                $this->_helper->flashMessenger->addMessage('Books published successfully');
+                $this->_helper->redirector('index', 'index', 'books');
+            }
+            if ($request->getParam('unpublish')) {
+                foreach ($hashes as $hash) {
+                    $book = $model_collection->findByHash($hash);
+                    if ($book <> null) {
+                        $book->published = false;
+                    }
+                    $book->save();
+                }
+                $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
+                $this->_helper->redirector('index', 'index', 'books');
             }
             if ($request->getParam('delete')) {
                 foreach ($hashes as $hash) {
                     $book = $model_collection->findByHash($hash);
-                    $book->delete();
+                    if ($book <> null) {
+                        $book->delete();
+                    }
                 }
                 $this->_helper->flashMessenger->addMessage('Books removed successfully');
                 $this->_helper->redirector('index', 'index', 'books');
@@ -111,7 +124,22 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage('Books removed successfully');
             }
-            $this->_helper->redirector('index', 'index', 'books');
+            if ($request->getParam('publish')) {
+                foreach ($hashes as $hash) {
+                    $adapters[$hash]->published = true;
+                    $adapters[$hash]->save();
+                }
+                $this->_helper->flashMessenger->addMessage('Books published successfully');
+            }
+            if ($request->getParam('unpublish')) {
+                foreach ($hashes as $hash) {
+                    $adapters[$hash]->published = false;
+                    $adapters[$hash]->save();
+                }
+                $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
+            }
+
+            $this->_redirect($this->url);
         }
 
         $this->view->bookstores = $bookstores;

@@ -28,7 +28,15 @@
     border-radius: 6px;
 }
 
-a.list {
+#column1, a.list {
     border-bottom-left-radius: 0.65em;
     border-top-left-radius: 0.65em;
+}
+
+#column2, #column3 {
+    box-shadow: 0px 0px 5px 2px #000000;
+}
+
+a.list {
+    box-shadow: 0px 0px 5px 2px #000000;
 }

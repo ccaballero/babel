@@ -1,3 +1,4 @@
+DELETE FROM `babel_catalogs`;
 INSERT INTO `babel_catalogs` (`root`, `parent`, `code`, `level`, `label`) VALUES
 (NULL, NULL, 'clasificacion-decimal-dewey', 0, 'Clasificación Decimal Dewey'),
 (1,  1, '0',  1, 'Generalidades'),
