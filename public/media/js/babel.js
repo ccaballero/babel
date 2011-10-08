@@ -13,12 +13,10 @@ var width=function(){
 var resize=function(){
     $('#wrapper').css('height',height()+'px');
     $('#main').css('height',(height()-60)+'px');
-    $('#wall').css('height',(height()-120)+'px');
     $('#wrapper').css('width',width()+'px');
     $('#main').css('width',(width()-20)+'px');
     $('#wall').css('width',(width()-35)+'px');
-
-    $('#column3').css('width',(width() - (55 + $('#column1').width() + $('#column2').width()))+'px');
+    $('#column3').css('width',(width() - (50 + $('#column1').width() + $('#column2').width()))+'px');
 };
 
 $(window).resize(resize);
@@ -30,6 +28,13 @@ $(document).ready(function(){
             $(this).animate({top:'1.0em'},100);
         },function(){
             $(this).animate({top:'0.5em'},100);
+        });
+
+    $('#wall a.list').hover(
+        function(){
+            $(this).animate({'margin-left':'0.4em'},100);
+        },function(){
+            $(this).animate({'margin-left':'0.9em'},100);
         });
 
     $('input[type="text"].focus').focus();

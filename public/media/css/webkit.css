@@ -26,3 +26,11 @@
 #list .element:hover {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#000000), to(#303030));
 }
+
+a.list {
+    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#888888));
+}
+
+a.list.active {
+    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#08395c), to(#74b7e7));
+}

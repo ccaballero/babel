@@ -80,7 +80,7 @@ body {
     margin: 0.4em;
     color: #ffffff;
     font-weight: bold;
-    text-shadow: 0.2em 0.2em 0.15em #000000;
+    text-shadow: 0.15em 0.15em 0.15em #000000;
 }
 
 .color1 {
@@ -149,12 +149,35 @@ body {
 
 #column1, #column2, #column3 {
     float: left;
-    height: 100%;
-    border-left: 1px dashed #ffffff;
+}
+
+#column1, #column2 {
+    margin-top: 2.3em;
+}
+
+#column2, #column3 {
+    border-left: 2px solid #ffffff;
 }
 
 #column3 {
-    padding-left: 10px;
+    padding: 2px 5px;
+}
+
+a.list {
+    display: block;
+    clear: both;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: right;
+    color: #000000;
+    text-shadow: 0.15em 0.15em 0.15em #ffffff;
+    margin: 0.2em 0em 0.2em 0.9em;
+    padding: 0.5em 0.5em 0.5em 1.0em;
+}
+
+a.list.active {
+    color: #ffffff;
+    text-shadow: 0.15em 0.15em 0.15em #000000;
 }
 
 #central {
@@ -391,17 +414,12 @@ div.tag {
     font-size: 1.40em;
     padding: 0.2em 0.4em;
     margin: 0em 0.3em;
-    border: 1px dashed #aaaaaa;
     background: #303030;
+    border: 1px dashed #aaaaaa;
 }
 
 .tag a:hover {
     background-color: #606060;
-}
-
-.tag.active a {
-    background-color: #ffffff;
-    color: #000000;
 }
 
 .user > img {
@@ -410,9 +428,4 @@ div.tag {
 
 .user > img, .catalog > .photo > img {
     height: 100px;
-}
-
-.vertical {
-    display: block;
-    clear: both;
 }

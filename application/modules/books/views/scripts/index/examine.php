@@ -2,16 +2,14 @@
 <div id="wall">
     <div id="column1">
     <?php foreach ($this->bookstores as $i => $bookstore) { ?>
-        <div class="vertical tag<?php echo ($i == $this->bookstore) ? ' active' : '' ?>">
-            <a href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo $bookstore ?></a>
-        </div>
+        <a class="list<?php echo ($i == $this->bookstore) ? ' active' : '' ?>"
+           href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo $bookstore ?></a>
     <?php } ?>
     </div>
     <div id="column2">
     <?php foreach ($this->directories as $i => $directory) { ?>
-        <div class="vertical tag<?php echo ($i == $this->directory) ? ' active' : '' ?>">
-            <a href="<?php echo $this->url(array('bookstore' => $this->bookstore, 'directory' => $i), 'books_examine') ?>"><?php echo $directory ?></a>
-        </div>
+        <a class="list<?php echo ($i == $this->directory) ? ' active' : '' ?>"
+           href="<?php echo $this->url(array('bookstore' => $this->bookstore, 'directory' => $i), 'books_examine') ?>"><?php echo $directory ?></a>
     <?php } ?>
     </div>
     <div id="column3">
