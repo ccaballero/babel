@@ -30,6 +30,11 @@
                     <th style="width:30px;"><img src="/media/img/icons/book.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/eye.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/photo.png" alt="" title="" /></th>
+                    <th style="width:30px;"><img src="/media/img/icons/book_open.png" alt="" title="" /></th>
+                    <th style="width:30px;"><img src="/media/img/icons/user.png" alt="" title="" /></th>
+                    <th style="width:30px;"><img src="/media/img/icons/world.png" alt="" title="" /></th>
+                    <th style="width:30px;"><img src="/media/img/icons/calendar.png" alt="" title="" /></th>
+                    <th style="width:30px;"><img src="/media/img/icons/flag_yellow.png" alt="" title="" /></th>
                 </tr>
             <?php foreach ($this->books as $i => $book) { ?>
                 <tr class="<?= $i % 2 == 0 ? 'even' : 'odd' ?>">
@@ -42,7 +47,7 @@
                     <td class="center"><?php echo $this->size($book->size) ?></td>
                     <td>
                     <?php if ($book->inCollection()) { ?>
-                        <img src="/media/img/icons/tick.png" alt="" title="" />
+                        <img src="/media/img/icons/tick_cut.png" alt="" title="" />
                     <?php } ?>
                     <?php if (isset($this->warnings[$book->getPath()])) { ?>
                         <img src="/media/img/icons/error.png"
@@ -52,14 +57,19 @@
                     </td>
                     <td>
                     <?php if ($book->inSearch()) { ?>
-                        <img src="/media/img/icons/tick.png" alt="" title="" />
+                        <img src="/media/img/icons/tick_cut.png" alt="" title="" />
                     <?php } ?>
                     </td>
                     <td>
                     <?php if ($book->hasThumb()) { ?>
-                        <img src="/media/img/icons/tick.png" alt="" title="" />
+                        <img src="/media/img/icons/tick_cut.png" alt="" title="" />
                     <?php } ?>
                     </td>
+                    <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->title <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
+                    <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->author <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
+                    <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->publisher <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
+                    <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->year <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
+                    <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->language <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
                 </tr>
             <?php } ?>
             </table>

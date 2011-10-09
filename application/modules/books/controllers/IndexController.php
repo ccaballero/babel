@@ -36,6 +36,8 @@ class Books_IndexController extends Babel_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $model_meta = new Books_Meta();
+
             $hashes = $request->getParam('books');
             if ($request->getParam('publish')) {
                 foreach ($hashes as $hash) {
@@ -44,6 +46,13 @@ class Books_IndexController extends Babel_Action
                         $book->published = true;
                     }
                     $book->save();
+
+                    $meta = $model_meta->findByHash($hash);
+                    if (empty($meta)) {
+                        $meta = $model_meta->createRow();
+                        $meta->book = $hash;
+                        $meta->save();
+                    }
                 }
                 $this->_helper->flashMessenger->addMessage('Books published successfully');
                 $this->_helper->redirector('index', 'index', 'books');
@@ -55,6 +64,13 @@ class Books_IndexController extends Babel_Action
                         $book->published = false;
                     }
                     $book->save();
+
+                    $meta = $model_meta->findByHash($hash);
+                    if (empty($meta)) {
+                        $meta = $model_meta->createRow();
+                        $meta->book = $hash;
+                        $meta->save();
+                    }
                 }
                 $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
                 $this->_helper->redirector('index', 'index', 'books');
@@ -107,13 +123,18 @@ class Books_IndexController extends Babel_Action
 
         $adapters = array();
         $warnings = array();
-        $books = $this->_scan_collection("$bookstore/$directory", &$adapters, &$warnings);
+        $metas = array();
+        $books = $this->_scan_collection("$bookstore/$directory", &$adapters, &$warnings, &$metas);
 
         if ($request->isPost()) {
+            $model_meta = new Books_Meta();
+
             $hashes = $request->getParam('books');
             if ($request->getParam('add')) {
                 foreach ($hashes as $hash) {
-                    $adapters[$hash]->tsregister = time();
+                    if (empty($adapters[$hash]->tsregister)) {
+                        $adapters[$hash]->tsregister = time();
+                    }
                     $adapters[$hash]->save();
                 }
                 $this->_helper->flashMessenger->addMessage('Books added successfully');
@@ -126,15 +147,35 @@ class Books_IndexController extends Babel_Action
             }
             if ($request->getParam('publish')) {
                 foreach ($hashes as $hash) {
+                    if (empty($adapters[$hash]->tsregister)) {
+                        $adapters[$hash]->tsregister = time();
+                    }
                     $adapters[$hash]->published = true;
                     $adapters[$hash]->save();
+
+                    $meta = $model_meta->findByHash($hash);
+                    if (empty($meta)) {
+                        $meta = $model_meta->createRow();
+                        $meta->book = $hash;
+                        $meta->save();
+                    }
                 }
                 $this->_helper->flashMessenger->addMessage('Books published successfully');
             }
             if ($request->getParam('unpublish')) {
                 foreach ($hashes as $hash) {
+                    if (empty($adapters[$hash]->tsregister)) {
+                        $adapters[$hash]->tsregister = time();
+                    }
                     $adapters[$hash]->published = false;
                     $adapters[$hash]->save();
+
+                    $meta = $model_meta->findByHash($hash);
+                    if (empty($meta)) {
+                        $meta = $model_meta->createRow();
+                        $meta->book = $hash;
+                        $meta->save();
+                    }
                 }
                 $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
             }
@@ -147,14 +188,17 @@ class Books_IndexController extends Babel_Action
         $this->view->directories = $directories;
         $this->view->directory = $index_directory;
         $this->view->books = $books;
+        $this->view->metas = $metas;
         $this->view->warnings = $warnings;
     }
 
-    private function _scan_collection($bookstore, $adapters = null, $warnings = null) {
+    private function _scan_collection($bookstore, $adapters = null, $warnings = null, $metas = null) {
         $model_collection = new Books_Collection();
-        $scan = array();
 
+        $scan = array();
         $dict_books = array();
+        $hashes = array();
+
         $books = $model_collection->selectByDirectory($bookstore);
         foreach ($books as $book) {
             $dict_books[$book->hash] = $book;
@@ -173,9 +217,18 @@ class Books_IndexController extends Babel_Action
             }
 
             $scan[] = $book;
+            $hashes[] = $file['hash'];
 
             if (isset($adapters)) {
                 $adapters[$book->hash] = $book;
+            }
+        }
+
+        if (isset($metas)) {
+            $model_metas = new Books_Meta();
+            $_metas = $model_metas->fetchAll($model_metas->select()->where('book IN (?)', $hashes));
+            foreach ($_metas as $meta) {
+                $metas[$meta->book] = $meta;
             }
         }
 

@@ -41,10 +41,10 @@ CREATE TABLE `babel_books_stats` (
 DROP TABLE IF EXISTS `babel_books_meta`;
 CREATE TABLE `babel_books_meta` (
     `book`              char(32)                                                    NOT NULL,
-    `title`             varchar(1024)                                               NOT NULL,
+    `title`             varchar(1024)                                               NOT NULL DEFAULT '',
     `author`            varchar(1024)                                               NOT NULL DEFAULT '',
     `publisher`         varchar(1024)                                               NOT NULL DEFAULT '',
-    `language`          varchar(1024)                                               NOT NULL,
+    `language`          varchar(1024)                                               NOT NULL DEFAULT '',
     `year`              varchar(4)                                                  NOT NULL DEFAULT '',
     PRIMARY KEY (`book`)
 ) DEFAULT CHARACTER SET UTF8;
