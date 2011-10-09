@@ -34,6 +34,11 @@
     -moz-border-radius-topleft: 0.65em;
 }
 
+#column3 {
+    -moz-border-radius: 0.65em;
+    background: -moz-linear-gradient(left, #dddddd, #a0a0a0);
+}
+
 #column1, #column2 {
     background: -moz-linear-gradient(left, #dddddd, #888888);
 }

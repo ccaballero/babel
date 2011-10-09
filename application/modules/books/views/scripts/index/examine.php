@@ -63,6 +63,7 @@
                 </tr>
             <?php } ?>
             </table>
+            <div id="box" style="background-color:#000000; background-image: url('/media/img/toolbar.png'); height: 0px;"></div>
             <div class="tool-panel">
                 <input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" />
                 <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />

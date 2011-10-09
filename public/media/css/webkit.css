@@ -31,6 +31,10 @@
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#dddddd), to(#888888));
 }
 
+#column3 {
+    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#dddddd), to(#a0a0a0));
+}
+
 a.list {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#888888));
 }

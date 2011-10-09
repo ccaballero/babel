@@ -17,6 +17,8 @@ var resize=function(){
     $('#column2').css('min-height',$('#column1').height()+'px');
     $('#column3').css('min-height',Math.max((height()-130), $('#column2').height()+32)+'px');
 
+    $('#box').css('height',Math.max(0,(($('#column3').height())-($('#column3 table').height())-65))+'px');
+
     $('#wrapper').css('width',width()+'px');
     $('#main').css('width',(width()-20)+'px');
     $('#wall').css('width',(width()-35)+'px');
@@ -36,9 +38,9 @@ $(document).ready(function(){
 
     $('#wall a.list').hover(
         function(){
-            $(this).animate({'margin-left':'0.4em'},100);
+            $(this).fadeTo('fast', 0.9);
         },function(){
-            $(this).animate({'margin-left':'0.9em'},100);
+            $(this).fadeTo('fast', 1.0);
         });
 
     $('input[type="text"].focus').focus();

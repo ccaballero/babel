@@ -159,7 +159,11 @@ body {
 
 #column3 {
     padding: 2px 5px;
-    border-left: 2px solid #888888;
+}
+
+#column3 table th {
+    color: #000000;
+    text-shadow: 0.12em 0.12em 0.15em #ffffff;
 }
 
 a.list {
@@ -356,7 +360,8 @@ table .title {
 }
 
 table th {
-    font-size: 1.2em;
+    font-size: 1.21em;
+    padding: 0.25em 0em;
 }
 
 table td {
@@ -365,6 +370,10 @@ table td {
 
 table tr.even {
     background: #202020;
+}
+
+table tr.odd {
+    background: #000000;
 }
 
 table tr a {
