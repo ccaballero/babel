@@ -1,0 +1,16 @@
+Babel
+
+Babel es una de las piezas de software relacionadas a un gran proyecto que
+intenta reducir las brechas de accesibilidad que se han percibido entre la
+comunidad estudiantil. En esencia consiste en un sitio web desarrollado en
+el lenguaje de programacion php, donde los usuarios pueden compartir, ordenar,
+clasificar, catalogar y valorar archivos en formato pdf.
+
+Babel esta concebido con un logica p2p, es decir, esta diseñado pensando en
+crear conexiones con otras instancias, ya sea publicas o privadas, de modo
+que el rango de busqueda pueda propagarse a una variedad aun mayor que la de
+una sola instancia.
+
+Babel ademas es software libre, lo que implica que cualquier usuarios puede
+instalarse una instancia en su computador y conectarse con otras instancias
+accesibles via web.
