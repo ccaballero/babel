@@ -42,11 +42,14 @@ class Books_Form_Meta extends Zend_Form
                      'ES' => 'Spanish',
                  ));
 
+        $return = $this->createElement('hidden', 'return');
+
         $this->addElement($title);
         $this->addElement($author);
         $this->addElement($publisher);
         $this->addElement($year);
         $this->addElement($language);
+        $this->addElement($return);
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
     }
 }

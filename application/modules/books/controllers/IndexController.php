@@ -13,11 +13,11 @@ class Books_IndexController extends Babel_Action
             $hashes = $request->getParam('books');
             if ($request->getParam('unpublish')) {
                 foreach ($hashes as $hash) {
-                    $book = $model_collection->findByHash($hash);
-                    if ($book <> null) {
-                        $book->published = false;
+                    $file = $model_collection->findByHash($hash);
+                    if ($file <> null) {
+                        $file->published = false;
                     }
-                    $book->save();
+                    $file->save();
                 }
                 $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
                 $this->_helper->redirector('published', 'index', 'books');
@@ -41,17 +41,17 @@ class Books_IndexController extends Babel_Action
             $hashes = $request->getParam('books');
             if ($request->getParam('publish')) {
                 foreach ($hashes as $hash) {
-                    $book = $model_collection->findByHash($hash);
-                    if ($book <> null) {
-                        $book->published = true;
+                    $file = $model_collection->findByHash($hash);
+                    if ($file <> null) {
+                        $file->published = true;
                     }
-                    $book->save();
+                    $file->save();
 
-                    $meta = $model_meta->findByHash($hash);
-                    if (empty($meta)) {
-                        $meta = $model_meta->createRow();
-                        $meta->book = $hash;
-                        $meta->save();
+                    $book = $model_meta->findByHash($hash);
+                    if (empty($book)) {
+                        $book = $model_meta->createRow();
+                        $book->book = $hash;
+                        $book->save();
                     }
                 }
                 $this->_helper->flashMessenger->addMessage('Books published successfully');
@@ -59,17 +59,17 @@ class Books_IndexController extends Babel_Action
             }
             if ($request->getParam('unpublish')) {
                 foreach ($hashes as $hash) {
-                    $book = $model_collection->findByHash($hash);
-                    if ($book <> null) {
-                        $book->published = false;
+                    $file = $model_collection->findByHash($hash);
+                    if ($file <> null) {
+                        $file->published = false;
                     }
-                    $book->save();
+                    $file->save();
 
-                    $meta = $model_meta->findByHash($hash);
-                    if (empty($meta)) {
-                        $meta = $model_meta->createRow();
-                        $meta->book = $hash;
-                        $meta->save();
+                    $book = $model_meta->findByHash($hash);
+                    if (empty($book)) {
+                        $book = $model_meta->createRow();
+                        $book->book = $hash;
+                        $book->save();
                     }
                 }
                 $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
@@ -77,9 +77,9 @@ class Books_IndexController extends Babel_Action
             }
             if ($request->getParam('delete')) {
                 foreach ($hashes as $hash) {
-                    $book = $model_collection->findByHash($hash);
-                    if ($book <> null) {
-                        $book->delete();
+                    $file = $model_collection->findByHash($hash);
+                    if ($file <> null) {
+                        $file->delete();
                     }
                 }
                 $this->_helper->flashMessenger->addMessage('Books removed successfully');
@@ -179,6 +179,25 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
             }
+            if ($request->getParam('thumb')) {
+                foreach ($hashes as $hash) {
+                    $file = $adapters[$hash];
+                    if (!$file->hasThumb()) {
+                        try {
+                            $image = new Imagick($file->getPath() . '[0]');
+                            $image->setImageFormat('jpg');
+                            $image->thumbnailImage(0, 390);
+                            $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg');
+
+                            $thumbnail = new Yachay_Helpers_Thumbnail();
+                            $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg',
+                                                  APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.small.jpg', 100, 100);
+                        } catch (Exception $e) {
+                        }
+                    }
+                }
+                $this->_helper->flashMessenger->addMessage('Thumbnails were generated');
+            }
 
             $this->_redirect($this->url);
         }
@@ -190,6 +209,7 @@ class Books_IndexController extends Babel_Action
         $this->view->books = $books;
         $this->view->metas = $metas;
         $this->view->warnings = $warnings;
+        $this->view->form = new Books_Form_Meta();
     }
 
     private function _scan_collection($bookstore, $adapters = null, $warnings = null, $metas = null) {
@@ -224,7 +244,7 @@ class Books_IndexController extends Babel_Action
             }
         }
 
-        if (isset($metas)) {
+        if (isset($metas) && count($hashes) <> 0) {
             $model_metas = new Books_Meta();
             $_metas = $model_metas->fetchAll($model_metas->select()->where('book IN (?)', $hashes));
             foreach ($_metas as $meta) {

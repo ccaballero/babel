@@ -8,7 +8,7 @@ class Catalogs_Catalog extends Zend_Db_Table_Row_Abstract
         if ($this->avatar) {
             return '/media/img/thumbnails/catalogs/' . $this->ident . '.jpg';
         } else {
-            return '/babel.png';
+            return '/babel_small.png';
         }
     }
 

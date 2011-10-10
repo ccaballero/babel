@@ -180,18 +180,18 @@ class Books_BookController extends Babel_Action
                 $model_collection = new Books_Collection();
 
                 $hash = $request->getParam('book');
-                $book = $model_collection->findByHash($hash);
+                $file = $model_collection->findByHash($hash);
 
-                $book->directory = $request->getParam('directory');
-                $book->file = $request->getParam('file');
+                $file->directory = $request->getParam('directory');
+                $file->file = $request->getParam('file');
 
-                if ($book->inDisk()) {
-                    $book->size = filesize($book->getPath());
-                    $book->hash = @md5_file($book->getPath());
-                    $book->save();
+                if ($file->inDisk()) {
+                    $file->size = filesize($file->getPath());
+                    $file->hash = @md5_file($file->getPath());
+                    $file->save();
                     $this->_helper->flashMessenger->addMessage('The book was edited successfully');
                 } else {
-                    $this->_helper->flashMessenger->addMessage('The file can not be found in: ' . $book->getPath());
+                    $this->_helper->flashMessenger->addMessage('The file can not be found in: ' . $file->getPath());
                 }
             }
             $this->_helper->redirector('index', 'index', 'books');
@@ -222,26 +222,29 @@ class Books_BookController extends Babel_Action
                 $book->publisher = $request->getParam('publisher');
                 $book->language = $request->getParam('language');
                 $book->year = $request->getParam('year');
+
                 $book->save();
+                $file->save();
 
                 $this->_helper->flashMessenger->addMessage('The book was edited successfully');
 
-                // Thumb
-                try {
-                    $image = new Imagick($file->getPath() . '[0]');
-                    $image->setImageFormat('jpg');
-                    $image->thumbnailImage(0, 390);
-                    $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg');
+                if (!$file->hasThumb()) {
+                    try {
+                        $image = new Imagick($file->getPath() . '[0]');
+                        $image->setImageFormat('jpg');
+                        $image->thumbnailImage(0, 390);
+                        $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg');
 
-                    $thumbnail = new Yachay_Helpers_Thumbnail();
-                    $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg',
-                                          APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 100, 100);
-                    $this->_helper->flashMessenger->addMessage('The thumb was generated successfully');
-                } catch (Exception $e) {
-                    $this->_helper->flashMessenger->addMessage('The thumb wasn\'t generated');
+                        $thumbnail = new Yachay_Helpers_Thumbnail();
+                        $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg',
+                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 100, 100);
+                        $this->_helper->flashMessenger->addMessage('The thumb was generated successfully');
+                    } catch (Exception $e) {
+                        $this->_helper->flashMessenger->addMessage('The thumb wasn\'t generated');
+                    }
                 }
             }
-            $this->_helper->redirector('published', 'index', 'books');
+            $this->_redirect($request->getParam('return'));
         }
     }
 }

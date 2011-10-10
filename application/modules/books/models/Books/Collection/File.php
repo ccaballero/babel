@@ -21,4 +21,9 @@ class Books_Collection_File extends Zend_Db_Table_Row_Abstract
     public function hasThumb() {
         return file_exists(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $this->hash . '.jpg');
     }
+
+    public function save() {
+        $this->tsupdated = time();
+        parent::save();
+    }
 }

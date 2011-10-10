@@ -15,7 +15,7 @@ var resize=function(){
     $('#main').css('height',(height()-60)+'px');
 
     $('#column2').css('min-height',$('#column1').height()+'px');
-    $('#column3').css('min-height',Math.max((height()-130), $('#column2').height()+32)+'px');
+    $('#column3').css('min-height',Math.max((height()-130), $('#column2').height()+52)+'px');
 
     $('#box').css('height',Math.max(0,(($('#column3').height())-($('#column3 table').height())-65))+'px');
 
@@ -23,6 +23,10 @@ var resize=function(){
     $('#main').css('width',(width()-20)+'px');
     $('#wall').css('width',(width()-35)+'px');
     $('#column3').css('width',(width() - (55 + $('#column1').width() + $('#column2').width()))+'px');
+
+    if ($('#column2').height() > $('#column1').height()) {
+        $('#column2').addClass('rounded');
+    }
 };
 
 $(window).resize(resize);
@@ -38,9 +42,9 @@ $(document).ready(function(){
 
     $('#wall a.list').hover(
         function(){
-            $(this).fadeTo('fast', 0.9);
+            $(this).addClass('hover');
         },function(){
-            $(this).fadeTo('fast', 1.0);
+            $(this).removeClass('hover');
         });
 
     $('input[type="text"].focus').focus();
@@ -70,6 +74,7 @@ $(document).ready(function(){
                 $('#publisher').attr('value',json.book.publisher);
                 $('#language').attr('value',json.book.language);
                 $('#year').attr('value',json.book.year);
+                $('#return').attr('value',window.location.pathname);
                 $('#form_book').attr('action','/books/shared/'+book.substring(5)+'/edit');
                 $('#thumb').css('background-image','url(/books/'+book.substring(5)+'/thumb/1)');
             });

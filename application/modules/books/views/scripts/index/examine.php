@@ -3,7 +3,7 @@
     <div id="column1">
     <?php foreach ($this->bookstores as $i => $bookstore) { ?>
         <a class="list<?php echo ($i == $this->bookstore) ? ' active' : '' ?>"
-           href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo $bookstore ?></a>
+           href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo basename($bookstore) ?></a>
     <?php } ?>
     </div>
     <div id="column2">
@@ -19,6 +19,7 @@
                 <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
                 <input type="submit" name="publish" value="<?php echo $this->translate->_('Publish the book') ?>" />
                 <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
+                <input type="submit" name="thumb" value="<?php echo $this->translate->_('Generate thumbs') ?>" />
             </div>
             <table>
                 <tr>
@@ -35,6 +36,7 @@
                     <th style="width:30px;"><img src="/media/img/icons/world.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/calendar.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/flag_yellow.png" alt="" title="" /></th>
+                    <th>&nbsp;</th>
                 </tr>
             <?php foreach ($this->books as $i => $book) { ?>
                 <tr class="<?= $i % 2 == 0 ? 'even' : 'odd' ?>">
@@ -70,6 +72,7 @@
                     <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->publisher <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
                     <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->year <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
                     <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->language <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
+                    <td><?php if ($book->inSearch()) { ?><a class="update_book" name="edit_<?php echo $book->hash ?>" rel="#update_book"><img src="/media/img/icons/pencil.png" alt="<?php echo $this->translate->_('Edit') ?>" title="<?php echo $this->translate->_('Edit') ?>" /></a><?php } ?></td>
                 </tr>
             <?php } ?>
             </table>
@@ -79,7 +82,16 @@
                 <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
                 <input type="submit" name="publish" value="<?php echo $this->translate->_('Publish the book') ?>" />
                 <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
+                <input type="submit" name="thumb" value="<?php echo $this->translate->_('Generate thumbs') ?>" />
             </div>
         </form>
+    </div>
+</div>
+
+<div class="overlay" id="update_book">
+    <div id="thumb" style="float:left; margin: 0em 1.3em 0em 0em; height: 400px; width: 300px;"></div>
+    <div style="float:left;">
+        <h1><?php echo $this->translate->_('Book information') ?></h1>
+        <div id="form"><?php echo $this->form ?></div>
     </div>
 </div>

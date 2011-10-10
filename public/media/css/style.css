@@ -175,10 +175,10 @@ a.list {
     color: #000000;
     text-shadow: 0.15em 0.15em 0.15em #ffffff;
     margin: 0.2em 0em 0.2em 0.9em;
-    padding: 0.5em 0.5em 0.5em 1.0em;
+    padding: 0.3em 0.5em 0.3em 1.0em;
 }
 
-a.list.active {
+a.list.active, a.list.hover {
     color: #ffffff;
     text-shadow: 0.15em 0.15em 0.15em #000000;
 }

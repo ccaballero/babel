@@ -27,6 +27,7 @@ CREATE TABLE `babel_books_collection` (
     `file`              varchar(2048)                                               NOT NULL,
     `published`         boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
+    `tsupdated`         int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`hash`),
     INDEX (`directory`)
 ) DEFAULT CHARACTER SET UTF8;
