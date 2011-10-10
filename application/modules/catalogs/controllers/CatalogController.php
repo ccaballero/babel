@@ -14,7 +14,7 @@ class Catalogs_CatalogController extends Babel_Action
         }
         
         $children = $catalog->findDependentRowset('Catalogs');
-        $books = $catalog->findBooksViaBooks_Catalogs();
+        $books = $catalog->findBooks_CollectionViaBooks_Catalogs();
 
         $this->view->catalog = $catalog;
         $this->view->catalogs = $children;

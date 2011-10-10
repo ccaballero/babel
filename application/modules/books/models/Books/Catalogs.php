@@ -7,8 +7,8 @@ class Books_Catalogs extends Babel_Models_Table
     protected $_referenceMap    = array(
         'Book'                  => array(
             'columns'           => 'book',
-            'refTableClass'     => 'Books',
-            'refColumns'        => 'book',
+            'refTableClass'     => 'Books_Collection',
+            'refColumns'        => 'hash',
             'onDelete'          => self::CASCADE,
             'onUpdate'          => self::CASCADE
         ),

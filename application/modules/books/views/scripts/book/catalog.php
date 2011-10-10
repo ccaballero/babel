@@ -1,8 +1,6 @@
 <div id="classic">
     <h1><?php echo $this->book->title ?></h1>
-    <div class="photo">
-        <a id="book_download" href="<?php echo $this->url(array('book' => $this->book->book), 'books_book_download') ?>" target="_BLANK"><img src="/media/img/books/<?php echo $this->book->book ?>.png" alt="" title="" /></a>
-    </div>
+    <div id="thumb" style="float:left; margin: 0em 1.3em 0em 0em; height: 400px; width: 300px; background-image: url('<?php echo $this->file->getUrlPhoto() ?>')"></div>
     <div>
         <p><span class="bold"><?php echo $this->translate->_('Title') ?>:</span> <?php echo $this->none($this->book->title) ?></p>
         <p><span class="bold"><?php echo $this->translate->_('Author') ?>:</span> <?php echo $this->book->author ?></p>

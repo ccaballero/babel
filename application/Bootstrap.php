@@ -82,11 +82,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headLink()->appendStylesheet('/media/css/style.css');
 
         // Browser semi-detection
-        if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
-            $view->headLink()->appendStylesheet('/media/css/firefox.css');
-        } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
-            $view->headLink()->appendStylesheet('/media/css/webkit.css');
-            $view->headLink()->appendStylesheet('/media/css/compat.css');
+        if (isset($_SERVER) && isset($_SERVER['HTTP_USER_AGENT'])) {
+            if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
+                $view->headLink()->appendStylesheet('/media/css/firefox.css');
+            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
+                $view->headLink()->appendStylesheet('/media/css/webkit.css');
+                $view->headLink()->appendStylesheet('/media/css/compat.css');
+            }
         }
 
         return $view;

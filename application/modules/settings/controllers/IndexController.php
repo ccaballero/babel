@@ -29,7 +29,7 @@ class Settings_IndexController extends Babel_Action
                 $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
 
                 $thumbnail = new Yachay_Helpers_Thumbnail();
-                $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 100, 100);
+                $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 0, 100);
                 unlink($filename);
 
                 $this->user->avatar = true;

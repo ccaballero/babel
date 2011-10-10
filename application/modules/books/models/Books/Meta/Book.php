@@ -2,27 +2,15 @@
 
 class Books_Meta_Book extends Zend_Db_Table_Row_Abstract
 {
-    //private $_collection = null;
-    //private $_stats = null;
+    public function hasThumb() {
+        return file_exists(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $this->book . '.small.jpg');
+    }
 
-    /*private function _getCollection() {
-        if ($this->_collection == null) {
-            $this->_collection = $this->findParentRow('Books_Collection');
+    public function getUrlPhoto() {
+        if ($this->hasThumb()) {
+            return '/media/img/thumbnails/books/' . $this->book . '.small.jpg';
+        } else {
+            return '/media/img/book_default.small.jpg';
         }
-        return $this->_collection;
-    }*/
-
-    /*public function getStats() {
-        if ($this->_stats == null) {
-            $model_stats = new Books_Stats();
-            $stats = $model_stats->findByBook($this->book);
-            if (empty($stats)) {
-                $stats = $model_stats->createRow();
-                $stats->book = $this->book;
-                $stats->save();
-            }
-            $this->_stats = $stats;
-        }
-        return $this->_stats;
-    }*/
+    }
 }

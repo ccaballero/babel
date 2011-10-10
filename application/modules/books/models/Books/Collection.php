@@ -6,7 +6,7 @@ class Books_Collection extends Babel_Models_Table
     protected $_primary = 'hash';
 
     protected $_rowClass = 'Books_Collection_File';
-    protected $_dependentTables = array();
+    protected $_dependentTables = array('Books_Catalogs');
 
     public function selectByDirectory($directory) {
         return $this->fetchAll($this->select()->where('directory LIKE ?', $directory . '%'));

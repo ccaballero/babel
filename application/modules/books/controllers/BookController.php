@@ -30,19 +30,17 @@ class Books_BookController extends Babel_Action
                 $class->publisher = $book->publisher;
                 $class->language = $book->language;
                 $class->year = $book->year;
-
-                $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
-                $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
             } else {
                 $class->title = '';
                 $class->author = '';
                 $class->publisher = '';
                 $class->language = $language->language('');
                 $class->year = '';
-
-                $class->url->catalog = $url->url(array('book' => $file->hash), 'books_book_catalog');
-                $class->url->download = $url->url(array('book' => $file->hash), 'books_book_download');
             }
+
+            $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
+            $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
+            $class->url->thumb = $file->getUrlPhoto();
         }
 
         header("HTTP/1.1 200 OK");
@@ -54,16 +52,18 @@ class Books_BookController extends Babel_Action
 
     public function catalogAction() {
         $request = $this->getRequest();
-        $ident = $request->getParam('book');
+        $hash = $request->getParam('book');
 
-        $model_shared = new Books();
+        $model_collection = new Books_Collection();
+        $model_metas = new Books_Meta();
         $model_books_catalogs = new Books_Catalogs();
         $model_catalogs = new Catalogs();
         $model_stats = new Catalogs_Stats();
 
-        $book = $model_shared->findByBook($ident);
-        if (!empty($book)) {
-            $db_catalogs = $book->findCatalogsViaBooks_Catalogs();
+        $file = $model_collection->findByHash($hash);
+        $book = $model_metas->findByHash($hash);
+        if (!empty($file)) {
+            $db_catalogs = $file->findCatalogsViaBooks_Catalogs();
             $catalogs_list = array();
             $current_catalogs = array();
 
@@ -89,7 +89,7 @@ class Books_BookController extends Babel_Action
                     $catalog = $model_catalogs->findByIdent($new_catalog);
                     if (!empty($catalog)) {
                         $book_catalog = $model_books_catalogs->createRow();
-                        $book_catalog->book = $book->book;
+                        $book_catalog->book = $file->hash;
                         $book_catalog->catalog = $catalog->ident;
                         $book_catalog->save();
 
@@ -100,7 +100,7 @@ class Books_BookController extends Babel_Action
                 foreach ($catalogs_list as $old_catalog) {
                     $catalog = $current_catalogs[$old_catalog];
                     if (!empty($catalog)) {
-                        $model_books_catalogs->deleteBookAndCatalog($book->book, $catalog->ident);
+                        $model_books_catalogs->deleteBookAndCatalog($file->hash, $catalog->ident);
 
                         $model_stats->decreaseBook($catalog);
                     }
@@ -113,6 +113,7 @@ class Books_BookController extends Babel_Action
             }
 
             $this->view->book = $book;
+            $this->view->file = $file;
             $this->view->roots = $model_catalogs->selectRoots();
             $this->view->catalogs = $catalogs_list;
         }
@@ -120,13 +121,13 @@ class Books_BookController extends Babel_Action
 
     public function downloadAction() {
         $request = $this->getRequest();
-        $ident = $request->getParam('book');
+        $hash = $request->getParam('book');
 
-        $model_shared = new Books();
-        $book = $model_shared->findByBook($ident);
+        $model_collection = new Books_Collection();
+        $file = $model_collection->findByHash($hash);
 
-        if (!empty($book)) {
-            $stats = $book->getStats();
+        if (!empty($file)) {
+            $stats = $file->getStats();
             $stats->downloads = $stats->downloads + 1;
             $stats->save();
 
@@ -134,11 +135,11 @@ class Books_BookController extends Babel_Action
                 header("HTTP/1.1 200 OK");
                 header("Status: 200 OK");
                 header('Content-Type: application/pdf');
-                header('Content-Disposition: attachment; filename="' . $book->getFilename() . '";');
-                header('Content-Length: '. $book->getSize() . '; ');
+                header('Content-Disposition: attachment; filename="' . $file->file . '";');
+                header('Content-Length: '. $file->size . '; ');
                 ob_clean();
                 flush();
-                readfile($book->getPath());
+                readfile($file->getPath());
             } catch (Exception $e) {}
         }
 
@@ -237,7 +238,7 @@ class Books_BookController extends Babel_Action
 
                         $thumbnail = new Yachay_Helpers_Thumbnail();
                         $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg',
-                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 100, 100);
+                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 0, 100);
                         $this->_helper->flashMessenger->addMessage('The thumb was generated successfully');
                     } catch (Exception $e) {
                         $this->_helper->flashMessenger->addMessage('The thumb wasn\'t generated');

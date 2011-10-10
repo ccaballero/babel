@@ -191,7 +191,7 @@ class Books_IndexController extends Babel_Action
 
                             $thumbnail = new Yachay_Helpers_Thumbnail();
                             $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg',
-                                                  APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.small.jpg', 100, 100);
+                                                  APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.small.jpg', 0, 100);
                         } catch (Exception $e) {
                         }
                     }

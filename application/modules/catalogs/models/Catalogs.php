@@ -6,7 +6,7 @@ class Catalogs extends Babel_Models_Table
     protected $_primary = 'ident';
     protected $_rowClass = 'Catalogs_Catalog';
 
-    protected $_dependentTables = array('Catalogs', 'Books_Catalogs');
+    protected $_dependentTables = array('Catalogs', 'Books_Catalogs', 'Catalogs_Stats');
     protected $_referenceMap    = array(
         'Parent'                => array(
             'columns'           => 'parent',

@@ -69,6 +69,7 @@ $(document).ready(function(){
     $('.update_book').overlay({
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
+                $('#thumb').css('background-image','url(/books/'+book.substring(5)+'/thumb/1)');
                 $('#title').focus();$('#title').attr('value',json.book.title);
                 $('#author').attr('value',json.book.author);
                 $('#publisher').attr('value',json.book.publisher);
@@ -76,14 +77,13 @@ $(document).ready(function(){
                 $('#year').attr('value',json.book.year);
                 $('#return').attr('value',window.location.pathname);
                 $('#form_book').attr('action','/books/shared/'+book.substring(5)+'/edit');
-                $('#thumb').css('background-image','url(/books/'+book.substring(5)+'/thumb/1)');
             });
         }});
     $('div.book').click(function(){book=$(this).attr('name');});
     $('div.book').overlay({
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
-                $('#thumb').attr('src','/media/img/books/'+book.substring(5)+'.png');
+                $('#thumb').css('background-image','url('+json.book.url.thumb+')');
                 $('#book_title').html(json.book.title);
                 $('#book_author').html(json.book.author);
                 $('#book_publisher').html(json.book.publisher);

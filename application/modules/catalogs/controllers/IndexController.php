@@ -47,7 +47,7 @@ class Catalogs_IndexController extends Babel_Action
 
                     if (!empty($filename) && file_exists($filename)) {
                         $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
+                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 0, 100);
                         unlink($filename);
 
                         $catalog->avatar = true;

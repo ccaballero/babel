@@ -12,7 +12,7 @@
             <th><?php echo $this->translate->_('Directory') ?></th>
             <th><?php echo $this->translate->_('File') ?></th>
             <th style="width:30px;"><img src="/media/img/icons/database.png" alt="" title="" /></th>
-            <th style="width:30px;"><img src="/media/img/icons/eye.png" alt="" title="" /></th>
+            <th style="width:30px;"><img src="/media/img/icons/transmit_blue.png" alt="" title="" /></th>
         </tr>
         <?php foreach ($this->books as $i => $book) { ?>
             <tr class="<?= $i % 2 == 0 ? 'even' : 'odd' ?>">

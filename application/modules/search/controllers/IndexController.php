@@ -38,8 +38,9 @@ class Search_IndexController extends Babel_Action
             $class->author = $hit->author;
             $class->publisher = $hit->publisher;
             $class->language = $hit->language;
+            $class->year = $hit->year;
 
-            $class->avatar = $hit->avatar;
+            $class->filename = $hit->filename;
 
             $books[] = $class;
         }

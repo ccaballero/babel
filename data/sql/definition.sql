@@ -78,7 +78,7 @@ CREATE TABLE `babel_catalogs_stats` (
 
 DROP TABLE IF EXISTS `babel_books_catalogs`;
 CREATE TABLE `babel_books_catalogs` (
-    `book`              int unsigned                                                NOT NULL,
+    `book`              char(32)                                                NOT NULL,
     `catalog`           int unsigned                                                NOT NULL,
     PRIMARY KEY (`book`, `catalog`),
     INDEX (`book`),

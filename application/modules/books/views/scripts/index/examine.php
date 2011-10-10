@@ -29,7 +29,7 @@
                     <th><?php echo $this->translate->_('MD5') ?></th>
                     <th><?php echo $this->translate->_('Size') ?></th>
                     <th style="width:30px;"><img src="/media/img/icons/book.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/eye.png" alt="" title="" /></th>
+                    <th style="width:30px;"><img src="/media/img/icons/transmit_blue.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/photo.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/book_open.png" alt="" title="" /></th>
                     <th style="width:30px;"><img src="/media/img/icons/user.png" alt="" title="" /></th>
