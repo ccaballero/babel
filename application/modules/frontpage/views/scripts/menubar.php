@@ -13,9 +13,9 @@
 <a class="users <?php echo $this->isHidden($this->route, 'users') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'users_new') ?>"><?php echo $this->translate->_('New') ?></a>
 
 <a id="books_menu" class="main color4" href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Books') ?></a>
-<a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_published') ?>"><?php echo $this->translate->_('Published') ?></a>
-<a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_collection') ?>"><?php echo $this->translate->_('Collection') ?></a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Files') ?></a>
+<a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_published') ?>"><?php echo $this->translate->_('Published') ?></a>
+<a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_lost') ?>"><?php echo $this->translate->_('Lost') ?></a>
 
 <?php } ?>
 

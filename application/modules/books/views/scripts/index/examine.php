@@ -28,15 +28,16 @@
                     <th><?php echo $this->translate->_('File') ?></th>
                     <th><?php echo $this->translate->_('MD5') ?></th>
                     <th><?php echo $this->translate->_('Size') ?></th>
-                    <th style="width:30px;"><img src="/media/img/icons/book.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/transmit_blue.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/photo.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/book_open.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/user.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/world.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/calendar.png" alt="" title="" /></th>
-                    <th style="width:30px;"><img src="/media/img/icons/flag_yellow.png" alt="" title="" /></th>
-                    <th>&nbsp;</th>
+                    <th style="width:20px;"><img src="/media/img/icons/book.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/transmit_blue.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/photo.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/book_open.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/user.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/world.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/calendar.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/flag_yellow.png" alt="" title="" /></th>
+                    <th style="width:20px;">&nbsp;</th>
+                    <th style="width:20px;">&nbsp;</th>
                 </tr>
             <?php foreach ($this->books as $i => $book) { ?>
                 <tr class="<?= $i % 2 == 0 ? 'even' : 'odd' ?>">
@@ -72,7 +73,13 @@
                     <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->publisher <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
                     <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->year <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
                     <td><?php if (isset($this->metas[$book->hash]) && $this->metas[$book->hash]->language <> '') { ?><img src="/media/img/icons/tick_cut.png" alt="" title="" /><?php } ?></td>
-                    <td><?php if ($book->inSearch()) { ?><a class="update_book" name="edit_<?php echo $book->hash ?>" rel="#update_book"><img src="/media/img/icons/pencil.png" alt="<?php echo $this->translate->_('Edit') ?>" title="<?php echo $this->translate->_('Edit') ?>" /></a><?php } ?></td>
+                    <?php if ($book->inSearch()) { ?>
+                    <td><a class="update_book" name="edit_<?php echo $book->hash ?>" rel="#update_book"><img src="/media/img/icons/pencil.png" alt="<?php echo $this->translate->_('Edit') ?>" title="<?php echo $this->translate->_('Edit') ?>" /></a></td>
+                    <td><a href="<?php echo $this->url(array('book' => $book->hash), 'books_book_catalog') ?>"><img src="/media/img/icons/tag_blue.png" alt="<?php echo $this->translate->_('Catalogs') ?>" title="<?php echo $this->translate->_('Catalogs') ?>" /></a></td>
+                    <?php } else { ?>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <?php } ?>
                 </tr>
             <?php } ?>
             </table>

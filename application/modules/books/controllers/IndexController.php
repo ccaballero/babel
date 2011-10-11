@@ -2,6 +2,10 @@
 
 class Books_IndexController extends Babel_Action
 {
+    public function indexAction() {
+        $this->_helper->redirector('examine', 'index', 'books');
+    }
+
     public function publishedAction() {
         $this->requireLogin();
 
@@ -28,53 +32,14 @@ class Books_IndexController extends Babel_Action
         $this->view->form = new Books_Form_Meta();
     }
 
-    public function indexAction() {
+    public function lostAction() {
         $this->requireLogin();
 
         $model_collection = new Books_Collection();
-        $books = $model_collection->fetchAll($model_collection->select()->order('CONCAT(directory,\'/\',file) ASC'));
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_meta = new Books_Meta();
-
             $hashes = $request->getParam('books');
-            if ($request->getParam('publish')) {
-                foreach ($hashes as $hash) {
-                    $file = $model_collection->findByHash($hash);
-                    if ($file <> null) {
-                        $file->published = true;
-                    }
-                    $file->save();
-
-                    $book = $model_meta->findByHash($hash);
-                    if (empty($book)) {
-                        $book = $model_meta->createRow();
-                        $book->book = $hash;
-                        $book->save();
-                    }
-                }
-                $this->_helper->flashMessenger->addMessage('Books published successfully');
-                $this->_helper->redirector('index', 'index', 'books');
-            }
-            if ($request->getParam('unpublish')) {
-                foreach ($hashes as $hash) {
-                    $file = $model_collection->findByHash($hash);
-                    if ($file <> null) {
-                        $file->published = false;
-                    }
-                    $file->save();
-
-                    $book = $model_meta->findByHash($hash);
-                    if (empty($book)) {
-                        $book = $model_meta->createRow();
-                        $book->book = $hash;
-                        $book->save();
-                    }
-                }
-                $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
-                $this->_helper->redirector('index', 'index', 'books');
-            }
             if ($request->getParam('delete')) {
                 foreach ($hashes as $hash) {
                     $file = $model_collection->findByHash($hash);
@@ -82,8 +47,16 @@ class Books_IndexController extends Babel_Action
                         $file->delete();
                     }
                 }
-                $this->_helper->flashMessenger->addMessage('Books removed successfully');
-                $this->_helper->redirector('index', 'index', 'books');
+                $this->_helper->flashMessenger->addMessage('The files were removed');
+                $this->_helper->redirector('lost', 'index', 'books');
+            }
+        }
+
+        $files = $model_collection->fetchAll($model_collection->select()->order('CONCAT(directory,\'/\',file) ASC'));
+        $books = array();
+        foreach ($files as $file) {
+            if (!$file->inDisk()) {
+                $books[] = $file;
             }
         }
 
@@ -219,7 +192,8 @@ class Books_IndexController extends Babel_Action
         $dict_books = array();
         $hashes = array();
 
-        $books = $model_collection->selectByDirectory($bookstore);
+        //$books = $model_collection->selectByDirectory($bookstore);
+        $books = $model_collection->fetchAll();
         foreach ($books as $book) {
             $dict_books[$book->hash] = $book;
         }

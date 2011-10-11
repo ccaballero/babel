@@ -60,7 +60,7 @@ $(document).ready(function(){
     $('.update_file').overlay({
         onBeforeLoad:function(){
             $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
-                $('#bookstore').focus();$('#directory').attr('value',json.book.directory);
+                $('#directory').focus();$('#directory').attr('value',json.book.directory);
                 $('#file').attr('value',json.book.file);
                 $('#form_file').attr('action','/books/collection/'+book.substring(5)+'/edit');
             });

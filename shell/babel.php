@@ -17,17 +17,19 @@ class Shell_Babel extends Yachay_Console
             $books = $model_collection->selectWithMetas();
 
             foreach ($books as $book) {
-                $doc = new Zend_Search_Lucene_Document();
+                if ($book->inDisk()) {
+                    $doc = new Zend_Search_Lucene_Document();
 
-                $doc->addField(Zend_Search_Lucene_Field::unIndexed('book', $book->hash));
-                $doc->addField(Zend_Search_Lucene_Field::Text('title', $book->title, 'utf-8'));
-                $doc->addField(Zend_Search_Lucene_Field::Text('author', $book->author, 'utf-8'));
-                $doc->addField(Zend_Search_Lucene_Field::Text('publisher', $book->publisher, 'utf-8'));
-                $doc->addField(Zend_Search_Lucene_Field::Text('language', $book->language, 'utf-8'));
-                $doc->addField(Zend_Search_Lucene_Field::Text('year', $book->year));
-                $doc->addField(Zend_Search_Lucene_Field::Text('filename', $book->file));
+                    $doc->addField(Zend_Search_Lucene_Field::unIndexed('book', $book->hash));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('title', $book->title, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('author', $book->author, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('publisher', $book->publisher, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('language', $book->language, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('year', $book->year));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('filename', $book->file));
 
-                $index->addDocument($doc);
+                    $index->addDocument($doc);
+                }
             }
 
             $index->optimize();

@@ -190,12 +190,12 @@ class Books_BookController extends Babel_Action
                     $file->size = filesize($file->getPath());
                     $file->hash = @md5_file($file->getPath());
                     $file->save();
-                    $this->_helper->flashMessenger->addMessage('The book was edited successfully');
+                    $this->_helper->flashMessenger->addMessage('The file was edited successfully');
                 } else {
                     $this->_helper->flashMessenger->addMessage('The file can not be found in: ' . $file->getPath());
                 }
             }
-            $this->_helper->redirector('index', 'index', 'books');
+            $this->_helper->redirector('lost', 'index', 'books');
         }
     }
 

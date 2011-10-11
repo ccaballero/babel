@@ -34,8 +34,13 @@ class Books_Collection_File extends Zend_Db_Table_Row_Abstract
     }
 
     public function save() {
-        $this->tsupdated = time();
-        parent::save();
+        try {
+            $this->tsupdated = time();
+            parent::save();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     public function getMeta() {
