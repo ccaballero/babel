@@ -97,7 +97,9 @@ class Books_IndexController extends Babel_Action
         $adapters = array();
         $warnings = array();
         $metas = array();
-        $books = $this->_scan_collection("$bookstore/$directory", &$adapters, &$warnings, &$metas);
+
+        $scanner = new Babel_Utils_DirectoryScanner();
+        $books = $scanner->scan_collection("$bookstore/$directory", &$adapters, &$warnings, &$metas);
 
         if ($request->isPost()) {
             $model_meta = new Books_Meta();
@@ -185,74 +187,36 @@ class Books_IndexController extends Babel_Action
         $this->view->form = new Books_Form_Meta();
     }
 
-    private function _scan_collection($bookstore, $adapters = null, $warnings = null, $metas = null) {
-        $model_collection = new Books_Collection();
+    public function exportAction() {
+        $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
+        $bookstores = $bookstores->toArray();
 
-        $scan = array();
-        $dict_books = array();
-        $hashes = array();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $i = intval($request->getParam('bookstore'));
 
-        //$books = $model_collection->selectByDirectory($bookstore);
-        $books = $model_collection->fetchAll();
-        foreach ($books as $book) {
-            $dict_books[$book->hash] = $book;
-        }
-
-        $files = $this->_scan_files($bookstore);
-        foreach ($files as $file) {
-            if (isset($dict_books[$file['hash']])) {
-                $book = $dict_books[$file['hash']];
-                if ($book->getPath() <> "{$file['directory']}/{$file['file']}") {
-                    $book = $model_collection->createRow($file);
-                    $warnings[$book->getPath()] = $dict_books[$file['hash']]->getPath();
-                }
-            } else {
-                $book = $model_collection->createRow($file);
-            }
-
-            $scan[] = $book;
-            $hashes[] = $file['hash'];
-
-            if (isset($adapters)) {
-                $adapters[$book->hash] = $book;
-            }
-        }
-
-        if (isset($metas) && count($hashes) <> 0) {
             $model_metas = new Books_Meta();
-            $_metas = $model_metas->fetchAll($model_metas->select()->where('book IN (?)', $hashes));
-            foreach ($_metas as $meta) {
-                $metas[$meta->book] = $meta;
+            if ($i < 0) {
+                $books = $model_metas->fetchAll();
+            } else {
+                $books = $model_metas->fetchAll(
+                    $model_metas->select()->where(
+                        "book IN (
+                            SELECT book
+                            FROM babel_books_collection
+                            WHERE directory LIKE '" . $bookstores[$i] . "%')"
+                    ));
             }
+
+            echo 'TITLE,AUTHOR,PUBLISHER,YEAR,LANGUAGE' . PHP_EOL;
+            foreach ($books as $book) {
+                echo '"'.$book->title.'","'.$book->author.'","'.$book->publisher.'","'.$book->year.'","'.$book->language.'"' . PHP_EOL;
+            }
+
+            header("Content-Type: text/plain");
+            die;
         }
 
-        return $scan;
-    }
-
-    private function _scan_files($directory) {
-        $files = array();
-
-        $subdirectories = @scandir($directory);
-        if ($subdirectories) {
-            foreach ($subdirectories as $file) {
-                if (($file <> '.') && ($file <> '..')) {
-                    $path = "$directory/$file";
-                    if (is_dir($path)) {
-                        $files = @array_merge($files, $this->_scan_files($path));
-                    } else if (is_file($path)) {
-                        if (substr(strtolower($file), -3) == 'pdf') {
-                            $files[] = array(
-                                'directory' => $directory,
-                                'file' => $file,
-                                'size' => filesize($path),
-                                'hash' => md5_file($path),
-                            );
-                        }
-                    }
-                }
-            }
-        }
-
-        return $files;
+        $this->view->bookstores = $bookstores;
     }
 }
