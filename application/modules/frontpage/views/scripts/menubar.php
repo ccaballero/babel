@@ -17,6 +17,7 @@
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_published') ?>"><?php echo $this->translate->_('Published') ?></a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_lost') ?>"><?php echo $this->translate->_('Lost') ?></a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_export') ?>"><?php echo $this->translate->_('Export') ?></a>
+<a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_import') ?>"><?php echo $this->translate->_('Import') ?></a>
 
 <?php } ?>
 

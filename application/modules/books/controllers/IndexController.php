@@ -191,32 +191,79 @@ class Books_IndexController extends Babel_Action
         $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
         $bookstores = $bookstores->toArray();
 
+        $form = new Books_Form_Export();
+        $form->setBookstores($bookstores);
+
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $i = intval($request->getParam('bookstore'));
+            if ($form->isValid($request->getPost())) {
+                $i = intval($form->getElement('bookstores')->getValue());
 
-            $model_metas = new Books_Meta();
-            if ($i < 0) {
-                $books = $model_metas->fetchAll();
-            } else {
-                $books = $model_metas->fetchAll(
-                    $model_metas->select()->where(
-                        "book IN (
-                            SELECT book
-                            FROM babel_books_collection
-                            WHERE directory LIKE '" . $bookstores[$i] . "%')"
-                    ));
+                $model_metas = new Books_Meta();
+                if ($i < 0) {
+                    $books = $model_metas->fetchAll();
+                } else {
+                    $books = $model_metas->fetchAll(
+                        $model_metas->select()->where(
+                            "book IN (
+                                SELECT book
+                                FROM babel_books_collection
+                                WHERE directory LIKE '" . $bookstores[$i] . "%')"
+                        ));
+                }
+
+                echo 'book,title,author,year,publisher,language' . PHP_EOL;
+                foreach ($books as $book) {
+                    echo '"'.$book->book.'","'.$book->title.'","'.$book->author.'","'.$book->year.'","'.$book->publisher.'","'.$book->language.'"' . PHP_EOL;
+                }
+
+                header("Content-Type: text/plain");
+                die;
             }
-
-            echo 'TITLE,AUTHOR,PUBLISHER,YEAR,LANGUAGE' . PHP_EOL;
-            foreach ($books as $book) {
-                echo '"'.$book->title.'","'.$book->author.'","'.$book->publisher.'","'.$book->year.'","'.$book->language.'"' . PHP_EOL;
-            }
-
-            header("Content-Type: text/plain");
-            die;
         }
 
-        $this->view->bookstores = $bookstores;
+        $this->view->form = $form;
+    }
+
+    public function importAction() {
+        $this->requireLogin();
+
+        $request = $this->getRequest();
+        $form = new Books_Form_Import();
+
+        if ($request->isPost()) {
+            if ($form->getElement('file')->receive()) {
+                $model_meta = new Books_Meta();
+                $filename = $form->getElement('file')->getFileName();
+
+                $csv = new File_CSV_DataSource;
+                $csv->load($filename);
+                $rows = $csv->connect();
+
+                foreach ($rows as $row) {
+                    $hash = $row['book'];
+
+                    $book = $model_meta->findByHash($hash);
+                    if (empty($book)) {
+                        $book = $model_meta->createRow();
+                        $book->book = $hash;
+                    }
+
+                    if (empty($book->title)) { $book->title = $row['title']; }
+                    if (empty($book->author)) { $book->author = $row['author']; }
+                    if (empty($book->year)) { $book->year = $row['year']; }
+                    if (empty($book->publisher)) { $book->publisher = $row['publisher']; }
+                    if (empty($book->language)) { $book->language = $row['language']; }
+
+                    $book->save();
+                }
+
+                unlink($filename);
+                $this->_helper->flashMessenger->addMessage('Meta-information uploaded successfully');
+                $this->_helper->redirector('index', 'index', 'frontpage');
+            }
+        }
+
+        $this->view->form = $form;
     }
 }

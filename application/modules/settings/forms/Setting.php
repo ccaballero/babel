@@ -30,7 +30,7 @@ class Settings_Form_Setting extends Zend_Form
         $photo = $photo_subform->createElement('file', 'photo');
         $photo->setRequired(false)
               ->setLabel('Photo')
-              ->setDestination(APPLICATION_PATH . '/../upload/')
+              ->setDestination(APPLICATION_PATH . '/../data/upload/')
               ->addValidator('Count', false, 1)
               ->addValidator('Size', false, 2097152)
               ->addValidator('Extension', false, 'jpg,png,gif');
