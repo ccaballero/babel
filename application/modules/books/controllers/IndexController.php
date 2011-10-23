@@ -208,7 +208,7 @@ class Books_IndexController extends Babel_Action
                             "book IN (
                                 SELECT book
                                 FROM babel_books_collection
-                                WHERE directory LIKE '" . $bookstores[$i] . "%')"
+                                WHERE directory LIKE ?)", $bookstores[$i] . '%'
                         ));
                 }
 

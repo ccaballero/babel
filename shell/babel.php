@@ -7,8 +7,8 @@ class Shell_Babel extends Yachay_Console
     public $directory = '';
     public $regex_type = 0;
     public $regex = array(
-        '/(?<title>.*).pdf/',
-        '/(?<title>.*) \(ISBN - (?<isbn>[0-9X]*)\).pdf/',
+        '/(?<title>.*)\.pdf/',
+        '/(?<title>.*) \(ISBN - (?<isbn>[0-9X]*)\)\.pdf/',
     );
 
     protected $specific_options = array(
@@ -60,7 +60,7 @@ class Shell_Babel extends Yachay_Console
     }
 
     public function regex($bootstrap, $getopt) {
-        $this->regex_type = $this->regex[$getopt->getOption('regex')];
+        $this->regex_type = intval($getopt->getOption('regex'));
         return true;
     }
 
@@ -69,7 +69,7 @@ class Shell_Babel extends Yachay_Console
             echo str_pad('Setting metabook information', $this->count, $this->separator);
 
             $directory = $this->directory;
-            $regex = $this->regex_type;
+            $regex = $this->regex[$this->regex_type];
 
             $adapters = array();
             $warnings = array();
@@ -95,9 +95,10 @@ class Shell_Babel extends Yachay_Console
                 if (empty($meta)) {
                     $meta = $model_meta->createRow();
                     $meta->book = $hash;
-                    $meta->title = $split['title'];
-                    $meta->save();
                 }
+
+                $meta->title = $split['title'];
+                $meta->save();
 
                 if (!$file->hasThumb()) {
                     try {

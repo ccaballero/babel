@@ -1,0 +1,106 @@
+\documentclass[letter,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\renewcommand*\familydefault{\sfdefault}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{pifont}
+\usepackage[
+pdfauthor={Carlos Caballero - Ubaldino Zurita},%
+pdftitle={Proyecto Babel},%
+colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+urlcolor=black
+pdftex]{hyperref}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+
+% Para la primera página
+\fancypagestyle{plain}{
+\fancyhead[l]{}
+\fancyhead[r]{}
+\fancyhead[c]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyfoot[l]{SCESI \\ Sociedad Científica de Estudiantes de Sistemas e Informática}
+\fancyfoot[c]{}
+\fancyfoot[r]{\thepage/\pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.5pt}}
+
+% Para el resto de páginas
+\lhead{Proyecto Babel}
+\chead{}
+\rhead{\includegraphics[width=0.1\textwidth]{img/scesi.png}}
+\renewcommand{\headrulewidth}{0.4pt}
+\lfoot{SCESI \\ Sociedad Científica de Estudiantes de Sistemas e Informática \\ 
+\url {http://scesi.fcyt.umss.edu.bo}}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{\bf Babel}
+\author{Carlos Caballero\\Ubaldino Zurita} 
+
+\begin{document}
+\maketitle
+\begin{center}\includegraphics[width=0.48\textwidth]{img/babel.png}\end{center}
+\begin{center}\url {http://scesi.fcyt.umss.edu.bo}\end{center}
+\pagebreak
+
+\tableofcontents
+\pagebreak
+
+\begin{abstract}
+Babel es una de las piezas de software relacionadas a un gran proyecto que
+intenta reducir las brechas de accesibilidad que se han percibido entre la
+comunidad estudiantil. En esencia consiste en un sitio web desarrollado en
+el lenguaje de programacion php, donde los usuarios pueden compartir, ordenar,
+clasificar, catalogar y valorar archivos en formato pdf.
+
+Babel esta concebido con un logica p2p, es decir, esta diseñado pensando en
+crear conexiones con otras instancias, ya sea publicas o privadas, de modo
+que el rango de busqueda pueda propagarse a una variedad aun mayor que la de
+una sola instancia.
+
+Babel ademas es software libre, lo que implica que cualquier usuario puede
+instalarse una instancia en su computador y conectarse con otras instancias
+accesibles via web.
+\end{abstract}
+\pagebreak
+
+\section{Introducción}
+Debido a que no contamos con una biblioteca virtual en los predios de la universidad se nos dio la idea a realizar un proyecto llamado {\bf BABEL} que se trata de un centro de información electrónico que proporcionara documentos a sus usuarios, entendiendo por documento un término muy amplio que casi puede definirse como cualquier tipo de información fijada en cualquier tipo de soporte digital.
+\section{Antecedentes}
+
+\section{Definición del Problema}
+La biblioteca tradicional se entiende como una colección de recursos de información, clasificados y ordenados, cuyo acceso al documento es siempre físico. Los recursos de información de dicha biblioteca están fijados, por regla general, en papel y, salvo excepciones en bibliotecas especializadas, suelen componerse sus colecciones de volúmenes encuadernados (monografías en su mayor parte) y publicaciones periódicas.\\
+Limitaciones de una biblioteca tradicional:
+\begin{enumerate}
+\item El usuario tiene acceso de un tiempo limitado al recurso.
+\item En muchos casos es que no contiene del mismo recurso para varios usuarios al mismo tiempo.
+\end{enumerate} 
+
+\section{Objetivo General}
+Con la difusión de {\bf BABEL} se quiere que el papel como soporte de información esté compartiendo su hegemonía con los soportes electrónicos y ópticos (como los libros digitales, la documentación accesible a través de la red, las bases de datos en línea, etc.)\\
+Ya no sera necesario desplazarse hasta la biblioteca o centro de documentación para conseguir la información que necesitamos, se puede acceder al contenido de esa información
+almacenada en soporte digital (a distancia) y obtenerla al momento.\\
+Con {\bf BABEL} cambiaría la idea del acceso al documento físico por la idea de acceso al contenido. Cuyo propósito es almacenar y conservar el máximo número de elementos de información.
+\section{Objetivos Específicos}
+
+\section{Recursos}
+
+\section{Herramientas}
+
+\section{Metodo o Técnica}
+
+\section{Justificación}
+
+\end{document}          
