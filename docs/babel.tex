@@ -77,11 +77,17 @@ accesibles via web.
 \pagebreak
 
 \section{Introducción}
-Debido a que no contamos con una biblioteca virtual en los predios de la universidad se nos dio la idea a realizar un proyecto llamado {\bf BABEL} que se trata de un centro de información electrónico que proporcionara documentos a sus usuarios, entendiendo por documento un término muy amplio que casi puede definirse como cualquier tipo de información fijada en cualquier tipo de soporte digital.
+Debido a que no contamos con una biblioteca virtual en los predios de la universidad se nos dio la idea a realizar un
+proyecto llamado {\bf BABEL} que se trata de un centro de información electrónico que proporcionara documentos a sus
+usuarios, entendiendo por documento un término muy amplio que casi puede definirse como cualquier tipo de información
+fijada en cualquier tipo de soporte digital.
 \section{Antecedentes}
 
 \section{Definición del Problema}
-La biblioteca tradicional se entiende como una colección de recursos de información, clasificados y ordenados, cuyo acceso al documento es siempre físico. Los recursos de información de dicha biblioteca están fijados, por regla general, en papel y, salvo excepciones en bibliotecas especializadas, suelen componerse sus colecciones de volúmenes encuadernados (monografías en su mayor parte) y publicaciones periódicas.\\
+La biblioteca tradicional se entiende como una colección de recursos de información, clasificados y ordenados, cuyo
+acceso al documento es siempre físico. Los recursos de información de dicha biblioteca están fijados, por regla general,
+en papel y, salvo excepciones en bibliotecas especializadas, suelen componerse sus colecciones de volúmenes encuadernados
+(monografías en su mayor parte) y publicaciones periódicas.\\
 Limitaciones de una biblioteca tradicional:
 \begin{enumerate}
 \item El usuario tiene acceso de un tiempo limitado al recurso.
@@ -89,17 +95,139 @@ Limitaciones de una biblioteca tradicional:
 \end{enumerate} 
 
 \section{Objetivo General}
-Con la difusión de {\bf BABEL} se quiere que el papel como soporte de información esté compartiendo su hegemonía con los soportes electrónicos y ópticos (como los libros digitales, la documentación accesible a través de la red, las bases de datos en línea, etc.)\\
-Ya no sera necesario desplazarse hasta la biblioteca o centro de documentación para conseguir la información que necesitamos, se puede acceder al contenido de esa información
-almacenada en soporte digital (a distancia) y obtenerla al momento.\\
-Con {\bf BABEL} cambiaría la idea del acceso al documento físico por la idea de acceso al contenido. Cuyo propósito es almacenar y conservar el máximo número de elementos de información.
+Con la difusión de {\bf BABEL} se quiere que el papel como soporte de información esté compartiendo su hegemonía con los
+soportes electrónicos y ópticos (como los libros digitales, la documentación accesible a través de la red, las bases de
+datos en línea, etc.)\\
+Ya no sera necesario desplazarse hasta la biblioteca o centro de documentación para conseguir la información que
+necesitamos, se puede acceder al contenido de esa información almacenada en soporte digital (a distancia) y obtenerla al
+momento.\\
+Con {\bf BABEL} cambiaría la idea del acceso al documento físico por la idea de acceso al contenido. Cuyo propósito es
+almacenar y conservar el máximo número de elementos de información.
 \section{Objetivos Específicos}
 
 \section{Recursos}
 
 \section{Herramientas}
+Si bien, el fin que nos justifica va mas allá de lo que tecnologicamente sería relevante, deberemos mencionar algo del
+software que ayuda a nuestros propositos, cabe recalcar encarecidamente que lo que intentamos hacer aqui, va mas a allá
+del software usado, construido, o necesario, nunca hay que olvidar la meta oficial.
+
+\subsection{Herramientas para desarrollo}
+En el cuadro~\ref{herramientas_desarrollo} se detallan las herramientas utilizadas en el desarrollo de nuestra herramienta.
+
+\begin{table}
+\begin{tabular}{l|l}
+Herramienta & Descripción \\
+\hline
+git & Manejo de control de versiones. \\
+& Asociada al sitio github.com (repositorio de software publico). \\
+netbeans & IDE de desarrollo. \\
+
+\end{tabular}
+\caption{Herramientas que apoyan al desarrollo.}
+\label{herramientas_desarrollo}
+\end{table}
+
+\subsection{Herramientas para despliegue}
+En el cuadro~\ref{herramientas_despliegue} se detallan las herramientas utilizadas e imprescindibles para la instalación
+y uso del software construido; ademas de ser estas, en las que se hizo la evaluación del desempeño adecuado.
+
+\begin{table}
+\begin{tabular}{l|r|l}
+Herramienta    & Versión & Descripción                                  \\
+\hline
+Apache         &     2.0 & Servidor de aplicaciones web.                \\
+MySQL          &     5.0 & Servidor de base de datos.                   \\
+Cron           &     3.0 & Demonio para tareas automaticas.             \\
+               &         & Necesario para tareas de mantenimiento e     \\
+               &         & indexado.                                    \\
+PHP            &     5.3 & Lenguage de programación.                    \\
+ImageMagick    &     6.5 & Libreria para manipulación de imagenes.      \\
+jQuery         &     1.6 & Libreria para desarrollo en JavaScript.      \\
+Zend Framework &    1.11 & Conjunto de librerias para aplicaciones web. \\
+\end{tabular}
+\caption{Herramientas necesarias para la ejecución.}
+\label{herramientas_despliegue}
+\end{table}
+
+En el cuadro~\ref{herramientas_zend} se muestran los paquetes de la libreria zend utilizados.
+
+\begin{table}
+\begin{tabular}{l|l}
+Paquete & Descripción \\
+\hline
+Zend\_Application     & Librería encargada del arranque y control de    \\
+					  & rutas en la aplicación. \\
+Zend\_Auth            & Sistema encargado de la autentificación en la   \\
+					  & aplicación. \\
+Zend\_Controller      & Librería encargada del control del flujo de     \\
+				      & informacion. \\
+Zend\_Db              & Librería de acceso a base de datos. \\
+Zend\_Form            & Generador de formularios con filtraje y         \\
+					  & validación de sus contenidos. \\
+Zend\_Search\_Lucene  & Motor de búsqueda. \\
+Zend\_Translate       & Método para internacionalización (i18n) de la   \\
+				      & aplicación. \\
+Zend\_View            & Sistema de plantillas. \\
+\end{tabular}
+\caption{Paquetes de Zend utilizados.}
+\label{herramientas_zend}
+\end{table}
 
 \section{Metodo o Técnica}
+Inicialmente se utilizó un metodo clasico de desarrollo incremental, desarrollando la base que satisfaga las funciones
+mas basicas, y de ahi ir especializando cada vez mas estas funciones.
+
+\subsection{Recursos definidos}
+Primeramente se establecieron recursos, sobre los que realizar funciones en el sistema, estos recursos se describen en el
+cuadro~\ref{recursos_actuales}
+
+\begin{table}
+\begin{tabular}{l|l}
+Recurso & Descripción \\
+\hline
+Usuario     & Representación de una persona real, que tiene asignada    \\
+            & multiples funciones que puede realizar en el sistema.     \\
+Libro       & Representación de un archivo digital a ser compartido.    \\
+Publicación & Representación de un \emph{libro} que ya posee meta-información. \\
+Catalogo    & Agrupación de libros que comparten algun criterio subjetivo \\
+		    & en comun.                                                 \\
+Etiqueta    & Palabra clave que constituye un criterio de agrupacion.   \\
+\end{tabular}
+\caption{Recursos establecidos para el sistema.}
+\label{recursos_actuales}
+\end{table}
+
+\subsection{Funciones establecidas}
+Las funciones que ya se tienen, y los modulos encargados, se detallan en el cuadro~\ref{funciones_actuales}
+
+\begin{table}
+\begin{tabular}{l|l}
+Módulo & Función \\
+\hline
+Users    & Crear \emph{usuarios} del sistema.                           \\
+	     & Mostrar los \emph{usuarios} actuales del sistema. 			\\
+Auth     & Permitir a \emph{usuarios} del sistema autentificarse.       \\
+Settings & Permitir a \emph{usuarios} cambiar algunas de sus propiedades \\
+	     & establecidas. \\ 
+Search   & Buscar \emph{libros} según algún criterio. 					\\
+Catalogs & Navegar entre los \emph{catalogos}.		 					\\
+	     & Crear \emph{catalogos} según algun criterio de agrupación.   \\
+	     & Crear \emph{sub-catalogos} según algun criterio de especialización. \\
+Tags     & Ver las \emph{etiquetas} creadas en el sistema. 				\\
+Books    & Explorar entre colecciones de \emph{libros}. 				\\
+	     & Generar miniaturas de un \emph{libro} especifico.			\\
+	     & Clasificar un \emph{libro} dentro de un \emph{catalogo}.     \\
+	     & Descargar un \emph{libro}.									\\
+	     & Publicar un \emph{libro}.                                    \\
+	     & Encontrar \emph{publicaciones} que no respecten a un \emph{libro}. \\
+	     & Exportar toda la meta-información que se posee sobre las     \\
+	     & \emph{publicaciones}. \\
+	     & Importar meta-información de cualquier fuente externa.       \\
+\end{tabular}
+\caption{Funciones cubiertas por el sistema.}
+\label{funciones_actuales}
+\end{table}
 
 \section{Justificación}
 

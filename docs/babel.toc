@@ -6,5 +6,9 @@
 \contentsline {section}{\numberline {5}Objetivos Espec\IeC {\'\i }ficos}{5}{section.5}
 \contentsline {section}{\numberline {6}Recursos}{5}{section.6}
 \contentsline {section}{\numberline {7}Herramientas}{5}{section.7}
-\contentsline {section}{\numberline {8}Metodo o T\IeC {\'e}cnica}{5}{section.8}
-\contentsline {section}{\numberline {9}Justificaci\IeC {\'o}n}{5}{section.9}
+\contentsline {subsection}{\numberline {7.1}Herramientas para desarrollo}{5}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Herramientas para despliegue}{5}{subsection.7.2}
+\contentsline {section}{\numberline {8}Metodo o T\IeC {\'e}cnica}{7}{section.8}
+\contentsline {subsection}{\numberline {8.1}Recursos definidos}{7}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Funciones establecidas}{7}{subsection.8.2}
+\contentsline {section}{\numberline {9}Justificaci\IeC {\'o}n}{7}{section.9}
