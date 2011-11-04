@@ -13,7 +13,6 @@ syntax: glob
 hgignore-dist
 .hgignore
 .project
-.htaccess
 library/Zend
 public/media/img/thumbnails/users/*.jpg
 public/media/img/thumbnails/books/*.jpg
