@@ -28,19 +28,19 @@
                     <th><?php echo $this->translate->_('File') ?></th>
                     <th><?php echo $this->translate->_('MD5') ?></th>
                     <th><?php echo $this->translate->_('Size') ?></th>
-                    <th style="width:20px;"><img src="/media/img/icons/book.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/transmit_blue.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/photo.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/book_open.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/user.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/world.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/calendar.png" alt="" title="" /></th>
-                    <th style="width:20px;"><img src="/media/img/icons/flag_yellow.png" alt="" title="" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/book.png" alt="<?php echo $this->translate->_('Book in collection') ?>" title="<?php echo $this->translate->_('Book in collection') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/transmit_blue.png" alt="<?php echo $this->translate->_('Published book') ?>" title="<?php echo $this->translate->_('Published book') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/photo.png" alt="<?php echo $this->translate->_('Thumbnail generate') ?>" title="<?php echo $this->translate->_('Thumbnail generate') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/book_open.png" alt="<?php echo $this->translate->_('Established title') ?>" title="<?php echo $this->translate->_('Established title') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/user.png" alt="<?php echo $this->translate->_('Established author') ?>" title="<?php echo $this->translate->_('Established author') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/world.png" alt="<?php echo $this->translate->_('Established publisher') ?>" title="<?php echo $this->translate->_('Established publisher') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/calendar.png" alt="<?php echo $this->translate->_('Established year') ?>" title="<?php echo $this->translate->_('Established year') ?>" /></th>
+                    <th style="width:20px;"><img src="/media/img/icons/flag_yellow.png" alt="<?php echo $this->translate->_('Established language') ?>" title="<?php echo $this->translate->_('Established language') ?>" /></th>
                     <th style="width:20px;">&nbsp;</th>
                     <th style="width:20px;">&nbsp;</th>
                 </tr>
-            <?php foreach ($this->books as $i => $book) { ?>
-                <tr class="<?= $i % 2 == 0 ? 'even' : 'odd' ?>">
+            <?php foreach ($this->books as $book) { ?>
+                <tr class="<?php echo $this->cycle(array("even", "odd"))->next()?>">
                     <td class="center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
                     <td class="left"><?php echo $book->directory ?></td>
                     <td class="left"><?php echo $book->file ?></td>

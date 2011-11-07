@@ -17,10 +17,6 @@ class ImageController extends Babel_Action
             }
         }
 
-        echo json_encode(array('image' => $array[rand(0, count($array) - 1)]));
-
-        $this->getResponse()->setHeader('Content-Type', 'application/json');
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->json(array('image' => $array[rand(0, count($array) - 1)]));
     }
 }

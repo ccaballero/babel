@@ -76,3 +76,13 @@
 "Value is required and can't be empty","El campo es requerido y no puede estar vacio"
 "Year","Año"
 "year","año"
+
+"Book in collection","Libro en colección"
+"Published book","Libro publicado"
+"Thumbnail generate","Miniatura generada"
+"Established title","Titulo establecido"
+"Established author","Autor establecido"
+"Established publisher","Editorial establecido"
+"Established year","Año establecido"
+"Established language","Idioma establecido"
+"File in disk","Archivo en disco"

@@ -43,11 +43,7 @@ class Books_BookController extends Babel_Action
             $class->url->thumb = $file->getUrlPhoto();
         }
 
-        echo json_encode(array('book' => $class));
-
-        $this->getResponse()->setHeader('Content-Type', 'application/json');
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->json(array('book' => $class));
     }
 
     public function catalogAction() {
