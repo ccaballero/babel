@@ -43,11 +43,11 @@ class Books_BookController extends Babel_Action
             $class->url->thumb = $file->getUrlPhoto();
         }
 
-        header("HTTP/1.1 200 OK");
-        header("Status: 200 OK");
-        header('Content-Type: application/json');
         echo json_encode(array('book' => $class));
-        die;
+
+        $this->getResponse()->setHeader('Content-Type', 'application/json');
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
     }
 
     public function catalogAction() {
@@ -143,7 +143,8 @@ class Books_BookController extends Babel_Action
             } catch (Exception $e) {}
         }
 
-        die;
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
     }
 
     public function thumbAction() {
@@ -159,15 +160,17 @@ class Books_BookController extends Babel_Action
 
         if (!empty($book)) {
             try {
+                $this->getResponse()->setHeader('Content-Type', 'image/png');
+
                 $image = new Imagick($book->getPath() . '[0]');
                 $image->setImageFormat('png');
                 $image->thumbnailImage(0, 390);
-                header('Content-Type: image/png');
                 echo $image;
             } catch (Exception $e) {}
         }
 
-        die;
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
     }
 
     public function fileAction() {

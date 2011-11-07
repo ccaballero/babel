@@ -217,8 +217,9 @@ class Books_IndexController extends Babel_Action
                     echo '"'.$book->book.'","'.$book->title.'","'.$book->author.'","'.$book->year.'","'.$book->publisher.'","'.$book->language.'"' . PHP_EOL;
                 }
 
-                header("Content-Type: text/plain");
-                die;
+                $this->getResponse()->setHeader('Content-Type', 'text/plain');
+                $this->_helper->layout->disableLayout();
+                $this->_helper->viewRenderer->setNoRender();
             }
         }
 

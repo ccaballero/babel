@@ -17,10 +17,10 @@ class ImageController extends Babel_Action
             }
         }
 
-        header("HTTP/1.1 200 OK");
-        header("Status: 200 OK");
-        header('Content-Type: application/json');
         echo json_encode(array('image' => $array[rand(0, count($array) - 1)]));
-        die;
+
+        $this->getResponse()->setHeader('Content-Type', 'application/json');
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
     }
 }
