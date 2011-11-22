@@ -16,23 +16,12 @@
 \title{\bf Babel}
 \author{Carlos Caballero}
 \institute{scesi}
-\date{2011/10/24}
 
 \begin{document}
 
 \begin{frame}
-\hspace*{0.22cm}
-\includegraphics[width=0.01\textwidth]{img/babel.png}
-\includegraphics[width=0.02\textwidth]{img/babel.png}
-\includegraphics[width=0.04\textwidth]{img/babel.png}
-\includegraphics[width=0.08\textwidth]{img/babel.png}
-\includegraphics[width=0.16\textwidth]{img/babel.png}
+\hspace*{3.5cm}
 \includegraphics[width=0.32\textwidth]{img/babel.png}
-\includegraphics[width=0.16\textwidth]{img/babel.png}
-\includegraphics[width=0.08\textwidth]{img/babel.png}
-\includegraphics[width=0.04\textwidth]{img/babel.png}
-\includegraphics[width=0.02\textwidth]{img/babel.png}
-\includegraphics[width=0.01\textwidth]{img/babel.png}
 \titlepage
 \end{frame}
 
@@ -44,16 +33,7 @@ que generalmente se sufren en el contexto en el que nos desempeñamos.
 
 \subsection{Los problemas}
 \begin{frame}
-\begin{center}
-\begin{tikzpicture}
-\path[mindmap,concept color=black,text=white]
-node[concept]{\bf Problemas de accesibilidad}[clockwise from=-60]
-child[concept]{node[concept]{\bf Problemas del co\-no\-ci\-mi\-en\-to necesario}[clockwise from=0]
-child[concept]{node[concept]{\bf Problemas del ti\-em\-po requerido}[clockwise from=90]
-child[concept]{node[concept]{\bf Problemas de com\-pro\-mi\-so}[clockwise from=-180]
-child[concept]{node[concept]{\bf Ob\-je\-ti\-vo}}}}}
-\end{tikzpicture}
-\end{center}
+\includegraphics[width=1.0\textwidth]{img/babel_1.pdf}
 \end{frame}
 
 \subsection{Funciones}
@@ -75,61 +55,6 @@ Este sistema se construyó siguiendo las premisas citadas a continuación:\\ \pa
 \item Dinamizar el conjunto de posibilidades de clasificación. \pause
 \item Ofrecer amplias formas de automatización de tareas comunes.
 \end{itemize}
-\end{frame}
-
-\section{Descripción}
-\begin{frame}[fragile]
-\begin{verbatim}
-mysql> show tables;
-+------------------------+
-| Tables_in_babel        |
-+------------------------+
-| babel_books_catalogs   |
-| babel_books_collection |
-| babel_books_meta       |
-| babel_books_stats      |
-| babel_catalogs         |
-| babel_catalogs_stats   |
-| babel_search_keywords  |
-| babel_users            |
-+------------------------+
-8 rows in set (0.00 sec)
-\end{verbatim}
-\end{frame}
-
-\begin{frame}
-\usetikzlibrary{positioning}
-\tikzstyle{every entity} = [top color=white, bottom color=blue!30, draw=blue!50!black!100, drop shadow]
-\tikzstyle{every relationship} = [top color=white, bottom color=red!20, draw=red!50!black!100, drop shadow]
-\centering
-\scalebox{.87}{
-\begin{tikzpicture}[node distance=1.5cm, every edge/.style={link}]
-\node[entity] (meta) {Meta};
-\node[relationship] (have) [left=2.0cm of meta] {has} edge (meta);
-\node[entity] (collection) [left=2.0cm of have] {Collection} edge (have);
-\node[entity] (catalog) [below=of collection] {Catalogs};
-\node[relationship] (composes) [right=2.0cm of catalog] {composes} edge (catalog);
-\end{tikzpicture}
-}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\begin{verbatim}
-mysql> describe babel_books_collection;
-+------------+------------------+------+-----+
-| Field      | Type             | Null | Key |
-+------------+------------------+------+-----+
-| hash       | char(32)         | NO   | PRI |
-| size       | int(10) unsigned | NO   |     |
-| directory  | varchar(2048)    | NO   | MUL |
-| file       | varchar(2048)    | NO   |     |
-| published  | tinyint(1)       | NO   |     |
-| tsregister | int(10) unsigned | NO   |     |
-| tsupdated  | int(10) unsigned | NO   |     |
-+------------+------------------+------+-----+
-7 rows in set (0.00 sec)
-\end{verbatim}
 \end{frame}
 
 \end{document}
