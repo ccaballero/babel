@@ -1,6 +1,7 @@
 "'%value%' exceeds the allowed length"
 "'%value%' is less than %min% characters long"
 "'%value%' is more than %max% characters long"
+"Add"
 "Add to collection"
 "All bookstores"
 "Author"

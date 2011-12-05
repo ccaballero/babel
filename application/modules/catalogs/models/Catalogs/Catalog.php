@@ -5,8 +5,9 @@ class Catalogs_Catalog extends Zend_Db_Table_Row_Abstract
     private $_stats = null;
 
     public function getUrlPhoto() {
-        if ($this->avatar) {
-            return '/media/img/thumbnails/catalogs/' . $this->ident . '.jpg';
+        $file = '/media/img/thumbnails/catalogs/' . $this->ident . '.jpg';
+        if (file_exists($file)) {
+            return $file;
         } else {
             return '/babel_small.png';
         }

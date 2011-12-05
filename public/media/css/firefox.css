@@ -84,3 +84,7 @@ a.list.active, a.list.hover {
     -moz-border-radius: 6px;
     -moz-box-shadow: 0 0 50px #ccc;
 }
+
+#list .element.admin {
+    -moz-box-shadow: 0px 0px 8px 2px #ffd700;
+}

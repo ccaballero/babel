@@ -16,7 +16,7 @@ class Books_Form_Export extends Zend_Form
     public function setBookstores($bookstores) {
         $element = $this->getElement('bookstores');
 
-        $element->addMultiOption(-1, 'All Bookstores');
+        $element->addMultiOption(-1, 'All bookstores');
         foreach ($bookstores as $i => $bookstore) {
             $element->addMultiOption($i, $bookstore);
         }

@@ -49,9 +49,6 @@ class Catalogs_IndexController extends Babel_Action
                         $thumbnail = new Yachay_Helpers_Thumbnail();
                         $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 0, 100);
                         unlink($filename);
-
-                        $catalog->avatar = true;
-                        $catalog->save();
                     }
 
                     $this->_helper->flashMessenger->addMessage('The photo of catalog ' . $catalog->label . ' was updated successfully');

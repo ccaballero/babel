@@ -20,6 +20,7 @@ class Babel_Action extends Zend_Controller_Action
             $model_users = new Users();
             $this->user = $model_users->findByIdent($this->auth->ident);
         }
+        $this->view->user = $this->user;
 
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Babel/Helpers', 'Babel_Helpers');
@@ -42,6 +43,15 @@ class Babel_Action extends Zend_Controller_Action
     public function requireLogin() {
         if ($this->auth == null) {
             $this->_helper->flashMessenger->addMessage('You must be logged');
+            $this->_helper->redirector('in', 'index', 'auth');
+        }
+    }
+
+    public function requireAdmin() {
+        $this->requireLogin();
+
+        if ($this->user->role <> 'admin') {
+            $this->_helper->flashMessenger->addMessage('You must be admin');
             $this->_helper->redirector('in', 'index', 'auth');
         }
     }

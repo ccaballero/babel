@@ -35,7 +35,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initTranslate() {
         $translate = new Zend_Translate(array(
             'adapter' => 'csv',
-            'content' => APPLICATION_PATH . '/../i18n/es.csv',
+            'content' => APPLICATION_PATH . '/../data/i18n/es.csv',
             'locale'  => 'es',
             'delimiter' => ','
         ));

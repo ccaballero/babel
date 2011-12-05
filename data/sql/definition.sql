@@ -10,10 +10,10 @@ CREATE TABLE `babel_search_keywords` (
 DROP TABLE IF EXISTS `babel_users`;
 CREATE TABLE `babel_users` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
+    `role`              enum('user','admin')                                        NOT NULL,
     `username`          varchar(128)                                                NOT NULL,
     `password`          varchar(40)                                                 NOT NULL,
     `fullname`          varchar(128)                                                NOT NULL DEFAULT '',
-    `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`username`)
@@ -57,7 +57,6 @@ CREATE TABLE `babel_catalogs` (
     `code`              varchar(8)                                                  NOT NULL DEFAULT '',
     `level`             int unsigned                                                NOT NULL,
     `description`       text                                                        NOT NULL DEFAULT '',
-    `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL,
     `parent`            int unsigned                                                NULL,
     `root`              int unsigned                                                NULL,

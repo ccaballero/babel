@@ -7,7 +7,7 @@ class Books_IndexController extends Babel_Action
     }
 
     public function publishedAction() {
-        $this->requireLogin();
+        $this->requireAdmin();
 
         $model_collection = new Books_Collection();
         $books = $model_collection->selectWithMetas();
@@ -33,7 +33,7 @@ class Books_IndexController extends Babel_Action
     }
 
     public function lostAction() {
-        $this->requireLogin();
+        $this->requireAdmin();
 
         $model_collection = new Books_Collection();
 
@@ -65,7 +65,7 @@ class Books_IndexController extends Babel_Action
     }
 
     public function examineAction() {
-        $this->requireLogin();
+        $this->requireAdmin();
         $request = $this->getRequest();
 
         $index_bookstore = intval($request->getParam('bookstore'));
@@ -188,6 +188,8 @@ class Books_IndexController extends Babel_Action
     }
 
     public function exportAction() {
+        $this->requireLogin();
+
         $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
         $bookstores = $bookstores->toArray();
 
@@ -227,7 +229,7 @@ class Books_IndexController extends Babel_Action
     }
 
     public function importAction() {
-        $this->requireLogin();
+        $this->requireAdmin();
 
         $request = $this->getRequest();
         $form = new Books_Form_Import();

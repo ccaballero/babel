@@ -11,7 +11,7 @@ class Settings_IndexController extends Babel_Action
         if ($request->isPost()) {
             if ($form->getSubForm('information')->isValid($request->getPost())) {
                 $this->user->fullname = $form->getSubForm('information')->getElement('fullname')->getValue();
-                $this->user->email = $form->getSubForm('information')->getElement('email')->getValue();
+                $this->user->username = $form->getSubForm('information')->getElement('username')->getValue();
 
                 $this->_helper->flashMessenger->addMessage('The information of user ' . $this->user->fullname . ' was updated successfully');
             }
@@ -32,7 +32,6 @@ class Settings_IndexController extends Babel_Action
                 $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 0, 100);
                 unlink($filename);
 
-                $this->user->avatar = true;
                 $this->_helper->flashMessenger->addMessage('The photo of user ' . $this->user->fullname . ' was updated successfully');
             }
 

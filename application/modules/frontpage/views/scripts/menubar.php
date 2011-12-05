@@ -10,7 +10,9 @@
 
 <a id="users_menu" class="main color3" href="<?php echo $this->url(array(), 'users') ?>"><?php echo $this->translate->_('Users') ?></a>
 <a class="users <?php echo $this->isHidden($this->route, 'users') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'users') ?>"><?php echo $this->translate->_('List') ?></a>
-<a class="users <?php echo $this->isHidden($this->route, 'users') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'users_new') ?>"><?php echo $this->translate->_('New') ?></a>
+<a class="users <?php echo $this->isHidden($this->route, 'users') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'users_new') ?>"><?php echo $this->translate->_('Add') ?></a>
+
+<?php if ($this->user->role == 'admin') { ?>
 
 <a id="books_menu" class="main color4" href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Books') ?></a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Files') ?></a>
@@ -19,6 +21,6 @@
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_export') ?>"><?php echo $this->translate->_('Export') ?></a>
 <a class="books <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>" href="<?php echo $this->url(array(), 'books_import') ?>"><?php echo $this->translate->_('Import') ?></a>
 
-<?php } ?>
+<?php }} ?>
 
 <?php $this->placeholder('menubar')->captureEnd() ?>

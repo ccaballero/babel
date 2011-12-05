@@ -1,6 +1,7 @@
 "'%value%' exceeds the allowed length","'%value%' excede el tamaño disponible"
 "'%value%' is less than %min% characters long","'%value%' tiene menos de %min% caracteres"
 "'%value%' is more than %max% characters long","'%value%' tiene mas de %max% caracteres"
+"Add","Agregar"
 "Add to collection","Añadir a la colección"
 "All bookstores","Todas las colecciones"
 "Author","Autor"
