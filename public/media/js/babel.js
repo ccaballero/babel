@@ -21,7 +21,7 @@ var resize=function(){
 
     $('#wrapper').css('width',width()+'px');
     $('#main').css('width',(width()-20)+'px');
-    $('#wall').css('width',(width()-35)+'px');
+    $('#wall').css('width',(width()-40)+'px');
     $('#column3').css('width',(width() - (55 + $('#column1').width() + $('#column2').width()))+'px');
 
     if ($('#column2').height() > $('#column1').height()) {
