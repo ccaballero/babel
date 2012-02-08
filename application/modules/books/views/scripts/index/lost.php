@@ -9,7 +9,7 @@
                 <th style="width:20px;"><input type="checkbox" class="groupall" /></th>
                 <th><?php echo $this->translate->_('Directory') ?></th>
                 <th><?php echo $this->translate->_('File') ?></th>
-                <th style="width:20px;"><img src="/media/img/icons/transmit_blue.png" alt="<?php echo $this->translate->_('Published book') ?>" title="<?php echo $this->translate->_('Published book') ?>" /></th>
+                <th style="width:20px;"><img src="<?php echo $this->baseUrl('/media/img/icons/transmit_blue.png') ?>" alt="<?php echo $this->translate->_('Published book') ?>" title="<?php echo $this->translate->_('Published book') ?>" /></th>
                 <th style="width:20px;">&nbsp;</th>
             </tr>
             <?php foreach ($this->books as $book) { ?>
@@ -19,14 +19,14 @@
                     <td class="left"><?php echo $book->file ?></td>
                     <td class="center">
                         <?php if ($book->inSearch()) { ?>
-                            <img src="/media/img/icons/tick.png" alt="" title="" />
+                            <img src="<?php echo $this->baseUrl('/media/img/icons/tick.png') ?>" alt="" title="" />
                         <?php } ?>
                     </td>
-                    <td class="center"><a class="update_file" name="edit_<?php echo $book->hash ?>" rel="#update_file"><img src="/media/img/icons/pencil.png" alt="<?php echo $this->translate->_('Edit') ?>" title="Edit" /></a></td>
+                    <td class="center"><a class="update_file" name="edit_<?php echo $book->hash ?>" rel="#update_file"><img src="<?php echo $this->baseUrl('/media/img/icons/pencil.png') ?>" alt="<?php echo $this->translate->_('Edit') ?>" title="Edit" /></a></td>
                 </tr>
             <?php } ?>
         </table>
-        <div id="box" style="background-color:#000000; background-image: url('/media/img/toolbar.png'); height: 0px;"></div>
+        <div id="box" style="background-color:#000000; height: 0px;"></div>
         <div class="tool-panel">
             <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
         </div>

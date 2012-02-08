@@ -1,5 +1,5 @@
 <?php $this->placeholder('footer')->captureStart() ?>
-    <a href="http://creativecommons.org/"><img src="/media/img/copyleft.jpg" alt="" title="" /></a>
+    <a href="http://creativecommons.org/"><img src="<?php echo $this->baseUrl('/media/img/copyleft.jpg') ?>" alt="" title="" /></a>
     <a href="http://scesi.fcyt.umss.edu.bo/" target="_BLANK">SCESI</a>
     |
     <a href="http://memi.fcyt.umss.edu.bo/" target="_BLANK">MEMI</a>

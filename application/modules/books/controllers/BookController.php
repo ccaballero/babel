@@ -40,7 +40,7 @@ class Books_BookController extends Babel_Action
 
             $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
             $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
-            $class->url->thumb = $file->getUrlPhoto();
+            $class->url->thumb = $this->view->baseUrl($file->getUrlPhoto());
         }
 
         $this->_helper->json(array('book' => $class));

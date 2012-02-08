@@ -55,34 +55,36 @@ $(document).ready(function(){
     $('#users_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeIn(1000);$('#menubar .books').fadeOut(950);return false;});
     $('#books_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeIn(1000);return false;});
 
+var baseUrl = '/babel';
+
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});
     $('.update_file').overlay({
         onBeforeLoad:function(){
-            $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
+            $.getJSON(baseUrl+'/books/'+book.substring(5)+'/info.json',function(json){
                 $('#directory').focus();$('#directory').attr('value',json.book.directory);
                 $('#file').attr('value',json.book.file);
-                $('#form_file').attr('action','/books/collection/'+book.substring(5)+'/edit');
+                $('#form_file').attr('action',baseUrl+'/books/collection/'+book.substring(5)+'/edit');
             });
         }});
     $('.update_book').click(function(){book=$(this).attr('name');});
     $('.update_book').overlay({
         onBeforeLoad:function(){
-            $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
-                $('#thumb').css('background-image','url(/books/'+book.substring(5)+'/thumb/1)');
+            $.getJSON(baseUrl+'/books/'+book.substring(5)+'/info.json',function(json){
+                $('#thumb').css('background-image','url('+baseUrl+'/books/'+book.substring(5)+'/thumb/1)');
                 $('#title').focus();$('#title').attr('value',json.book.title);
                 $('#author').attr('value',json.book.author);
                 $('#publisher').attr('value',json.book.publisher);
                 $('#language').attr('value',json.book.language);
                 $('#year').attr('value',json.book.year);
                 $('#return').attr('value',window.location.pathname);
-                $('#form_book').attr('action','/books/shared/'+book.substring(5)+'/edit');
+                $('#form_book').attr('action',baseUrl+'/books/shared/'+book.substring(5)+'/edit');
             });
         }});
     $('div.book').click(function(){book=$(this).attr('name');});
     $('div.book').overlay({
         onBeforeLoad:function(){
-            $.getJSON('/books/'+book.substring(5)+'/info.json',function(json){
+            $.getJSON(baseUrl+'/books/'+book.substring(5)+'/info.json',function(json){
                 $('#thumb').css('background-image','url('+json.book.url.thumb+')');
                 $('#book_title').html(json.book.title);
                 $('#book_author').html(json.book.author);
