@@ -55,7 +55,7 @@ $(document).ready(function(){
     $('#users_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeIn(1000);$('#menubar .books').fadeOut(950);return false;});
     $('#books_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeIn(1000);return false;});
 
-var baseUrl = '/babel';
+var baseUrl = '';///babel';
 
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});
