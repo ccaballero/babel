@@ -24,8 +24,7 @@ fieldset {
 blockquote {
     margin: 1.0em 3.0em;
     padding: 1.0em 3.0em;
-    border: 1px dashed #ffffff;
-    font-size: 1.2em;
+    border: 1px dashed #000000;
 }
 
 table {
@@ -44,7 +43,7 @@ body {
 .hidden { display: none; }
 .showed { display: inline; }
 
-.bold { font-weight: bold; color: #74B7E7; padding-right: 0.25em; }
+.bold { font-weight: bold; padding-right: 0.25em; }
 .italic { font-style: italic; }
 
 #head {
@@ -163,6 +162,20 @@ body {
 
 #column3 {
     padding: 2px 5px;
+    font-size: 1.1em;
+}
+
+#column3 h1, #column3 h2, #column3 p, #column3 span {
+    margin: 0.4em 0.2em 0.4em 1.0em;
+    color: #404040;
+}
+
+#column3 h1, #column3 h2 {
+    text-shadow: none;
+}
+
+#column3 blockquote {
+    color: #404040;
 }
 
 #column3 table th {
