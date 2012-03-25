@@ -19,7 +19,8 @@ class Settings_IndexController extends Babel_Action
             if ($form->getSubForm('password')->isValid($request->getPost())) {
                 $new_password = $form->getSubForm('password')->getElement('password2')->getValue();
                 if (!empty($new_password)) {
-                    $key = Zend_Registry::get('Config')->babel->properties->key;
+                    $config = Zend_Registry::get('Config');
+                    $key = $config->babel->properties->key;
                     $this->user->password = sha1($key . $new_password . $key);
                     $this->_helper->flashMessenger->addMessage('The password of user ' . $this->user->fullname . ' was updated successfully');
                 }

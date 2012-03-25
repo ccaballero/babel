@@ -34,14 +34,14 @@ CREATE TABLE `babel_books_collection` (
 
 DROP TABLE IF EXISTS `babel_books_stats`;
 CREATE TABLE `babel_books_stats` (
-    `book`              char(32)                                                    NOT NULL,
+    `book`              char(64)                                                    NOT NULL,
     `downloads`         int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`book`)
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_books_meta`;
 CREATE TABLE `babel_books_meta` (
-    `book`              char(32)                                                    NOT NULL,
+    `book`              char(64)                                                    NOT NULL,
     `title`             varchar(1024)                                               NULL,
     `author`            varchar(1024)                                               NULL,
     `publisher`         varchar(1024)                                               NULL,
@@ -57,13 +57,17 @@ CREATE TABLE `babel_catalogs` (
     `code`              varchar(8)                                                  NOT NULL DEFAULT '',
     `level`             int unsigned                                                NOT NULL,
     `description`       text                                                        NOT NULL DEFAULT '',
-    `tsregister`        int unsigned                                                NOT NULL,
+    `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
     `parent`            int unsigned                                                NULL,
     `root`              int unsigned                                                NULL,
     `books`             int unsigned                                                NOT NULL DEFAULT 0,
+    `mode`              enum('open','close')                                        NOT NULL DEFAULT 'close',
+    `owner`             int unsigned                                                NOT NULL,
     PRIMARY KEY (`ident`),
     INDEX (`parent`),
-    FOREIGN KEY (`parent`) REFERENCES `babel_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (`parent`) REFERENCES `babel_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE,
+    INDEX (`owner`),
+    FOREIGN KEY (`owner`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_catalogs_stats`;
@@ -77,7 +81,7 @@ CREATE TABLE `babel_catalogs_stats` (
 
 DROP TABLE IF EXISTS `babel_books_catalogs`;
 CREATE TABLE `babel_books_catalogs` (
-    `book`              char(32)                                                NOT NULL,
+    `book`              char(64)                                                    NOT NULL,
     `catalog`           int unsigned                                                NOT NULL,
     PRIMARY KEY (`book`, `catalog`),
     INDEX (`book`),

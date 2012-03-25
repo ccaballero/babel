@@ -23,6 +23,10 @@
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#888888));
 }
 
+#list .element {
+    border: none;
+}
+
 #list .element:hover {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#000000), to(#303030));
 }

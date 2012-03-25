@@ -24,7 +24,9 @@ class Catalogs_IndexController extends Babel_Action
 
                 $catalog->label = $form->getSubForm('information')->getElement('label')->getValue();
                 //$catalog->code = $form->getSubForm('information')->getElement('code')->getValue();
+                $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
                 $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
+                $catalog->owner = $this->user->ident;
                 $catalog->tsregister = time();
 
                 // Parent comprobation

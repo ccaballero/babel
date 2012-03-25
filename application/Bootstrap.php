@@ -91,6 +91,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
                 $view->headLink()->appendStylesheet($view->baseUrl('/media/css/webkit.css'));
                 $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
+            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'konqueror')) {
+                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
+                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/konqueror.css'));
             }
         }
 

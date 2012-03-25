@@ -13,21 +13,16 @@ var width=function(){
 var resize=function(){
     $('#wrapper').css('height',height()+'px');
     $('#main').css('height',(height()-60)+'px');
-
     $('#column2').css('min-height',$('#column1').height()+'px');
     $('#column3').css('min-height',Math.max((height()-130), $('#column2').height()+52)+'px');
-
     $('#box').css('height',Math.max(0,(($('#column3').height())-($('#column3 table').height())-65))+'px');
-
     $('#wrapper').css('width',width()+'px');
     $('#main').css('width',(width()-20)+'px');
     $('#wall').css('width',(width()-40)+'px');
     $('#column3').css('width',(width() - (55 + $('#column1').width() + $('#column2').width()))+'px');
-
     if ($('#column2').height() > $('#column1').height()) {
         $('#column2').addClass('rounded');
-    }
-};
+    }};
 
 $(window).resize(resize);
 $(document).ready(resize);
@@ -39,24 +34,19 @@ $(document).ready(function(){
         },function(){
             $(this).animate({top:'0.5em'},100);
         });
-
     $('#wall a.list').hover(
         function(){
             $(this).addClass('hover');
         },function(){
             $(this).removeClass('hover');
         });
-
     $('input[type="text"].focus').focus();
     $('.closeable').click(function(){$(this).parent().fadeOut();});
     $('input[class="groupall"]').click(function(){if ($(this).attr('checked') == 'checked') {$('input[class="check"]').attr('checked', 'checked');} else {$('input[class="check"]').removeAttr('checked');}});
-
     $('#catalogs_menu').click(function(){$('#menubar .catalogs').fadeIn(1000);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeOut(950);return false;});
     $('#users_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeIn(1000);$('#menubar .books').fadeOut(950);return false;});
     $('#books_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeIn(1000);return false;});
 
-    //var baseUrl='/babel';
-    
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});
     $('.update_file').overlay({

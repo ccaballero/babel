@@ -52,7 +52,7 @@ body {
     z-index: 2;
     width: 100%;
     height: 25px;
-    border-bottom: 1px dashed #ffffff;
+    background-color: #ffffff;
 }
 
 #menubar {
@@ -69,7 +69,7 @@ body {
 #menubar a, #toolbar a {
     position: relative;
     top: 0.36em;
-    color: #ffffff;
+    color: #000000;
     text-shadow: 1px 1px 1px #ffffff;
     margin: 0em 0.4em;
 }
@@ -141,6 +141,10 @@ body {
     float: right;
     color: #a6a600;
     margin: 0px 2px 0px 0px;
+}
+
+#main .description {
+    padding-bottom: 1.0em;
 }
 
 #wall {
@@ -327,6 +331,7 @@ div.tool-panel input[type="submit"] {
     margin: 10px;
     padding: 10px;
     float: left;
+    border: 1px dashed #ffffff;
 }
 
 #list .element:hover {

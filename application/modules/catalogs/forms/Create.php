@@ -25,6 +25,11 @@ class Catalogs_Form_Create extends Zend_Form
              ->addValidator('StringLength', false, array(1, 8))
              ->addValidator('Alnum', false, array('allowWhiteSpace' => false));*/
 
+        $mode = $this->createElement('select', 'mode');
+        $mode->setRequired(true)
+             ->setLabel('Mode')
+             ->setMultiOptions(array('open' => 'Open', 'close' => 'Close'));
+
         $description = $information_subform->createElement('textarea', 'description');
         $description->setRequired(false)
                     ->setLabel('Description')
@@ -33,6 +38,7 @@ class Catalogs_Form_Create extends Zend_Form
 
         $information_subform->addElement($label);
         //$information_subform->addElement($code);
+        $information_subform->addElement($mode);
         $information_subform->addElement($description);
 
         $photo_subform = new Zend_Form_SubForm();
