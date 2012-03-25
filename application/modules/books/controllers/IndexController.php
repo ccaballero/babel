@@ -92,14 +92,18 @@ class Books_IndexController extends Babel_Action
         if (!isset($directories[$index_directory])) {
             $index_directory = 0;
         }
-        $directory = $directories[$index_directory];
 
         $adapters = array();
         $warnings = array();
         $metas = array();
 
-        $scanner = new Babel_Utils_DirectoryScanner();
-        $books = $scanner->scan_collection("$bookstore/$directory", &$adapters, &$warnings, &$metas);
+        if (!empty($directories)) {
+            $directory = $directories[$index_directory];
+            $scanner = new Babel_Utils_DirectoryScanner();
+            $books = $scanner->scan_collection("$bookstore/$directory", $adapters, $warnings, $metas);
+        } else {
+            $books = array();
+        }
 
         if ($request->isPost()) {
             $model_meta = new Books_Meta();

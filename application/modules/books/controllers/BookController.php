@@ -186,8 +186,10 @@ class Books_BookController extends Babel_Action
                 $file->file = $request->getParam('file');
 
                 if ($file->inDisk()) {
+                    $config = Zend_Registry::get('Config');
+
                     $file->size = filesize($file->getPath());
-                    $file->hash = @md5_file($file->getPath());
+                    $file->hash = @hash_file($config->babel->properties->algo, $file->getPath());
                     $file->save();
                     $this->_helper->flashMessenger->addMessage('The file was edited successfully');
                 } else {

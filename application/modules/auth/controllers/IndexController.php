@@ -9,7 +9,8 @@ class Auth_IndexController extends Babel_Action
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
 
-                $key = Zend_Registry::get('Config')->babel->properties->key;
+                $config = Zend_Registry::get('Config');
+                $key = $config->babel->properties->key;
 
                 $dbAdapter = Zend_Db_Table::getDefaultAdapter();
                 $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
@@ -37,6 +38,6 @@ class Auth_IndexController extends Babel_Action
 
     public function outAction() {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->_helper->redirector('index', 'index', 'frontpage');
+        $this->_helper->redirector('in', 'index', 'auth');
     }
 }

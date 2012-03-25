@@ -13,7 +13,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 array('namespace' => ucfirst($module), 'basePath' => APPLICATION_PATH . '/modules/' . $module, 'resourceTypes' => $resourceTypes)
             ));
         }
-
+        
         $loader->pushAutoloader(new Babel_Models_Loader());
         return $loader;
     }
@@ -80,6 +80,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headLink(array('rel' => 'icon', 'href' => $view->baseUrl('/babel_small.png')));
         $view->headScript()->appendFile($view->baseUrl('/media/js/jquery-1.6.2.min.js'), 'text/javascript')
                            ->appendFile($view->baseUrl('/media/js/jquery.tools.min.js'), 'text/javascript')
+                           ->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'')
                            ->appendFile($view->baseUrl('/media/js/babel.js', 'text/javascript'));
         $view->headLink()->appendStylesheet($view->baseUrl('/media/css/style.css'));
 

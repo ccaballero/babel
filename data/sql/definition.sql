@@ -21,7 +21,7 @@ CREATE TABLE `babel_users` (
 
 DROP TABLE IF EXISTS `babel_books_collection`;
 CREATE TABLE `babel_books_collection` (
-    `hash`              char(32)                                                    NOT NULL,
+    `hash`              char(64)                                                    NOT NULL,
     `size`              int unsigned                                                NOT NULL,
     `directory`         varchar(2048)                                               NOT NULL,
     `file`              varchar(2048)                                               NOT NULL,

@@ -2,9 +2,9 @@
 
 class Babel_Helpers_CheckCollection
 {
-    public function checkCollection($md5) {
+    public function checkCollection($hash) {
         $model_books = new Books_Collection();
-        $book = $model_books->findByMD5($md5);
+        $book = $model_books->findByHash($hash);
         return !empty($book);
     }
 }

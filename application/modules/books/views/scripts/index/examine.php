@@ -26,7 +26,7 @@
                     <th style="width:20px;"><input type="checkbox" class="groupall" /></th>
                     <th><?php echo $this->translate->_('Directory') ?></th>
                     <th><?php echo $this->translate->_('File') ?></th>
-                    <th><?php echo $this->translate->_('MD5') ?></th>
+                    <th><?php echo $this->translate->_('Hash') ?></th>
                     <th><?php echo $this->translate->_('Size') ?></th>
                     <th style="width:20px;"><img src="<?php echo $this->baseUrl('/media/img/icons/book.png') ?>" alt="<?php echo $this->translate->_('Book in collection') ?>" title="<?php echo $this->translate->_('Book in collection') ?>" /></th>
                     <th style="width:20px;"><img src="<?php echo $this->baseUrl('/media/img/icons/transmit_blue.png') ?>" alt="<?php echo $this->translate->_('Published book') ?>" title="<?php echo $this->translate->_('Published book') ?>" /></th>

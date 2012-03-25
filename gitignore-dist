@@ -12,10 +12,8 @@ syntax: glob
 .gitignore
 .project
 application/configs/application.ini
-data/backup/*.tar.gz
-data/bookstore/*.csv
-data/bookstore/*.sql
-data/bookstore/*.tar.bz2
+data/backup/
+data/bookstore/
 data/lucene/
 data/log/*.log
 library/Zend

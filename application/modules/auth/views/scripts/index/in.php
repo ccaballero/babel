@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    $.getJSON('/image.json',function(json){
+    $.getJSON('<?php echo $this->baseUrl('/image.json') ?>',function(json){
         var image=json.image;
         $('img.switcher').attr('src',image).animate({opacity: 1.0},3500);
     });

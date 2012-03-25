@@ -2,7 +2,7 @@
 
 class Babel_Utils_DirectoryScanner {
 
-    public function scan_collection($bookstore, $adapters = null, $warnings = null, $metas = null) {
+    public function scan_collection($bookstore, &$adapters = null, &$warnings = null, &$metas = null) {
         $model_collection = new Books_Collection();
         $model_meta = new Books_Meta();
 
@@ -47,6 +47,7 @@ class Babel_Utils_DirectoryScanner {
 
     public function scan_files($directory) {
         $files = array();
+        $config = Zend_Registry::get('Config');
 
         $subdirectories = @scandir($directory);
         if ($subdirectories) {
@@ -61,7 +62,7 @@ class Babel_Utils_DirectoryScanner {
                                 'directory' => $directory,
                                 'file' => $file,
                                 'size' => filesize($path),
-                                'hash' => md5_file($path),
+                                'hash' => hash_file($config->babel->properties->algo, $path),
                             );
                         }
                     }
