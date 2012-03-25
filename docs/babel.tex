@@ -17,7 +17,7 @@ colorlinks,%
 citecolor=black,%
 filecolor=black,%
 linkcolor=black,%
-urlcolor=black
+%urlcolor=black
 pdftex]{hyperref}
 
 \usepackage{fancyhdr}
@@ -59,38 +59,63 @@ pdftex]{hyperref}
 \pagebreak
 
 \begin{abstract}
-Babel es una de las piezas de software relacionadas a un gran proyecto que
-intenta reducir las brechas de accesibilidad que se han percibido entre la
-comunidad estudiantil. En esencia consiste en un sitio web desarrollado en
-el lenguaje de programacion php, donde los usuarios pueden compartir, ordenar,
-clasificar, catalogar y valorar archivos en formato pdf.
+Babel es una de las piezas de software desarrolladas en la sociedad científica de sistemas
+e informatica que intenta reducir las brechas de accesibilidad que se perciben entre la
+comunidad estudiantil. En esencia consiste en un sitio web desarrollado en el lenguaje de
+programación php, donde los usuarios pueden compartir, ordenar, clasificar, catalogar y
+valorar archivos en formato pdf.
 
-Babel esta concebido con un logica p2p, es decir, esta diseñado pensando en
-crear conexiones con otras instancias, ya sea publicas o privadas, de modo
-que el rango de busqueda pueda propagarse a una variedad aun mayor que la de
-una sola instancia.
+Babel fue concebido con un logica descentralizada de intercambio, es decir, esta diseñado
+pensando en crear conexiones con otras instancias, ya sea publicas o privadas, de modo que
+el rango de busqueda pueda propagarse a una variedad aun mayor que la de una sola instancia.
 
-Babel ademas es software libre, lo que implica que cualquier usuario puede
-instalarse una instancia en su computador y conectarse con otras instancias
-accesibles via web.
+Babel ademas es software libre, lo que implica que cualquier usuario puede instalarse una
+instancia en su computador y conectarse con otras instancias accesibles via web.
 \end{abstract}
 \pagebreak
 
 \section{Introducción}
-Debido a que no contamos con una biblioteca virtual en los predios de la universidad se nos dio la idea a realizar un
-proyecto llamado {\bf BABEL} que se trata de un centro de información electrónico que proporcionara documentos a sus
-usuarios, entendiendo por documento un término muy amplio que casi puede definirse como cualquier tipo de información
-fijada en cualquier tipo de soporte digital.
+Debido a que no contamos con una biblioteca virtual en los predios de la universidad,
+surgio la idea de realizar un proyecto que trate de crear un centro de información
+electrónico que proporcione documentos a sus usuarios, entendiendo por documento un término
+muy amplio que casi puede definirse como cualquier tipo de información fijada en cualquier
+tipo de soporte digital.
+
 \section{Antecedentes}
+Si bien los problemas de accesibilidad a los recursos de información se han visto reducidos
+por el cada vez mayor acceso a internet, aun el problema esta vigente, dadas esas
+condiciones se intento subsanar algunos aspectos de este problema.
+
+Despues de algunas investigaciones, se concluyo que el conjunto de dificultades que tienen
+las personas, pueden ser clasificados en cuatro tipos:
+
+\begin{description}
+\item [Problemas de accesibilidad] Referentes a los problemas de acceso al recurso
+necesario.
+\item [Problemas de conocimiento] Referentes a los problemas de desconocimiento acerca del 
+area sobre el que uno quiere desempeñarse.
+\item [Problemas de tiempo] Referentes a los problemas en los que el tiempo requerido para
+alcanzar el objetivo no puede ser cubierto.
+\item [Problemas de compromiso] Referentes a los problemas en lo que la intencion por hacer
+lo requerido es la carencia principal de las personas.
+\end{description}
+
+Entendiendo el conjunto de problemas, justificamos la creacion del proyecto babel en minimizar los problemas de accesibilidad, siendo esta la primera barrera que se tiene al intentar alcanzar los objetivos deseados.
+
+Es asi que el 14 de junio del 2011, se obtiene el primer prototipo del sistema informatico; despues de varias correciones y cambios se llega a una version estable el 27 de julio del
+2011, de ahi en adelante se siguen desarrollando hasta la actualidad, ya sean correciones urgentes, nuevas funcionalidades y mejoras de compatibilidad.
 
 \section{Definición del Problema}
-La biblioteca tradicional se entiende como una colección de recursos de información, clasificados y ordenados, cuyo
-acceso al documento es siempre físico. Los recursos de información de dicha biblioteca están fijados, por regla general,
-en papel y, salvo excepciones en bibliotecas especializadas, suelen componerse sus colecciones de volúmenes encuadernados
-(monografías en su mayor parte) y publicaciones periódicas.\\
+La biblioteca tradicional se entiende como una colección de recursos de información,
+clasificados y ordenados, cuyo acceso al documento es siempre físico. Los recursos de
+información de dicha biblioteca están fijados, por regla general, en papel y, salvo
+excepciones en bibliotecas especializadas, suelen componerse sus colecciones de volúmenes
+encuadernados (monografías en su mayor parte) y publicaciones periódicas.
+
 Limitaciones de una biblioteca tradicional:
+
 \begin{enumerate}
-\item El usuario tiene acceso de un tiempo limitado al recurso.
+\item El usuario tiene acceso al recurso por un tiempo limitado.
 \item En muchos casos es que no contiene del mismo recurso para varios usuarios al mismo tiempo.
 \end{enumerate} 
 
@@ -110,7 +135,7 @@ almacenar y conservar el máximo número de elementos de información.
 \section{Herramientas}
 Si bien, el fin que nos justifica va mas allá de lo que tecnologicamente sería relevante, deberemos mencionar algo del
 software que ayuda a nuestros propositos, cabe recalcar encarecidamente que lo que intentamos hacer aqui, va mas a allá
-del software usado, construido, o necesario, nunca hay que olvidar la meta oficial.
+del software usado, construido, o necesario, nunca hay que olvidar la meta real.
 
 \subsection{Herramientas para desarrollo}
 En el cuadro~\ref{herramientas_desarrollo} se detallan las herramientas utilizadas en el desarrollo de nuestra herramienta.
@@ -175,7 +200,7 @@ Zend\_View            & Sistema de plantillas. \\
 \end{table}
 
 \section{Metodo o Técnica}
-Inicialmente se utilizó un metodo clasico de desarrollo incremental, desarrollando la base que satisfaga las funciones
+Inicialmente se utilizó un metodo clasico de desarrollo incremental, de\-sa\-rro\-llan\-do la base que satisfaga las funciones
 mas basicas, y de ahi ir especializando cada vez mas estas funciones.
 
 \subsection{Recursos definidos}

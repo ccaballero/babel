@@ -1,6 +1,0 @@
-\beamer@endinputifotherversion {3.07pt}
-\select@language {spanish}
-\beamer@sectionintoc {1}{Definici\IeC {\'o}n}{2}{0}{1}
-\beamer@subsectionintoc {1}{1}{Los problemas}{3}{0}{1}
-\beamer@subsectionintoc {1}{2}{Funciones}{4}{0}{1}
-\beamer@subsectionintoc {1}{3}{Premisas}{9}{0}{1}

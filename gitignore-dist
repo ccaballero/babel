@@ -5,6 +5,15 @@ syntax: glob
 *.tmp.
 *.bak
 *.log
+
+*.toc
+*.aux
+*.nav
+*.out
+*.snm
+*.vrb
+*.synctex.gz
+
 .svn/
 .cache/
 .settings/
@@ -15,7 +24,7 @@ application/configs/application.ini
 data/backup/
 data/bookstore/
 data/lucene/
-data/log/*.log
+data/log/
 library/Zend
 public/media/img/thumbnails/books/*.jpg
 public/media/img/thumbnails/catalogs/*.jpg
