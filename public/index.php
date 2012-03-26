@@ -1,5 +1,8 @@
 <?php
 
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));

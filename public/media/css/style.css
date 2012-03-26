@@ -102,6 +102,23 @@ body {
     background: #757575;
 }
 
+a.list {
+    display: block;
+    clear: both;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: right;
+    color: #000000;
+    text-shadow: 0.15em 0.15em 0.15em #ffffff;
+    margin: 0.2em 0em 0.2em 0.9em;
+    padding: 0.32em 0.5em 0.38em 1.0em;
+}
+
+a.list.active, a.list.hover {
+    color: #ffffff;
+    text-shadow: 0.15em 0.15em 0.15em #000000;
+}
+
 #wrapper {
     position: absolute;
     z-index: 1;
@@ -146,10 +163,6 @@ body {
     padding-bottom: 1.0em;
 }
 
-#wall {
-    
-}
-
 #column1, #column2, #column3 {
     float: left;
 }
@@ -162,19 +175,21 @@ body {
 
 #column3 {
     padding: 2px 5px;
-    font-size: 1.1em;
+    font-size: 1.18em;
+    padding-bottom: 1.0em;
+    margin-bottom: 1.0em;
+}
+
+#column3 h1, #column3 h2 {
+    text-shadow: 0.12em 0.12em 0.15em #ffffff;
+    color: #000000;
 }
 
 #column3 h1, #column3 h2, #column3 p, #column3 span {
     margin: 0.4em 0.2em 0.4em 1.0em;
-    color: #404040;
 }
 
-#column3 h1, #column3 h2 {
-    text-shadow: none;
-}
-
-#column3 blockquote {
+#column3 p, #column3 span, #column3 blockquote {
     color: #404040;
 }
 
@@ -183,21 +198,20 @@ body {
     text-shadow: 0.12em 0.12em 0.15em #ffffff;
 }
 
-a.list {
-    display: block;
-    clear: both;
-    font-size: 1.1em;
-    font-weight: bold;
-    text-align: right;
-    color: #000000;
-    text-shadow: 0.15em 0.15em 0.15em #ffffff;
-    margin: 0.2em 0em 0.2em 0.9em;
-    padding: 0.32em 0.5em 0.38em 1.0em;
+#column3 ol {
+    color: #404040;
+    margin-left: 5.0em;
+    font-size: inherit;
 }
 
-a.list.active, a.list.hover {
-    color: #ffffff;
-    text-shadow: 0.15em 0.15em 0.15em #000000;
+#column3 li {
+    font-size: inherit;
+}
+
+#column3 a {
+    color: #404040;
+    font-size: inherit;
+    font-weight: bold;
 }
 
 #central {
@@ -402,14 +416,30 @@ table tr a {
 #foot {
     position: absolute;
     z-index: 2;
+    width: 100%;
     bottom: 0.2em;
-    right: 0.3em;
     color: #ffffff;
+}
+
+#foot .left {
+    float: left;
+    padding-left: 1.0em;
+}
+
+#foot .right {
+    float: right;
+    padding-right: 0.5em;
 }
 
 #foot a {
     color: inherit;
-    margin: 0em 0.2em 0em 0em;
+    margin: 0em 0em 0em 0em;
+    padding-right: 0.28em;
+}
+
+#foot a.border {
+    padding: 0em 0.28em 0em 0.5em;
+    border-left: 1px solid #ffffff;
 }
 
 .update {

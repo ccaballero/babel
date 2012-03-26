@@ -4,7 +4,8 @@
     </div>
     <div>
         <h2><a href="<?php echo $this->url(array('catalog' => $this->catalog->ident), 'catalogs_catalog_view') ?>"><?php echo $this->escape($this->catalog->label) ?> (<?php echo $this->catalog->getStats()->books ?>)</a></h2>
-        <p><?php echo $this->escape($this->wrapper($this->catalog->description, 25)) ?></p>
+    <?php if ($this->user->ident == $this->catalog->owner) { ?>
         <p style="margin-top: 0.5em;"><a href="#"><img src="<?php echo $this->baseUrl('/media/img/icons/pencil.png') ?>" alt="<?php echo $this->translate->_('Edit') ?>" title="<?php echo $this->translate->_('Edit') ?>" /></a></p>
+    <?php } ?>
     </div>
 </div>

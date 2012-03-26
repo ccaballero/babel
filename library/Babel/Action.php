@@ -19,8 +19,12 @@ class Babel_Action extends Zend_Controller_Action
         if (!empty($this->auth)) {
             $model_users = new Users();
             $this->user = $model_users->findByIdent($this->auth->ident);
+        } else {
+            $this->user = new Users_Guest;
         }
         $this->view->user = $this->user;
+
+        $this->view->addScriptPath(APPLICATION_PATH . '/../docs/manual/');
 
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Babel/Helpers', 'Babel_Helpers');
@@ -28,6 +32,8 @@ class Babel_Action extends Zend_Controller_Action
         $this->view->route = $this->getFrontController()->getRouter()->getCurrentRouteName();
         $this->route = $this->view->route;
         $this->url = $request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri();
+
+        $this->view->language = Zend_Registry::get('lang');
     }
 
     public function postDispatch() {

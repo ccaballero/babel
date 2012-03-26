@@ -8,7 +8,7 @@
 <p class="description"><?php echo $this->catalog->description ?></p>
 <div id="list">
     <?php foreach ($this->catalogs as $catalog) { ?>
-        <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('catalog' => $catalog, 'translate' => $this->translate)) ?>
+        <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('user' => $this->user, 'catalog' => $catalog, 'translate' => $this->translate)) ?>
     <?php } ?>
     <?php foreach ($this->books as $book) { ?>
         <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book->getMeta(), 'translate' => $this->translate)) ?>

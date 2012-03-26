@@ -30,25 +30,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initSession() {
         Zend_Session::start();
+        
+        $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        Zend_Registry::set('lang', $language);
     }
 
     protected function _initTranslate() {
+        $this->bootstrap(array('session'));
+        
+        $i18n = APPLICATION_PATH . '/../data/i18n/';
+        $language = Zend_Registry::get('lang');
+        
+        if (!file_exists($i18n . $language . '.csv')) {
+            $language = 'en';
+        }
+        $content = $i18n . $language . '.csv';
+
         $translate = new Zend_Translate(array(
             'adapter' => 'csv',
-            'content' => APPLICATION_PATH . '/../data/i18n/es.csv',
-            'locale'  => 'es',
+            'content' => $content,
             'delimiter' => ','
         ));
 
-        // PHP's settings for encoding
-        mb_internal_encoding('UTF-8');
-        mb_http_output('UTF-8');
-
-        // Set for localization
-        setlocale(LC_CTYPE, 'en_US.UTF8');
-        Zend_Locale::setDefault('en_US.UTF8');
-
-        //$translate->addTranslation(array('content' => APPLICATION_PATH . '/../i18n/es.csv', 'locale' => 'es'));
         Zend_Registry::set('Zend_Translate', $translate);
         Zend_Form::setDefaultTranslator($translate);
         Zend_Validate_Abstract::setDefaultTranslator($translate);
@@ -100,3 +103,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $view;
     }
 }
+;

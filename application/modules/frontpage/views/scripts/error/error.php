@@ -1,5 +1,5 @@
 <div id="full">
-    <h1><?php echo $this->message ?></h1>
+    <h1><?php echo $this->translate->_($this->message) ?></h1>
 
     <?php if (isset($this->exception)) { ?>
         <h2>Exception information:</h2>

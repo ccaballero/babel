@@ -7,7 +7,7 @@ class Help_IndexController extends Babel_Action
         $locale = $translate->getLocale();
 
         $request = $this->getRequest();
-        $page = $request->getParam('page', 'search');
+        $page = $request->getParam('page', 'contents');
 
         $this->view->page = $page;
         $this->view->locale = $locale;

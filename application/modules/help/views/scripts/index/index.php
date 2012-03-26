@@ -1,11 +1,20 @@
 <div id="wall">
+    <?php $manuals = $this->manuals(); ?>
     <div id="column1">
-        <a class="list <?php echo ($this->page == 'search') ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => 'search'), 'help_manual') ?>"><?php echo $this->translate->_('Search') ?></a>
-        <a class="list <?php echo ($this->page == 'catalogs') ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => 'catalogs'), 'help_manual') ?>"><?php echo $this->translate->_('Catalogs') ?></a>
-        <a class="list <?php echo ($this->page == 'books') ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => 'books'), 'help_manual') ?>"><?php echo $this->translate->_('Books') ?></a>
-        <a class="list <?php echo ($this->page == 'users') ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => 'users'), 'help_manual') ?>"><?php echo $this->translate->_('Users') ?></a>
+    <?php foreach ($manuals as $element) { ?>
+        <a class="list <?php echo ($this->page == $element) ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => $element), 'help_manual') ?>"><?php echo $this->translate->_(ucfirst($element)) ?></a>
+    <?php } ?>
     </div>
     <div id="column3">
-        <?php echo $this->partial('help/views/scripts/' . $this->escape($this->page) . '/' . $this->locale . '.php') ?>
+        <?php if (in_array($this->page, $manuals)) { ?>
+            <?php $script = array_search($this->page, $manuals) . '_' . $this->escape($this->page) . '/' . $this->locale . '.php'; ?>
+            <?php if (file_exists(APPLICATION_PATH . '/../docs/manual/' . $script)) { ?>
+                <?php echo $this->partial($script) ?>
+            <?php } else { ?>
+                <?php echo $this->partial('help/views/scripts/notfound.php', array('translate' => $this->translate)) ?>
+            <?php } ?>
+        <?php } else { ?>
+            <?php echo $this->partial('help/views/scripts/notfound.php', array('translate' => $this->translate)) ?>
+        <?php } ?>
     </div>
 </div>
