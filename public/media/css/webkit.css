@@ -46,3 +46,7 @@ a.list {
 a.list.active {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#08395c), to(#74b7e7));
 }
+
+#foot .left a {
+    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#808080));
+}

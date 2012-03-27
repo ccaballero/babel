@@ -30,8 +30,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initSession() {
         Zend_Session::start();
-        
-        $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+        $session = new Zend_Session_Namespace();
+        if (isset($session->lang)) {
+            $language = $session->lang;
+        } else {
+            $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        }
         Zend_Registry::set('lang', $language);
     }
 
@@ -45,6 +50,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $language = 'en';
         }
         $content = $i18n . $language . '.csv';
+        
+        Zend_Registry::set('lang', $language);
 
         $translate = new Zend_Translate(array(
             'adapter' => 'csv',

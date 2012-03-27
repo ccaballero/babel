@@ -1,7 +1,7 @@
 <?php $this->placeholder('footer')->captureStart() ?>
 <div class="left">
     <?php foreach ($this->translations() as $translation) { ?>
-        <a href="#"><?php echo $translation ?></a>
+        <a <?php echo (Zend_Registry::get('lang') == $translation) ? 'class="active" ' : '' ?>href="<?php echo $this->url(array('lang' => $translation), 'frontpage_translate') ?>"><?php echo $translation ?></a>
     <?php } ?>
 </div>
 <div class="right">

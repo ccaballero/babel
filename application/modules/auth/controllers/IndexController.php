@@ -37,6 +37,11 @@ class Auth_IndexController extends Babel_Action
     }
 
     public function outAction() {
+        $session = new Zend_Session_Namespace();
+        if (isset($session->lang)) {
+            unset($session->lang);
+        }
+
         Zend_Auth::getInstance()->clearIdentity();
         $this->_helper->redirector('in', 'index', 'auth');
     }
