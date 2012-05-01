@@ -11,7 +11,6 @@ class Babel_Action extends Zend_Controller_Action
         $this->view->translate = Zend_Registry::get('Zend_Translate');
 
         $request = $this->getRequest();
-        //$request->setBaseUrl($request->getScheme() . '://' . $request->getHttpHost());
 
         $this->view->auth = Zend_Auth::getInstance();
         $this->auth = $this->view->auth->getIdentity();
@@ -38,6 +37,7 @@ class Babel_Action extends Zend_Controller_Action
 
     public function postDispatch() {
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->_flashMessenger->setNamespace('babel');
         $this->view->messages = $this->_flashMessenger->getMessages();
 
         $this->view->render('frontpage/views/scripts/toolbar.php');
