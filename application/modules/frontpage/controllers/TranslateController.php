@@ -6,7 +6,7 @@ class TranslateController extends Babel_Action
         $request = $this->getRequest();
         $lang = $request->getParam('lang');
         
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('babel');
         $session->lang = $lang;
 
         $this->_helper->flashMessenger->addMessage('You change the language');

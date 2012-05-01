@@ -37,7 +37,7 @@ class Auth_IndexController extends Babel_Action
     }
 
     public function outAction() {
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('babel');
         if (isset($session->lang)) {
             unset($session->lang);
         }
