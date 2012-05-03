@@ -263,6 +263,10 @@ a.list.active, a.list.hover {
     font-size: 1.08em;
 }
 
+#classic pre {
+    font-size: 1.3em;
+}
+
 #form label {
     font-size: 1.2em;
     text-shadow: 0.2em 0.2em 0.2em #000000;

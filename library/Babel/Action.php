@@ -5,11 +5,9 @@ class Babel_Action extends Zend_Controller_Action
     public $auth = null;
     public $user = null;
     public $route = null;
+    public $translate = null;
 
     public function preDispatch() {
-        $this->view->addScriptPath(APPLICATION_PATH . '/modules');
-        $this->view->translate = Zend_Registry::get('Zend_Translate');
-
         $request = $this->getRequest();
 
         $this->view->auth = Zend_Auth::getInstance();
@@ -23,6 +21,7 @@ class Babel_Action extends Zend_Controller_Action
         }
         $this->view->user = $this->user;
 
+        $this->view->addScriptPath(APPLICATION_PATH . '/modules');
         $this->view->addScriptPath(APPLICATION_PATH . '/../docs/manual/');
 
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
@@ -33,11 +32,14 @@ class Babel_Action extends Zend_Controller_Action
         $this->url = $request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri();
 
         $this->view->language = Zend_Registry::get('lang');
+        $this->view->translate = Zend_Registry::get('Zend_Translate');
+        $this->translate = $this->view->translate;
     }
 
     public function postDispatch() {
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->_flashMessenger->setNamespace('babel');
+
         $this->view->messages = $this->_flashMessenger->getMessages();
 
         $this->view->render('frontpage/views/scripts/toolbar.php');
