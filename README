@@ -1,4 +1,21 @@
-# BABEL
+###############################################################################
 
-# Made in locations
+Babel version 1.0
 
+== Developer ==
+    Carlos Caballero B. (cijkb.j@gmail.com)
+
+== Dependencies ==
+    PHP 5.3 or higher.
+    Web Server (with mod_rewrite and gd).
+    Zend Framework 1.8.3 or higher.
+    MySQL 5.0 or higher.
+
+== License ==
+    GNU GPL v3.0.
+
+== Description ==
+    A free and open source site for share pdf documents.
+
+== Instalation ==
+     
