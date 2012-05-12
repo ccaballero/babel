@@ -23,7 +23,7 @@ class Books_IndexController extends Babel_Action
                     }
                     $file->save();
                 }
-                $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Books unpublished successfully'));
                 $this->_helper->redirector('published', 'index', 'books');
             }
         }
@@ -47,7 +47,7 @@ class Books_IndexController extends Babel_Action
                         $file->delete();
                     }
                 }
-                $this->_helper->flashMessenger->addMessage('The files were removed');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('The files were removed'));
                 $this->_helper->redirector('lost', 'index', 'books');
             }
         }
@@ -116,13 +116,13 @@ class Books_IndexController extends Babel_Action
                     }
                     $adapters[$hash]->save();
                 }
-                $this->_helper->flashMessenger->addMessage('Books added successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Books added successfully'));
             }
             if ($request->getParam('delete')) {
                 foreach ($hashes as $hash) {
                     $adapters[$hash]->delete();
                 }
-                $this->_helper->flashMessenger->addMessage('Books removed successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Books removed successfully'));
             }
             if ($request->getParam('publish')) {
                 foreach ($hashes as $hash) {
@@ -139,7 +139,7 @@ class Books_IndexController extends Babel_Action
                         $meta->save();
                     }
                 }
-                $this->_helper->flashMessenger->addMessage('Books published successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Books published successfully'));
             }
             if ($request->getParam('unpublish')) {
                 foreach ($hashes as $hash) {
@@ -156,7 +156,7 @@ class Books_IndexController extends Babel_Action
                         $meta->save();
                     }
                 }
-                $this->_helper->flashMessenger->addMessage('Books unpublished successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Books unpublished successfully'));
             }
             if ($request->getParam('thumb')) {
                 foreach ($hashes as $hash) {
@@ -175,7 +175,7 @@ class Books_IndexController extends Babel_Action
                         }
                     }
                 }
-                $this->_helper->flashMessenger->addMessage('Thumbnails were generated');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Thumbnails were generated'));
             }
 
             $this->_redirect($this->url);
@@ -266,7 +266,7 @@ class Books_IndexController extends Babel_Action
                 }
 
                 unlink($filename);
-                $this->_helper->flashMessenger->addMessage('Meta-information uploaded successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Meta-information uploaded successfully'));
                 $this->_helper->redirector('index', 'index', 'frontpage');
             }
         }

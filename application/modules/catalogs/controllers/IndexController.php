@@ -42,7 +42,7 @@ class Catalogs_IndexController extends Babel_Action
                 }
 
                 $catalog->save();
-                $this->_helper->flashMessenger->addMessage('The catalog ' . $catalog->label . ' was created');
+                $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('Catalog %s was created'), $catalog->label));
 
                 if ($form->getSubForm('photo')->getElement('photo')->receive()) {
                     $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
@@ -53,7 +53,7 @@ class Catalogs_IndexController extends Babel_Action
                         unlink($filename);
                     }
 
-                    $this->_helper->flashMessenger->addMessage('The photo of catalog ' . $catalog->label . ' was updated successfully');
+                    $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
                 }
 
                 if ($id_parent == 0) {
@@ -63,7 +63,7 @@ class Catalogs_IndexController extends Babel_Action
                     $this->_redirect($url->url(array('catalog' => $id_parent), 'catalogs_catalog_view'));
                 }
             } else {
-                $this->_helper->flashMessenger->addMessage('You must define a catalog name');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('You must define a catalog name'));
             }
         }
 

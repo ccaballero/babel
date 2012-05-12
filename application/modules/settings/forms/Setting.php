@@ -2,7 +2,11 @@
 
 class Settings_Form_Setting extends Zend_Form
 {
+    protected $_uniqueUsernameValidator = null;
+
     public function init() {
+        $this->_uniqueUsernameValidator = new Babel_Validators_UniqueField(new Users(), 'username', true);
+
         $this->setMethod('post');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
@@ -21,7 +25,8 @@ class Settings_Form_Setting extends Zend_Form
                  ->setAttrib('class', 'email')
                  ->addFilter('StringTrim')
                  ->addValidator('StringLength', false, array(0, 128))
-                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
+                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true))
+                 ->addValidator($this->_uniqueUsernameValidator);
 
         $information_subform->addElement($fullname);
         $information_subform->addElement($username);
@@ -59,11 +64,12 @@ class Settings_Form_Setting extends Zend_Form
             'photo' => $photo_subform,
             'password' => $password_subform,
         ));
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Change',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Change'));
     }
 
     public function setUser($user) {
         $this->getSubForm('information')->getElement('fullname')->setValue($user->fullname);
         $this->getSubForm('information')->getElement('username')->setValue($user->username);
+        $this->_uniqueUsernameValidator->setElement($user);
     }
 }

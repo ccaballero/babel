@@ -35,7 +35,7 @@ class Yachay_Helpers_Thumbnail
             $ratio = $width / $height;
             if ($ratio == 1) {
                 $newwidth = $maxwidth;
-                $newheigth = $maxwidth;
+                $newheight = $maxwidth;
             } else if ($ratio > 1) {
                 $newwidth = $maxwidth;
                 $newheight = $maxwidth / $ratio;

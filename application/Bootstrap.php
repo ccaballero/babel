@@ -37,6 +37,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         } else {
             $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
         }
+
         Zend_Registry::set('lang', $language);
     }
 

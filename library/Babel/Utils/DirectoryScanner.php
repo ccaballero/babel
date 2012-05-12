@@ -52,7 +52,7 @@ class Babel_Utils_DirectoryScanner {
         $subdirectories = @scandir($directory);
         if ($subdirectories) {
             foreach ($subdirectories as $file) {
-                if (($file <> '.') && ($file <> '..')) {
+                if (($file <> '.') && ($file <> '..') && ($file <> 'lost+found')) {
                     $path = "$directory/$file";
                     if (is_dir($path)) {
                         $files = @array_merge($files, $this->scan_files($path));

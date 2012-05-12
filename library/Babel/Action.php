@@ -7,6 +7,11 @@ class Babel_Action extends Zend_Controller_Action
     public $route = null;
     public $translate = null;
 
+    public function init() {
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->_flashMessenger->setNamespace('babel');
+    }
+
     public function preDispatch() {
         $request = $this->getRequest();
 
@@ -37,10 +42,8 @@ class Babel_Action extends Zend_Controller_Action
     }
 
     public function postDispatch() {
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->_flashMessenger->setNamespace('babel');
-
         $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->_flashMessenger->clearMessages();
 
         $this->view->render('frontpage/views/scripts/toolbar.php');
         $this->view->render('frontpage/views/scripts/menubar.php');
@@ -50,7 +53,7 @@ class Babel_Action extends Zend_Controller_Action
 
     public function requireLogin() {
         if ($this->auth == null) {
-            $this->_helper->flashMessenger->addMessage('You must be logged');
+            $this->_helper->flashMessenger->addMessage($this->translate->_('You must be logged'));
             $this->_helper->redirector('in', 'index', 'auth');
         }
     }
@@ -59,7 +62,7 @@ class Babel_Action extends Zend_Controller_Action
         $this->requireLogin();
 
         if ($this->user->role <> 'admin') {
-            $this->_helper->flashMessenger->addMessage('You must be admin');
+            $this->_helper->flashMessenger->addMessage($this->translate->_('You must be admin'));
             $this->_helper->redirector('in', 'index', 'auth');
         }
     }

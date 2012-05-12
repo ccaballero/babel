@@ -19,7 +19,8 @@ class Users_Form_Create extends Zend_Form
                  ->setAttrib('class', 'user')
                  ->addFilter('StringTrim')
                  ->addValidator('StringLength', false, array(0, 128))
-                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
+                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true))
+                 ->addValidator(new Babel_Validators_UniqueField(new Users(), 'username'));
 
         $password = $this->createElement('password', 'password');
         $password->setRequired(true)

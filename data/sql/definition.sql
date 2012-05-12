@@ -11,12 +11,15 @@ DROP TABLE IF EXISTS `babel_users`;
 CREATE TABLE `babel_users` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `role`              enum('user','admin')                                        NOT NULL,
+    `contact`           int unsigned                                                NOT NULL DEFAULT 0,
     `username`          varchar(128)                                                NOT NULL,
     `password`          varchar(40)                                                 NOT NULL,
     `fullname`          varchar(128)                                                NOT NULL DEFAULT '',
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`username`)
+    UNIQUE INDEX (`username`),
+    INDEX (`contact`),
+    FOREIGN KEY (`contact`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_books_collection`;

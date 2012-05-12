@@ -9,4 +9,8 @@ class Users extends Babel_Models_Table
     public function findByIdent($ident) {
         return $this->fetchRow($this->select()->where('ident = ?', $ident));
     }
+
+    public function findByUsername($username) {
+        return $this->fetchRow($this->select()->where('username = ?', $username));
+    }
 }

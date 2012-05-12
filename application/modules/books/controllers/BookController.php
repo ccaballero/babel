@@ -103,7 +103,7 @@ class Books_BookController extends Babel_Action
                     }
                 }
 
-                $this->_helper->flashMessenger->addMessage('The catalogs were updated');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Catalogs were updated'));
 
                 $url = new Zend_Controller_Action_Helper_Url();
                 $this->_redirect($url->url(array('book' => $book->book), 'books_book_catalog'));
@@ -192,9 +192,9 @@ class Books_BookController extends Babel_Action
                     $file->size = filesize($file->getPath());
                     $file->hash = @hash_file($config->babel->properties->algo, $file->getPath());
                     $file->save();
-                    $this->_helper->flashMessenger->addMessage('The file was edited successfully');
+                    $this->_helper->flashMessenger->addMessage($this->translate->_('File was edited successfully'));
                 } else {
-                    $this->_helper->flashMessenger->addMessage('The file can not be found in: ' . $file->getPath());
+                    $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The file can not be found in: %s'), $file->getPath()));
                 }
             }
             $this->_helper->redirector('lost', 'index', 'books');
@@ -229,7 +229,7 @@ class Books_BookController extends Babel_Action
                 $book->save();
                 $file->save();
 
-                $this->_helper->flashMessenger->addMessage('The book was edited successfully');
+                $this->_helper->flashMessenger->addMessage($this->translate->_('The book was edited successfully'));
 
                 if (!$file->hasThumb()) {
                     try {
@@ -241,9 +241,9 @@ class Books_BookController extends Babel_Action
                         $thumbnail = new Yachay_Helpers_Thumbnail();
                         $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg',
                                               APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 0, 100);
-                        $this->_helper->flashMessenger->addMessage('The thumb was generated successfully');
+                        $this->_helper->flashMessenger->addMessage($this->translate->_('The thumb was generated successfully'));
                     } catch (Exception $e) {
-                        $this->_helper->flashMessenger->addMessage('The thumb wasn\'t generated');
+                        $this->_helper->flashMessenger->addMessage($this->translate->_('The thumb wasn\'t generated'));
                     }
                 }
             }
