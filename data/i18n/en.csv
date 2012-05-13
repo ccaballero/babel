@@ -110,6 +110,7 @@
 "Users","Users"
 "Value is required and can't be empty","Value is required and can't be empty"
 "Year","Year"
+"You can\'t create catalogs inside of %s","You can\'t create catalogs inside of %s"
 "You change the language","You change the language"
 "You must be admin","You must be admin"
 "You must be logged","You must be logged"

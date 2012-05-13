@@ -34,7 +34,7 @@ class Settings_IndexController extends Babel_Action
 
                 if (!empty($filename)) {
                     $thumbnail = new Yachay_Helpers_Thumbnail();
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 0, 100);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 100, 100);
                     unlink($filename);
 
                     $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of \'%s\' was updated successfully'), $this->user->fullname));

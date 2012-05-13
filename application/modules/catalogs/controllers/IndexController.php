@@ -16,12 +16,13 @@ class Catalogs_IndexController extends Babel_Action
         $this->requireLogin();
 
         $request = $this->getRequest();
+        $model_catalogs = new Catalogs();
+
         if ($request->isPost()) {
             $form = new Catalogs_Form_Create();
-            if ($form->isValid($request->getPost())) {
-                $model_catalogs = new Catalogs();
-                $catalog = $model_catalogs->createRow();
 
+            if ($form->isValid($request->getPost())) {
+                $catalog = $model_catalogs->createRow();
                 $catalog->label = $form->getSubForm('information')->getElement('label')->getValue();
                 //$catalog->code = $form->getSubForm('information')->getElement('code')->getValue();
                 $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
@@ -39,6 +40,11 @@ class Catalogs_IndexController extends Babel_Action
                     } else {
                         $catalog->root = $parent->ident;
                     }
+
+                    // Owner comprobation
+                    if ($catalog->mode == 'close' && $parent->owner <> $this->user->ident) {
+                        $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('You can\'t create catalogs inside of %s'), $parent->label));
+                    }
                 }
 
                 $catalog->save();
@@ -49,7 +55,7 @@ class Catalogs_IndexController extends Babel_Action
 
                     if (!empty($filename) && file_exists($filename)) {
                         $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 0, 100);
+                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
                         unlink($filename);
                     }
 
@@ -65,8 +71,17 @@ class Catalogs_IndexController extends Babel_Action
             } else {
                 $this->_helper->flashMessenger->addMessage($this->translate->_('You must define a catalog name'));
             }
+
+            $this->_helper->redirector('index', 'index', 'catalogs');
         }
 
-        $this->_helper->redirector('index', 'index', 'catalogs');
+        $this->view->catalogs = $model_catalogs->selectRoots();
+
+        if ($this->auth <> null) {
+            $this->view->form = new Catalogs_Form_Create();
+        }
+        
+        $this->view->overlay = true;
+        $this->render('index');
     }
 }

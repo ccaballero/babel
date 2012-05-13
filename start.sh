@@ -15,8 +15,8 @@ cd shell/
 php babel.php --index
 cd -
 
+chmod 777 data/lucene
 chmod 777 data/upload
 chmod 777 public/media/img/thumbnails/users
 chmod 777 public/media/img/thumbnails/catalogs
 chmod 777 public/media/img/thumbnails/books
-

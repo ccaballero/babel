@@ -32,10 +32,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Session::start();
 
         $session = new Zend_Session_Namespace('babel');
+
+        $language = 'en';
         if (isset($session->lang)) {
             $language = $session->lang;
         } else {
-            $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+                $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            }
         }
 
         Zend_Registry::set('lang', $language);

@@ -11,3 +11,7 @@
 <?php if ($this->auth->hasIdentity()) { ?>
     <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form, 'translate' => $this->translate)) ?>
 <?php } ?>
+
+<?php if (isset($this->overlay)) { ?>
+<script type="text/javascript">$('#catalog_new').overlay({left:'center',top:90,load:true});</script>
+<?php } ?>

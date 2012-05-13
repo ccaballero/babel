@@ -110,6 +110,7 @@
 "Users","Usuarios"
 "Value is required and can't be empty","El campo es requerido y no puede estar vacio"
 "Year","Año"
+"You can\'t create catalogs inside of %s","Tu no puedes crear catalogos dentro de %s"
 "You change the language","Tu cambiaste el lenguaje"
 "You must be admin","Necesitas ser administrador"
 "You must be logged","Necesitas estar autentificado"
