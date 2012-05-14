@@ -1,29 +1,22 @@
 <?php
 
-class Catalogs_Form_Create extends Zend_Form
+class Catalogs_Form_Catalog extends Zend_Form
 {
     public function init() {
         $this->setMethod('post');
+        $this->setName('form_catalog');
 
         $url = new Zend_Controller_Action_Helper_Url();
         $this->setAction($url->url(array(), 'catalogs_new'));
 
         $information_subform = new Zend_Form_SubForm();
-        $label = $information_subform->createElement('text', 'label');
-        $label->setRequired(true)
+        $catalog = $information_subform->createElement('text', 'catalog');
+        $catalog->setRequired(true)
               ->setLabel('Label')
               ->setAttrib('class', 'focus label')
               ->addFilter('StringTrim')
               ->addValidator('StringLength', false, array(1, 128))
               ->addValidator('Alnum', false, array('allowWhiteSpace' => true));
-
-        /*$code = $information_subform->createElement('text', 'code');
-        $code->setRequired(true)
-             ->setLabel('Code')
-             ->setAttrib('class', 'key')
-             ->addFilter('StringTrim')
-             ->addValidator('StringLength', false, array(1, 8))
-             ->addValidator('Alnum', false, array('allowWhiteSpace' => false));*/
 
         $mode = $this->createElement('select', 'mode');
         $mode->setRequired(true)
@@ -36,10 +29,12 @@ class Catalogs_Form_Create extends Zend_Form
                     ->addFilter('StringTrim')
                     ->addFilter('StripTags');
 
-        $information_subform->addElement($label);
-        //$information_subform->addElement($code);
+        $return = $this->createElement('hidden', 'return');
+
+        $information_subform->addElement($catalog);
         $information_subform->addElement($mode);
         $information_subform->addElement($description);
+        $information_subform->addElement($return);
 
         $photo_subform = new Zend_Form_SubForm();
         $photo = $photo_subform->createElement('file', 'photo');
@@ -56,6 +51,6 @@ class Catalogs_Form_Create extends Zend_Form
             'information' => $information_subform,
             'photo' => $photo_subform,
         ));
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Create',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
     }
 }
