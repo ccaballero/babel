@@ -16,7 +16,7 @@ class Users_IndexController extends Babel_Action
         $form = new Users_Form_Create();
 
         if ($request->isPost()) {
-            if ($form->isValid($request->getPost())) {
+            if ($form->isValid($request->getPost()) && $form->getSubForm('password')->isValid($request->getPost())) {
                 $model_users = new Users();
                 $user = $model_users->createRow();
 
@@ -26,7 +26,7 @@ class Users_IndexController extends Babel_Action
                 $user->contact = $this->user->ident;
                 $user->fullname = $form->getElement('fullname')->getValue();
                 $user->username = $form->getElement('username')->getValue();
-                $user->password = sha1($key . $form->getElement('password')->getValue() . $key);
+                $user->password = sha1($key . $form->getSubForm('password')->getElement('password2')->getValue() . $key);
                 $user->tsregister = time();
 
                 $user->save();

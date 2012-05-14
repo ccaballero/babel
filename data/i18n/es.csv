@@ -128,3 +128,4 @@
 "You must be admin","Necesitas ser administrador"
 "You must be logged","Necesitas estar autentificado"
 "You must define a catalog name","Tu debes definir un nombre de catalogo"
+"The two given tokens do not match","Las dos contraseñas deben coincidir"

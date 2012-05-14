@@ -286,6 +286,7 @@ a.list.active, a.list.hover {
 
 #form dd ul.errors li {
     width: 430px;
+    font-size: 12px;
     list-style-type: none;
     text-shadow: 0.2em 0.2em 0.2em #000000;
 }
