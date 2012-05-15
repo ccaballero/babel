@@ -10,8 +10,7 @@ class Users_Form_Create extends Zend_Form
                  ->setLabel('Fullname')
                  ->setAttrib('class', 'focus user')
                  ->addFilter('StringTrim')
-                 ->addValidator('StringLength', false, array(0, 128))
-                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true));
+                 ->addValidator('StringLength', false, array(0, 128));
 
         $username = $this->createElement('text', 'username');
         $username->setRequired(true)
@@ -19,7 +18,6 @@ class Users_Form_Create extends Zend_Form
                  ->setAttrib('class', 'user')
                  ->addFilter('StringTrim')
                  ->addValidator('StringLength', false, array(0, 128))
-                 ->addValidator('Alpha', false, array('allowWhiteSpace' => true))
                  ->addValidator(new Babel_Validators_UniqueField(new Users(), 'username'));
 
         $password_subform = new Zend_Form_SubForm();

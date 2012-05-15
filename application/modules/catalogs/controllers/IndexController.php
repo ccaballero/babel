@@ -12,7 +12,9 @@ class Catalogs_IndexController extends Babel_Action
         if (empty($catalog)) {
             $this->view->catalogs = $model_catalogs->selectRoots();
             if (!empty($this->auth)) {
-                $this->view->form = new Catalogs_Form_Catalog();
+                if (!isset($this->view->form)) {
+                    $this->view->form = new Catalogs_Form_Catalog();
+                }
             }
         } else {
             $this->view->catalog = $catalog;
@@ -24,7 +26,9 @@ class Catalogs_IndexController extends Babel_Action
                 $form = new Catalogs_Form_Catalog();
                 $form->setAction($url->url(array('catalog' => $catalog->ident), 'catalogs_catalog_new'));
 
-                $this->view->form = $form;
+                if (!isset($this->view->form)) {
+                    $this->view->form = $form;
+                }
             }
         }
     }
@@ -93,6 +97,7 @@ class Catalogs_IndexController extends Babel_Action
 
         $this->view->overlay = true;
         $this->view->action = 'new';
+        $this->view->form = $form;
 
         $this->_useForward = true;
         $this->_forward('index', 'index', 'catalogs');

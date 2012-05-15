@@ -36,6 +36,10 @@ body {
     background-color: #000000;
 }
 
+select {
+    padding-right: 1.0em;
+}
+
 .right { text-align: right; }
 .left { text-align: left; }
 .center { text-align: center; }
@@ -306,7 +310,7 @@ a.list.active, a.list.hover {
 
 #form textarea {
     width: 333px;
-    height: 200px;
+    height: 100px;
     padding: 0.4em 0.4em 0.4em 0.4em;
 }
 

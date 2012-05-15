@@ -19,23 +19,39 @@ class Catalogs_Stats extends Babel_Models_Table
         return $this->fetchRow($this->select()->where('catalog = ?', $catalog));
     }
 
-    public function increaseBook($catalog) {
+    public function increaseBook($ident) {
         $model_catalogs = new Catalogs();
+        $catalog = $model_catalogs->findByIdent($ident);
 
-        do {
+        while ($catalog <> null) {
             $stats = $catalog->getStats();
-            $stats->books += 1;
+            $stats->catalog = $catalog->ident;
+            $stats->books = $stats->books + 1;
             $stats->save();
-        } while (($catalog->parent <> NULL) && ($catalog = $model_catalogs->findByIdent($catalog->parent)));
+
+            if ($catalog->parent == null) {
+                $catalog = null;
+            } else {
+                $catalog = $model_catalogs->findByIdent($catalog->parent);
+            }
+        }
     }
 
-    public function decreaseBook($catalog) {
+    public function decreaseBook($ident) {
         $model_catalogs = new Catalogs();
+        $catalog = $model_catalogs->findByIdent($ident);
 
-        do {
+        while ($catalog <> null) {
             $stats = $catalog->getStats();
-            $stats->books -= 1;
+            $stats->catalog = $catalog->ident;
+            $stats->books = $stats->books - 1;
             $stats->save();
-        } while (($catalog->parent <> NULL) && ($catalog = $model_catalogs->findByIdent($catalog->parent)));
+
+            if ($catalog->parent == null) {
+                $catalog = null;
+            } else {
+                $catalog = $model_catalogs->findByIdent($catalog->parent);
+            }
+        }
     }
 }

@@ -17,11 +17,14 @@ class Catalogs_Catalog extends Zend_Db_Table_Row_Abstract
         if ($this->_stats == null) {
             $model_stats = new Catalogs_Stats();
             $stats = $model_stats->findByCatalog($this->ident);
+
             if (empty($stats)) {
                 $stats = $model_stats->createRow();
                 $stats->catalog = $this->ident;
+                $stats->books = 0;
                 $stats->save();
             }
+
             $this->_stats = $stats;
         }
         return $this->_stats;

@@ -59,47 +59,71 @@ class Books_BookController extends Babel_Action
 
         $file = $model_collection->findByHash($hash);
         $book = $model_metas->findByHash($hash);
-        if (!empty($file)) {
-            $db_catalogs = $file->findCatalogsViaBooks_Catalogs();
-            $catalogs_list = array();
-            $current_catalogs = array();
 
-            foreach ($db_catalogs as $db_catalog) {
-                $catalogs_list[] = $db_catalog->ident;
-                $current_catalogs[$db_catalog->ident] = $db_catalog;
+        if (!empty($file)) {
+            $root_catalogs_1 = $model_catalogs->selectRoots();
+            $root_catalogs_2 = array();
+            foreach ($root_catalogs_1 as $root_catalog) {
+                if ($root_catalog->mode == 'open' || $root_catalog->owner == $this->user->ident) {
+                    $root_catalogs_2[] = $root_catalog;
+                }
+            }
+
+            $available_catalogs = array();
+            foreach ($root_catalogs_2 as $root_catalog) {
+                foreach ($model_catalogs->selectElementsByRoot($root_catalog->ident) as $catalog) {
+                    if ($catalog->mode == 'open' || $catalog->owner == $this->user->ident) {
+                        $available_catalogs[$root_catalog->ident][] = $catalog;
+                    }
+                }
+            }
+
+            $current_catalogs_1 = $file->findCatalogsViaBooks_Catalogs();
+            $current_catalogs_2 = array();
+            foreach ($current_catalogs_1 as $current_catalog) {
+                $current_catalogs_2[$current_catalog->root] = $current_catalog->ident;
             }
 
             if ($request->isPost()) {
-                $new_catalogs = $request->getParam('catalogs');
+                $catalogs = $request->getParam('catalogs');
 
-                foreach ($new_catalogs as $key1 => $new_catalog) {
-                    $new_catalog = intval($new_catalog);
-                    foreach ($catalogs_list as $key2 => $old_catalog) {
-                        if ($new_catalog == $old_catalog) {
-                            unset($new_catalogs[$key1]);
-                            unset($catalogs_list[$key2]);
+                foreach ($root_catalogs_2 as $root_catalog) {
+                    if (array_key_exists($root_catalog->ident, $catalogs)) {
+                        $new_assign = empty($catalogs[$root_catalog->ident]) ? 0 : $catalogs[$root_catalog->ident];
+                        $old_assign = empty($current_catalogs_2[$root_catalog->ident]) ? 0 : $current_catalogs_2[$root_catalog->ident];
+
+                        if ($new_assign <> $old_assign) {
+                            if (empty($new_assign)) {
+                                // remove book from catalog
+                                $model_books_catalogs->deleteBookAndCatalog($file->hash, $old_assign);
+                                $model_stats->decreaseBook($old_assign);
+                            } else if (empty($old_assign)) {
+                                // add book to catalog
+                                $book_catalog = $model_books_catalogs->createRow();
+                                $book_catalog->book = $file->hash;
+                                $book_catalog->catalog = $new_assign;
+                                $book_catalog->save();
+                                $model_stats->increaseBook($new_assign);
+                            } else {
+                                foreach ($available_catalogs[$root_catalog->ident] as $catalog) {
+                                    if ($old_assign == $catalog->ident) {
+                                        // remove book from catalog
+                                        $model_books_catalogs->deleteBookAndCatalog($file->hash, $catalog->ident);
+                                        $model_stats->decreaseBook($catalog->ident);
+                                    }
+                                }
+                                foreach ($available_catalogs[$root_catalog->ident] as $catalog) {
+                                    if ($new_assign == $catalog->ident) {
+                                        // add book to catalog
+                                        $book_catalog = $model_books_catalogs->createRow();
+                                        $book_catalog->book = $file->hash;
+                                        $book_catalog->catalog = $catalog->ident;
+                                        $book_catalog->save();
+                                        $model_stats->increaseBook($catalog->ident);
+                                    }
+                                }
+                            }
                         }
-                    }
-                }
-
-                foreach ($new_catalogs as $new_catalog) {
-                    $catalog = $model_catalogs->findByIdent($new_catalog);
-                    if (!empty($catalog)) {
-                        $book_catalog = $model_books_catalogs->createRow();
-                        $book_catalog->book = $file->hash;
-                        $book_catalog->catalog = $catalog->ident;
-                        $book_catalog->save();
-
-                        $model_stats->increaseBook($catalog);
-                    }
-                }
-
-                foreach ($catalogs_list as $old_catalog) {
-                    $catalog = $current_catalogs[$old_catalog];
-                    if (!empty($catalog)) {
-                        $model_books_catalogs->deleteBookAndCatalog($file->hash, $catalog->ident);
-
-                        $model_stats->decreaseBook($catalog);
                     }
                 }
 
@@ -111,8 +135,9 @@ class Books_BookController extends Babel_Action
 
             $this->view->book = $book;
             $this->view->file = $file;
-            $this->view->roots = $model_catalogs->selectRoots();
-            $this->view->catalogs = $catalogs_list;
+            $this->view->roots = $root_catalogs_2;
+            $this->view->availables = $available_catalogs;
+            $this->view->assigned = $current_catalogs_2;
         }
     }
 
@@ -132,8 +157,11 @@ class Books_BookController extends Babel_Action
                 header("HTTP/1.1 200 OK");
                 header("Status: 200 OK");
                 header('Content-Type: application/pdf');
-                header('Content-Disposition: attachment; filename="' . $file->file . '";');
-                header('Content-Length: '. $file->size . '; ');
+                header('Content-Disposition: attachment; filename=' . $file->file . ';');
+                header('Content-Transfer-Encoding: binary');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: '. $file->size);
                 ob_clean();
                 flush();
                 readfile($file->getPath());

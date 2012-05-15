@@ -15,13 +15,17 @@ class Catalogs_Form_Catalog extends Zend_Form
               ->setLabel('Label')
               ->setAttrib('class', 'focus label')
               ->addFilter('StringTrim')
-              ->addValidator('StringLength', false, array(1, 128))
-              ->addValidator('Alnum', false, array('allowWhiteSpace' => true));
+              ->addValidator('StringLength', false, array(1, 128));
 
         $mode = $this->createElement('select', 'mode');
         $mode->setRequired(true)
              ->setLabel('Mode')
              ->setMultiOptions(array('open' => 'Open', 'close' => 'Close'));
+
+        $type = $this->createElement('select', 'type');
+        $type->setRequired(true)
+             ->setLabel('Type')
+             ->setMultiOptions(array('f' => 'Folksonomy', 't' => 'Taxonomy'));
 
         $description = $information_subform->createElement('textarea', 'description');
         $description->setRequired(false)
@@ -33,6 +37,7 @@ class Catalogs_Form_Catalog extends Zend_Form
 
         $information_subform->addElement($catalog);
         $information_subform->addElement($mode);
+        $information_subform->addElement($type);
         $information_subform->addElement($description);
         $information_subform->addElement($return);
 

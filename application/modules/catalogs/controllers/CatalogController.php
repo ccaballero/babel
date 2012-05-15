@@ -69,6 +69,7 @@ class Catalogs_CatalogController extends Babel_Action
         $this->view->overlay = true;
         $this->view->action = 'edit';
         $this->view->edit = $catalog->ident;
+        $this->view->form = $form;
 
         $this->_useForward = true;
         $this->_forward('index', 'index', 'catalogs');
