@@ -252,6 +252,14 @@ a.list.active, a.list.hover {
     border: 3px solid #ffffff;
 }
 
+#classic a img {
+    border: none;
+}
+
+#classic ul {
+    list-style-type: none;
+}
+
 #classic .photo {
     float: left;
     margin: 0em 1.0em;

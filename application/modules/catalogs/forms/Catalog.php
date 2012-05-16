@@ -18,12 +18,12 @@ class Catalogs_Form_Catalog extends Zend_Form
               ->addValidator('StringLength', false, array(1, 128));
 
         $mode = $this->createElement('select', 'mode');
-        $mode->setRequired(true)
+        $mode->setRequired(false)
              ->setLabel('Mode')
              ->setMultiOptions(array('open' => 'Open', 'close' => 'Close'));
 
         $type = $this->createElement('select', 'type');
-        $type->setRequired(true)
+        $type->setRequired(false)
              ->setLabel('Type')
              ->setMultiOptions(array('f' => 'Folksonomy', 't' => 'Taxonomy'));
 
@@ -57,5 +57,15 @@ class Catalogs_Form_Catalog extends Zend_Form
             'photo' => $photo_subform,
         ));
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
+    }
+
+    public function hideMode() {
+        $information = $this->getSubForm('information');
+        $information->removeElement('mode');
+    }
+
+    public function hideType() {
+        $information = $this->getSubForm('information');
+        $information->removeElement('type');
     }
 }

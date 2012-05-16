@@ -39,6 +39,7 @@ class Catalogs_CatalogController extends Babel_Action
             if ($form->isValid($request->getPost())) {
                 $catalog->label = $form->getSubForm('information')->getElement('catalog')->getValue();
                 $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
+                $catalog->type = $form->getSubForm('information')->getElement('type')->getValue();
                 $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
                 $catalog->save();
 
@@ -69,7 +70,7 @@ class Catalogs_CatalogController extends Babel_Action
         $this->view->overlay = true;
         $this->view->action = 'edit';
         $this->view->edit = $catalog->ident;
-        $this->view->form = $form;
+        //$this->view->form = $form;
 
         $this->_useForward = true;
         $this->_forward('index', 'index', 'catalogs');

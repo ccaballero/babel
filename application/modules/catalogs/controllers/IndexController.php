@@ -25,6 +25,8 @@ class Catalogs_IndexController extends Babel_Action
 
                 $form = new Catalogs_Form_Catalog();
                 $form->setAction($url->url(array('catalog' => $catalog->ident), 'catalogs_catalog_new'));
+                $form->hideMode();
+                $form->hideType();
 
                 if (!isset($this->view->form)) {
                     $this->view->form = $form;
@@ -46,7 +48,6 @@ class Catalogs_IndexController extends Babel_Action
 
                 $catalog = $model_catalogs->createRow();
                 $catalog->label = $form->getSubForm('information')->getElement('catalog')->getValue();
-                $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
                 $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
                 $catalog->owner = $this->user->ident;
                 $catalog->tsregister = time();
@@ -67,6 +68,12 @@ class Catalogs_IndexController extends Babel_Action
                         $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('You can\'t create catalogs inside of %s'), $parent->label));
                         $this->_redirect($url->url(array('catalog' => $catalog->ident), 'catalogs_catalog_view'));
                     }
+                    
+                    $catalog->mode = $parent->mode;
+                    $catalog->type = $parent->type;
+                } else {
+                    $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
+                    $catalog->type = $form->getSubForm('information')->getElement('type')->getValue();
                 }
 
                 $catalog->save();
@@ -97,7 +104,7 @@ class Catalogs_IndexController extends Babel_Action
 
         $this->view->overlay = true;
         $this->view->action = 'new';
-        $this->view->form = $form;
+        //$this->view->form = $form;
 
         $this->_useForward = true;
         $this->_forward('index', 'index', 'catalogs');

@@ -17,7 +17,9 @@ class Users_Form_Create extends Zend_Form
                  ->setLabel('Username')
                  ->setAttrib('class', 'user')
                  ->addFilter('StringTrim')
-                 ->addValidator('StringLength', false, array(0, 128))
+                 ->addFilter('StringToLower')
+                 ->addValidator('StringLength', false, array(4, 128))
+                 ->addValidator('Alnum', false, array('allowWhiteSpace' => false))
                  ->addValidator(new Babel_Validators_UniqueField(new Users(), 'username'));
 
         $password_subform = new Zend_Form_SubForm();

@@ -61,7 +61,10 @@ class Books_BookController extends Babel_Action
         $book = $model_metas->findByHash($hash);
 
         if (!empty($file)) {
-            $root_catalogs_1 = $model_catalogs->selectRoots();
+            
+            // Taxonomies Management
+            $root_catalogs_1 = $model_catalogs->selectRootsByType('t');
+            
             $root_catalogs_2 = array();
             foreach ($root_catalogs_1 as $root_catalog) {
                 if ($root_catalog->mode == 'open' || $root_catalog->owner == $this->user->ident) {
@@ -84,7 +87,17 @@ class Books_BookController extends Babel_Action
                 $current_catalogs_2[$current_catalog->root] = $current_catalog->ident;
             }
 
+            // Folksonomies Management
+            $root_catalogs_3 = $model_catalogs->selectRootsByType('f');
+            $root_catalogs_4 = array();
+            foreach ($root_catalogs_3 as $root_catalog) {
+                if ($root_catalog->mode == 'open' || $root_catalog->owner == $this->user->ident) {
+                    $root_catalogs_4[] = $root_catalog;
+                }
+            }
+
             if ($request->isPost()) {
+                // Taxonomies Management
                 $catalogs = $request->getParam('catalogs');
 
                 foreach ($root_catalogs_2 as $root_catalog) {
@@ -135,9 +148,83 @@ class Books_BookController extends Babel_Action
 
             $this->view->book = $book;
             $this->view->file = $file;
-            $this->view->roots = $root_catalogs_2;
+            $this->view->taxonomies = $root_catalogs_2;
             $this->view->availables = $available_catalogs;
             $this->view->assigned = $current_catalogs_2;
+            $this->view->folksonomies = $root_catalogs_4;
+        } else {
+            $this->_helper->flashMessenger->addMessage($this->translate->_('Book not found'));
+            $this->_helper->redirector('index', 'index', 'frontpage');
+        }
+    }
+
+    public function folksonomyAction() {
+        $request = $this->getRequest();
+        $hash = $request->getParam('book');
+        $ident_catalog = $request->getParam('catalog');
+
+        $model_collection = new Books_Collection();
+        $model_metas = new Books_Meta();
+        $model_books_catalogs = new Books_Catalogs();
+        $model_catalogs = new Catalogs();
+        $model_stats = new Catalogs_Stats();
+
+        $file = $model_collection->findByHash($hash);
+        $book = $model_metas->findByHash($hash);
+        $root_catalog = $model_catalogs->findByIdent($ident_catalog);
+        
+        if (!empty($file) && !empty($root_catalog)) {
+            $catalogs_1 = $model_catalogs->selectElementsByRoot($root_catalog->ident);
+            $catalogs_2 = array();
+            foreach ($catalogs_1 as $catalog_1) {
+                if ($catalog_1->mode == 'open' || $catalog_1->owner == $this->user->ident) {
+                    $catalogs_2[] = $catalog_1;
+                }
+            }
+
+            $books_catalog_1 = $model_books_catalogs->selectByBook($file->hash);
+            $books_catalog_2 = array();
+            foreach ($books_catalog_1 as $book_catalog) {
+                $books_catalog_2[] = $book_catalog->catalog;
+            }
+            
+            if ($request->isPost()) {
+                $catalogs = $request->getParam('catalogs');
+
+                foreach ($catalogs_2 as $catalog) {
+                    $new_assign = array_key_exists($catalog->ident, $catalogs) ? true : false;
+                    $old_assign = in_array($catalog->ident, $books_catalog_2) ? true : false;
+                    
+                    if ($new_assign <> $old_assign) {
+                        if ($new_assign) {
+                            // add book to catalog
+                            $book_catalog = $model_books_catalogs->createRow();
+                            $book_catalog->book = $file->hash;
+                            $book_catalog->catalog = $catalog->ident;
+                            $book_catalog->save();
+                            $model_stats->increaseBook($catalog->ident);
+                        }
+                        if ($old_assign) {
+                            // remove book from catalog
+                            $model_books_catalogs->deleteBookAndCatalog($file->hash, $catalog->ident);
+                            $model_stats->decreaseBook($catalog->ident);
+                        }
+                    }
+                }
+
+                $this->_helper->flashMessenger->addMessage($this->translate->_('Catalogs were updated'));
+
+                $url = new Zend_Controller_Action_Helper_Url();
+                $this->_redirect($url->url(array('book' => $book->book, 'catalog' => $root_catalog->ident), 'books_book_folksonomy'));
+            }
+
+            $this->view->book = $book;
+            $this->view->file = $file;
+            $this->view->catalog = $root_catalog;
+            $this->view->catalogs = $catalogs_2;
+            $this->view->book_catalogs = $books_catalog_2;
+        } else {
+            $this->_helper->redirector('index', 'index', 'frontpage');
         }
     }
 

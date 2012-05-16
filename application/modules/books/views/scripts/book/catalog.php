@@ -1,17 +1,11 @@
 <div id="classic">
-    <h1><?php echo $this->book->title ?></h1>
-    <div id="thumb" style="float:left; margin: 0em 1.3em 0em 0em; height: 400px; width: 300px; background-image: url('<?php echo $this->file->getUrlPhoto() ?>')"></div>
-    <div style="margin-top:10px;">
-        <p><span class="bold"><?php echo $this->translate->_('Title') ?>:</span> <?php echo $this->none($this->book->title) ?></p>
-        <p><span class="bold"><?php echo $this->translate->_('Author') ?>:</span> <?php echo $this->book->author ?></p>
-        <p><span class="bold"><?php echo $this->translate->_('Publisher') ?>:</span> <?php echo $this->book->publisher ?></p>
-        <p><span class="bold"><?php echo $this->translate->_('Language') ?>:</span> <?php echo $this->language($this->book->language) ?></p>
-        <p><span class="bold"><?php echo $this->translate->_('Year') ?>:</span> <?php echo $this->none($this->book->year) ?></p>
+    <?php echo $this->partial('books/views/scripts/book/header.php', array('user' => $this->user, 'book' => $this->book, 'file' => $this->file, 'translate' => $this->translate)) ?>
 
-        <h2><?php echo $this->translate->_('Catalogs') ?>:</h2>
+    <?php if (!empty($this->taxonomies)) { ?>
+        <h2><?php echo $this->translate->_('Taxonomies') ?>:</h2>
         <form method="post" action="" accept-charset="utf-8">
             <table>
-            <?php foreach ($this->roots as $root) { ?>
+            <?php foreach ($this->taxonomies as $root) { ?>
                 <?php if (!empty($this->availables[$root->ident])) { ?>
                 <tr>
                     <td><?php echo $root->label ?></td>
@@ -28,9 +22,22 @@
             <?php } ?>
                 <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
+                    <td style="text-align: right;"><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
                 </tr>
             </table>
         </form>
+    <?php } ?>
+
+    <?php if (!empty($this->folksonomies)) { ?>
+        <h2><?php echo $this->translate->_('Folksonomies') ?>:</h2>
+        <table>
+        <?php foreach ($this->folksonomies as $root) { ?>
+            <tr>
+                <td><?php echo $root->label ?></td>
+                <td><button onclick="javascript:location.href='<?php echo $this->url(array('book' => $this->file->hash, 'catalog' => $root->ident), 'books_book_folksonomy') ?>';"><?php echo $this->translate->_('Update') ?></button></td>
+            </tr>
+        <?php } ?>
+        </table>
+    <?php } ?>
     </div>
 </div>

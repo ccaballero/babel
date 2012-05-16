@@ -25,6 +25,10 @@ class Catalogs extends Babel_Models_Table
         return $this->fetchAll($this->select()->where('parent IS NULL'));
     }
 
+    public function selectRootsByType($type) {
+        return $this->fetchAll($this->select()->where('parent IS NULL')->where('type = ?', $type));
+    }
+
     public function selectElementsByRoot($root) {
         return $this->fetchAll($this->select()->where('root = ?', $root)->order('code ASC')->order('label ASC'));
     }

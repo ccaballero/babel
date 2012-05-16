@@ -31,4 +31,8 @@ class Books_Catalogs extends Babel_Models_Table
             $this->getAdapter()->quoteInto('catalog = ?', $catalog, 'INTEGER'),
         ));
     }
+
+    public function selectByBook($hash) {
+        return $this->fetchAll($this->select()->where('book = ?', $hash));
+    }
 }
