@@ -16,7 +16,8 @@ class Shell_Babel extends Yachay_Console
         'directory|d=s' => 'set directory for scanning',
         'regex|r=i'     => 'set the regex type for use',
         'generate|g'    => 'generation meta books.',
-        'figlet|f=s'    => 'generation of figlet',
+        'font|f=s'      => 'generation of figlet',
+        'figlet|l=s'    => 'generation of figlet',
     );
 
     public function index($bootstrap) {
@@ -128,16 +129,28 @@ class Shell_Babel extends Yachay_Console
     }
     
     public function figlet($bootstrap, $getopt) {
+        $font_default = APPLICATION_PATH . '/../data/utils/figlet/mini.flf';
+        if (!empty($this->font)) {
+            $font_default = $this->font;
+        }
+
         echo str_pad('Generating figlet', $this->count, $this->separator);
 
         $figlet = new Zend_Text_Figlet(array(
-            'font' => APPLICATION_PATH . '/../data/utils/figlet/mini.flf',
+            'font' => $font_default,
         ));
         echo $figlet->render($getopt->getOption('figlet'));
 
         echo $this->ok;
         return true;
     }
+
+    public $path_font = null; 
+    public function font($bootstrap, $getopt) {
+        $this->font = $getopt->getOption('font');
+        return true;
+    }
+
 }
 
 $command = new Shell_Babel();
