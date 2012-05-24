@@ -1,0 +1,14 @@
+#%PAM
+#session optional pam_keyinit.so force revoke
+#auth    required pam_mysql.so user=vsftpd passwd=asdf host=localhost db=vsftpd table=accounts usercolumn=username passwdcolumn=pass crypt=3
+#account required pam_mysql.so user=vsftpd passwd=asdf host=localhost db=vsftpd table=accounts usercolumn=username passwdcolumn=pass crypt=3
+
+# Customized login using htpasswd file
+#auth required pam_pwdfile.so pwdfile /etc/vsftpd/passwd
+#account required pam_permit.so
+
+# Customized login using mysql database
+session optional pam_keyinit.so force revoke
+auth required pam_mysql.so user=carlos db=babel passwd=nonchalant table=babel_users_ftp usercolumn=username passwdcolumn=password crypt=4
+account required pam_mysql.so user=carlos db=babel passwd=nonchalant table=babel_users_ftp usercolumn=username passwdcolumn=password crypt=4
+

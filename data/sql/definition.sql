@@ -19,7 +19,18 @@ CREATE TABLE `babel_users` (
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`username`),
     INDEX (`contact`),
-    FOREIGN KEY (`contact`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (`contact`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `babel_users_ftp`;
+CREATE TABLE `babel_users_ftp` (
+    `user`              int unsigned                                                NOT NULL DEFAULT 0,
+    `username`          varchar(128)                                                NOT NULL,
+    `password`          varchar(40)                                                 NOT NULL,
+    PRIMARY KEY (`user`),
+    UNIQUE INDEX (`username`),
+    INDEX (`user`),
+    FOREIGN KEY (`user`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_books_collection`;
@@ -63,7 +74,6 @@ CREATE TABLE `babel_catalogs` (
     `tsregister`        int unsigned                                                NOT NULL DEFAULT 0,
     `parent`            int unsigned                                                NULL,
     `root`              int unsigned                                                NULL,
-    `books`             int unsigned                                                NOT NULL DEFAULT 0,
     `mode`              enum('open','close')                                        NOT NULL DEFAULT 'open',
     `type`              enum('f','t')                                               NOT NULL DEFAULT 'f',
     `owner`             int unsigned                                                NOT NULL,
@@ -71,7 +81,7 @@ CREATE TABLE `babel_catalogs` (
     INDEX (`parent`),
     FOREIGN KEY (`parent`) REFERENCES `babel_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE,
     INDEX (`owner`),
-    FOREIGN KEY (`owner`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (`owner`) REFERENCES `babel_users`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_catalogs_stats`;
@@ -80,7 +90,7 @@ CREATE TABLE `babel_catalogs_stats` (
     `books`             int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`catalog`),
     INDEX (`catalog`),
-    FOREIGN KEY (`catalog`) REFERENCES `babel_books_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (`catalog`) REFERENCES `babel_catalogs`(`ident`) ON UPDATE CASCADE ON DELETE CASCADE
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `babel_books_catalogs`;

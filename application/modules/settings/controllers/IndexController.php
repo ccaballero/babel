@@ -12,10 +12,38 @@ class Settings_IndexController extends Babel_Action
             $form->setUser($this->user);
 
             if ($form->getSubForm('information')->isValid($request->getPost())) {
-                $this->user->fullname = $form->getSubForm('information')->getElement('fullname')->getValue();
-                $this->user->username = $form->getSubForm('information')->getElement('username')->getValue();
+                $fullname = $form->getSubForm('information')->getElement('fullname')->getValue();
+                $username = $form->getSubForm('information')->getElement('username')->getValue();
 
-                $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The information of \'%s\' was updated successfully'), $this->user->fullname));
+                if ($this->user->fullname <> $fullname) {
+                    $this->user->fullname = $fullname;
+
+                    $this->_helper->flashMessenger->addMessage($this->translate->_('Your fullname was updated successfully'));
+                }
+
+                if ($this->user->username <> $username) {
+                    // Move the FTP directory
+                    $ftp = Zend_Registry::get('Config')->babel->properties->ftp;
+                    rename($ftp->root . '/' . $ftp->prefix . $this->user->username, $ftp->root . '/' . $ftp->prefix . $username);
+
+                    $this->user->username = $username;
+
+                    $this->_helper->flashMessenger->addMessage($this->translate->_('Your username was updated successfully'));
+                }
+            }
+
+            if ($form->getSubForm('photo')->getElement('photo')->receive()) {
+                $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
+
+                if (!empty($filename)) {
+                    $thumbnail = new Yachay_Helpers_Thumbnail();
+                    $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 100, 100);
+                    unlink($filename);
+
+                    if ($avatar) {
+                        $this->_helper->flashMessenger->addMessage($this->translate->_('Your photo was updated successfully'));
+                    }
+                }
             }
 
             if ($form->getSubForm('password')->isValid($request->getPost())) {
@@ -25,19 +53,40 @@ class Settings_IndexController extends Babel_Action
                     $key = $config->babel->properties->key;
                     $this->user->password = sha1($key . $new_password . $key);
 
-                    $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The password of \'%s\' was updated successfully'), $this->user->fullname));
+                    $this->_helper->flashMessenger->addMessage($this->translate->_('Your password was updated successfully'));
                 }
             }
 
-            if ($form->getSubForm('photo')->getElement('photo')->receive()) {
-                $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
+            if ($form->getSubForm('ftp')->isValid($request->getPost())) {
+                $model_users_ftp = new Users_FTP();
 
-                if (!empty($filename)) {
-                    $thumbnail = new Yachay_Helpers_Thumbnail();
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/users/' . $this->user->ident . '.jpg', 100, 100);
-                    unlink($filename);
+                $ftp_password = $form->getSubForm('ftp')->getElement('password')->getValue();
+                $ftp_activation = $form->getSubForm('ftp')->getElement('activation')->getValue();
+                $ftp_is_activated = $this->user->isFTPActivate();
 
-                    $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of \'%s\' was updated successfully'), $this->user->fullname));
+                if ($ftp_activation <> $ftp_is_activated) {
+                    if ($ftp_activation) { // Activation of FTP account
+                        $user_ftp = $model_users_ftp->createRow();
+                        $user_ftp->user = $this->user->ident;
+                        $user_ftp->username = $this->user->username;
+                        $user_ftp->password = sha1($ftp_password);
+
+                        $user_ftp->save();
+                        $this->_helper->flashMessenger->addMessage($this->translate->_('You FTP account is on'));
+                    } else { // Deactivation of FTP account
+                        $user_ftp = $model_users_ftp->findByUser($this->user->ident);
+
+                        $user_ftp->delete();
+                        $this->_helper->flashMessenger->addMessage($this->translate->_('You FTP account is off'));
+                    }
+                }
+
+                if ($ftp_is_activated && !empty($ftp_password)) {
+                    $user_ftp = $model_users_ftp->findByUser($this->user->ident);
+                    $user_ftp->password = sha1($ftp_password);
+
+                    $user_ftp->save();
+                    $this->_helper->flashMessenger->addMessage($this->translate->_('You FTP Password was updated successfully'));
                 }
             }
 

@@ -12,10 +12,11 @@ class Shell_Babel extends Yachay_Console
     );
 
     protected $specific_options = array(
-        'index|i'    => 'lucene indexation for books.',
+        'index|i'       => 'lucene indexation for books.',
         'directory|d=s' => 'set directory for scanning',
-        'regex|r=i' => 'set the regex type for use',
-        'generate|g' => 'generation meta books.',
+        'regex|r=i'     => 'set the regex type for use',
+        'generate|g'    => 'generation meta books.',
+        'figlet|f=s'    => 'generation of figlet',
     );
 
     public function index($bootstrap) {
@@ -109,7 +110,7 @@ class Shell_Babel extends Yachay_Console
 
                         $thumbnail = new Yachay_Helpers_Thumbnail();
                         $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg',
-                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.small.jpg', 0, 100);
+                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '-small.jpg', 0, 100);
                     } catch (Exception $e) {
                     }
                 }
@@ -124,6 +125,18 @@ class Shell_Babel extends Yachay_Console
 
         $this->__dump();
         return false;
+    }
+    
+    public function figlet($bootstrap, $getopt) {
+        echo str_pad('Generating figlet', $this->count, $this->separator);
+
+        $figlet = new Zend_Text_Figlet(array(
+            'font' => APPLICATION_PATH . '/../data/utils/figlet/mini.flf',
+        ));
+        echo $figlet->render($getopt->getOption('figlet'));
+
+        echo $this->ok;
+        return true;
     }
 }
 

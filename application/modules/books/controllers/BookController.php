@@ -355,7 +355,7 @@ class Books_BookController extends Babel_Action
 
                         $thumbnail = new Yachay_Helpers_Thumbnail();
                         $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg',
-                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.small.jpg', 0, 100);
+                                              APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '-small.jpg', 0, 100);
                         $this->_helper->flashMessenger->addMessage($this->translate->_('The thumb was generated successfully'));
                     } catch (Exception $e) {
                         $this->_helper->flashMessenger->addMessage($this->translate->_('The thumb wasn\'t generated'));

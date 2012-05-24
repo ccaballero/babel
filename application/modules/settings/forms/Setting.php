@@ -59,10 +59,25 @@ class Settings_Form_Setting extends Zend_Form
         $password_subform->addElement($password1);
         $password_subform->addElement($password2);
 
+        $ftp_subform = new Zend_Form_SubForm();
+
+        $ftp_activation = $ftp_subform->createElement('checkbox', 'activation');
+        $ftp_activation->setLabel('FTP Activation');
+
+        $ftp_password = $ftp_subform->createElement('password', 'password');
+        $ftp_password->setRequired(false)
+                  ->setLabel('FTP Password')
+                  ->setAttrib('class', 'key')
+                  ->addValidator('StringLength', false, array(6, 20));
+
+        $ftp_subform->addElement($ftp_activation);
+        $ftp_subform->addElement($ftp_password);
+        
         $this->addSubForms(array(
             'information' => $information_subform,
             'photo' => $photo_subform,
             'password' => $password_subform,
+            'ftp' => $ftp_subform,
         ));
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Change'));
     }
@@ -70,6 +85,7 @@ class Settings_Form_Setting extends Zend_Form
     public function setUser($user) {
         $this->getSubForm('information')->getElement('fullname')->setValue($user->fullname);
         $this->getSubForm('information')->getElement('username')->setValue($user->username);
+        $this->getSubForm('ftp')->getElement('activation')->setValue($user->isFTPActivate());
         $this->_uniqueUsernameValidator->setElement($user);
     }
 }

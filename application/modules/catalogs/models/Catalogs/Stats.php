@@ -19,6 +19,10 @@ class Catalogs_Stats extends Babel_Models_Table
         return $this->fetchRow($this->select()->where('catalog = ?', $catalog));
     }
 
+    public function cleanBooks($catalog) {
+        $this->delete($this->getAdapter()->quoteInto('catalog = ?', $catalog, 'INTEGER'));
+    }
+
     public function increaseBook($ident) {
         $model_catalogs = new Catalogs();
         $catalog = $model_catalogs->findByIdent($ident);

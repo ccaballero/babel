@@ -50,10 +50,12 @@ class Catalogs_CatalogController extends Babel_Action
 
                     if (!empty($filename) && file_exists($filename)) {
                         $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
+                        $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
                         unlink($filename);
 
-                        $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
+                        if ($avatar) {
+                            $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
+                        }
                     }
                 }
 
@@ -74,5 +76,31 @@ class Catalogs_CatalogController extends Babel_Action
 
         $this->_useForward = true;
         $this->_forward('index', 'index', 'catalogs');
+    }
+
+    public function deleteAction() {
+        $this->requireLogin();
+        $request = $this->getRequest();
+        $model_catalogs = new Catalogs();
+
+        $ident = $request->getParam('catalog', 0);
+        $catalog = $model_catalogs->findByIdent($ident);
+        if (empty($catalog) || $catalog->owner <> $this->user->ident) {
+            $this->_helper->redirector('index', 'index', 'catalogs');
+        }
+
+        $url = new Zend_Controller_Action_Helper_Url();
+        $parent = $catalog->parent;
+        $label = $catalog->label;
+        
+        $catalog->delete();
+
+        $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('Catalog %s and all references was deleted'), $label));
+
+        if (empty($parent)) {
+            $this->_helper->redirector('index', 'index', 'catalogs');
+        } else {
+            $this->_redirect($url->url(array('catalog' => $parent), 'catalogs_catalog_view'));
+        }
     }
 }

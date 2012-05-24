@@ -84,10 +84,12 @@ class Catalogs_IndexController extends Babel_Action
 
                     if (!empty($filename) && file_exists($filename)) {
                         $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
+                        $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
                         unlink($filename);
 
-                        $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
+                        if ($avatar) {
+                            $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
+                        }
                     }
                 }
 

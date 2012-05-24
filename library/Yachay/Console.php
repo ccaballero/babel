@@ -54,6 +54,11 @@ class Yachay_Console
     public function __construct() {
         $this->ok .= PHP_EOL;
         $this->fail .= PHP_EOL;
+        
+        $cols = exec('tput cols');
+        if (!empty($cols)) {
+            $this->count = $cols - 4;
+        }
     }
 
     public function __setup() {

@@ -47,6 +47,6 @@ class Yachay_Helpers_Thumbnail
 
         $thumbnail = imagecreatetruecolor($newwidth, $newheight);
         imagecopyresized($thumbnail, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        imagejpeg($thumbnail, $copy_to, 100);
+        return imagejpeg($thumbnail, $copy_to, 100);
     }
 }

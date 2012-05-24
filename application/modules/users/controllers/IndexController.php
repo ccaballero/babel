@@ -32,6 +32,10 @@ class Users_IndexController extends Babel_Action
                 $user->save();
                 $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('User %s was created'), $user->fullname));
                 $this->_helper->redirector('index', 'index', 'users');
+
+                // FTP Assignation
+                $ftp = Zend_Registry::get('Config')->babel->properties->ftp;
+                mkdir($ftp->root . '/' . $ftp->prefix . $user->username);
             }
         }
 
