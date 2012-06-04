@@ -60,47 +60,43 @@ pdftex]{hyperref}
 
 \section{Introducción}
 Babel es una de las piezas de software desarrolladas en la sociedad científica de sistemas e
-informatica; esta intenta reducir las brechas de accesibilidad que se perciben entre la comunidad
+informática; esta intenta reducir las brechas de accesibilidad que se perciben entre la comunidad
 estudiantil. En esencia consiste en un sitio web desarrollado en el lenguaje de programación php,
-donde los usuarios pueden compartir, ordenar, clasificar, catalogar y valorar archivos en formato
-pdf.
+donde los usuarios pueden compartir, ordenar, clasificar, y catalogar archivos en formato pdf.
 
-Babel ha sido concebida con un logica descentralizada de intercambio, es decir, esta diseñado
+Babel ha sido concebida con un lógica descentralizada de intercambio, es decir, esta diseñado
 pensando en crear conexiones con otras instancias, ya sea publicas o privadas, de modo que el rango
-de busqueda pueda propagarse a una variedad aún mayor que la de una unica instancia.
+de búsqueda pueda propagarse a una variedad aún mayor que la de una única instancia.
 
 Babel ademas es software libre, lo que implica que cualquier usuario puede instalarse una instancia
-en su computador y conectarse con otras instancias accesibles via web.
+en su computador y conectarse con otras instancias accesibles vía web.
 
 \section{Antecedentes}
-Debido a que no contamos con una biblioteca virtual en los predios de la universidad, surgio la
+Debido a que no contamos con una biblioteca virtual en los predios de la universidad, surgió la
 idea de realizar un proyecto que trate de crear un centro de información electrónico que 
 proporcione documentos a sus usuarios.
 
 Si bien los problemas de accesibilidad a los recursos de información se han visto reducidos por el
-cada vez mayor acceso a internet, aun el problema esta vigente, dadas esas condiciones se intento
-subsanar algunos aspectos de este problema.
-
-Despues de algunas investigaciones, se concluyo que el conjunto de dificultades que tienen las
-personas, pueden ser clasificados en cuatro tipos:
+cada vez mayor acceso a Internet, aun el problema esta vigente, dadas esas condiciones se intento
+subsanar algunos aspectos de este problema. Después de algunas investigaciones, se concluyo que el conjunto de dificultades que tienen las personas, pueden ser clasificados en cuatro tipos:
 
 \begin{description}
 \item [Problemas de accesibilidad] Referentes a los problemas de acceso al recurso necesario.
-\item [Problemas de conocimiento] Referentes a los problemas de desconocimiento acerca del area 
+\item [Problemas de conocimiento] Referentes a los problemas de desconocimiento acerca del área 
 sobre el que uno quiere desempeñarse.
 \item [Problemas de tiempo] Referentes a los problemas en los que el tiempo requerido para alcanzar
 el objetivo no puede ser cubierto.
-\item [Problemas de compromiso] Referentes a los problemas en los que la intencion por hacer lo
+\item [Problemas de compromiso] Referentes a los problemas en los que la intención por hacer lo
 requerido es la carencia principal de las personas.
 \end{description}
 
-Entendiendo el conjunto de problemas, justificamos la creacion del proyecto babel, en minimizar los
+Entendiendo el conjunto de problemas, justificamos la creación del proyecto babel, en minimizar los
 problemas de accesibilidad, siendo esta la primera barrera que se tiene al intentar alcanzar los
 objetivos deseados.
 
-Es asi que el 14 de junio del 2011, se obtiene el primer prototipo del sistema informatico; despues
-de varias correciones y cambios se llega a una version estable el 27 de julio del 2011, de ahi en
-adelante se siguen desarrollando hasta la actualidad, ya sean correciones urgentes, nuevas
+Es así que el 14 de junio del 2011, se obtiene el primer prototipo del sistema informático; después
+de varias correcciones y cambios se llega a una version estable el 27 de julio del 2011, de ahí en
+adelante se siguen desarrollando hasta la actualidad, ya sean correcciones urgentes, nuevas
 funcionalidades y mejoras de compatibilidad.
 
 \section{Definición del Problema}
@@ -114,12 +110,12 @@ Limitaciones de una biblioteca tradicional:
 
 \begin{enumerate}
 \item El usuario tiene acceso al recurso por un tiempo limitado.
-\item En la mayoria de los casos existe un unico recurso debe ser compartido por varios usuarios.
+\item En la mayoría de los casos existe un único recurso debe ser compartido por varios usuarios.
 \end{enumerate} 
 
 \section{Objetivo General}
 Minimizar los problemas de accesibilidad al conocimiento para mejorar los niveles de rendimiento
-academico de los estudiantes de la universidad.
+académico de los estudiantes de la universidad.
 
 \section{Objetivos Específicos}
 \begin{itemize}
@@ -129,9 +125,8 @@ academico de los estudiantes de la universidad.
 \end{itemize}
 
 \section{Herramientas}
-Si bien, el fin que nos justifica va mas allá de lo que tecnologicamente sería relevante, deberemos
-mencionar algo del software que ayuda a nuestros propositos, cabe recalcar encarecidamente que lo
-que intentamos hacer aqui, va mas a allá del software usado, construido, o necesitado.
+Si bien, el fin que nos justifica va mas allá de lo que tecnológicamente sería relevante, deberemos
+mencionar algo del software que ayuda a nuestros propósitos.
 
 \subsection{Herramientas para desarrollo}
 En el cuadro~\ref{herramientas_desarrollo} se detallan las herramientas utilizadas en el desarrollo
@@ -139,12 +134,11 @@ de nuestra herramienta.
 
 \begin{table}
 \begin{tabular}{l|l}
-Herramienta & Descripción \\
+Herramienta & Descripción                                                  \\
 \hline
-git & Manejo de control de versiones. \\
-& Asociada al sitio github.com (repositorio de software publico). \\
-netbeans & IDE de desarrollo. \\
-
+git         & Manejo de control de versiones.                                \\
+            & Asociada al sitio github.com (repositorio de software publico). \\
+netbeans    & IDE de desarrollo.                                               \\
 \end{tabular}
 \caption{Herramientas que apoyan al desarrollo.}
 \label{herramientas_desarrollo}
@@ -157,17 +151,19 @@ que se hizo la evaluación del desempeño adecuado.
 
 \begin{table}
 \begin{tabular}{l|r|l}
-Herramienta    & Versión & Descripción                                  \\
+Herramienta    & Versión & Descripción                            \\
 \hline
-Apache         &     2.0 & Servidor de aplicaciones web.                \\
-MySQL          &     5.0 & Servidor de base de datos.                   \\
-Cron           &     3.0 & Demonio para tareas automaticas.             \\
-               &         & Necesario para tareas de mantenimiento e     \\
-               &         & indexado.                                    \\
-PHP            &     5.3 & Lenguage de programación.                    \\
-ImageMagick    &     6.5 & Libreria para manipulación de imagenes.      \\
-jQuery         &     1.6 & Libreria para desarrollo en JavaScript.      \\
-Zend Framework &    1.11 & Conjunto de librerias para aplicaciones web. \\
+Apache         &     2.2 & Servidor de aplicaciones web.            \\
+vsFTPd         &   2.3.5 & Servidor FTP (transferencia de ficheros). \\
+MySQL          &     5.1 & Servidor de base de datos.                 \\
+pam\_MySQL     &     0.7 & Modulo de autentificación para MySQL.       \\
+Cron           &       - & Demonio para tareas automáticas.             \\
+               &         & Necesario para tareas de mantenimiento e      \\
+               &         & indexado.                                      \\
+PHP            &     5.3 & Lenguaje de programación.                       \\
+ImageMagick    &     6.5 & Liberia para manipulación de imágenes.           \\
+jQuery         &     1.6 & Liberia para desarrollo en JavaScript.            \\
+Zend Framework &    1.11 & Conjunto de librerías para aplicaciones web.       \\
 \end{tabular}
 \caption{Herramientas necesarias para la ejecución.}
 \label{herramientas_despliegue}
@@ -177,29 +173,29 @@ En el cuadro~\ref{herramientas_zend} se muestran los paquetes de la libreria zen
 
 \begin{table}
 \begin{tabular}{l|l}
-Paquete & Descripción \\
+Paquete               & Descripción                                \\
 \hline
-Zend\_Application     & Librería encargada del arranque y control de    \\
-					  & rutas en la aplicación. \\
-Zend\_Auth            & Sistema encargado de la autentificación en la   \\
-					  & aplicación. \\
-Zend\_Controller      & Librería encargada del control del flujo de     \\
-				      & informacion. \\
-Zend\_Db              & Librería de acceso a base de datos. \\
-Zend\_Form            & Generador de formularios con filtraje y         \\
-					  & validación de sus contenidos. \\
-Zend\_Search\_Lucene  & Motor de búsqueda. \\
-Zend\_Translate       & Método para internacionalización (i18n) de la   \\
-				      & aplicación. \\
-Zend\_View            & Sistema de plantillas. \\
+Zend\_Application     & Librería encargada del arranque y control de \\
+                      & rutas en la aplicación.                       \\
+Zend\_Auth            & Sistema encargado de la autentificación en la  \\
+                      & aplicación.                                     \\
+Zend\_Controller      & Librería encargada del control del flujo de      \\
+                      & información.                                      \\
+Zend\_Db              & Librería de acceso a base de datos.                \\
+Zend\_Form            & Generador de formularios con filtraje y             \\
+                      & validación de sus contenidos.                        \\
+Zend\_Search\_Lucene  & Motor de búsqueda.                                    \\
+Zend\_Translate       & Método para internacionalización (i18n) de la          \\
+                      & aplicación.                                             \\
+Zend\_View            & Sistema de plantillas.                                   \\
 \end{tabular}
 \caption{Paquetes de Zend utilizados.}
 \label{herramientas_zend}
 \end{table}
 
-\section{Metodo o Técnica}
-Inicialmente se utilizó un metodo clasico de desarrollo incremental, de\-sa\-rro\-llan\-do la
-base que satisfaga las funciones mas basicas, de ahi partir en dos caminos; ya sea especializando
+\section{Método o Técnica}
+Inicialmente se utilizó un método clásico de desarrollo incremental, de\-sa\-rro\-llan\-do la
+base que satisfaga las funciones mas básicas, de ahí partir en dos caminos; ya sea especializando
 cada vez mas las funciones existentes, y por el otro lado implementar nuevas funcionalidades.
 
 \subsection{Recursos definidos}
@@ -208,47 +204,50 @@ recursos se describen en el cuadro~\ref{recursos_actuales}.
 
 \begin{table}
 \begin{tabular}{l|l}
-Recurso & Descripción \\
+Recurso     & Descripción                                                 \\
 \hline
-Usuario     & Representación de una persona real, que tiene asignada    \\
-            & multiples funciones que puede realizar en el sistema.     \\
-Libro       & Representación de un archivo digital a ser compartido.    \\
+Usuario     & Representación de una persona real, que tiene asignada        \\
+            & múltiples funciones que puede realizar en el sistema.          \\
+Libro       & Representación de un archivo digital a ser compartido.          \\
 Publicación & Representación de un \emph{libro} que ya posee meta-información. \\
-Catalogo    & Agrupación de libros que comparten algun criterio subjetivo \\
-		    & en comun.                                                 \\
-Etiqueta    & Palabra clave que constituye un criterio de agrupacion.   \\
+Catalogo    & Agrupación de libros que comparten algún criterio subjetivo       \\
+            & en común.                                                          \\
+Etiqueta    & Palabra clave que constituye un criterio de agrupación.             \\
 \end{tabular}
 \caption{Recursos establecidos para el sistema.}
 \label{recursos_actuales}
 \end{table}
 
 \subsection{Funciones establecidas}
-Las funciones que ya se tienen, y los modulos encargados, se detallan en el 
+Las funciones que ya se tienen, y los módulos encargados, se detallan en el 
 cuadro~\ref{funciones_actuales}.
 
 \begin{table}
 \begin{tabular}{l|l}
-Módulo & Función \\
+Módulo   & Función                                                     \\
 \hline
-Users    & Crear \emph{usuarios} del sistema.                           \\
-	     & Mostrar los \emph{usuarios} actuales del sistema. 			\\
-Auth     & Permitir a \emph{usuarios} del sistema autentificarse.       \\
-Settings & Permitir a \emph{usuarios} cambiar algunas de sus propiedades \\
-	     & establecidas. \\ 
-Search   & Buscar \emph{libros} según algún criterio. 					\\
-Catalogs & Navegar entre los \emph{catalogos}.		 					\\
-	     & Crear \emph{catalogos} según algun criterio de agrupación.   \\
-	     & Crear \emph{sub-catalogos} según algun criterio de especialización. \\
-Tags     & Ver las \emph{etiquetas} creadas en el sistema. 				\\
-Books    & Explorar entre colecciones de \emph{libros}. 				\\
-	     & Generar miniaturas de un \emph{libro} especifico.			\\
-	     & Clasificar un \emph{libro} dentro de un \emph{catalogo}.     \\
-	     & Descargar un \emph{libro}.									\\
-	     & Publicar un \emph{libro}.                                    \\
-	     & Encontrar \emph{publicaciones} que no respecten a un \emph{libro}. \\
-	     & Exportar toda la meta-información que se posee sobre las     \\
-	     & \emph{publicaciones}. \\
-	     & Importar meta-información de cualquier fuente externa.       \\
+Users    & - Crear \emph{usuarios} del sistema.                          \\
+         & - Mostrar los \emph{usuarios} actuales del sistema.            \\
+Auth     & - Permitir a \emph{usuarios} del sistema autentificarse.        \\
+Settings & - Permitir a \emph{usuarios} cambiar algunas de sus propiedades  \\
+         & establecidas.                                                     \\ 
+Search   & - Buscar \emph{libros} según algún criterio.                       \\
+Catalogs & - Navegar entre los \emph{catalogos}.                               \\
+         & - Crear \emph{catalogos} según algún criterio de agrupación.         \\
+         & - Crear \emph{sub-catalogos} según algún criterio de especialización. \\
+Tags     & - Ver las \emph{etiquetas} creadas en el sistema.                      \\
+Books    & - Explorar entre colecciones de \emph{libros}.                          \\
+         & - Generar miniaturas de un \emph{libro} especifico.                      \\
+         & - Clasificar un \emph{libro} dentro de un \emph{catalogo}.                \\
+         & - Descargar un \emph{libro}.                                               \\
+         & - Publicar un \emph{libro}.                                                 \\
+         & - Encontrar \emph{publicaciones} que respecten a un \emph{libro}.            \\
+         & - Exportar toda la meta-información que se posee sobre las                    \\
+         & \emph{publicaciones}.                                                          \\
+         & - Importar meta-información de cualquier fuente externa.                        \\
+FTP      & - Ver la colección de \emph{libros} desde una servidor FTP.                      \\
+         & - Compartir \emph{libros} con la aplicación por medio de un servidor              \\
+         & FTP autentificado.                                                                 \\
 \end{tabular}
 \caption{Funciones cubiertas por el sistema.}
 \label{funciones_actuales}
