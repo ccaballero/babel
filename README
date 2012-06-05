@@ -1,21 +1,47 @@
-###############################################################################
+#
+#----\ |_  _.|_  _ | /| / \ 
+#----/ |_)(_||_)(/_|  |o\_/ 
+#
+# Babel version 1.0
 
-Babel version 1.0
+## Developers ##
+#      Carlos Caballero B. (cijkb.j@gmail.com)
 
-== Developer ==
-    Carlos Caballero B. (cijkb.j@gmail.com)
+## Dependencies ##
+#      PHP 5.3 or higher.
+#      Web Server (with mod_rewrite and gd).
+#      Zend Framework 1.8.3 or higher.
+#      MySQL 5.0 or higher.
 
-== Dependencies ==
-    PHP 5.3 or higher.
-    Web Server (with mod_rewrite and gd).
-    Zend Framework 1.8.3 or higher.
-    MySQL 5.0 or higher.
+## License ##
+#      GNU GPL v3.0.
 
-== License ==
-    GNU GPL v3.0.
+## Description ##
+#      A free and open source site for share pdf documents.
 
-== Description ==
-    A free and open source site for share pdf documents.
+## Instalation ##
 
-== Instalation ==
-     
+# Copy the gitignore-dist to .ignore (only need for developers)
+cp gitignore-dist .gitignore
+
+# Copy the application-dist.ini to application.ini and review the parameters
+# Don't forget to set the database values
+cp application/configs/application-dist.ini application/configs/application.ini
+
+# Install the tables and default data (install_en or install_es)
+cd data/sql/
+USER=$1; DATABASE=$2; PASSWORD=$3
+mysql --user=$USER --database=$2 --password=$3 --default-character-set=utf8 < install_es.sql
+cd -
+
+# Put permissions to folders
+chmod 777 data/lucene                             # Search engine
+chmod 777 data/upload                             # Upload directory
+chmod 777 public/media/img/thumbnails/users       # Thumbs for users
+chmod 777 public/media/img/thumbnails/catalogs    # Thumbs for catalogs
+chmod 777 public/media/img/thumbnails/books       # Thumbs for books
+
+# Execute the first indexation
+cd shell/
+php babel.php --index
+cd -

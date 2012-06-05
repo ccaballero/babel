@@ -141,10 +141,17 @@ a.list.active, a.list.hover {
     font-size: 1.8em;
     padding: 0em 0em 0.3em 0em;
     text-shadow: 0.1em 0.1em 0.1em #888888;
+    border-bottom: 2px solid #000000;
 }
 
 #main h2 {
-    font-size: 1.7em;
+    font-size: 1.5em;
+    padding: 0.36em 0em;
+    border-bottom: 1px solid #000000;
+}
+
+#main h3 {
+    font-size: 1.2em;
     padding: 0.36em 0em;
 }
 
@@ -182,13 +189,13 @@ a.list.active, a.list.hover {
     font-size: 1.18em;
 }
 
-#column3 h1, #column3 h2 {
+#column3 h1, #column3 h2, #column3 h3 {
     text-shadow: 0.12em 0.12em 0.15em #ffffff;
     color: #000000;
 }
 
-#column3 h1, #column3 h2, #column3 p, #column3 span {
-    margin: 0.4em 0.2em 0.4em 1.0em;
+#column3 h1, #column3 h2, #column3 h3, #column3 p, #column3 span {
+    margin: 0.4em 0.6em 0.4em 1.0em;
 }
 
 #column3 p, #column3 span, #column3 blockquote {
@@ -377,7 +384,6 @@ div.tool-panel input[type="submit"] {
 }
 
 #list .element:hover {
-    cursor: pointer;
     background: #303030;
 }
 
@@ -518,4 +524,9 @@ div.tag {
 
 .user > img, .catalog > .photo > img {
     height: 100px;
+}
+
+.img {
+    text-align: center;
+    margin: 1.0em 0em 2.0em 0em;
 }

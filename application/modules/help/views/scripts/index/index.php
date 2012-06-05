@@ -5,7 +5,7 @@
         <a class="list <?php echo ($this->page == $element) ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => $element), 'help_manual') ?>"><?php echo $this->translate->_(ucfirst($element)) ?></a>
     <?php } ?>
     </div>
-    <div id="column3">
+    <div id="column3" class="help" style="background: #f0f0f0;">
         <?php if (in_array($this->page, $manuals)) { ?>
             <?php $script = array_search($this->page, $manuals) . '_' . $this->escape($this->page) . '/' . $this->locale . '.php'; ?>
             <?php if (file_exists(APPLICATION_PATH . '/../docs/manual/' . $script)) { ?>

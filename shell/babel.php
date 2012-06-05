@@ -32,13 +32,24 @@ class Shell_Babel extends Yachay_Console
                 if ($book->inDisk()) {
                     $doc = new Zend_Search_Lucene_Document();
 
+                    // Common terms
                     $doc->addField(Zend_Search_Lucene_Field::unIndexed('book', $book->hash));
-                    $doc->addField(Zend_Search_Lucene_Field::Text('title', $book->title, 'utf-8'));
-                    $doc->addField(Zend_Search_Lucene_Field::Text('author', $book->author, 'utf-8'));
+
+                    // English terms
+                    $doc->addField(Zend_Search_Lucene_Field::Text('title',     $book->title, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('author',    $book->author, 'utf-8'));
                     $doc->addField(Zend_Search_Lucene_Field::Text('publisher', $book->publisher, 'utf-8'));
-                    $doc->addField(Zend_Search_Lucene_Field::Text('language', $book->language, 'utf-8'));
-                    $doc->addField(Zend_Search_Lucene_Field::Text('year', $book->year));
-                    $doc->addField(Zend_Search_Lucene_Field::Text('filename', $book->file));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('language',  $book->language, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('year',      $book->year));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('filename',  $book->file));
+
+                    // Spanistan terms
+                    $doc->addField(Zend_Search_Lucene_Field::Text('titulo',    $book->title, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('autor',     $book->author, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('editorial', $book->publisher, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('idioma',    $book->language, 'utf-8'));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('año',       $book->year));
+                    $doc->addField(Zend_Search_Lucene_Field::Text('archivo',   $book->file));
 
                     $index->addDocument($doc);
                 }

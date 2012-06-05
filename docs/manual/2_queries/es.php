@@ -1,179 +1,354 @@
-<h1>Lenguaje de consulta</h1>
-<span class="bold">fuente:</span> <a href="http://framework.zend.com/manual/en/zend.search.lucene.query-language.html">http://framework.zend.com/manual/en/zend.search.lucene.query-language.html</a>
+<h1>Busqueda de libros</h1>
 
-<h2>Terms</h2>
+<p>
+La pagina principal presenta un campo de texto donde usted puede ingresar algún
+criterio de busqueda.
+</p>
+<div class="img">
+<img src="/media/img/help/buscador.png" alt="Buscador" title="Buscador" />
+</div>
+<p>
+De ahi podrá ver los resultados asociados a los documentos que se encuentran en
+el sistema.
+</p>
+<div class="img">
+<img src="/media/img/help/resultados.png" alt="Resultados" title="Resultados" />
+</div>
+<p>
+Si hace click sobre algun documento entre los resultados, se desplegará la
+información relacionada a este.
+</p>
+<div class="img">
+<img src="/media/img/help/detalles-libro.png"
+     alt="Detalles del libro" title="Detalles del libro" />
+</div>
+<p>
+Entre los detalles del documento pueden apreciarse dos iconos. El icono 
+<img src="/media/img/icons/disk.png" alt="Descargar" title="Descargar" />
+descargará el libro; y el icono
+<img src="/media/img/icons/tag_blue.png" alt="Descargar" title="Descargar" />
+conduce a la pagina para catalogar el libro.
+</p>
 
-<p>A query is broken up into terms and operators. There are three types of terms: Single Terms, Phrases, and Subqueries.</p>
-<p>A Single Term is a single word such as "test" or "hello".</p>
-<p>A Phrase is a group of words surrounded by double quotes such as "hello dolly".</p>
-<p>A Subquery is a query surrounded by parentheses such as "(hello dolly)".</p>
-<p>Multiple terms can be combined together with boolean operators to form complex queries (see below).</p>
+<h2>Lenguaje de consulta</h2>
+<p>
+Babel utiliza el motor de busqueda
+<a href="http://lucene.apache.org/core/">Lucene</a> implementado por las
+librerias Zend, esta provee al usuario un conjunto de funciones adicionales.
+A continuación intentamos traducir la documentación al respecto a este motor de
+busqueda cuya fuente original se encuentra en
+<a href="http://framework.zend.com/manual/en/zend.search.lucene.query-language.html">
+Zend Search Lucene Query-Language</a>. Para conocer los detalles respecto a la
+implementación de los campos y la forma de busqueda especifica para Babel,
+refierase a la pagina
+<a href="<?php echo $this->url(array('page' => 'searcher'), 'help_manual') ?>">
+Funciones de busqueda</a>.
+</p>
 
-<h2>Fields</h2>
+<h3>Terminos</h3>
+<p>
+Una consulta está compuesta de terminos y operadores. Existen tres tipos de
+terminos: terminos simples, frases y subconsultas.
+</p>
+<p>
+Un termino simple es un palabra suelta, como "prueba" o "hola".
+</p>
+<p>
+Una frase es un grupo de palabras encerradas entre comillas dobles, como
+"hola dolly".
+</p>
+<p>
+Una subconsulta es un consulta encerrada entre parentesis, como "(hola dolly)".
+</p>
+<p>
+Multiples terminos pueden ser combinados entre si por medio de operadores, para
+formar consultas complejas (ver mas abajo).
+</p>
 
-<p>You can search specific fields by typing the field name followed by a colon ":" followed by the term you are looking for.</p>
-<p>As an example, let's assume a Lucene index contains two fields- title and text- with text as the default field. If you want to find the document entitled "The Right Way" which contains the text "don't go this way", you can enter:</p>
+<h3>Campos</h3>
+<p>
+Se pueden buscar determinados campos, especificando el nombre del campo seguido
+por dos puntos ":", seguido por el termino que estas buscando.
+</p>
+<p>
+Como ejemplo, asumiremos que el motor contiene dos campos: "titulo" y "texto"
+con "texto" como campo por omision. Si tu quieres buscar el documento titulado
+"La manera correcta" que contenga el texto "de esta manera", tu puedes escribir:
+</p>
+<blockquote>titulo:"La manera correcta" AND texto:"de esta manera"</blockquote>
+<p>ó</p>
+<blockquote>titulo:"La manera correcta" AND "de esta manera"</blockquote>
+<p>
+Como "texto" es el campo por omisión, el indicador de campo no es requerido.
+</p>
+<p>
+Nota: El campo es solo valido para el termino, frase o subconsulta que este
+directamente precedido, por ejemplo:
+</p>
+<blockquote>titulo:La manera correcta</blockquote>
+<p>
+Unicamente buscará "La" en el campo titulo. Ademas de buscar "manera" y
+"correcta" en el campo por omisión (si el campo esta definido) o en todos los
+campos indexados (si el campo por omisión no existiese).
+</p>
 
-<blockquote>title:"The Right Way" AND text:go</blockquote>
-<p>or</p>
-<blockquote>title:"Do it right" AND go</blockquote>
-
-<p>Because "text" is the default field, the field indicator is not required.</p>
-<p>Note: The field is only valid for the term, phrase or subquery that it directly precedes, so the query</p>
-
-<blockquote>title:Do it right</blockquote>
-
-<p>Will only find "Do" in the title field. It will find "it" and "right" in the default field (if the default field is set) or in all indexed fields (if the default field is set to NULL).</p>
-
-<h2>Wildcards</h2>
-
-<p>Lucene supports single and multiple character wildcard searches within single terms (but not within phrase queries).</p>
-<p>To perform a single character wildcard search use the "?" symbol.</p>
-<p>To perform a multiple character wildcard search use the "*" symbol.</p>
-<p>The single character wildcard search looks for string that match the term with the "?" replaced by any single character. For example, to search for "text" or "test" you can use the search:</p>
-
+<h3>Comodines</h3>
+<p>
+Lucene soporta caracteres comodín simples y multiples en terminos simples
+(pero no en frases).
+</p>
+<p>
+Para un comodín de un caracter use el simbolo "?".
+</p>
+<p>
+Para un comodín de varios caracteres utilice el simbolo "*".
+</p>
+<p>
+El comodín "?" intenta reemplazar cualquier caracter simple. Por ejemplo, para
+buscar "text" ó "test" puedes escribir:
+</p>
 <blockquote>te?t</blockquote>
-
-<p>Multiple character wildcard searches look for 0 or more characters when matching strings against terms. For example, to search for test, tests or tester, you can use the search:</p>
-
+<p>
+El comodín "*" intenta reemplazar por 0 o más caracteres. Por ejemplo, para
+buscar "test", "tests" ó "tester", puedes escribir:
+</p>
 <blockquote>test*</blockquote>
-
-<p>You can use "?", "*" or both at any place of the term:</p>
-
+<p>
+Tambien se puede usar "?", "*", o ambos en cualquier lugar del termino:
+</p>
 <blockquote>*wr?t*</blockquote>
+<p>
+Buscará por "write", "wrote", "written", "rewrite", "rewrote" y cualquier otra
+coincidencia.
+</p>
 
-<p>It searches for "write", "wrote", "written", "rewrite", "rewrote" and so on.</p>
+<h3>Modificadores</h3>
+<p>
+Lucene soporta modificadores para proveer un amplio rango de opciones de
+busqueda.
+</p>
+<p>
+El modificador "~" puede ser usado para busquedas difusas en terminos simples.
+</p>
 
-<h2>Term Modifiers</h2>
-
-<p>Lucene supports modifying query terms to provide a wide range of searching options.</p>
-<p>"~" modifier can be used to specify proximity search for phrases or fuzzy search for individual terms.</p>
-
-<h2>Range Searches</h2>
-
-<p>Range queries allow the developer or user to match documents whose field(s) values are between the lower and upper bound specified by the range query. Range Queries can be inclusive or exclusive of the upper and lower bounds. Sorting is performed lexicographically.</p>
-
+<h3>Rangos</h3>
+<p>
+Las busquedas por rango permiten emparejar documentos o campos entre un termino
+inferior y uno superior. Estos dependerán de su posicion lexicografica. Por
+ejemplo:
+</p>
 <blockquote>mod_date:[20020101 TO 20030101]</blockquote>
-
-<p>This will find documents whose mod_date fields have values between 20020101 and 20030101, inclusive. Note that Range Queries are not reserved for date fields. You could also use range queries with non-date fields:</p>
-
-<blockquote>title:{Aida TO Carmen}</blockquote>
-
-<p>This will find all documents whose titles would be sorted between Aida and Carmen, but not including Aida and Carmen.</p>
-<p>Inclusive range queries are denoted by square brackets. Exclusive range queries are denoted by curly brackets.</p>
-<p>If field is not specified then <span class="classname">Zend_Search_Lucene</span> searches for specified interval through all fields by default.</p>
-
+<p>
+Buscará documentos cuyo campo "mod_date" comprenda los valores entre
+20020101 y 20030101, incluyendo a estos. Notese que las busquedas por rango no
+estan reservadas a campos de tipo fecha. Se pueden también utilizar en otros
+tipos de campos:
+</p>
+<blockquote>titulo:{Aida TO Carmen}</blockquote>
+<p>
+Esto buscará todos los documentos en los que el campo "titulo" esten
+comprendidos entre Aida y Carmen, incluyendo a estos valores.
+</p>
+<p>
+Los rangos inclusivos estan denotados entre corchetes ([, ]). los rangos
+exclusivos estan denotados entre llaves ({, }).
+</p>
+<p>
+Si el campo no esta especificado, entonces se buscará entre todos los campos por
+omisión.
+</p>
 <blockquote>{Aida TO Carmen}</blockquote>
 
-<h2>Fuzzy Searches</h2>
-
-<p>Zend_Search_Lucene as well as Java Lucene supports fuzzy searches based on the Levenshtein Distance, or Edit Distance algorithm. To do a fuzzy search use the tilde, "~", symbol at the end of a Single word Term. For example to search for a term similar in spelling to "roam" use the fuzzy search:</p>
-
+<h3>Busquedas difusas</h3>
+<p>
+Lucene soporta busquedas difusas basadas en la
+<a href="http://es.wikipedia.org/wiki/Distancia_de_Levenshtein">Distancia de
+Levenshtein</a>. Para realizar busquedas difusas use el caracter "~", al final
+del termino simple. Por ejemplo para buscar por un termino similar a "roam"
+escriba:
+</p>
 <blockquote>roam~</blockquote>
-
-<p>This search will find terms like foam and roams. Additional (optional) parameter can specify the required similarity. The value is between 0 and 1, with a value closer to 1 only terms with a higher similarity will be matched. For example:</p>
-
+<p>
+Esta buscará terminos como foam y roams. Adicionalmente puede especificar el
+grado de similaridad. El valor debe estar entre 0 y 1, con 1 como el valor para
+la mayor similaridad. Por ejemplo:
+</p>
 <blockquote>roam~0.8</blockquote>
+<p>
+El valor por omisión utilizado si el parametro no fue definido es 0.5.
+</p>
 
-<p>The default that is used if the parameter is not given is 0.5.</p>
-
-<h2>Proximity Searches</h2>
-
-<p>Lucene supports finding words from a phrase that are within a specified word distance in a string. To do a proximity search use the tilde, "~", symbol at the end of the phrase. For example to search for a "Zend" and "Framework" within 10 words of each other in a document use the search:</p>
-
+<h3>Busquedas por proximidad</h3>
+<p>
+Lucene soporta la busqueda de palabras en una frase que estan a una determinada
+distancia. Para realizar una busqueda por proximidad use el simbolo "~", al
+final de la frase. Por ejemplo para buscar por "Zend" y "Framework" con
+10 palabras entre ellas, escriba:
+</p>
 <blockquote>"Zend Framework"~10</blockquote>
 
-<h2>Boosting a Term</h2>
-
-<p>Java Lucene and <span class="classname">Zend_Search_Lucene</span> provide the relevance level of matching documents based on the terms found. To boost the relevance of a term use the caret, "^", symbol with a boost factor (a number) at the end of the term you are searching. The higher the boost factor, the more relevant the term will be.</p>
-<p>Boosting allows you to control the relevance of a document by boosting individual terms. For example, if you are searching for</p>
-
+<h3>Relevancia de los terminos</h3>
+<p>
+Lucene permite establecer el nivel de relevancia en la busqueda de documentos
+segun los terminos de busqueda. Para elevar la relevancia de un termino,
+se utiliza el simbolo "^", seguido de un factor (un numero) al final del
+termino de busqueda. Cuanto mas alto sea el factor de elevación, mas relevante
+será el termino en la busqueda.
+</p>
+<p>
+Esto permite controlar el grado de relevancia del termino. Por ejemplo, si tu
+estas buscando:
+</p>
 <blockquote>PHP framework</blockquote>
-
-<p>and you want the term "PHP" to be more relevant boost it using the ^ symbol along with the boost factor next to the term. You would type:</p>
-
+<p>
+y quieres que el termino "PHP" sea mas relevante, se usa el simbolo ^ junto al
+factor de relevancia.
+</p>
 <blockquote>PHP^4 framework</blockquote>
-
-<p>This will make documents with the term <acronym class="acronym">PHP</acronym> appear more relevant. You can also boost phrase terms and subqueries as in the example:</p>
-
+<p>
+Esto hará que los documentos con el termino "PHP" tengan mayor relevancia.
+Tu puedes tambien elevar la relevancia de una frase o subconsulta, como en el
+siguiente ejemplo:
+</p>
 <blockquote>"PHP framework"^4 "Zend Framework"</blockquote>
+<p>
+Por omisión, el factor de relevancia es 1. Ademas tal factor debe ser positivo,
+pero puede ser menor que 1 (por ejemplo 0.2).
+</p>
 
-<p>By default, the boost factor is 1. Although the boost factor must be positive, it may be less than 1 (e.g. 0.2).</p>
+<h3>Operaciones logicas</h3>
+<p>
+Los operadores logicos permiten combinar terminos. Lucene soporta los operadores
+"AND", "+", "OR", "NOT" y "-".
+</p>
+<p>
+Los operadores AND, OR, y NOT, como tambien los operadores "+", "-" definen dos
+diferentes estilos de construccion de consultas. La implementación de Lucene
+utilizada no permite combinar tales estilos.
+</p>
+<p>
+Si el estilo AND/OR/NOT es utilizado, entonces los operadores AND ó OR deben
+estar presentes entre todos los terminos. Y cada termino puede estar precedido
+por el operador NOT. El operador AND tiene mayor precedencia que el operador OR.
+</p>
 
-<h2>Boolean Operators</h2>
-
-<p>Boolean operators allow terms to be combined through logic operators. Lucene supports AND, "+", OR, NOT and "-" as Boolean operators. Java Lucene requires boolean operators to be ALL CAPS. Zend_Search_Lucene does not.</p>
-<p>AND, OR, and NOT operators and "+", "-" defines two different styles to construct boolean queries. Unlike Java Lucene, Zend_Search_Lucene doesn't allow these two styles to be mixed.</p>
-<p>If the AND/OR/NOT style is used, then an AND or OR operator must be present between all query terms. Each term may also be preceded by NOT operator. The AND operator has higher precedence than the OR operator. This differs from Java Lucene behavior.</p>
-
-<h2>AND</h2>
-
-<p>The AND operator means that all terms in the "AND group" must match some part of the searched field(s).</p>
-<p>To search for documents that contain "PHP framework" and "Zend Framework" use the query:</p>
-
+<h3>AND</h3>
+<p>
+El operador AND dice que todos los terminos en el grupo deben emparejar alguna
+parte de los campos de busqueda.
+</p>
+<p>
+Para buscar documentos que contengan "PHP framework" y "Zend Framework" use la
+siguiente consulta:
+</p>
 <blockquote>"PHP framework" AND "Zend Framework"</blockquote>
 
-<h2>OR</h2>
-
-<p>The OR operator divides the query into several optional terms.</p>
-<p>To search for documents that contain "PHP framework" or "Zend Framework" use the query:</p>
-
+<h3>OR</h3>
+<p>
+El operador OR divide la consulta en muchos terminos opcionales.
+</p>
+<p>
+Para buscar los documentos que contengan "PHP framework" ó "Zend Framework" use
+la siguiente consulta:
+</p>
 <blockquote>"PHP framework" OR "Zend Framework"</blockquote>
 
-<h2>NOT</h2>
-
-<p>The NOT operator excludes documents that contain the term after NOT. But an "AND group" which contains only terms with the NOT operator gives an empty result set instead of a full set of indexed documents.</p>
-<p>To search for documents that contain "PHP framework" but not "Zend Framework" use the query:</p>
-
+<h3>NOT</h3>
+<p>
+El operador NOT excluye los documentos que contengan tal termino. Pero si
+un grupo de terminos unidos por un operador AND solo contienen terminos con el
+operador NOT, este resultará vacio, en lugar de resultar en todos los documentos
+indexados.
+</p>
+<p>
+Para buscar documentos que contengan "PHP framework" pero que no contengan 
+"Zend Framework" use la siguiente consulta:
+</p>
 <blockquote>"PHP framework" AND NOT "Zend Framework"</blockquote>
 
-<h2>&amp;&amp;, ||, and ! operators</h2>
+<h3>Operadores &&, ||, y !</h3>
+<p>
+&&, ||, y ! pueden ser utilizados en lugar de la notación AND, OR, y NOT.
+</p>
 
-<p>&amp;&amp;, ||, and ! may be used instead of AND, OR, and NOT notation.</p>
-
-<h2>+</h2>
-
-<p>The "+" or required operator stipulates that the term after the "+" symbol must match the document.</p>
-<p>To search for documents that must contain "Zend" and may contain "Framework" use the query:</p>
-
+<h3>+</h3>
+<p>
+El simbolo "+" o operador "requerido", estipula que el termino debe estar en el
+documento.
+</p>
+<p>
+Para buscar por los documentos que deben contener "Zend" y que pueden contener
+"Framework" use la siguiente consulta:
+</p>
 <blockquote>+Zend Framework</blockquote>
 
-<h2>-</h2>
-
-<p>The "-" or prohibit operator excludes documents that match the term after the "-" symbol.</p>
-<p>To search for documents that contain "PHP framework" but not "Zend Framework" use the query:</p>
-
+<h3>-</h3>
+<p>
+El simbolo "-" o operados "prohibido", excluye los documentos que emparejan con
+tal termino.
+</p>
+<p>
+Para buscar por los documentos que contienen "PHP framework" pero no
+"Zend Framework" use la siguiente consulta:
+</p>
 <blockquote>"PHP framework" -"Zend Framework"</blockquote>
 
-<h2>No Operator</h2>
-
-<p>If no operator is used, then the search behavior is defined by the "default boolean operator".</p>
-<p>This is set to 'OR' by default.</p>
-<p>That implies each term is optional by default. It may or may not be present within document, but documents with this term will receive a higher score.</p>
-<p>To search for documents that requires "PHP framework" and may contain "Zend Framework" use the query:</p>
-
+<h3>Terminos sin operador</h3>
+<p>
+Si ningun operador es utilizado, entonces el comportamiento de busqueda estará
+definido por el operador logico por omisión. Este es el operador "OR".
+</p>
+<p>
+Lo que implica que cada termino es opcional. Este puede estar o no presente en
+el documento, pero los documentos que posean el termino poseerán mayor
+relevancia.
+</p>
+<p>
+Para buscar los documentos que tengan "PHP framework" y que pueden contener
+"Zend Framework" use la siguiente consulta:
+</p>
 <blockquote>+"PHP framework" "Zend Framework"</blockquote>
 
-<h2>Grouping</h2>
-
-<p>Java Lucene and <span class="classname">Zend_Search_Lucene</span> support using parentheses to group clauses to form sub queries. This can be useful if you want to control the precedence of boolean logic operators for a query or mix different boolean query styles:</p>
-
+<h3>Grupos</h3>
+<p>
+Lucene soporta el uso de parentesis para agrupar clausulas que conforman una
+subconsulta. Esto puede ser util si quieres controlar la precedencia de los
+operadores logicos para una consulta o si quisieras mezclar varios estilos de
+busqueda con operadores logicos:
+</p>
 <blockquote>+(framework OR library) +php</blockquote>
+<p>
+Lucene soporta subconsultas anidadas hasta cualquier nivel.
+</p>
 
-<p>Zend_Search_Lucene supports subqueries nested to any level.</p>
+<h3>Grupos en campos</h3>
+<p>
+Lucene tambien soporta el uso de parentesis para agrupar multiples clausulas en
+un campo.
+</p>
+<p>
+Para buscar los documentos cuyo campo "titulo" contenga las palabras
+"return" y la frase "pink panther" use la siguiente consulta:
+</p>
+<blockquote>titulo:(+return +"pink panther")</blockquote>
 
-<h2>Field Grouping</h2>
-
-<p>Lucene also supports using parentheses to group multiple clauses to a single field.</p>
-<p>To search for a title that contains both the word "return" and the phrase "pink panther" use the query:</p>
-
-<blockquote>title:(+return +"pink panther")</blockquote>
-
-<h2>Escaping Special Characters</h2>
-
-<p>Lucene supports escaping special characters that are used in query syntax. The current list of special characters is:</p>
-<p>+ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \</p>
-<p>+ and - inside single terms are automatically treated as common characters.</p>
-<p>For other instances of these characters use the \ before each special character you'd like to escape. For example to search for (1+1):2 use the query:</p>
-
+<h3>Escapando caracteres especiales</h3>
+<p>
+Lucene puede escapar los caracteres especiales utilizados en la sintaxis de la
+consulta. Los caracteres especiales son:
+</p>
+<p>
++ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
+</p>
+<p>
+Los operadores "+" y "-" utilizados dentro de terminos simples son tratados
+automaticamente como caracteres ordinarios.
+</p>
+<p>
+Para escapar los caracteres especiales use el simbolo "\" antes del caracter
+que tu desees escapar. Por ejemplo para buscar el termino (1+1):2 use la siguiente
+consulta:
+</p>
 <blockquote>\(1\+1\)\:2</blockquote>
+
+<p>&nbsp;</p>
