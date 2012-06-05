@@ -5,22 +5,25 @@ La pagina principal presenta un campo de texto donde usted puede ingresar algún
 criterio de busqueda.
 </p>
 <div class="img">
-<img src="/media/img/help/buscador.png" alt="Buscador" title="Buscador" />
+<img src="/media/img/help/search.png" alt="Buscador" title="Buscador" />
+<p>Campo de texto para busqueda de documentos</p>
 </div>
 <p>
 De ahi podrá ver los resultados asociados a los documentos que se encuentran en
 el sistema.
 </p>
 <div class="img">
-<img src="/media/img/help/resultados.png" alt="Resultados" title="Resultados" />
+<img src="/media/img/help/results.png" alt="Resultados" title="Resultados" />
+<p>Campo de texto y su resultado despues de una busqueda</p>
 </div>
 <p>
 Si hace click sobre algun documento entre los resultados, se desplegará la
 información relacionada a este.
 </p>
 <div class="img">
-<img src="/media/img/help/detalles-libro.png"
+<img src="/media/img/help/book-details.png"
      alt="Detalles del libro" title="Detalles del libro" />
+<p>Detalles de un documento de la pagina de resultados</p>
 </div>
 <p>
 Entre los detalles del documento pueden apreciarse dos iconos. El icono 
