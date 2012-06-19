@@ -33,9 +33,9 @@ class Users_IndexController extends Babel_Action
                 $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('User %s was created'), $user->fullname));
                 $this->_helper->redirector('index', 'index', 'users');
 
-                // FTP Assignation
-                $ftp = Zend_Registry::get('Config')->babel->properties->ftp;
-                mkdir($ftp->root . '/' . $ftp->prefix . $user->username);
+                if (!Babel_Utils_FTPDirectoryManager::createAccount($user->username)) {
+                    $this->_helper->flashMessenger->addMessage($this->translate->_('FTP account could not be created, Contact with the Administrator'));
+                }
             }
         }
 

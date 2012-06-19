@@ -22,11 +22,11 @@ class Settings_IndexController extends Babel_Action
                 }
 
                 if ($this->user->username <> $username) {
+                    $this->user->username = $username;
+
                     // Move the FTP directory
                     $ftp = Zend_Registry::get('Config')->babel->properties->ftp;
                     rename($ftp->root . '/' . $ftp->prefix . $this->user->username, $ftp->root . '/' . $ftp->prefix . $username);
-
-                    $this->user->username = $username;
 
                     $this->_helper->flashMessenger->addMessage($this->translate->_('Your username was updated successfully'));
                 }
@@ -72,11 +72,17 @@ class Settings_IndexController extends Babel_Action
                         $user_ftp->password = sha1($ftp_password);
 
                         $user_ftp->save();
+
+                        if (!Babel_Utils_FTPDirectoryManager::createAccount($this->user->username)) {
+                            $this->_helper->flashMessenger->addMessage($this->translate->_('FTP account could not be created, Contact with the Administrator'));
+                        }
+
                         $this->_helper->flashMessenger->addMessage($this->translate->_('You FTP account is on'));
                     } else { // Deactivation of FTP account
                         $user_ftp = $model_users_ftp->findByUser($this->user->ident);
 
                         $user_ftp->delete();
+
                         $this->_helper->flashMessenger->addMessage($this->translate->_('You FTP account is off'));
                     }
                 }

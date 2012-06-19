@@ -145,3 +145,5 @@
 "You FTP account is on"
 "You FTP account is off"
 "You FTP Password was updated successfully"
+"File '%value%' was only partially uploaded"
+"FTP account could not be created, Contact with the Administrator"

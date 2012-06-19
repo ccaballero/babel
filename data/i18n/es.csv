@@ -139,7 +139,6 @@
 "Catalog %s and all references was deleted"."El catálogo %s y todas sus referencias fueron eliminadas"
 "FTP Activation","Activación de cuenta FTP"
 "FTP Password","Contraseña de la cuenta FTP"
-
 "Your fullname was updated successfully","Tu nombre completo fue actualizado"
 "Your username was updated successfully","Tu nombre de usuario fue actualizado"
 "Your photo was updated successfully","Tu foto fue actualizada"
@@ -147,3 +146,5 @@
 "You FTP account is on","Tu cuenta FTP fue activada"
 "You FTP account is off","Tu cuenta FTP fue desactivada"
 "You FTP Password was updated successfully","La contraseña de tu cuenta FTP fue actualizada"
+"File '%value%' was only partially uploaded","El archivo fue interrumpido repentinamente"
+"FTP account could not be created, Contact with the Administrator","Tu cuenta FTP no pudo ser creada, Por favor contactate con el administrador"

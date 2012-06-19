@@ -1,7 +1,7 @@
 <?php
 
-class Babel_Utils_DirectoryScanner {
-
+class Babel_Utils_DirectoryScanner
+{
     public function scan_collection($bookstore, &$adapters = null, &$warnings = null, &$metas = null) {
         $model_collection = new Books_Collection();
         $model_meta = new Books_Meta();
