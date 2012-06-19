@@ -45,3 +45,8 @@ chmod 777 public/media/img/thumbnails/books       # Thumbs for books
 cd shell/
 php babel.php --index
 cd -
+
+# Put permissions to 'revision' directory for ftp
+# (application.ini) babel.properties.ftp.root = APPLICATION_PATH "/../data/bookstore/revision"
+# example:
+chmod 777 data/bookstore/revision
