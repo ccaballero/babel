@@ -5,15 +5,15 @@ La pagina principal presenta un campo de texto donde usted puede ingresar algún
 criterio de busqueda.
 </p>
 <div class="img">
-<img src="/media/img/help/search.png" alt="Buscador" title="Buscador" />
+<img src="/media/img/help/queries.1.png" alt="Buscador" title="Buscador" />
 <p>Campo de texto para busqueda de documentos</p>
 </div>
 <p>
-De ahi podrá ver los resultados asociados a los documentos que se encuentran en
+Ahi podrá ver los resultados asociados a los documentos que se encuentran en
 el sistema.
 </p>
 <div class="img">
-<img src="/media/img/help/results.png" alt="Resultados" title="Resultados" />
+<img src="/media/img/help/queries.2.png" alt="Resultados" title="Resultados" />
 <p>Campo de texto y su resultado despues de una busqueda</p>
 </div>
 <p>
@@ -21,7 +21,7 @@ Si hace click sobre algun documento entre los resultados, se desplegará la
 información relacionada a este.
 </p>
 <div class="img">
-<img src="/media/img/help/book-details.png"
+<img src="/media/img/help/queries.3.png"
      alt="Detalles del libro" title="Detalles del libro" />
 <p>Detalles de un documento de la pagina de resultados</p>
 </div>
@@ -38,8 +38,8 @@ conduce a la pagina para catalogar el libro.
 Babel utiliza el motor de busqueda
 <a href="http://lucene.apache.org/core/">Lucene</a> implementado por las
 librerias Zend, esta provee al usuario un conjunto de funciones adicionales.
-A continuación intentamos traducir la documentación al respecto a este motor de
-busqueda cuya fuente original se encuentra en
+A continuación intentamos traducir la documentación al respecto sobre este motor
+de busqueda cuya fuente original se encuentra en
 <a href="http://framework.zend.com/manual/en/zend.search.lucene.query-language.html">
 Zend Search Lucene Query-Language</a>. Para conocer los detalles respecto a la
 implementación de los campos y la forma de busqueda especifica para Babel,

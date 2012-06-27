@@ -7,7 +7,7 @@ instalación, administración y desarrollo de este sistema.
 </p>
 <p>
 Si aún asi no encontró lo que buscaba entre estas paginas, puede escribir un 
-correo electronico al 
+correo electronico a 
 <a href="mailto: babel@scesi.memi.umss.edu.bo">babel@scesi.memi.umss.edu.bo</a>
 o contactarse con la <a href="http://scesi.memi.umss.edu.bo">sociedad cientifica
 de estudiantes de sistemas e informatica</a> (SCESI). Su apoyo en la busqueda de

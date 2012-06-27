@@ -23,10 +23,10 @@ libro que pertenezca a ese catalogo, unicamente pueda estar en una de sus ramas.
 Como ejemplo de catalogo taxonomico, podemos citar la
 <a href="http://es.wikipedia.org/wiki/Sistema_Dewey_de_clasificaci%C3%B3n">
 Clasificación decimal de Dewey</a>, usada frecuentemente en Bibliotecas, como
-un metodo de ordenar sus libros.
+un metodo para ordenar sus libros.
 </p>
 <div class="img">
-<img src="/media/img/help/catalog-taxonomy.png" alt="Taxonomia" title="Taxonomia" />
+<img src="/media/img/help/catalogs.1.png" alt="Taxonomia" title="Taxonomia" />
 <p>Ejemplo de catalogo taxonomico</p>
 </div>
 
@@ -43,6 +43,6 @@ Como ejemplo de catalogo folcsonomico, podemos citar el pensum de una carrera,
 donde un libro podría facilmente servir a los propositos de mas de una materia.
 </p>
 <div class="img">
-<img src="/media/img/help/catalog-folcsonomy.png" alt="Folcsonomia" title="Folcsonomia" />
+<img src="/media/img/help/catalogs.2.png" alt="Folcsonomia" title="Folcsonomia" />
 <p>Ejemplo de catalogo taxonomico</p>
 </div>
