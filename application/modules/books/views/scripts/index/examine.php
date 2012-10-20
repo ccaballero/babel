@@ -44,8 +44,8 @@
                     <td class="center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
                     <td class="left"><?php echo $book->directory ?></td>
                     <td class="left"><?php echo $book->file ?></td>
-                    <td style="width:180px;" class="left">
-                        <?php echo strtolower($book->hash) ?>
+                    <td style="width:180px;" class="center">
+                        <?php echo strtolower(substr($book->hash, 1, 32)) ?>
                     </td>
                     <td class="center"><?php echo $this->size($book->size) ?></td>
                     <td>
