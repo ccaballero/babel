@@ -6,6 +6,7 @@
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 }
 
@@ -34,6 +35,7 @@ table {
 
 body {
     background-color: #000000;
+    color: #ffffff;
 }
 
 select {
@@ -51,11 +53,12 @@ select {
 .italic { font-style: italic; }
 
 #head {
-    position: absolute;
+    position: fixed;
     z-index: 2;
     width: 100%;
     height: 25px;
     background-color: #ffffff;
+    color: #000000;
 }
 
 #menubar {
@@ -72,8 +75,7 @@ select {
 #menubar a, #toolbar a {
     position: relative;
     top: 0.36em;
-    color: #000000;
-    text-shadow: 1px 1px 1px #ffffff;
+/*    text-shadow: 1px 1px 1px #ffffff;*/
     margin: 0em 0.4em;
 }
 
@@ -83,7 +85,7 @@ select {
     margin: 0.4em;
     color: #ffffff;
     font-weight: bold;
-    text-shadow: 0.15em 0.15em 0.15em #000000;
+/*    text-shadow: 0.15em 0.15em 0.15em #000000;*/
 }
 
 .color1 {
@@ -109,45 +111,42 @@ select {
 a.list {
     display: block;
     clear: both;
+    font-family: 'Times New Roman',Times,serif;
     font-size: 1.1em;
-    font-weight: bold;
     text-align: right;
     color: #000000;
-    text-shadow: 0.15em 0.15em 0.15em #ffffff;
+/*    text-shadow: 0.15em 0.15em 0.15em #ffffff;*/
     margin: 0.2em 0em 0.2em 0.9em;
     padding: 0.32em 0.5em 0.38em 1.0em;
 }
 
 a.list.active, a.list.hover {
     color: #ffffff;
-    text-shadow: 0.15em 0.15em 0.15em #000000;
-}
-
-#wrapper {
-    position: absolute;
-    z-index: 1;
+/*    text-shadow: 0.15em 0.15em 0.15em #000000;*/
 }
 
 #main {
-    position: relative;
-    z-index: 3;
-    top: 38px;
-    left: 10px;
-    overflow: auto;
-    color: #ffffff;
+    position: absolute;
+    z-index: 1;
+    top: 25px;
+    right: 0px;
+    bottom: 18px;
+    left: 0px;
+/*    overflow: auto;*/
+    padding: 10px;
 }
 
 #main h1 {
     font-size: 1.8em;
-    padding: 0em 0em 0.3em 0em;
-    text-shadow: 0.1em 0.1em 0.1em #888888;
-    border-bottom: 2px solid #000000;
+    padding: 0em 0em 0.3em 0.4em;
+/*    text-shadow: 0.1em 0.1em 0.1em #888888;*/
+/*    border-bottom: 2px solid #000000;*/
 }
 
 #main h2 {
     font-size: 1.5em;
     padding: 0.36em 0em;
-    border-bottom: 1px solid #000000;
+/*    border-bottom: 1px solid #000000;*/
 }
 
 #main h3 {
@@ -174,8 +173,18 @@ a.list.active, a.list.hover {
     padding-bottom: 1.0em;
 }
 
+#wall {
+    position: absolute;
+    top: 46px;
+    right: 5px;
+    bottom: 2px;
+    left: 5px;
+    overflow-y: scroll;
+}
+
 #column1, #column2, #column3 {
     float: left;
+    background: #bbbbbb;
 }
 
 #column1, #column2 {
@@ -190,7 +199,7 @@ a.list.active, a.list.hover {
 }
 
 #column3 h1, #column3 h2, #column3 h3 {
-    text-shadow: 0.12em 0.12em 0.15em #ffffff;
+/*    text-shadow: 0.12em 0.12em 0.15em #ffffff;*/
     color: #000000;
 }
 
@@ -204,7 +213,7 @@ a.list.active, a.list.hover {
 
 #column3 table th {
     color: #000000;
-    text-shadow: 0.12em 0.12em 0.15em #ffffff;
+/*    text-shadow: 0.12em 0.12em 0.15em #ffffff;*/
 }
 
 #column3 ol {
@@ -235,8 +244,6 @@ a.list.active, a.list.hover {
 }
 
 #central img.switcher {
-    width: 840px;
-    height: 472px;
     opacity: 0.1;
 }
 
@@ -249,6 +256,7 @@ a.list.active, a.list.hover {
 #classic {
     width: 960px;
     margin: 0em auto;
+    margin-bottom: 20px;
 }
 
 #classic a {
@@ -286,7 +294,7 @@ a.list.active, a.list.hover {
 
 #form label {
     font-size: 1.2em;
-    text-shadow: 0.2em 0.2em 0.2em #000000;
+/*    text-shadow: 0.2em 0.2em 0.2em #000000;*/
 }
 
 #form dt {
@@ -307,7 +315,7 @@ a.list.active, a.list.hover {
     width: 430px;
     font-size: 12px;
     list-style-type: none;
-    text-shadow: 0.2em 0.2em 0.2em #000000;
+/*    text-shadow: 0.2em 0.2em 0.2em #000000;*/
 }
 
 #form input[type="text"], #form input[type="password"], #form input[type="file"] {
@@ -347,6 +355,8 @@ div.tool-panel {
 
 div.tool-panel input[type="submit"] {
     padding: 0.2em 0.4em;
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 8pt;
 }
 
 #form input.find  { background: #ffffff url('../img/icons/find.png') no-repeat 8px 7px; }
@@ -409,7 +419,7 @@ table .title {
     height: 1.6em;
     font-weight: bold;
     color: #ffffff;
-    text-shadow: 0.2em 0.2em 0.15em #000000;
+/*    text-shadow: 0.2em 0.2em 0.15em #000000;*/
 }
 
 table th {
@@ -435,10 +445,11 @@ table tr a {
 }
 
 #foot {
-    position: absolute;
+    position: fixed;
     z-index: 2;
     width: 100%;
     bottom: 0em;
+    background-color: #000000;
     color: #ffffff;
 }
 
@@ -459,7 +470,6 @@ table tr a {
 }
 
 #foot .right a {
-    color: inherit;
     margin: 0em 0em 0em 0em;
     padding-right: 0.28em;
 }
@@ -529,4 +539,13 @@ div.tag {
 .img {
     text-align: center;
     margin: 1.0em 0em 2.0em 0em;
+}
+
+.text {
+    font-family: Georgia,'Times New Roman',times,serif;
+    font-size: 12pt;
+    color: #000000;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 20px;
 }

@@ -1,3 +1,1 @@
-<div id="classic">
-<pre><?php echo $this->escape($this->contents) ?></pre>
-</div>
+<div id="classic"><div class="text"><?php echo $this->contents ?></div></div>

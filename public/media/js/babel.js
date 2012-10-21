@@ -11,19 +11,18 @@ var width=function(){
         return document.documentElement.clientWidth;
     }};
 var resize=function(){
-    $('#wrapper').css('height',height()+'px');
-    $('#main').css('height',(height()-60)+'px');
+//    $('#main').css('height',(height()-60)+'px');
     $('#column2').css('min-height',$('#column1').height()+'px');
     $('#column3').css('min-height',Math.max((height()-130),$('#column2').height()+52)+'px');
-    $('#box').css('height',Math.max(0,(($('#column3').height())-($('#column3 table').height())-65))+'px');
-
-    $('#wrapper').css('width',width()+'px');
-    $('#main').css('width',(width()-20)+'px');
-    $('#wall').css('width',(width()-40)+'px');
-    $('#column3').css('width',(width()-(55+$('#column1').width()+$('#column2').width()))+'px');
+//    $('#box').css('height',Math.max(0,(($('#column3').height())-($('#column3 table').height())-65))+'px');
+//
+//    $('#main').css('width',(width()-20)+'px');
+//    $('#wall').css('width',(width()-40)+'px');
+    $('#column3').css('width',(width()-(40+$('#column1').width()+$('#column2').width()))+'px');
     if($('#column2').height()>$('#column1').height()){
         $('#column2').addClass('rounded');
-    }};
+    }
+};
 
 $(window).resize(resize);
 $(document).ready(resize);

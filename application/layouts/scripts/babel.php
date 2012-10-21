@@ -12,11 +12,9 @@
             <div id="menubar"><?php echo $this->placeholder('menubar') ?></div>
             <div id="toolbar"><?php echo $this->placeholder('toolbar') ?></div>
         </div>
-        <div id="wrapper">
-            <div id="main">
-                <?php echo $this->placeholder('messages') ?>
-                <?php echo $this->layout()->content; ?>
-            </div>
+        <div id="main">
+            <?php echo $this->placeholder('messages') ?>
+            <?php echo $this->layout()->content; ?>
         </div>
         <div id="foot"><?php echo $this->placeholder('footer') ?></div>
     </body>
