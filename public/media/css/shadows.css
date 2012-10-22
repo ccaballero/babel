@@ -1,0 +1,39 @@
+#menubar a, #toolbar a {
+    text-shadow: 1px 1px 1px #ffffff;
+}
+
+#menubar a.main {
+    text-shadow: 0.15em 0.15em 0.15em #000000;
+}
+
+a.list {
+    text-shadow: 0.15em 0.15em 0.15em #ffffff;
+}
+
+a.list.active, a.list.hover {
+    text-shadow: 0.15em 0.15em 0.15em #000000;
+}
+
+#main h1 {
+    text-shadow: 0.1em 0.1em 0.1em #888888;
+}
+
+#column3 h1, #column3 h2, #column3 h3 {
+    text-shadow: 0.12em 0.12em 0.15em #ffffff;
+}
+
+#column3 table th {
+    text-shadow: 0.12em 0.12em 0.15em #ffffff;
+}
+
+#form label {
+    text-shadow: 0.2em 0.2em 0.2em #000000;
+}
+
+#form dd ul.errors li {
+    text-shadow: 0.2em 0.2em 0.2em #000000;
+}
+
+table .title {
+    text-shadow: 0.2em 0.2em 0.15em #000000;
+}
