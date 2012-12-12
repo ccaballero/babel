@@ -194,8 +194,8 @@ class Books_IndexController extends Babel_Action
     public function exportAction() {
         $this->requireLogin();
 
-        $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
-        $bookstores = $bookstores->toArray();
+        $_bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
+        $bookstores = $_bookstores->toArray();
 
         $form = new Books_Form_Export();
         $form->setBookstores($bookstores);
@@ -206,16 +206,17 @@ class Books_IndexController extends Babel_Action
                 $i = intval($form->getElement('bookstores')->getValue());
 
                 $model_metas = new Books_Meta();
-                if ($i < 0) {
+                if ($i === -1) {
                     $books = $model_metas->fetchAll();
-                } else {
+                } else if ($i >= 0) {
                     $books = $model_metas->fetchAll(
                         $model_metas->select()->where(
-                            "book IN (
-                                SELECT book
+                            'book IN (
+                                SELECT hash
                                 FROM babel_books_collection
-                                WHERE directory LIKE ?)", $bookstores[$i] . '%'
-                        ));
+                                WHERE directory LIKE ?)', $bookstores[$i] . '%'
+                        )
+                    );
                 }
 
                 echo 'book,title,author,year,publisher,language' . PHP_EOL;
