@@ -7,6 +7,7 @@ class Shell_Babel extends Yachay_Console
     public $directory = '';
     public $regex_type = 0;
     public $regex = array(
+        '', // because fuck you, that's why
         '/(?<title>.*)\.pdf/',
         '/(?<title>.*) \(ISBN - (?<isbn>[0-9X]*)\)\.pdf/',
     );
@@ -20,7 +21,7 @@ class Shell_Babel extends Yachay_Console
         'figlet|l=s'    => 'generation of figlet',
     );
 
-    public function index($bootstrap) {
+    public function index() {
         try {
             echo str_pad('indexing the books', $this->count, $this->separator);
             $index = Zend_Search_Lucene::create(APPLICATION_PATH . '/../data/lucene');
@@ -69,11 +70,15 @@ class Shell_Babel extends Yachay_Console
 
     public function directory($bootstrap, $getopt) {
         $this->directory = $getopt->getOption('directory');
+        echo str_pad('Set the directory to: ' . $this->directory, $this->count, $this->separator);
+        echo $this->ok;
         return true;
     }
 
     public function regex($bootstrap, $getopt) {
         $this->regex_type = intval($getopt->getOption('regex'));
+        echo str_pad('Set the regex to: ' . $this->regex[$this->regex_type], $this->count, $this->separator);
+        echo $this->ok;
         return true;
     }
 
@@ -82,6 +87,8 @@ class Shell_Babel extends Yachay_Console
             echo str_pad('Setting metabook information', $this->count, $this->separator);
 
             $directory = $this->directory;
+            $directory = realpath($directory);
+            
             $regex = $this->regex[$this->regex_type];
 
             $adapters = array();
