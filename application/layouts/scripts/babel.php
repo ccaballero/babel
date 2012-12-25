@@ -9,13 +9,16 @@
     </head>
     <body>
         <div id="head">
-            <div id="menubar"><?php echo $this->placeholder('menubar') ?></div>
-            <div id="toolbar"><?php echo $this->placeholder('toolbar') ?></div>
+            <div id="menubar" class="left"><?php echo $this->placeholder('menubar') ?></div>
+            <div id="toolbar" class="right"><?php echo $this->placeholder('toolbar') ?></div>
         </div>
         <div id="main">
             <?php echo $this->placeholder('messages') ?>
             <?php echo $this->layout()->content; ?>
         </div>
-        <div id="foot"><?php echo $this->placeholder('footer') ?></div>
+        <div id="foot">
+            <div id="translate" class="left"><?php echo $this->placeholder('translate') ?></div>
+            <div id="footer" class="right"><?php echo $this->placeholder('footer') ?></div>
+        </div>
     </body>
 </html>

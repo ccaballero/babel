@@ -28,7 +28,7 @@ $(window).resize(resize);
 $(document).ready(resize);
 
 $(document).ready(function(){
-    $('#menubar a.main').hover(
+    $('#menubar ul li').hover(
         function(){
             $(this).animate({top:'1.0em'},100);
         },function(){

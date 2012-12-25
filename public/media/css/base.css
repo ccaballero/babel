@@ -1,23 +1,3 @@
-* {
-    padding: 0em 0em;
-    margin: 0em 0em;
-    font-family: arial,sans-serif;
-    font-size: 0.952em;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-a img {
-    border: none;
-}
-
-a:focus, input:focus {
-    outline: none;
-}
-
 fieldset {
     border: none;
 }
@@ -52,61 +32,39 @@ select {
 .bold { font-weight: bold; padding-right: 0.25em; }
 .italic { font-style: italic; }
 
-#head {
+/*#head {
     position: fixed;
     z-index: 2;
     width: 100%;
     height: 25px;
     background-color: #ffffff;
     color: #000000;
-}
+}*/
 
-#menubar {
+/*#menubar {
     float: left;
     display: inline;
     margin-left: 0.6em;
-}
+}*/
 
-#toolbar {
+/*#toolbar {
     float: right;
     margin-right: 0.6em;
-}
+}*/
 
-#menubar a, #toolbar a {
+/*#menubar a, #toolbar a {
     position: relative;
     top: 0.36em;
-/*    text-shadow: 1px 1px 1px #ffffff;*/
     margin: 0em 0.4em;
-}
+}*/
 
-#menubar a.main {
+/*#menubar a.main {
     top: 0.5em;
     padding: 1.0em 1.0em 0.5em 1.0em;
     margin: 0.4em;
     color: #ffffff;
     font-weight: bold;
-/*    text-shadow: 0.15em 0.15em 0.15em #000000;*/
-}
-
-.color1 {
-    background: #5a065d;
-}
-
-.color2 {
-    background: #8f5509;
-}
-
-.color3 {
-    background: #758a08;
-}
-
-.color4 {
-    background: #08395c;
-}
-
-.color5 {
-    background: #757575;
-}
+}*/
 
 a.list {
     display: block;
@@ -232,27 +190,6 @@ a.list.active, a.list.hover {
     font-weight: bold;
 }
 
-#central {
-    position: absolute;
-    width: 840px;
-    height: 472px;
-    top: 50%;
-    left: 50%;
-    margin-top: -235px;
-    margin-left: -420px;
-    border: 3px solid #ffffff;
-}
-
-#central img.switcher {
-    opacity: 0.1;
-}
-
-#central #form {
-    position: absolute;
-    left: 2.5em;
-    top: 2.0em;
-}
-
 #classic {
     width: 960px;
     margin: 0em auto;
@@ -291,85 +228,6 @@ a.list.active, a.list.hover {
 #classic pre {
     font-size: 1.3em;
 }
-
-#form label {
-    font-size: 1.2em;
-/*    text-shadow: 0.2em 0.2em 0.2em #000000;*/
-}
-
-#form dt {
-    margin-top: 0.6em;
-}
-
-#form dd {
-    position: relative;
-}
-
-#form dd ul.errors {
-    position: absolute;
-    top: 0em;
-    left: 360px;
-}
-
-#form dd ul.errors li {
-    width: 430px;
-    font-size: 12px;
-    list-style-type: none;
-/*    text-shadow: 0.2em 0.2em 0.2em #000000;*/
-}
-
-#form input[type="text"], #form input[type="password"], #form input[type="file"] {
-    width: 318px;
-    height: 26px;
-    padding: 0.1em 0.2em 0.1em 28px;
-}
-
-#form select {
-    height: 28px;
-    color: #000000;
-    font-size: 1.3em;
-    padding: 0.20em 0.6em 0em 0em;
-}
-
-#form textarea {
-    width: 333px;
-    height: 100px;
-    padding: 0.4em 0.4em 0.4em 0.4em;
-}
-
-#form input[type="text"], #form input[type="password"], #form input[type="file"], #form textarea {
-    margin: 0.1em 0em 0.5em 0em;
-    color: #000000;
-    font-size: 1.7em;
-    border: none;
-}
-
-#form input[type="submit"] {
-    font-size: 1.4em;
-    padding: 0.31em 0.36em;
-}
-
-div.tool-panel {
-    margin: 0.3em 0em 0.5em 0em;
-}
-
-div.tool-panel input[type="submit"] {
-    padding: 0.2em 0.4em;
-    font-family: Geneva,Arial,Helvetica,sans-serif;
-    font-size: 8pt;
-}
-
-#form input.find  { background: #ffffff url('../img/icons/find.png') no-repeat 8px 7px; }
-#form input.user  { background: #ffffff url('../img/icons/user.png') no-repeat 8px 7px; }
-#form input.email { background: #ffffff url('../img/icons/email.png') no-repeat 8px 7px; }
-#form input.photo { background: #ffffff url('../img/icons/photo.png') no-repeat 8px 7px; }
-#form input.key   { background: #ffffff url('../img/icons/key.png') no-repeat 8px 7px;  }
-#form input.label { background: #ffffff url('../img/icons/page.png') no-repeat 8px 7px;  }
-#form input.bookstore { background: #ffffff url('../img/icons/book_open.png') no-repeat 8px 7px;  }
-#form input.directory { background: #ffffff url('../img/icons/folder.png') no-repeat 8px 7px;  }
-#form input.world { background: #ffffff url('../img/icons/world.png') no-repeat 8px 7px;  }
-#form input.flag { background: #ffffff url('../img/icons/flag_yellow.png') no-repeat 8px 7px;  }
-#form input.calendar { background: #ffffff url('../img/icons/calendar.png') no-repeat 8px 7px;  }
 
 #breadcrumb {
     padding: 2px 0px 3px 8px;

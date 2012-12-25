@@ -98,21 +98,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                            ->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'')
                            ->appendFile($view->baseUrl('/media/js/babel.js', 'text/javascript'));
 
-        $view->headLink()->appendStylesheet($view->baseUrl('/media/css/base.css'))
-                         ->appendStylesheet($view->baseUrl('/media/css/shadows.css'));
+        $view->headLink()->appendStylesheet($view->baseUrl('/media/new_css/base.css'))
+                         ->appendStylesheet($view->baseUrl('/media/new_css/common.css'))
+                         ->appendStylesheet($view->baseUrl('/media/new_css/tipography.css'))
+                         ->appendStylesheet($view->baseUrl('/media/new_css/colors.css'));
 
         // Browser semi-detection
-        if (isset($_SERVER) && isset($_SERVER['HTTP_USER_AGENT'])) {
-            if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/firefox.css'));
-            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/webkit.css'));
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
-            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'konqueror')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/konqueror.css'));
-            }
-        }
+//        if (isset($_SERVER) && isset($_SERVER['HTTP_USER_AGENT'])) {
+//            if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
+//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/firefox.css'));
+//            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
+//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/webkit.css'));
+//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
+//            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'konqueror')) {
+//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
+//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/konqueror.css'));
+//            }
+//        }
 
         return $view;
     }

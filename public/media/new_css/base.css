@@ -1,0 +1,213 @@
+/* General cleaners */
+body, ul, li, a, p {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+/*    color: inherit;*/
+    text-decoration: none;
+}
+
+a img {
+    border: none;
+}
+
+a:focus, input:focus {
+    outline: none;
+}
+
+/* Generic behaviors */
+.left { float: left; }
+.right { float: right; }
+.hidden { display: none; }
+
+/* Basic structure*/
+#head, #main, #foot {
+    position: absolute;
+}
+
+#head {
+    top: 0px;
+    height: 25px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+}
+
+#main {
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 5;
+    padding: 30px 5px 20px 5px;
+}
+
+#foot {
+    bottom: 0px;
+    height: 15px;
+    left: 0px;
+    right: 0px;
+    z-index: 8;
+}
+
+/* Menu settings */
+#head #menubar {
+    display: block;
+    margin-left: 10px;
+}
+
+#head #menubar .primary {
+    padding: 0px 10px 3px 10px;
+}
+
+#head #toolbar {
+    display: block;
+    margin-right: 10px;
+}
+
+#head ul {
+    height: 25px;
+}
+
+#head ul li {
+    height: 25px;
+    list-style: none;
+    display: inline-block;
+}
+
+#head ul li a {
+    height: 25px;
+    display: block;
+    padding: 0px 5px;
+    line-height: 25px;
+}
+
+#foot #translate {
+    display: block;
+    margin-left: 10px;
+}
+
+#foot #footer {
+    display: block;
+    margin-right: 10px;
+}
+
+#foot ul {
+    height: 15px;
+}
+
+#foot ul li {
+    height: 15px;
+    list-style: none;
+    display: inline-block;
+}
+
+#foot ul li a {
+    height: 15px;
+    display: block;
+    padding: 0px 5px;
+    line-height: 15px;
+}
+
+/* Frontpage settings */
+#central {
+    position: absolute;
+    height: 472px;
+    width: 840px;
+    top: 50%;
+    left: 50%;
+    margin-left: -420px;
+    margin-top: -235px;
+}
+
+#central img.switcher {
+    opacity: 0.1;
+}
+
+#central #form {
+    position: absolute;
+    left: 1.0em;
+    top: 1.0em;
+}
+
+/* Form settings */
+#form label {
+    font-size: 0.8em;
+}
+
+#form dt {
+    margin-top: 0.6em;
+}
+
+#form dd {
+    position: relative;
+    margin-left: 2.0em;
+}
+
+#form dd ul.errors {
+    position: absolute;
+    top: 0em;
+    left: 360px;
+}
+
+#form dd ul.errors li {
+    width: 430px;
+    font-size: 12px;
+    list-style-type: none;
+}
+
+#form input[type="text"], #form input[type="password"], #form input[type="file"] {
+    width: 318px;
+    height: 26px;
+    padding: 0.1em 0.2em 0.1em 28px;
+}
+
+#form select {
+    height: 28px;
+    color: #000000;
+    font-size: 1.3em;
+    padding: 0.20em 0.6em 0em 0em;
+}
+
+#form textarea {
+    width: 333px;
+    height: 100px;
+    padding: 0.4em 0.4em 0.4em 0.4em;
+}
+
+#form input[type="text"], #form input[type="password"], #form input[type="file"], #form textarea {
+    margin: 0.1em 0em 0.5em 0em;
+    color: #000000;
+    font-size: 1.0em;
+    font-weight: normal;
+    border: none;
+}
+
+#form input[type="submit"] {
+    font-size: 0.8em;
+    padding: 0.31em 0.36em;
+}
+
+div.tool-panel {
+    margin: 0.3em 0em 0.5em 0em;
+}
+
+div.tool-panel input[type="submit"] {
+    padding: 0.2em 0.4em;
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 8pt;
+}
+
+#form input.find  { background: #ffffff url('../img/icons/find.png') no-repeat 8px 7px; }
+#form input.user  { background: #ffffff url('../img/icons/user.png') no-repeat 8px 7px; }
+#form input.email { background: #ffffff url('../img/icons/email.png') no-repeat 8px 7px; }
+#form input.photo { background: #ffffff url('../img/icons/photo.png') no-repeat 8px 7px; }
+#form input.key   { background: #ffffff url('../img/icons/key.png') no-repeat 8px 7px;  }
+#form input.label { background: #ffffff url('../img/icons/page.png') no-repeat 8px 7px;  }
+#form input.bookstore { background: #ffffff url('../img/icons/book_open.png') no-repeat 8px 7px;  }
+#form input.directory { background: #ffffff url('../img/icons/folder.png') no-repeat 8px 7px;  }
+#form input.world { background: #ffffff url('../img/icons/world.png') no-repeat 8px 7px;  }
+#form input.flag { background: #ffffff url('../img/icons/flag_yellow.png') no-repeat 8px 7px;  }
+#form input.calendar { background: #ffffff url('../img/icons/calendar.png') no-repeat 8px 7px;  }

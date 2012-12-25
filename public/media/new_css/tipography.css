@@ -1,0 +1,17 @@
+#main {
+    color: #ffffff;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12pt;
+}
+
+#head, #head ul li a {
+    color: #000000;
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 13px;
+}
+
+#foot, #foot ul li a {
+    color: #ffffff;
+    font-size: 13px;
+    font-family: Arial,Helvetica,sans-serif;
+}
