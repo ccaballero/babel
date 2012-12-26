@@ -28,12 +28,33 @@ $(window).resize(resize);
 $(document).ready(resize);
 
 $(document).ready(function(){
-    $('#menubar ul li').hover(
+    $('#catalogs_menu').click(function(){
+        $('#menubar .catalogs_item').fadeIn(1000);
+        $('#menubar .users_item').fadeOut(950);
+        $('#menubar .books_item').fadeOut(950);
+        return false;
+    });
+    $('#users_menu').click(function(){
+        $('#menubar .catalogs_item').fadeOut(950);
+        $('#menubar .users_item').fadeIn(1000);
+        $('#menubar .books_item').fadeOut(950);
+        return false;
+    });
+    $('#books_menu').click(function(){
+        $('#menubar .catalogs_item').fadeOut(950);
+        $('#menubar .users_item').fadeOut(950);
+        $('#menubar .books_item').fadeIn(1000);
+        return false;
+    });
+
+    $('#menubar ul li.primary').hover(
         function(){
-            $(this).animate({top:'1.0em'},100);
+            $(this).animate({paddingTop:'5px'},100);
         },function(){
-            $(this).animate({top:'0.5em'},100);
-        });
+            $(this).animate({paddingTop:'0px'},100);
+        }
+    );
+
     $('#wall a.list').hover(
         function(){
             $(this).addClass('hover');
@@ -43,10 +64,6 @@ $(document).ready(function(){
     $('input[type="text"].focus').focus();
     $('.closeable').click(function(){$(this).parent().fadeOut();});
     $('input[class="groupall"]').click(function(){if($(this).attr('checked')=='checked'){$('input[class="check"]').attr('checked','checked');}else{$('input[class="check"]').removeAttr('checked');}});
-
-    $('#catalogs_menu').click(function(){$('#menubar .catalogs').fadeIn(1000);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeOut(950);return false;});
-    $('#users_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeIn(1000);$('#menubar .books').fadeOut(950);return false;});
-    $('#books_menu').click(function(){$('#menubar .catalogs').fadeOut(950);$('#menubar .users').fadeOut(950);$('#menubar .books').fadeIn(1000);return false;});
 
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});

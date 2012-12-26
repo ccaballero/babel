@@ -29,4 +29,5 @@ library/Zend
 public/media/img/thumbnails/books/*.jpg
 public/media/img/thumbnails/catalogs/*.jpg
 public/media/img/thumbnails/users/*.jpg
+public/media/img/wallpaper/
 

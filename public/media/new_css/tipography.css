@@ -15,3 +15,8 @@
     font-size: 13px;
     font-family: Arial,Helvetica,sans-serif;
 }
+
+#main #messages p.message {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}

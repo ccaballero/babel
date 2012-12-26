@@ -20,7 +20,9 @@ a:focus, input:focus {
 /* Generic behaviors */
 .left { float: left; }
 .right { float: right; }
+
 .hidden { display: none; }
+.showed { display: inline; }
 
 /* Basic structure*/
 #head, #main, #foot {
@@ -55,11 +57,14 @@ a:focus, input:focus {
 /* Menu settings */
 #head #menubar {
     display: block;
-    margin-left: 10px;
 }
 
 #head #menubar .primary {
     padding: 0px 10px 3px 10px;
+}
+
+#head #menubar .hidden {
+    display: none;
 }
 
 #head #toolbar {
@@ -69,12 +74,14 @@ a:focus, input:focus {
 
 #head ul {
     height: 25px;
+    float: left;
 }
 
 #head ul li {
     height: 25px;
     list-style: none;
-    display: inline-block;
+    float: left;
+    margin: 0px 0px 0px 10px;
 }
 
 #head ul li a {
@@ -82,6 +89,17 @@ a:focus, input:focus {
     display: block;
     padding: 0px 5px;
     line-height: 25px;
+    text-shadow: 1px 1px 1px #ffffff;
+}
+
+#head ul li.primary {
+    box-shadow: 0 0 5px 2px #000000;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+#head ul li.primary a {
+    text-shadow: 0.15em 0.15em 0.15em #000000;
 }
 
 #foot #translate {
@@ -124,6 +142,8 @@ a:focus, input:focus {
 
 #central img.switcher {
     opacity: 0.1;
+    height: 100%;
+    width: 100%;
 }
 
 #central #form {
@@ -134,7 +154,9 @@ a:focus, input:focus {
 
 /* Form settings */
 #form label {
+    margin-left: 1.0em;
     font-size: 0.8em;
+    text-shadow: 0.2em 0.2em 0.2em #000000;
 }
 
 #form dt {
@@ -161,7 +183,9 @@ a:focus, input:focus {
 #form input[type="text"], #form input[type="password"], #form input[type="file"] {
     width: 318px;
     height: 26px;
-    padding: 0.1em 0.2em 0.1em 28px;
+    padding: 0px 10px 0px 28px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px 1px #000000;
 }
 
 #form select {
@@ -188,6 +212,10 @@ a:focus, input:focus {
 #form input[type="submit"] {
     font-size: 0.8em;
     padding: 0.31em 0.36em;
+    background-color: #ffffff;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px 1px #000000;
+    border: none;
 }
 
 div.tool-panel {
@@ -200,14 +228,34 @@ div.tool-panel input[type="submit"] {
     font-size: 8pt;
 }
 
-#form input.find  { background: #ffffff url('../img/icons/find.png') no-repeat 8px 7px; }
-#form input.user  { background: #ffffff url('../img/icons/user.png') no-repeat 8px 7px; }
-#form input.email { background: #ffffff url('../img/icons/email.png') no-repeat 8px 7px; }
-#form input.photo { background: #ffffff url('../img/icons/photo.png') no-repeat 8px 7px; }
-#form input.key   { background: #ffffff url('../img/icons/key.png') no-repeat 8px 7px;  }
-#form input.label { background: #ffffff url('../img/icons/page.png') no-repeat 8px 7px;  }
-#form input.bookstore { background: #ffffff url('../img/icons/book_open.png') no-repeat 8px 7px;  }
-#form input.directory { background: #ffffff url('../img/icons/folder.png') no-repeat 8px 7px;  }
-#form input.world { background: #ffffff url('../img/icons/world.png') no-repeat 8px 7px;  }
-#form input.flag { background: #ffffff url('../img/icons/flag_yellow.png') no-repeat 8px 7px;  }
-#form input.calendar { background: #ffffff url('../img/icons/calendar.png') no-repeat 8px 7px;  }
+#form input.find      { background: #ffffff url('../img/icons/find.png')        no-repeat 8px 5px; }
+#form input.user      { background: #ffffff url('../img/icons/user.png')        no-repeat 8px 5px; }
+#form input.email     { background: #ffffff url('../img/icons/email.png')       no-repeat 8px 5px; }
+#form input.photo     { background: #ffffff url('../img/icons/photo.png')       no-repeat 8px 5px; }
+#form input.key       { background: #ffffff url('../img/icons/key.png')         no-repeat 8px 5px; }
+#form input.label     { background: #ffffff url('../img/icons/page.png')        no-repeat 8px 5px; }
+#form input.bookstore { background: #ffffff url('../img/icons/book_open.png')   no-repeat 8px 5px; }
+#form input.directory { background: #ffffff url('../img/icons/folder.png')      no-repeat 8px 5px; }
+#form input.world     { background: #ffffff url('../img/icons/world.png')       no-repeat 8px 5px; }
+#form input.flag      { background: #ffffff url('../img/icons/flag_yellow.png') no-repeat 8px 5px; }
+#form input.calendar  { background: #ffffff url('../img/icons/calendar.png')    no-repeat 8px 5px; }
+
+/* block for flash messages */
+#messages {
+    border: 3px solid #a6a600;
+    background: #ffff73;
+    color: #000000;
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    right: 15px;
+}
+
+#main p.message {
+    padding: 3px 5px;
+    margin-right: 40px;
+}
+
+#main div.closeable {
+    margin: 1px 5px 0px 5px;
+}
