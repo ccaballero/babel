@@ -11,7 +11,6 @@
     <?php if ($this->auth->hasIdentity()) { ?>
         <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form, 'translate' => $this->translate)) ?>
     <?php } ?>
-
 <?php } else { ?>
     <div id="breadcrumb">
         <a href="<?php echo $this->url(array(), 'catalogs') ?>"><?php echo $this->translate->_('Catalogs') ?></a>

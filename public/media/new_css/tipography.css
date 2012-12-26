@@ -4,6 +4,13 @@
     font-size: 12pt;
 }
 
+#main h1 {
+    font-family:"Times New Roman",Georgia,Serif;
+    font-size: 2.5em;
+    font-weight: normal;
+    margin: 0.2em 0.5em;
+}
+
 #head, #head ul li a {
     color: #000000;
     font-family: Geneva,Arial,Helvetica,sans-serif;

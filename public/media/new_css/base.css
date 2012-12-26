@@ -17,6 +17,10 @@ a:focus, input:focus {
     outline: none;
 }
 
+fieldset {
+    border: none;
+}
+
 /* Generic behaviors */
 .left { float: left; }
 .right { float: right; }
@@ -25,24 +29,16 @@ a:focus, input:focus {
 .showed { display: inline; }
 
 /* Basic structure*/
-#head, #main, #foot {
-    position: absolute;
-}
-
 #head {
     top: 0px;
     height: 25px;
     left: 0px;
     right: 0px;
     z-index: 10;
+    position: fixed;
 }
 
 #main {
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    z-index: 5;
     padding: 30px 5px 20px 5px;
 }
 
@@ -51,7 +47,9 @@ a:focus, input:focus {
     height: 15px;
     left: 0px;
     right: 0px;
+    margin-top: 3px;
     z-index: 8;
+    position: fixed;
 }
 
 /* Menu settings */
@@ -152,6 +150,45 @@ a:focus, input:focus {
     top: 1.0em;
 }
 
+/* Classic settings */
+#classic {
+    width: 960px;
+    margin: 0em auto;
+    margin-bottom: 20px;
+}
+
+/* List settings */
+#list .element {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    float: left;
+    border: 1px dashed #ffffff;
+}
+
+#list .element:hover {
+    background: #303030;
+}
+
+#list .book {
+    width: 333px;
+    height: 100px;
+}
+
+#list .catalog {
+    width: 333px;
+    height: 100px;
+}
+
+#list .new {
+    width: 103px;
+}
+
+#list a {
+    color: #ffffff;
+}
+
 /* Form settings */
 #form label {
     margin-left: 1.0em;
@@ -191,7 +228,7 @@ a:focus, input:focus {
 #form select {
     height: 28px;
     color: #000000;
-    font-size: 1.3em;
+    font-size: 0.96em;
     padding: 0.20em 0.6em 0em 0em;
 }
 
