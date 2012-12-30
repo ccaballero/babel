@@ -27,7 +27,7 @@ INSERT INTO `babel_catalogs` (`tsregister`, `mode`, `type`, `root`, `parent`, `c
 (UNIX_TIMESTAMP(), 'open', 't', 1,  3, '14', 2, 'Puntos de vista filosóficos', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  3, '15', 2, 'Psicología', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  3, '16', 2, 'Lógica', 1),
-(UNIX_TIMESTAMP(), 'open', 't', 1,  3, '17', 2, 'ética (filosofía moral)', 1),
+(UNIX_TIMESTAMP(), 'open', 't', 1,  3, '17', 2, 'Ética (filosofía moral)', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  3, '18', 2, 'Filosofía antigua, medieval, oriental', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  3, '19', 2, 'Filosofía moderna occidental', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  4, '20', 2, 'Religion', 1),

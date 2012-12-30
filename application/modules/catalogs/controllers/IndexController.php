@@ -47,8 +47,12 @@ class Catalogs_IndexController extends Babel_Action
                 $url = new Zend_Controller_Action_Helper_Url();
 
                 $catalog = $model_catalogs->createRow();
-                $catalog->label = $form->getSubForm('information')->getElement('catalog')->getValue();
-                $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
+
+//                $catalog->label = $form->getSubForm('information')->getElement('catalog')->getValue();
+//                $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
+                $catalog->label = $form->getElement('catalog')->getValue();
+                $catalog->description = $form->getElement('description')->getValue();
+
                 $catalog->owner = $this->user->ident;
                 $catalog->tsregister = time();
 
@@ -72,26 +76,28 @@ class Catalogs_IndexController extends Babel_Action
                     $catalog->mode = $parent->mode;
                     $catalog->type = $parent->type;
                 } else {
-                    $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
-                    $catalog->type = $form->getSubForm('information')->getElement('type')->getValue();
+//                    $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
+//                    $catalog->type = $form->getSubForm('information')->getElement('type')->getValue();
+                    $catalog->mode = $form->getElement('mode')->getValue();
+                    $catalog->type = $form->getElement('type')->getValue();
                 }
 
                 $catalog->save();
                 $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('Catalog %s was created'), $catalog->label));
 
-                if ($form->getSubForm('photo')->getElement('photo')->receive()) {
-                    $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
-
-                    if (!empty($filename) && file_exists($filename)) {
-                        $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
-                        unlink($filename);
-
-                        if ($avatar) {
-                            $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
-                        }
-                    }
-                }
+//                if ($form->getSubForm('photo')->getElement('photo')->receive()) {
+//                    $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
+//
+//                    if (!empty($filename) && file_exists($filename)) {
+//                        $thumbnail = new Yachay_Helpers_Thumbnail();
+//                        $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
+//                        unlink($filename);
+//
+//                        if ($avatar) {
+//                            $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
+//                        }
+//                    }
+//                }
 
                 if ($parent <> null) {
                     $this->_redirect($url->url(array('catalog' => $parent->ident), 'catalogs_catalog_view'));

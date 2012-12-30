@@ -35,37 +35,40 @@ class Catalogs_Form_Catalog extends Zend_Form
 
         $return = $this->createElement('hidden', 'return');
 
-        $information_subform->addElement($catalog);
-        $information_subform->addElement($mode);
-        $information_subform->addElement($type);
-        $information_subform->addElement($description);
-        $information_subform->addElement($return);
+        $this->addElement($catalog);
+        $this->addElement($mode);
+        $this->addElement($type);
+        $this->addElement($description);
+        $this->addElement($return);
 
-        $photo_subform = new Zend_Form_SubForm();
-        $photo = $photo_subform->createElement('file', 'photo');
-        $photo->setRequired(false)
-              ->setLabel('Photo')
-              ->setDestination(APPLICATION_PATH . '/../data/upload/')
-              ->addValidator('Count', false, 1)
-              ->addValidator('Size', false, 2097152)
-              ->addValidator('Extension', false, 'jpg,png,gif');
+//        $photo_subform = new Zend_Form_SubForm();
+//        $photo = $photo_subform->createElement('file', 'photo');
+//        $photo->setRequired(false)
+//              ->setLabel('Photo')
+//              ->setDestination(APPLICATION_PATH . '/../data/upload/')
+//              ->addValidator('Count', false, 1)
+//              ->addValidator('Size', false, 2097152)
+//              ->addValidator('Extension', false, 'jpg,png,gif');
+//
+//        $photo_subform->addElement($photo);
 
-        $photo_subform->addElement($photo);
-
-        $this->addSubForms(array(
-            'information' => $information_subform,
-            'photo' => $photo_subform,
-        ));
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
+//        $this->addSubForms(array(
+//            'information' => $information_subform,
+//            'photo' => $photo_subform,
+//        ));
+//        $this->addElement($information_subform);
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit'));
     }
 
     public function hideMode() {
-        $information = $this->getSubForm('information');
-        $information->removeElement('mode');
+//        $information = $this->getSubForm('information');
+//        $information->removeElement('mode');
+        $this->removeElement('mode');
     }
 
     public function hideType() {
-        $information = $this->getSubForm('information');
-        $information->removeElement('type');
+//        $information = $this->getSubForm('information');
+//        $information->removeElement('type');
+        $this->removeElement('type');
     }
 }

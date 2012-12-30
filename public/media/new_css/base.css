@@ -157,42 +157,9 @@ fieldset {
     margin-bottom: 20px;
 }
 
-/* List settings */
-#list .element {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    padding: 10px;
-    float: left;
-    border: 1px dashed #ffffff;
-}
-
-#list .element:hover {
-    background: #303030;
-}
-
-#list .book {
-    width: 333px;
-    height: 100px;
-}
-
-#list .catalog {
-    width: 333px;
-    height: 100px;
-}
-
-#list .new {
-    width: 103px;
-}
-
-#list a {
-    color: #ffffff;
-}
-
 /* Form settings */
 #form label {
-    margin-left: 1.0em;
-    font-size: 0.8em;
+    margin-left: 10px;
     text-shadow: 0.2em 0.2em 0.2em #000000;
 }
 
@@ -213,12 +180,11 @@ fieldset {
 
 #form dd ul.errors li {
     width: 430px;
-    font-size: 12px;
     list-style-type: none;
 }
 
 #form input[type="text"], #form input[type="password"], #form input[type="file"] {
-    width: 318px;
+    width: 308px;
     height: 26px;
     padding: 0px 10px 0px 28px;
     border-radius: 7px;
@@ -228,7 +194,6 @@ fieldset {
 #form select {
     height: 28px;
     color: #000000;
-    font-size: 0.96em;
     padding: 0.20em 0.6em 0em 0em;
 }
 
@@ -236,33 +201,21 @@ fieldset {
     width: 333px;
     height: 100px;
     padding: 0.4em 0.4em 0.4em 0.4em;
+    border-radius: 7px;
 }
 
 #form input[type="text"], #form input[type="password"], #form input[type="file"], #form textarea {
     margin: 0.1em 0em 0.5em 0em;
     color: #000000;
-    font-size: 1.0em;
-    font-weight: normal;
     border: none;
 }
 
 #form input[type="submit"] {
-    font-size: 0.8em;
     padding: 0.31em 0.36em;
     background-color: #ffffff;
     border-radius: 7px;
     box-shadow: 1px 1px 5px 1px #000000;
     border: none;
-}
-
-div.tool-panel {
-    margin: 0.3em 0em 0.5em 0em;
-}
-
-div.tool-panel input[type="submit"] {
-    padding: 0.2em 0.4em;
-    font-family: Geneva,Arial,Helvetica,sans-serif;
-    font-size: 8pt;
 }
 
 #form input.find      { background: #ffffff url('../img/icons/find.png')        no-repeat 8px 5px; }
@@ -284,8 +237,13 @@ div.tool-panel input[type="submit"] {
     color: #000000;
     position: absolute;
     top: 40px;
-    left: 15px;
     right: 15px;
+    width: 50%;
+}
+
+/* main block */
+#main h1 {
+    margin: 10px 20px 0px 20px;
 }
 
 #main p.message {
@@ -295,4 +253,85 @@ div.tool-panel input[type="submit"] {
 
 #main div.closeable {
     margin: 1px 5px 0px 5px;
+}
+
+/* breadcrumb block */
+#breadcrumb {
+    margin: 0px 20px;
+    display: inline;
+    border-right: 1px solid #505050;
+}
+
+#breadcrumb a {
+    color: #d0d0d0;
+    border-left: 1px solid #505050;
+    padding: 0px 10px;
+}
+
+/* List settings */
+#list {
+    margin: 20px 0px;
+}
+
+#list .element {
+    margin: 5px;
+    padding: 10px;
+    float: left;
+    border: 1px solid #ffffff;
+}
+
+#list .element h2 {
+    padding: 0px;
+    margin: 0px 0px 4px 0px;
+    height: 46px;
+    overflow: hidden;
+}
+
+#list .element:hover {
+    background: #303030;
+}
+
+#list p.description {
+    padding: 0px 20px 10px 20px;
+    text-align: justify;
+}
+
+#list .book {
+    width: 333px;
+    height: 100px;
+}
+
+#list .catalog {
+    width: 333px;
+    height: auto;
+}
+
+#list .new {
+    width: 66px;
+}
+
+#list a {
+    color: #ffffff;
+}
+
+/* overlay sector */
+.overlay {
+    display: none;
+    padding: 10px 30px 0px 10px;
+    background: #000000;
+    border: 3px solid #ffffff;
+}
+
+.overlay .close {
+    background-image: url('../img/close.png');
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+
+#return-label, #return-element {
+    display: none;
 }

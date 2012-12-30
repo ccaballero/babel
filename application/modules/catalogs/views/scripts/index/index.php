@@ -12,15 +12,15 @@
         <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form, 'translate' => $this->translate)) ?>
     <?php } ?>
 <?php } else { ?>
+    <h1><?php echo $this->catalog->label ?></h1>
     <div id="breadcrumb">
         <a href="<?php echo $this->url(array(), 'catalogs') ?>"><?php echo $this->translate->_('Catalogs') ?></a>
         <?php foreach ($this->breadcrumb($this->catalog) as $catalog) { ?>
             <a href="<?php echo $this->url(array('catalog' => $catalog->ident), 'catalogs_catalog_view') ?>"><?php echo $catalog->label ?></a>
         <?php } ?>
     </div>
-    <h1><?php echo $this->catalog->label ?></h1>
-    <p class="description"><?php echo $this->catalog->description ?></p>
     <div id="list">
+        <p class="description"><?php echo $this->catalog->description ?></p>
         <?php foreach ($this->catalogs as $catalog) { ?>
             <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('user' => $this->user, 'catalog' => $catalog, 'translate' => $this->translate)) ?>
         <?php } ?>
