@@ -7,6 +7,7 @@
         <?php if ($this->auth->hasIdentity()) { ?>
             <?php echo $this->partial('catalogs/views/scripts/new.php', array('translate' => $this->translate)) ?>
         <?php } ?>
+        <div class="clear"></div>
     </div>
     <?php if ($this->auth->hasIdentity()) { ?>
         <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form, 'translate' => $this->translate)) ?>
@@ -32,6 +33,7 @@
                 <?php echo $this->partial('catalogs/views/scripts/new.php', array('translate' => $this->translate)) ?>
             <?php } ?>
         <?php } ?>
+        <div class="clear"></div>
     </div>
     <?php if ($this->auth->hasIdentity()) { ?>
         <?php echo $this->partial('catalogs/views/scripts/info.php', array('form' => $this->form, 'translate' => $this->translate)) ?>

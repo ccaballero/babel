@@ -1,13 +1,16 @@
-<div id="wall">
-    <?php $manuals = $this->manuals(); ?>
+<div id="columns">
     <div id="column1">
-    <?php foreach ($manuals as $element) { ?>
-        <a class="list <?php echo ($this->page == $element) ? ' active':' inactive' ?>" href="<?php echo $this->url(array('page' => $element), 'help_manual') ?>"><?php echo $this->translate->_(ucfirst($element)) ?></a>
-    <?php } ?>
+        <ul>
+        <?php foreach ($this->manuals as $element) { ?>
+            <li class="<?php echo ($this->page == $element) ? 'active':'inactive' ?>">
+                <a href="<?php echo $this->url(array('page' => $element), 'help_manual') ?>"><?php echo $this->translate->_(ucfirst($element)) ?></a>
+            </li>
+        <?php } ?>
+        </ul>
     </div>
-    <div id="column3" class="help" style="background: #f0f0f0;">
-        <?php if (in_array($this->page, $manuals)) { ?>
-            <?php $script = array_search($this->page, $manuals) . '_' . $this->escape($this->page) . '/' . $this->locale . '.php'; ?>
+    <div id="column3">
+        <?php if (in_array($this->page, $this->manuals)) { ?>
+            <?php $script = array_search($this->page, $this->manuals) . '_' . $this->escape($this->page) . '/' . $this->locale . '.php'; ?>
             <?php if (file_exists(APPLICATION_PATH . '/../docs/manual/' . $script)) { ?>
                 <?php echo $this->partial($script) ?>
             <?php } else { ?>

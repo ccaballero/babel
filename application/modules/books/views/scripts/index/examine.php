@@ -1,18 +1,24 @@
-<h1><?php echo $this->translate->_('Books directories') ?></h1>
-<div id="wall">
+<div id="columns">
     <div id="column1">
-    <?php foreach ($this->bookstores as $i => $bookstore) { ?>
-        <a class="list<?php echo ($i == $this->bookstore) ? ' active' : '' ?>"
-           href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo basename($bookstore) ?></a>
-    <?php } ?>
+        <ul>
+        <?php foreach ($this->bookstores as $i => $bookstore) { ?>
+            <li class="list<?php echo ($i == $this->bookstore) ? ' active' : '' ?>">
+                <a href="<?php echo $this->url(array('bookstore' => $i), 'books_examine') ?>"><?php echo basename($bookstore) ?></a>
+            </li>
+        <?php } ?>
+        </ul>
     </div>
     <div id="column2">
-    <?php foreach ($this->directories as $i => $directory) { ?>
-        <a class="list<?php echo ($i == $this->directory) ? ' active' : '' ?>"
-           href="<?php echo $this->url(array('bookstore' => $this->bookstore, 'directory' => $i), 'books_examine') ?>"><?php echo $directory ?></a>
-    <?php } ?>
+        <ul>
+        <?php foreach ($this->directories as $i => $directory) { ?>
+            <li class="list<?php echo ($i == $this->directory) ? ' active' : '' ?>">
+                <a href="<?php echo $this->url(array('bookstore' => $this->bookstore, 'directory' => $i), 'books_examine') ?>"><?php echo $directory ?></a>
+            </li>
+        <?php } ?>
+        </ul>
     </div>
     <div id="column3">
+        <h1><?php echo $this->translate->_('Books directories') ?></h1>
         <form method="post" action="" accept-charset="utf-8">
             <div class="tool-panel">
                 <input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" />

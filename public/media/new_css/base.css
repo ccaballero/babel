@@ -28,6 +28,8 @@ fieldset {
 .hidden { display: none; }
 .showed { display: inline; }
 
+.clear { clear: both; }
+
 /* Basic structure*/
 #head {
     top: 0px;
@@ -47,7 +49,7 @@ fieldset {
     height: 15px;
     left: 0px;
     right: 0px;
-    margin-top: 3px;
+    padding-top: 3px;
     z-index: 8;
     position: fixed;
 }
@@ -91,7 +93,7 @@ fieldset {
 }
 
 #head ul li.primary {
-    box-shadow: 0 0 5px 2px #000000;
+    box-shadow: 0px 0px 5px 2px #000000;
     border-bottom-left-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
 }
@@ -270,7 +272,7 @@ fieldset {
 
 /* List settings */
 #list {
-    margin: 20px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 #list .element {
@@ -312,6 +314,113 @@ fieldset {
 
 #list a {
     color: #ffffff;
+}
+
+/* the terrible columns blocks */
+#columns {
+    position: absolute;
+    top: 32px;
+    bottom: 18px;
+    left: 6px;
+    right: 6px;
+}
+
+#column1, #column2, #column3 {
+    float: left;
+    background-color: #dddddd;
+}
+
+#column1, #column1 ul li, #column1 ul li.active a, #column1 ul li a:hover,
+#column2, #column2 ul li, #column2 ul li.active a, #column2 ul li a:hover {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#column1, #column2 {
+    max-width: 200px;
+    margin-top: 20px;
+}
+
+#column2, #column3 {
+    box-shadow: 0px 0px 5px 2px #000000;
+}
+
+#column1 ul, #column2 ul {
+    list-style-type: none;
+    margin: 10px 0px 10px 10px;
+}
+
+#column1 ul li, #column2 ul li {
+    background-color: #888888;
+    box-shadow: 0px 0px 5px 2px #000000;
+    margin: 3px 0px;
+    padding: 0px;
+}
+
+#column1 ul li.active a, #column1 ul li a:hover,
+#column2 ul li.active a, #column2 ul li a:hover {
+    background-color: #74b7e7;
+    color: #ffffff;
+    text-shadow: 0.15em 0.15em 0.15em #000000;
+}
+
+#column1 ul li a, #column2 ul li a {
+    display: block;
+    text-align: right;
+    padding: 5px 12px;
+    color: #000000;
+    text-shadow: 0.15em 0.15em 0.15em #FFFFFF;
+}
+
+#column3 {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 10pt;
+}
+
+#column3 h1, #column3 h2, #column3 h3 {
+    text-transform: uppercase;
+    font-weight: normal;
+    text-decoration: underline;
+    color: #000000;
+}
+
+#main #column3 h1 {
+    font-size: 18pt;
+}
+
+#main #column3 h2 {
+    font-size: 13pt;
+}
+
+#main #column3 h3 {
+    font-size: 11pt;
+    font-style: italic;
+}
+
+#column3 h1, #column3 h2, #column3 h3, #column3 p, #column3 span {
+    margin: 5px 0px 5px 8px;
+}
+
+#column3 p, #column3 span, #column3 blockquote, #column3 ol, #column3 li {
+    color: #404040;
+    font-size: inherit;
+}
+
+#column3 table th {
+    color: #000000;
+    text-shadow: 0.12em 0.12em 0.15em #ffffff;
+}
+
+#column3 ol {
+    margin-left: 10px;
+}
+
+#column3 a {
+    color: #404040;
+    font-size: inherit;
+    font-weight: bold;
 }
 
 /* overlay sector */

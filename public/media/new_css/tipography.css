@@ -51,3 +51,8 @@
 #form dd ul.errors li {
     font-size: 12px;
 }
+
+#column1 ul li a, #column2 ul li a {
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 9pt;
+}
