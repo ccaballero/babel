@@ -39,6 +39,9 @@ table {
 
 .clear { clear: both; }
 
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+
 tr.even { background: #202020; }
 tr.odd { background: #000000; }
 
@@ -171,6 +174,28 @@ tr.odd { background: #000000; }
     margin-bottom: 20px;
 }
 
+#classic #thumb {
+    float: left;
+    margin: 10px;
+}
+
+#classic #details {
+    float: left;
+}
+
+#classic #details ul {
+    list-style-type: none;
+}
+
+#classic #details ul li {
+    display: inline-block;
+    margin: 0px 4px;
+}
+
+#classic #details dl dt {
+    font-weight: bold;
+}
+
 /* Form settings */
 #form label {
     margin-left: 10px;
@@ -225,7 +250,7 @@ tr.odd { background: #000000; }
 }
 
 #form input[type="submit"] {
-    padding: 0.31em 0.36em;
+    padding: 3px 10px;
     background-color: #ffffff;
     border-radius: 7px;
     box-shadow: 1px 1px 5px 1px #000000;
@@ -292,7 +317,9 @@ tr.odd { background: #000000; }
     margin: 5px;
     padding: 10px;
     float: left;
-    border: 1px solid #ffffff;
+    border: 1px solid #606060;
+    border-radius: 8px;
+    box-shadow: 0px 0px 4px 2px #303030;
 }
 
 #list .element h2 {
@@ -309,6 +336,10 @@ tr.odd { background: #000000; }
 #list p.description {
     padding: 0px 20px 10px 20px;
     text-align: justify;
+}
+
+#list .catalog {
+    background-color: #202020;
 }
 
 #list .book, #list .catalog {
@@ -414,7 +445,7 @@ tr.odd { background: #000000; }
     text-shadow: 0.15em 0.15em 0.15em #FFFFFF;
 }
 
-#column3.square {
+#column2.square, #column3.square {
     border-bottom-left-radius: 0px;
 }
 
@@ -476,7 +507,7 @@ tr.odd { background: #000000; }
 /* overlay sector */
 .overlay {
     display: none;
-    padding: 10px 30px 0px 10px;
+    padding: 10px 30px 10px 10px;
     background: #000000;
     border: 3px solid #ffffff;
 }
@@ -489,6 +520,33 @@ tr.odd { background: #000000; }
     cursor: pointer;
     height: 35px;
     width: 35px;
+}
+
+.overlay #thumb, .overlay .details {
+    float: left;
+/*    max-height: 400px;*/
+}
+
+.overlay #thumb {
+    margin: 0px 10px 0px 0px;
+    height: 400px;
+    width: 300px;
+    background-repeat: no-repeat;
+}
+
+.overlay h1#book_title {
+    font-family: "Times New Roman",Georgia,Serif;
+    font-size: 20pt;
+    margin: 0px 0px 8px 0px;
+    padding: 0px;
+}
+
+.overlay .details div {
+    margin-bottom: 8px;
+}
+
+.overlay .details p {
+    font-size: 9pt;
 }
 
 #return-label, #return-element {

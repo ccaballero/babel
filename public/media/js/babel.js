@@ -16,6 +16,7 @@ var resize=function(){
 
     $('#column3').css('width',($('#columns').width()-$('#column1').width()-$('#column2').width()-20)+'px');
 
+    if(($('#column1').height())==$('#column2').height()){$('#column2').addClass('square');}else{$('#column2').removeClass('square');}
     if(($('#column2').height())==$('#column3').height()){$('#column3').addClass('square');}else{$('#column3').removeClass('square');}
 };
 
@@ -110,7 +111,7 @@ $(document).ready(function(){
             $('#information-return').attr('value',window.location.pathname);
             action=window.location.pathname;
             if(action.match('^[/new/?]')==null){$('#form_catalog').attr('action',action);}else{if(action.substring(action.length-1,action.length)=='/'){$('#form_catalog').attr('action',action+'new');}else{$('#form_catalog').attr('action',action+'/new');}}
-        },onLoad:function(){$('#information-catalog').focus();}});
+        },onLoad:function(){$('#catalog').focus();}});
 
     var catalog='';
     $('.update_catalog').click(function(){catalog=$(this).attr('name');});

@@ -53,8 +53,8 @@
 </div>
 
 <div class="overlay" id="update_book">
-    <div id="thumb" style="float:left; margin: 0em 1.3em 0em 0em; height: 400px; width: 300px;"></div>
-    <div style="float:left;">
+    <div id="thumb"></div>
+    <div class="details">
         <h1><?php echo $this->translate->_('Book information') ?></h1>
         <div id="form"><?php echo $this->form ?></div>
     </div>

@@ -25,13 +25,14 @@
         <?php foreach ($this->catalogs as $catalog) { ?>
             <?php echo $this->partial('catalogs/views/scripts/catalog.php', array('user' => $this->user, 'catalog' => $catalog, 'translate' => $this->translate)) ?>
         <?php } ?>
-        <?php foreach ($this->books as $book) { ?>
-            <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book->getMeta(), 'translate' => $this->translate)) ?>
-        <?php } ?>
         <?php if ($this->auth->hasIdentity()) { ?>
             <?php if ($this->catalog->mode == 'open' || ($this->catalog->mode == 'close' && $this->catalog->owner == $this->user->ident)) { ?>
                 <?php echo $this->partial('catalogs/views/scripts/new.php', array('translate' => $this->translate)) ?>
             <?php } ?>
+        <?php } ?>
+        <div class="clear"></div>
+        <?php foreach ($this->books as $book) { ?>
+            <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book->getMeta(), 'translate' => $this->translate)) ?>
         <?php } ?>
         <div class="clear"></div>
     </div>

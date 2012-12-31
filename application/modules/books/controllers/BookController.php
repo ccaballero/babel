@@ -244,7 +244,7 @@ class Books_BookController extends Babel_Action
                 header("HTTP/1.1 200 OK");
                 header("Status: 200 OK");
                 header('Content-Type: application/pdf');
-                header('Content-Disposition: attachment; filename=' . $file->file . ';');
+                header('Content-Disposition: attachment; filename=' . urlencode($file->file) . ';');
                 header('Content-Transfer-Encoding: binary');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
