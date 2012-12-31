@@ -11,19 +11,18 @@ var width=function(){
         return document.documentElement.clientWidth;
     }};
 var resize=function(){
-//    $('#main').css('height',(height()-60)+'px');
-//    $('#column2').css('min-height',$('#column1').height()+'px');
+    $('#column2').css('min-height',$('#column1').height()+'px');
 //    $('#column3').css('min-height',Math.max((height()-130),$('#column2').height()+52)+'px');
-    $('#column3').css('min-height',($('#columns').height()-22)+'px');
-//    $('#box').css('height',Math.max(0,(($('#column3').height())-($('#column3 table').height())-65))+'px');
-//
-//    $('#main').css('width',(width()-20)+'px');
-//    $('#wall').css('width',(width()-40)+'px');
+    $('#column3').css('min-height',Math.max( $('#columns').height()-22, $('#column2').height() )+'px');
+
 //    $('#column3').css('width',(width()-(40+$('#column1').width()+$('#column2').width()))+'px');
     $('#column3').css('width', ($('#columns').width()-$('#column1').width()-$('#column2').width()-20)+'px');
-//    if($('#column2').height()>$('#column1').height()){
-//        $('#column2').addClass('rounded');
-//    }
+
+    if(($('#column2').height())==$('#column3').height()){
+        $('#column3').addClass('square');
+    }else{
+        $('#column3').removeClass('square');
+    }
 };
 
 $(window).resize(resize);

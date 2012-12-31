@@ -21,14 +21,26 @@ fieldset {
     border: none;
 }
 
+table {
+    width: 100%;
+    border-collapse:collapse;
+}
+
 /* Generic behaviors */
 .left { float: left; }
 .right { float: right; }
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
 
 .hidden { display: none; }
 .showed { display: inline; }
 
 .clear { clear: both; }
+
+tr.even { background: #202020; }
+tr.odd { background: #000000; }
 
 /* Basic structure*/
 #head {
@@ -328,12 +340,17 @@ fieldset {
 #column1, #column2, #column3 {
     float: left;
     background-color: #dddddd;
+    margin-bottom: 18px;
 }
 
 #column1, #column1 ul li, #column1 ul li.active a, #column1 ul li a:hover,
 #column2, #column2 ul li, #column2 ul li.active a, #column2 ul li a:hover {
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
+}
+
+#column2 {
+    border-top-left-radius: 0px;
 }
 
 #column1, #column2 {
@@ -372,9 +389,13 @@ fieldset {
     text-shadow: 0.15em 0.15em 0.15em #FFFFFF;
 }
 
+#column3.square {
+    border-bottom-left-radius: 0px;
+}
+
 #column3 {
     border-radius: 10px;
-    margin-bottom: 20px;
+/*    margin-bottom: 20px;*/
     padding: 10px;
     font-size: 10pt;
 }
@@ -413,6 +434,10 @@ fieldset {
     text-shadow: 0.12em 0.12em 0.15em #ffffff;
 }
 
+#main #column3 table tr td {
+    font-size: 8pt;
+}
+
 #column3 ol {
     margin-left: 10px;
 }
@@ -443,4 +468,14 @@ fieldset {
 
 #return-label, #return-element {
     display: none;
+}
+
+.tool-panel input[type="submit"] {
+    font-size: 8pt;
+    background-color: inherit;
+    padding: 1px 4px;
+    margin: 1px 1px;
+    border-radius: 6px;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 1px #ffffff;
 }
