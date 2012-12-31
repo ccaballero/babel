@@ -479,3 +479,30 @@ tr.odd { background: #000000; }
     border: 1px solid #000000;
     box-shadow: 1px 1px 1px #ffffff;
 }
+
+/* Users list customization */
+#list .user {
+    width: 100px;
+    height: 100px;
+}
+
+/* Tagcloud list customization */
+div.tag {
+    float: left;
+    display: inline;
+    line-height: 26px;
+}
+
+.tag a {
+    color: #ffffff;
+    font-size: 10pt;
+    padding: 2px 5px;
+    margin: 0em 3px;
+    background: #303030;
+    border: 1px dashed #aaaaaa;
+}
+
+.tag a:hover {
+    background-color: #606060;
+}
+
