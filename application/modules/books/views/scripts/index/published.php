@@ -21,21 +21,21 @@
                 </tr>
                 <?php foreach ($this->books as $book) { ?>
                     <tr class="<?php echo $this->cycle(array("even", "odd"))->next()?>">
-                        <td class="center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
-                        <td class="left"><?php echo $book->title ?></td>
-                        <td class="left"><?php echo $book->author ?></td>
-                        <td class="center"><?php echo $book->publisher ?></td>
-                        <td class="center"><?php echo $book->year ?></td>
-                        <td class="center"><?php echo $book->language ?></td>
-                        <td class="left"><?php echo $book->getPath() ?></td>
-                        <td class="center">
+                        <td class="text-center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
+                        <td class="text-left"><?php echo $book->title ?></td>
+                        <td class="text-left"><?php echo $book->author ?></td>
+                        <td class="text-center"><?php echo $book->publisher ?></td>
+                        <td class="text-center"><?php echo $book->year ?></td>
+                        <td class="text-center"><?php echo $book->language ?></td>
+                        <td class="text-left"><?php echo $book->getPath() ?></td>
+                        <td class="text-center">
                         <?php if ($book->inDisk()) { ?>
                             <img src="<?php echo $this->baseUrl('/media/img/icons/tick.png') ?>" alt="" title="" />
                         <?php } else { ?>
                             <img src="<?php echo $this->baseUrl('/media/img/icons/cross.png') ?>" alt="" title="" />
                         <?php } ?>
                         </td>
-                        <td class="center">
+                        <td class="text-center">
                         <?php if ($book->hasThumb()) { ?>
                             <img src="<?php echo $this->baseUrl('/media/img/icons/tick.png') ?>" alt="" title="" />
                         <?php } ?>
@@ -45,7 +45,6 @@
                     </tr>
                 <?php } ?>
             </table>
-            <div id="box" style="background-color:#000000; height: 0px;"></div>
             <div class="tool-panel">
                 <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
             </div>

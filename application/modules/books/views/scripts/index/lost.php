@@ -15,19 +15,18 @@
                 </tr>
                 <?php foreach ($this->books as $book) { ?>
                     <tr class="<?php echo $this->cycle(array("even", "odd"))->next()?>">
-                        <td class="center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
-                        <td class="left"><?php echo $book->directory ?></td>
-                        <td class="left"><?php echo $book->file ?></td>
-                        <td class="center">
+                        <td class="text-center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
+                        <td class="text-left"><?php echo $book->directory ?></td>
+                        <td class="text-left"><?php echo $book->file ?></td>
+                        <td class="text-center">
                             <?php if ($book->inSearch()) { ?>
                                 <img src="<?php echo $this->baseUrl('/media/img/icons/tick.png') ?>" alt="" title="" />
                             <?php } ?>
                         </td>
-                        <td class="center"><a class="update_file" name="edit_<?php echo $book->hash ?>" rel="#update_file"><img src="<?php echo $this->baseUrl('/media/img/icons/pencil.png') ?>" alt="<?php echo $this->translate->_('Edit') ?>" title="Edit" /></a></td>
+                        <td class="text-center"><a class="update_file" name="edit_<?php echo $book->hash ?>" rel="#update_file"><img src="<?php echo $this->baseUrl('/media/img/icons/pencil.png') ?>" alt="<?php echo $this->translate->_('Edit') ?>" title="Edit" /></a></td>
                     </tr>
                 <?php } ?>
             </table>
-            <div id="box" style="background-color:#000000; height: 0px;"></div>
             <div class="tool-panel">
                 <input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" />
             </div>
