@@ -7,7 +7,7 @@ class Users_User extends Zend_Db_Table_Row_Abstract
         if (file_exists(APPLICATION_PATH . '/../public' . $url_base)) {
             return $url_base;
         } else {
-            return '/babel_small.png';
+            return '/babel-small.png';
         }
     }
 

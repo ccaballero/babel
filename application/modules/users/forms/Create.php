@@ -5,14 +5,16 @@ class Users_Form_Create extends Zend_Form
     public function init() {
         $this->setMethod('post');
 
-        $fullname = $this->createElement('text', 'fullname');
+        $information_subform = new Zend_Form_SubForm();
+
+        $fullname = $information_subform->createElement('text', 'fullname');
         $fullname->setRequired(true)
                  ->setLabel('Fullname')
                  ->setAttrib('class', 'focus user')
                  ->addFilter('StringTrim')
                  ->addValidator('StringLength', false, array(0, 128));
 
-        $username = $this->createElement('text', 'username');
+        $username = $information_subform->createElement('text', 'username');
         $username->setRequired(true)
                  ->setLabel('Username')
                  ->setAttrib('class', 'user')
@@ -21,6 +23,9 @@ class Users_Form_Create extends Zend_Form
                  ->addValidator('StringLength', false, array(4, 128))
                  ->addValidator('Alnum', false, array('allowWhiteSpace' => false))
                  ->addValidator(new Babel_Validators_UniqueField(new Users(), 'username'));
+
+        $information_subform->addElement($fullname);
+        $information_subform->addElement($username);
 
         $password_subform = new Zend_Form_SubForm();
 
@@ -39,11 +44,10 @@ class Users_Form_Create extends Zend_Form
         $password_subform->addElement($password1);
         $password_subform->addElement($password2);
 
-        $this->addElement($fullname);
-        $this->addElement($username);
         $this->addSubForms(array(
+            'information' => $information_subform,
             'password' => $password_subform,
         ));
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Create',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Create'));
     }
 }

@@ -6,7 +6,15 @@ class Users_IndexController extends Babel_Action
         $this->requireLogin();
 
         $model_users = new Users();
-        $this->view->users = $model_users->fetchAll($model_users->select()->where('contact <> ?', 0));
+
+        $users = $model_users->fetchAll($model_users->select()->where('contact <> ?', 0));
+        $shuffle = array();
+        foreach ($users as $user) {
+            $shuffle[] = $user;
+        }
+        shuffle($shuffle);
+        
+        $this->view->users = $shuffle;
     }
 
     public function newAction() {
@@ -24,8 +32,8 @@ class Users_IndexController extends Babel_Action
 
                 $user->role = $this->user->role;
                 $user->contact = $this->user->ident;
-                $user->fullname = $form->getElement('fullname')->getValue();
-                $user->username = $form->getElement('username')->getValue();
+                $user->fullname = $form->getSubForm('information')->getElement('fullname')->getValue();
+                $user->username = $form->getSubForm('information')->getElement('username')->getValue();
                 $user->password = sha1($key . $form->getSubForm('password')->getElement('password2')->getValue() . $key);
                 $user->tsregister = time();
 
