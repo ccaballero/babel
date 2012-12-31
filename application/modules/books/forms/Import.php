@@ -15,6 +15,6 @@ class Books_Form_Import extends Zend_Form
               ->addValidator('Extension', false, 'csv');
 
         $this->addElement($meta);
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Import',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Import'));
     }
 }

@@ -8,8 +8,9 @@
             'user' => $this->user, 
             'book' => $this->book, 
             'file' => $this->file, 
-            'translate' => $this->translate)
-        ) ?>
+            'translate' => $this->translate,
+            'auth' => $this->auth
+        )) ?>
 
         <h2><?php echo $this->catalog->label ?></h2>
         <form id="form" method="post" action="" accept-charset="utf-8">
@@ -21,8 +22,7 @@
                 </tr>
             <?php } ?>
                 <tr>
-                    <td>&nbsp;</td>
-                    <td style="text-align: right;"><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
+                    <td colspan="2" class="text-right"><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
                 </tr>
             </table>
         </form>

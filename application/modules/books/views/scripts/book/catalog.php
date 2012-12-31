@@ -8,8 +8,9 @@
             'user' => $this->user, 
             'book' => $this->book, 
             'file' => $this->file, 
-            'translate' => $this->translate)
-        ) ?>
+            'translate' => $this->translate,
+            'auth' => $this->auth
+        )) ?>
 
     <?php if (!empty($this->taxonomies)) { ?>
         <h2><?php echo $this->translate->_('Taxonomies') ?>:</h2>
@@ -31,8 +32,7 @@
                 <?php } ?>
             <?php } ?>
                 <tr>
-                    <td>&nbsp;</td>
-                    <td style="text-align: right;"><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
+                    <td colspan="2" class="text-right"><input type="submit" value="<?php echo $this->translate->_('Update') ?>" /></td>
                 </tr>
             </table>
         </form>

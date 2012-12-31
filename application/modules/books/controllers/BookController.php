@@ -318,23 +318,25 @@ class Books_BookController extends Babel_Action
 
     public function editAction() {
         $this->requireLogin();
+        $request = $this->getRequest();
+
+        $model_collection = new Books_Collection();
+        $model_metas = new Books_Meta();
+
+        $hash = $request->getParam('book');
+        $file = $model_collection->findByHash($hash);
+
+        $book = $model_metas->findByHash($hash);
+        if (empty($book)) {
+            $book = $model_metas->createRow();
+            $book->book = $hash;
+        }
 
         $form = new Books_Form_Meta();
+        $form->setBook($book);
 
-        $request = $this->getRequest();
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $model_collection = new Books_Collection();
-                $model_metas = new Books_Meta();
-
-                $hash = $request->getParam('book');
-                $file = $model_collection->findByHash($hash);
-
-                $book = $model_metas->findByHash($hash);
-                if (empty($book)) {
-                    $book = $model_metas->createRow();
-                    $book->book = $hash;
-                }
                 $book->title = $request->getParam('title');
                 $book->author = $request->getParam('author');
                 $book->publisher = $request->getParam('publisher');
@@ -362,7 +364,14 @@ class Books_BookController extends Babel_Action
                     }
                 }
             }
-            $this->_redirect($request->getParam('return'));
+            
+            $return = $request->getParam('return');
+            if (!empty($return)) {
+                $this->_redirect($return);
+            }
         }
+        
+        $this->view->file = $file;
+        $this->view->form = $form;
     }
 }

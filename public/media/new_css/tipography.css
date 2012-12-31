@@ -58,7 +58,7 @@
 }
 
 #form input[type="text"], #form input[type="password"], #form input[type="file"],
-#form select, #form textarea, #form input[type="submit"] {
+#form select, #form textarea, #form input[type="submit"], button {
     font-family: Arial,Helvetica,sans-serif;
     font-size: 11pt;
 }

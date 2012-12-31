@@ -19,6 +19,6 @@ class Auth_Form_Login extends Zend_Form
 
         $this->addElement($email);
         $this->addElement($password);
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Login',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Login'));
     }
 }

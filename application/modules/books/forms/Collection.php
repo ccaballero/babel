@@ -20,6 +20,6 @@ class Books_Form_Collection extends Zend_Form
 
         $this->addElement($directory);
         $this->addElement($file);
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit'));
     }
 }

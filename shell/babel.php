@@ -91,8 +91,8 @@ class Shell_Babel extends Yachay_Console
     }
 
     public function regex($bootstrap, $getopt) {
-        echo str_pad('Set the regex to: ' . $this->regex[$this->regex_type], $this->count, $this->separator);
         $this->regex_type = intval($getopt->getOption('regex'));
+        echo str_pad('Set the regex to: ' . $this->regex[$this->regex_type], $this->count, $this->separator);
         
         echo $this->ok;
         return true;

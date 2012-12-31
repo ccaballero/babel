@@ -50,6 +50,14 @@ class Books_Form_Meta extends Zend_Form
         $this->addElement($year);
         $this->addElement($language);
         $this->addElement($return);
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Edit'));
+    }
+
+    public function setBook($book) {
+        $this->getElement('title')->setValue($book->title);
+        $this->getElement('author')->setValue($book->author);
+        $this->getElement('publisher')->setValue($book->publisher);
+        $this->getElement('year')->setValue($book->year);
+        $this->getElement('language')->setValue($book->language);
     }
 }

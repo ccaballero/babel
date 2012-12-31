@@ -1,5 +1,15 @@
 <div class="right">
     <ul>
+    <?php if ($this->auth->hasIdentity()) { ?>
+        <li>
+            <a id="book_edit" 
+               href="<?php echo $this->url(array('book' => $this->book->book), 'books_book_edit') ?>">
+                <img src="<?php echo $this->baseUrl('/media/img/icons/pencil.png') ?>" 
+                     alt="<?php echo $this->translate->_('Edit information') ?>" 
+                     title="<?php echo $this->translate->_('Edit information') ?>" />
+            </a>
+        </li>
+    <?php } ?>
         <li>
             <a id="book_download" 
                href="<?php echo $this->url(array('book' => $this->book->book), 'books_book_download') ?>">

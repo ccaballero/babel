@@ -10,7 +10,7 @@ class Books_Form_Export extends Zend_Form
                   ->setLabel('Bookstore');
 
         $this->addElement($bookstore);
-        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Export',));
+        $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Export'));
     }
 
     public function setBookstores($bookstores) {
