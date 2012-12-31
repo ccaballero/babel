@@ -12,17 +12,11 @@ var width=function(){
     }};
 var resize=function(){
     $('#column2').css('min-height',$('#column1').height()+'px');
-//    $('#column3').css('min-height',Math.max((height()-130),$('#column2').height()+52)+'px');
     $('#column3').css('min-height',Math.max( $('#columns').height()-22, $('#column2').height() )+'px');
 
-//    $('#column3').css('width',(width()-(40+$('#column1').width()+$('#column2').width()))+'px');
-    $('#column3').css('width', ($('#columns').width()-$('#column1').width()-$('#column2').width()-20)+'px');
+    $('#column3').css('width',($('#columns').width()-$('#column1').width()-$('#column2').width()-20)+'px');
 
-    if(($('#column2').height())==$('#column3').height()){
-        $('#column3').addClass('square');
-    }else{
-        $('#column3').removeClass('square');
-    }
+    if(($('#column2').height())==$('#column3').height()){$('#column3').addClass('square');}else{$('#column3').removeClass('square');}
 };
 
 $(window).resize(resize);

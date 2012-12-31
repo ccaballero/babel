@@ -250,6 +250,7 @@ tr.odd { background: #000000; }
     background: #ffff73;
     color: #000000;
     position: absolute;
+    z-index: 10;
     top: 40px;
     right: 15px;
     width: 50%;
@@ -310,14 +311,38 @@ tr.odd { background: #000000; }
     text-align: justify;
 }
 
-#list .book {
-    width: 333px;
-    height: 100px;
-}
-
-#list .catalog {
+#list .book, #list .catalog {
     width: 333px;
     height: auto;
+}
+
+#list .book .photo {
+    float: left;
+    margin: 0px 8px 0px 0px;
+    height: 100px;
+    width: 85px; 
+    overflow: hidden;
+}
+
+#list .book .details {
+    height: 100px;
+    overflow: hidden;
+}
+
+#list .book .details h1 {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11pt;
+    margin: 0px;
+    padding: 0px 0px 8px 0px;
+}
+
+#list .book .details h2 {
+    font-family:"Times New Roman",Georgia,Serif;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: normal;
+    margin: 0px;
+    padding: 0px;
 }
 
 #list .new {
@@ -331,7 +356,7 @@ tr.odd { background: #000000; }
 /* the terrible columns blocks */
 #columns {
     position: absolute;
-    top: 32px;
+    top: 36px;
     bottom: 18px;
     left: 6px;
     right: 6px;
@@ -505,4 +530,3 @@ div.tag {
 .tag a:hover {
     background-color: #606060;
 }
-

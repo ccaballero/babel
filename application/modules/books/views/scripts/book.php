@@ -1,9 +1,11 @@
 <div class="element book" name="book_<?php echo $this->book->book ?>" rel="#book_info">
-    <div class="photo" style="float:left; margin: 0em 1.0em 0em 0em; height: 100px; width: 85px; background-image: url('<?php echo $this->baseUrl($this->book->getUrlPhoto()) ?>')"></div>
-    <div>
-        <p><span class="bold"><?php echo $this->translate->_('Title') ?>:</span> <?php echo $this->none($this->book->title) ?></p>
+    <div class="photo">
+        <img src="<?php echo $this->baseUrl($this->book->getUrlPhoto()) ?>" alt="" title="" />
+    </div>
+    <div class="details">
+        <h1><?php echo $this->none($this->book->title) ?></h1>
     <?php if (!empty($this->book->author)) { ?>
-        <p><span class="bold"><?php echo $this->translate->_('Author') ?>:</span> <?php echo $this->book->author ?></p>
+        <h2><?php echo $this->book->author ?></h2>
     <?php } ?>
     </div>
 </div>

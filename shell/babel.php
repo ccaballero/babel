@@ -5,6 +5,8 @@ include_once('__header.php');
 class Shell_Babel extends Yachay_Console
 {
     public $directory = '';
+    public $files = array();
+    
     public $regex_type = 0;
     public $regex = array(
         '', // because fuck you, that's why
@@ -17,9 +19,13 @@ class Shell_Babel extends Yachay_Console
         'directory|d=s' => 'set directory for scanning',
         'regex|r=i'     => 'set the regex type for use',
         'generate|g'    => 'generation meta books.',
+        'thumbs|t'      => 'generation thumbnails.',
+        'publish|p'     => 'publish the books',
         'font|f=s'      => 'generation of figlet',
         'figlet|l=s'    => 'generation of figlet',
     );
+    
+    public $path_font = null; 
 
     public function index() {
         try {
@@ -69,47 +75,44 @@ class Shell_Babel extends Yachay_Console
     }
 
     public function directory($bootstrap, $getopt) {
-        $this->directory = $getopt->getOption('directory');
+        $this->directory = realpath($getopt->getOption('directory'));
         echo str_pad('Set the directory to: ' . $this->directory, $this->count, $this->separator);
+
+
+        $adapters = array();
+        $warnings = array();
+        $metas = array();
+
+        $scanner = new Babel_Utils_DirectoryScanner();
+        $this->files = $scanner->scan_collection($this->directory, $adapters, $warnings, $metas);
+        
         echo $this->ok;
         return true;
     }
 
     public function regex($bootstrap, $getopt) {
-        $this->regex_type = intval($getopt->getOption('regex'));
         echo str_pad('Set the regex to: ' . $this->regex[$this->regex_type], $this->count, $this->separator);
+        $this->regex_type = intval($getopt->getOption('regex'));
+        
         echo $this->ok;
         return true;
     }
 
+    // Directory and regex required
     public function generate() {
         try {
             echo str_pad('Setting metabook information', $this->count, $this->separator);
-
-            $directory = $this->directory;
-            $directory = realpath($directory);
-            
             $regex = $this->regex[$this->regex_type];
 
-            $adapters = array();
-            $warnings = array();
-            $metas = array();
-
             $model_meta = new Books_Meta();
-            $scanner = new Babel_Utils_DirectoryScanner();
-            $files = $scanner->scan_collection($directory, $adapters, $warnings, $metas);
             echo $this->ok;
 
-            foreach ($files as $file) {
+            foreach ($this->files as $file) {
                 $split = array();
                 preg_match($regex, $file->file, $split);
                 echo str_pad($split['title'], $this->count * 2, $this->separator);
 
                 $hash = $file->hash;
-
-                $file->tsregister = time();
-                $file->published = true;
-                $file->save();
 
                 $meta = $model_meta->findByHash($hash);
                 if (empty($meta)) {
@@ -120,9 +123,30 @@ class Shell_Babel extends Yachay_Console
                 $meta->title = $split['title'];
                 $meta->save();
 
+                echo $this->ok;
+            }
+
+            return true;
+        } catch (Exception $e) {
+            $this->messages[] = $e->getMessage();
+        }
+
+        $this->__dump();
+        return false;
+    }
+
+    // Directory required
+    public function thumbs() {
+        try {
+            echo str_pad('Generate of thumbnails', $this->count, $this->separator);
+            echo $this->ok;
+
+            foreach ($this->files as $file) {
+                echo str_pad('Thumbnail for ' . $file->file, $this->count, $this->separator);
                 if (!$file->hasThumb()) {
                     try {
                         $image = new Imagick($file->getPath() . '[0]');
+
                         $image->setImageFormat('jpg');
                         $image->thumbnailImage(0, 390);
                         $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg');
@@ -133,7 +157,31 @@ class Shell_Babel extends Yachay_Console
                     } catch (Exception $e) {
                     }
                 }
+                echo $this->ok;
+            }
 
+            return true;
+        } catch (Exception $e) {
+            $this->messages[] = $e->getMessage();
+        }
+
+        $this->__dump();
+        return false;
+    }
+    
+    // Directory required
+    public function publish() {
+        try {
+            echo str_pad('Publish the books', $this->count, $this->separator);
+            echo $this->ok;
+
+            foreach ($this->files as $file) {
+                echo str_pad('Publish ' . $file->file, $this->count, $this->separator);
+                if (!$file->published) {
+                    $file->tsregister = time();
+                    $file->published = true;
+                    $file->save();
+                }
                 echo $this->ok;
             }
 
@@ -163,7 +211,6 @@ class Shell_Babel extends Yachay_Console
         return true;
     }
 
-    public $path_font = null; 
     public function font($bootstrap, $getopt) {
         $this->font = $getopt->getOption('font');
         return true;

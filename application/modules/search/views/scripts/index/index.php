@@ -5,6 +5,7 @@
     <?php foreach($this->books as $book) { ?>
         <?php echo $this->partial('books/views/scripts/book.php', array('book' => $book, 'translate' => $this->translate)) ?>
     <?php } ?>
+    <div class="clear"></div>
 <?php } else { ?>
     <p class="description"><?php echo $this->translate->_('No results found') ?></p>
 <?php } ?>
