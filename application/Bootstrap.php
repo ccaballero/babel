@@ -107,8 +107,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
                 $view->headLink()->appendStylesheet($view->baseUrl('/media/new_css/firefox.css'));
             } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
-//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/webkit.css'));
-//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
+                $view->headLink()->appendStylesheet($view->baseUrl('/media/new_css/webkit.css'));
             } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'konqueror')) {
 //                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
 //                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/konqueror.css'));
