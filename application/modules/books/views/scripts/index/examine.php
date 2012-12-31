@@ -48,7 +48,7 @@
 
                     <td class="text-left"><?php echo $this->escape($book->directory) ?></td>
                     <td class="text-left"><?php echo $book->file ?></td>
-                    <td class="text-center"><?php echo strtolower(substr($book->hash, 1, 32)) ?></td>
+                    <td class="text-center"><?php echo strtolower(substr($book->hash, 0, 16)) ?></td>
                     <td class="text-right"><?php echo $this->size($book->size) ?></td>
 
                     <td>
