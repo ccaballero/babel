@@ -77,7 +77,7 @@ $(document).ready(function(){
         onBeforeLoad:function(){
             $.getJSON(baseUrl+'/books/'+book.substring(5)+'/info.json',function(json){
                 $('#title').focus();
-                $('#thumb').css('background-image','url('+baseUrl+'/books/'+book.substring(5)+'/thumb/1)');
+                $('#thumb').css('background-image','url('+baseUrl+'/books/'+book.substring(5)+'/thumb)');
                 $('#title').attr('value',json.book.title);
                 $('#author').attr('value',json.book.author);
                 $('#publisher').attr('value',json.book.publisher);

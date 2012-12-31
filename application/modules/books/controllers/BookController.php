@@ -61,7 +61,6 @@ class Books_BookController extends Babel_Action
         $book = $model_metas->findByHash($hash);
 
         if (!empty($file)) {
-            
             // Taxonomies Management
             $root_catalogs_1 = $model_catalogs->selectRootsByType('t');
             
@@ -253,19 +252,27 @@ class Books_BookController extends Babel_Action
                 flush();
                 readfile($file->getPath());
             } catch (Exception $e) {}
-        }
 
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+            $this->_helper->layout->disableLayout();
+            $this->_helper->viewRenderer->setNoRender();
+        } else {
+            $this->_helper->flashMessenger->addMessage($this->translate->_('Book not found'));
+            $this->_helper->redirector('index', 'index', 'frontpage');
+        }
     }
 
     public function thumbAction() {
         $request = $this->getRequest();
         $hash = $request->getParam('book');
 
-        $page = $request->getParam('page', 1);
-        $page = intval($page);
-        $page = $page <= 0 ? 1 : $page;
+        $page = intval($request->getParam('page', 0));
+        $page = $page < 0 ? 0 : $page;
+
+        $height = intval($request->getParam('height', 0));
+        $height = $height < 0 ? 0 : $height;
+
+        $width = intval($request->getParam('width', 0));
+        $width = $width < 0 ? 0 : $width;
 
         $model_collection = new Books_Collection();
         $book = $model_collection->findByHash($hash);
@@ -274,9 +281,9 @@ class Books_BookController extends Babel_Action
             try {
                 $this->getResponse()->setHeader('Content-Type', 'image/png');
 
-                $image = new Imagick($book->getPath() . '[0]');
+                $image = new Imagick($book->getPath() . '[' . $page . ']');
                 $image->setImageFormat('png');
-                $image->thumbnailImage(0, 390);
+                $image->thumbnailImage($width, $height);
                 echo $image;
             } catch (Exception $e) {}
         }
@@ -372,6 +379,29 @@ class Books_BookController extends Babel_Action
         }
         
         $this->view->file = $file;
+        $this->view->book = $book;
         $this->view->form = $form;
+    }
+
+    public function previewAction() {
+        $request = $this->getRequest();
+        $hash = $request->getParam('book');
+
+        $model_metas = new Books_Meta();
+
+        $hash = $request->getParam('book');
+        $book = $model_metas->findByHash($hash);
+
+        $page = $request->getParam('page', 0);
+        $page = intval($page);
+        $page = $page <= 0 ? 0 : $page;
+        
+        if (!empty($book)) {
+            $this->view->book = $book;
+            $this->view->page = $page;
+        } else {
+            $this->_helper->flashMessenger->addMessage($this->translate->_('Book not found'));
+            $this->_helper->redirector('index', 'index', 'frontpage');
+        }
     }
 }

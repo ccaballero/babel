@@ -181,6 +181,7 @@ tr.odd { background: #000000; }
 
 #classic #details {
     float: left;
+    margin-top: 10px;
 }
 
 #classic #details ul {
@@ -587,4 +588,19 @@ div.tag {
 
 .tag a:hover {
     background-color: #606060;
+}
+
+/* preview function */
+#preview {
+/*    background-color: #ffffff;*/
+    margin-top: 8px;
+    padding: 8px;
+    width: 900px;
+}
+
+#preview div {
+    margin: 0px auto;
+    width: 600px;
+    height: auto;
+    border: 3px solid #ffffff;
 }
