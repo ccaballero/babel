@@ -240,8 +240,8 @@ table {
 }
 
 #form select {
-    height: 28px;
-    padding: 0.20em 0.6em 0em 0em;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 
 #form textarea {

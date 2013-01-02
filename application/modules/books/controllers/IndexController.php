@@ -71,7 +71,7 @@ class Books_IndexController extends Babel_Action
         $index_bookstore = intval($request->getParam('bookstore'));
         $index_directory = intval($request->getParam('directory'));
 
-        $bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
+        $bookstores = Zend_Registry::get('config')->babel->properties->bookstores;
         $bookstores = $bookstores->toArray();
 
         if (!isset($bookstores[$index_bookstore])) {
@@ -194,7 +194,7 @@ class Books_IndexController extends Babel_Action
     public function exportAction() {
         $this->requireLogin();
 
-        $_bookstores = Zend_Registry::get('Config')->babel->properties->bookstores;
+        $_bookstores = Zend_Registry::get('config')->babel->properties->bookstores;
         $bookstores = $_bookstores->toArray();
 
         $form = new Books_Form_Export();

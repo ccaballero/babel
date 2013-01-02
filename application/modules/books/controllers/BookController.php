@@ -309,7 +309,7 @@ class Books_BookController extends Babel_Action
                 $file->file = $request->getParam('file');
 
                 if ($file->inDisk()) {
-                    $config = Zend_Registry::get('Config');
+                    $config = Zend_Registry::get('config');
 
                     $file->size = filesize($file->getPath());
                     $file->hash = @hash_file($config->babel->properties->algo, $file->getPath());

@@ -9,20 +9,3 @@
 .color4 {
     background: -moz-linear-gradient(top, #707070, #e0e0e0);
 }
-
-#column1, #column2 {
-    background: -moz-linear-gradient(left, #dddddd, #888888);
-}
-
-#column1 ul li, #column2 ul li {
-    background: -moz-linear-gradient(top, #ffffff, #888888);
-}
-
-#column1 ul li.active a, #column1 ul li a:hover,
-#column2 ul li.active a, #column2 ul li a:hover {
-    background: -moz-linear-gradient(top, #08395c, #74b7e7);
-}
-
-#column3 {
-    background: -moz-linear-gradient(left center , #dddddd, #bbbbbb) repeat scroll 0 0 transparent;
-}

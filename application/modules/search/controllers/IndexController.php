@@ -21,26 +21,40 @@ class Search_IndexController extends Babel_Action
         $keyword->tsregister = time();
         $keyword->save();
 
-        Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(0);
-        $index = Zend_Search_Lucene::open(APPLICATION_PATH . '/../data/lucene');
+        try {
+            if ($q == '*') {
+                $model_collection = new Books_Collection();
+                $hits = $model_collection->selectWithMetas();
+            } else {
+                Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(1);
 
-        $hits = $index->find($value);
+                $config = Zend_Registry::get('config');
+                $index = Zend_Search_Lucene::open($config->babel->properties->lucene);
+
+                $hits = $index->find($value);
+            }
+        } catch (Exception $e) {
+            $hits = array();
+        }
+
         $books = array();
 
         foreach ($hits as $hit) {
             $class = new Books_Book_Empty();
 
-            $class->id = $hit->id;
-            $class->score = $hit->score;
+            if (isset($hit->id)) {
+                $class->id = $hit->id;
+                $class->score = $hit->score;
+                $class->filename = $hit->filename;
+            }
 
             $class->book = $hit->book;
+
             $class->title = $hit->title;
             $class->author = $hit->author;
             $class->publisher = $hit->publisher;
             $class->language = $hit->language;
             $class->year = $hit->year;
-
-            $class->filename = $hit->filename;
 
             $books[] = $class;
         }

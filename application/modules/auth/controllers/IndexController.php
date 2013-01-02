@@ -9,7 +9,7 @@ class Auth_IndexController extends Babel_Action
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
 
-                $config = Zend_Registry::get('Config');
+                $config = Zend_Registry::get('config');
                 $key = $config->babel->properties->key;
 
                 $dbAdapter = Zend_Db_Table::getDefaultAdapter();

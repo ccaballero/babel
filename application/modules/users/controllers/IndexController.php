@@ -28,7 +28,7 @@ class Users_IndexController extends Babel_Action
                 $model_users = new Users();
                 $user = $model_users->createRow();
 
-                $key = Zend_Registry::get('Config')->babel->properties->key;
+                $key = Zend_Registry::get('config')->babel->properties->key;
 
                 $user->role = $this->user->role;
                 $user->contact = $this->user->ident;

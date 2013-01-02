@@ -30,7 +30,9 @@ class Shell_Babel extends Yachay_Console
     public function index() {
         try {
             echo str_pad('indexing the books', $this->count, $this->separator);
-            $index = Zend_Search_Lucene::create(APPLICATION_PATH . '/../data/lucene');
+            
+            $config = Zend_Registry::get('config');
+            $index = Zend_Search_Lucene::create($config->babel->properties->lucene);
 
             $model_collection = new Books_Collection();
             $books = $model_collection->selectWithMetas();

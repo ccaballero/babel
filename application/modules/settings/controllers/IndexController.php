@@ -25,7 +25,7 @@ class Settings_IndexController extends Babel_Action
                     $this->user->username = $username;
 
                     // Move the FTP directory
-                    $ftp = Zend_Registry::get('Config')->babel->properties->ftp;
+                    $ftp = Zend_Registry::get('config')->babel->properties->ftp;
                     rename($ftp->root . '/' . $ftp->prefix . $this->user->username, $ftp->root . '/' . $ftp->prefix . $username);
 
                     $this->_helper->flashMessenger->addMessage($this->translate->_('Your username was updated successfully'));
@@ -49,7 +49,7 @@ class Settings_IndexController extends Babel_Action
             if ($form->getSubForm('password')->isValid($request->getPost())) {
                 $new_password = $form->getSubForm('password')->getElement('password2')->getValue();
                 if (!empty($new_password)) {
-                    $config = Zend_Registry::get('Config');
+                    $config = Zend_Registry::get('config');
                     $key = $config->babel->properties->key;
                     $this->user->password = sha1($key . $new_password . $key);
 

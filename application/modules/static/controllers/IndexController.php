@@ -6,7 +6,7 @@ class Static_IndexController extends Babel_Action
         $request = $this->getRequest();
         $page = $request->getParam('page');
 
-        $config = Zend_Registry::get('Config');
+        $config = Zend_Registry::get('config');
         $static = $config->babel->static;
 
         $this->view->page = $page;

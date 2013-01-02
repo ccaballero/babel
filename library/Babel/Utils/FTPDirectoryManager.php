@@ -3,7 +3,7 @@
 class Babel_Utils_FTPDirectoryManager
 {
     public static function createAccount($username) {
-        $config = Zend_Registry::get('Config');
+        $config = Zend_Registry::get('config');
 
         $ftp = $config->babel->properties->ftp;
         $ftp_dir = $ftp->root . DIRECTORY_SEPARATOR . $ftp->prefix . $username;

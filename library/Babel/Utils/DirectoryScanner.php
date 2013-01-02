@@ -47,7 +47,7 @@ class Babel_Utils_DirectoryScanner
 
     public function scan_files($directory) {
         $files = array();
-        $config = Zend_Registry::get('Config');
+        $config = Zend_Registry::get('config');
 
         $subdirectories = @scandir($directory);
         if ($subdirectories) {
