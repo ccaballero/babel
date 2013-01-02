@@ -1,0 +1,193 @@
+/*============================================================================*/
+/* general cleaner */
+
+/*============================================================================*/
+/* default behavior for tags */
+
+/*============================================================================*/
+/* generic behaviors */
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+
+/*============================================================================*/
+/* palette colors */
+
+/*============================================================================*/
+/* fundamental structure */
+#main {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12pt;
+}
+
+/*============================================================================*/
+/* top menu settings */
+#head #menubar .primary a {
+    font-weight: bold;
+}
+
+#head ul li a {
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 9pt;
+}
+
+/*============================================================================*/
+/* bottom menu settings */
+#foot ul li a {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 9pt;
+}
+
+/*============================================================================*/
+/* frontpage settings */
+
+/*============================================================================*/
+/* classic settings */
+#classic #details dl dt {
+    font-weight: bold;
+}
+
+/*============================================================================*/
+/* form settings */
+#form label {
+    font-size: 10pt;
+}
+
+#form dd ul.errors li {
+    font-size: 8pt;
+}
+
+#form input[type="text"],
+#form input[type="password"],
+#form input[type="file"],
+#form select,
+#form textarea,
+#form input[type="submit"],
+button {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11pt;
+}
+
+/*============================================================================*/
+/* block for flash messages */
+#main #messages p.message {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 9pt;
+}
+
+/*============================================================================*/
+/* main settings */
+#main h1 {
+    font-family: "Times New Roman",Georgia,Serif;
+    font-size: 26pt;
+    font-weight: normal;
+}
+
+/*============================================================================*/
+/* breadcrumb settings */
+#breadcrumb a {
+    font-family: "Times New Roman",Georgia,Serif;
+    font-size: 11pt;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/*============================================================================*/
+/* list settings */
+#list .element h2 {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15pt;
+    font-weight: normal;
+}
+
+#list p.description {
+    font-size: 11pt;
+}
+
+#list .book .details h1 {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11pt;
+}
+
+#list .book .details h2 {
+    font-family:"Times New Roman",Georgia,Serif;
+    font-size: 10pt;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/*============================================================================*/
+/* 3-columns settings */
+#column1 ul li a,
+#column2 ul li a {
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 9pt;
+}
+
+#column3 {
+    font-size: 10pt;
+}
+
+#column3 h1,
+#column3 h2,
+#column3 h3 {
+    font-weight: normal;
+}
+
+#main #column3 h1 {
+    font-size: 18pt;
+}
+
+#main #column3 h2 {
+    font-size: 13pt;
+}
+
+#main #column3 h3 {
+    font-size: 11pt;
+    font-style: italic;
+}
+
+#column3 p,
+#column3 span,
+#column3 blockquote,
+#column3 ol,
+#column3 li {
+    font-size: inherit;
+}
+
+#main #column3 table tr td {
+    font-size: 8pt;
+}
+
+#column3 a {
+    font-size: inherit;
+    font-weight: bold;
+}
+
+/*============================================================================*/
+/* overlay settings */
+.overlay h1#book_title {
+    font-family: "Times New Roman",Georgia,Serif;
+    font-size: 20pt;
+}
+
+.overlay .details p {
+    font-size: 9pt;
+}
+
+/*============================================================================*/
+/* misc settings */
+.tool-panel input[type="submit"] {
+    font-size: 8pt;
+}
+
+/*============================================================================*/
+/* Users list customization */
+
+/*============================================================================*/
+/* tagcloud list settings */
+.tag a {
+    font-size: 10pt;
+}
+
+/*============================================================================*/
+/* preview settings */

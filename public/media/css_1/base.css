@@ -1,0 +1,580 @@
+/*============================================================================*/
+/* general cleaner */
+body {
+    background-image: url('../img/pirate.png');
+}
+
+body,
+ul,
+li,
+a,
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*============================================================================*/
+/* default behavior for tags */
+a {
+    text-decoration: none;
+}
+
+a img {
+    border: none;
+}
+
+a:focus,
+input:focus {
+    outline: none;
+}
+
+fieldset {
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/*============================================================================*/
+/* generic behaviors */
+.left { float: left; }
+.right { float: right; }
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.hidden { display: none; }
+.showed { display: inline; }
+
+.clear { clear: both; }
+
+/*============================================================================*/
+/* palette colors */
+
+/*============================================================================*/
+/* fundamental structure */
+#head {
+    top: 0px;
+    height: 25px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+    position: fixed;
+}
+
+#main {
+    padding: 30px 5px 20px 5px;
+}
+
+#foot {
+    bottom: 0px;
+    height: 15px;
+    left: 0px;
+    right: 0px;
+    padding-top: 3px;
+    z-index: 8;
+    position: fixed;
+}
+
+/*============================================================================*/
+/* top menu settings */
+#head #menubar {
+    display: block;
+}
+
+#head #menubar .primary {
+    padding: 0px 10px 3px 10px;
+}
+
+#head #menubar .hidden {
+    display: none;
+}
+
+#head #toolbar {
+    display: block;
+    margin-right: 10px;
+}
+
+#head ul {
+    height: 25px;
+    float: left;
+}
+
+#head ul li {
+    height: 25px;
+    list-style: none;
+    float: left;
+    margin: 0px 0px 0px 10px;
+}
+
+#head ul li a {
+    height: 25px;
+    display: block;
+    padding: 0px 5px;
+    line-height: 25px;
+}
+
+#head ul li.primary {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+/*============================================================================*/
+/* bottom menu settings */
+#foot #translate {
+    display: block;
+    margin-left: 10px;
+}
+
+#foot #translate ul li {
+    margin: -1px 2px 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom: none;
+}
+
+#foot #footer {
+    display: block;
+    margin-right: 10px;
+}
+
+#foot ul {
+    height: 15px;
+    list-style: none;
+}
+
+#foot ul li {
+    display: inline-block;
+}
+
+#foot ul li a {
+    float: left;
+    padding: 0px 5px;
+}
+
+/*============================================================================*/
+/* frontpage settings */
+#central {
+    position: absolute;
+    height: 472px;
+    width: 840px;
+    top: 50%;
+    left: 50%;
+    margin-left: -420px;
+    margin-top: -235px;
+    border-width: 3px;
+    border-style: solid;
+}
+
+#central img.switcher {
+    opacity: 0.1;
+    height: 100%;
+    width: 100%;
+}
+
+#central #form {
+    position: absolute;
+    left: 1.0em;
+    top: 1.0em;
+}
+
+/*============================================================================*/
+/* classic settings */
+#classic {
+    width: 960px;
+    margin: 0em auto;
+    margin-bottom: 20px;
+}
+
+#classic #thumb {
+    float: left;
+    margin: 10px;
+}
+
+#classic #details {
+    float: left;
+    margin-top: 10px;
+}
+
+#classic #details ul {
+    list-style-type: none;
+}
+
+#classic #details ul li {
+    display: inline-block;
+    margin: 0px 4px;
+}
+
+/*============================================================================*/
+/* form settings */
+#form label {
+    margin-left: 10px;
+}
+
+#form dt {
+    margin-top: 0.6em;
+}
+
+#form dd {
+    position: relative;
+    margin-left: 2.0em;
+}
+
+#form dd ul.errors {
+    position: absolute;
+    top: 0em;
+    left: 360px;
+}
+
+#form dd ul.errors li {
+    width: 430px;
+    list-style-type: none;
+}
+
+#form input[type="text"],
+#form input[type="password"],
+#form input[type="file"] {
+    width: 308px;
+    height: 26px;
+    padding: 0px 10px 0px 28px;
+    border-radius: 7px;
+}
+
+#form select {
+    height: 28px;
+    padding: 0.20em 0.6em 0em 0em;
+}
+
+#form textarea {
+    width: 333px;
+    height: 100px;
+    padding: 0.4em 0.4em 0.4em 0.4em;
+    border-radius: 7px;
+}
+
+#form input[type="text"],
+#form input[type="password"],
+#form input[type="file"],
+#form textarea {
+    margin: 0.1em 0em 0.5em 0em;
+    border: none;
+}
+
+input[type="submit"],
+button {
+    padding: 3px 10px;
+    border-radius: 7px;
+    border: none;
+}
+
+#form input.find,
+#form input.user,
+#form input.email,
+#form input.photo,
+#form input.key,
+#form input.label,
+#form input.bookstore,
+#form input.directory,
+#form input.world,
+#form input.flag,
+#form input.calendar {
+    background-repeat: no-repeat;
+    background-position: 8px 5px;
+}
+
+#form input.find { background-image: url('../img/icons/find.png'); }
+#form input.user { background-image: url('../img/icons/user.png'); }
+#form input.email { background-image: url('../img/icons/email.png'); }
+#form input.photo { background-image: url('../img/icons/photo.png'); }
+#form input.key { background-image: url('../img/icons/key.png'); }
+#form input.label { background-image: url('../img/icons/page.png'); }
+#form input.bookstore { background-image: url('../img/icons/book_open.png'); }
+#form input.directory { background-image: url('../img/icons/folder.png'); }
+#form input.world { background-image: url('../img/icons/world.png'); }
+#form input.flag { background-image: url('../img/icons/flag_yellow.png'); }
+#form input.calendar { background-image: url('../img/icons/calendar.png'); }
+
+/*============================================================================*/
+/* block for flash messages */
+#messages {
+    position: absolute;
+    z-index: 10;
+    top: 40px;
+    right: 15px;
+    width: 50%;
+    border-width: 3px;
+    border-style: solid;
+}
+
+/*============================================================================*/
+/* main settings */
+#main h1 {
+    margin: 10px 20px 0px 20px;
+}
+
+#main p.message {
+    padding: 3px 5px;
+    margin-right: 40px;
+}
+
+#main div.closeable {
+    margin: 1px 5px 0px 5px;
+}
+
+/*============================================================================*/
+/* breadcrumb settings */
+#breadcrumb {
+    margin: 0px 20px;
+    display: inline;
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+#breadcrumb a {
+    padding: 0px 10px;
+    border-left-width: 1px;
+    border-left-style: solid;
+}
+
+/*============================================================================*/
+/* list settings */
+#list {
+    margin: 0px 0px 0px 0px;
+}
+
+#list .element {
+    margin: 5px;
+    padding: 10px;
+    float: left;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#list .element h2 {
+    padding: 0px;
+    margin: 0px 0px 4px 0px;
+    height: 46px;
+    overflow: hidden;
+}
+
+#list p.description {
+    padding: 0px 20px 10px 20px;
+    text-align: justify;
+}
+
+#list .book,
+#list .catalog {
+    width: 333px;
+    height: auto;
+}
+
+#list .book .photo {
+    float: left;
+    margin: 0px 8px 0px 0px;
+    height: 100px;
+    width: 85px; 
+    overflow: hidden;
+}
+
+#list .book .details {
+    height: 100px;
+    overflow: hidden;
+}
+
+#list .book .details h1 {
+    margin: 0px;
+    padding: 0px 0px 8px 0px;
+}
+
+#list .book .details h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+#list .new {
+    width: 66px;
+}
+
+/*============================================================================*/
+/* 3-columns settings */
+#columns {
+    position: absolute;
+    top: 36px;
+    bottom: 18px;
+    left: 6px;
+    right: 6px;
+}
+
+#column1,
+#column2,
+#column3 {
+    float: left;
+    margin-bottom: 28px;
+}
+
+#column1,
+#column1 ul li,
+#column1 ul li.active a,
+#column1 ul li a:hover,
+#column2,
+#column2 ul li,
+#column2 ul li.active a,
+#column2 ul li a:hover {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#column2 {
+    border-top-left-radius: 0px;
+}
+
+#column1,
+#column2 {
+    max-width: 200px;
+    margin-top: 20px;
+}
+
+#column1 ul,
+#column2 ul {
+    list-style-type: none;
+    margin: 10px 0px 10px 10px;
+}
+
+#column1 ul li,
+#column2 ul li {
+    margin: 3px 0px;
+    padding: 0px;
+}
+
+#column1 ul li a,
+#column2 ul li a {
+    display: block;
+    text-align: right;
+    padding: 5px 12px;
+}
+
+#column2.square,
+#column3.square {
+    border-bottom-left-radius: 0px;
+}
+
+#column3 {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#column3 h1,
+#column3 h2,
+#column3 h3 {
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+#column3 h1,
+#column3 h2,
+#column3 h3,
+#column3 p,
+#column3 span {
+    margin: 5px 0px 5px 8px;
+}
+
+#column3 ol {
+    margin-left: 10px;
+}
+
+/*============================================================================*/
+/* overlay settings */
+.overlay {
+    display: none;
+    padding: 10px 30px 10px 10px;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.overlay .close {
+    background-image: url('../img/close.png');
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+
+.overlay #thumb,
+.overlay .details {
+    float: left;
+}
+
+.overlay #thumb {
+    margin: 0px 10px 0px 0px;
+    height: 400px;
+    width: 300px;
+    background-repeat: no-repeat;
+}
+
+.overlay h1#book_title {
+    margin: 0px 0px 8px 0px;
+    padding: 0px;
+}
+
+.overlay .details div {
+    margin-bottom: 8px;
+}
+
+/*============================================================================*/
+/* misc settings */
+#return-label,
+#return-element {
+    display: none;
+}
+
+.tool-panel input[type="submit"] {
+    padding: 1px 4px;
+    margin: 1px 1px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/*============================================================================*/
+/* Users list customization */
+#list .user {
+    width: 100px;
+    height: 100px;
+}
+
+/*============================================================================*/
+/* tagcloud list settings */
+div.tag {
+    float: left;
+    display: inline;
+    line-height: 26px;
+}
+
+.tag a {
+    padding: 2px 5px;
+    margin: 0em 3px;
+    border-width: 1px;
+    border-style: dashed;
+}
+
+/*============================================================================*/
+/* preview settings */
+#preview {
+    margin-top: 8px;
+    padding: 8px;
+    width: 900px;
+}
+
+#preview div {
+    margin: 0px auto;
+    width: 600px;
+    height: auto;
+    border-width: 3px;
+    border-style: solid;
+}

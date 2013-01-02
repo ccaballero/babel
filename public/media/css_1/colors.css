@@ -1,0 +1,213 @@
+/*============================================================================*/
+/* general cleaner */
+body {
+    background-color: #b0b0b0;
+}
+
+/*============================================================================*/
+/* default behavior for tags */
+
+/*============================================================================*/
+/* generic behaviors */
+tr.even { background-color: #202020; }
+tr.odd { background-color: #ffffff; }
+
+/*============================================================================*/
+/* palette colors */
+/*.color1 { background-color: #f10026; }
+.color2 { background-color: #ffca00; }
+.color3 { background-color: #3bda00; }
+.color4 { background-color: #2c17b1; }*/
+.color1 { background-color: #202020; }
+
+.color2,
+.color3,
+.color4 {
+    background-color: #707070;
+}
+
+/*============================================================================*/
+/* fundamental structure */
+#head {
+    background-color: #606060;
+    border-bottom: 1px solid #606060;
+}
+
+#main {
+    color: #303030;
+}
+
+#foot {
+    background-color: #bfbfbf;
+}
+
+/*============================================================================*/
+/* top menu settings */
+#head #menubar .primary a {
+    color: #ffffff;
+}
+
+#head ul li a {
+    color: #ffffff;
+}
+
+/*============================================================================*/
+/* bottom menu settings */
+#foot #translate ul li {
+    border-color: #606060;
+}
+
+#foot ul li a {
+    color: #606060;
+}
+
+/*============================================================================*/
+/* frontpage settings */
+#central {
+    border-color: #606060;
+}
+
+/*============================================================================*/
+/* classic settings */
+
+/*============================================================================*/
+/* form settings */
+#form select {
+    color: #000000;
+}
+
+#form input[type="text"],
+#form input[type="password"],
+#form input[type="file"],
+#form textarea {
+    color: #000000;
+}
+
+input[type="submit"],
+button {
+    background-color: #ffffff;
+}
+
+#form input.find,
+#form input.user,
+#form input.email,
+#form input.photo,
+#form input.key,
+#form input.label,
+#form input.bookstore,
+#form input.directory,
+#form input.world,
+#form input.flag,
+#form input.calendar {
+    background-color: #ffffff;
+}
+
+/*============================================================================*/
+/* block for flash messages */
+#messages {
+    border-color: #a6a600;
+    background-color: #ffff73;
+    color: #000000;
+}
+
+/*============================================================================*/
+/* main settings */
+
+/*============================================================================*/
+/* breadcrumb settings */
+#breadcrumb {
+    border-right-color: #505050;
+}
+
+#breadcrumb a {
+    color: #505050;
+    border-left-color: #505050;
+}
+
+/*============================================================================*/
+/* list settings */
+#list .element {
+    border-color: #606060;
+}
+
+#list .element:hover {
+    background-color: #dddddd;
+}
+
+#list .catalog {
+    background-color: #808080;
+}
+
+#list a {
+    color: #ffffff;
+}
+
+/*============================================================================*/
+/* 3-columns settings */
+#column1, #column2, #column3 {
+    background-color: #dddddd;
+}
+
+#column1 ul li, #column2 ul li {
+    background-color: #888888;
+}
+
+#column1 ul li.active a, #column1 ul li a:hover,
+#column2 ul li.active a, #column2 ul li a:hover {
+    background-color: #74b7e7;
+    color: #ffffff;
+}
+
+#column1 ul li a, #column2 ul li a {
+    color: #000000;
+}
+
+#column3 h1, #column3 h2, #column3 h3 {
+    color: #000000;
+}
+
+#column3 p, #column3 span, #column3 blockquote, #column3 ol, #column3 li {
+    color: #404040;
+}
+
+#column3 table th {
+    color: #000000;
+}
+
+#column3 a {
+    color: #404040;
+}
+
+/*============================================================================*/
+/* overlay settings */
+.overlay {
+    background: #ffffff;
+    border-color: #606060;
+}
+
+/*============================================================================*/
+/* misc settings */
+.tool-panel input[type="submit"] {
+    border-color: #000000;
+}
+
+/*============================================================================*/
+/* Users list customization */
+
+/*============================================================================*/
+/* tagcloud list settings */
+.tag a {
+    color: #ffffff;
+    background: #303030;
+    border-color: #aaaaaa;
+}
+
+.tag a:hover {
+    background-color: #606060;
+}
+
+/*============================================================================*/
+/* preview settings */
+#preview div {
+    border-color: #ffffff;
+}

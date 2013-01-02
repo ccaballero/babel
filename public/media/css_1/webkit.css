@@ -1,6 +1,5 @@
 #head {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#888888), to(#ffffff));
-    border: none;
 }
 
 .color1 {
@@ -23,34 +22,19 @@
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#888888));
 }
 
-#list .element {
-    border: none;
-}
-
-#list .element:hover {
-    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#000000), to(#303030));
-}
-
-#list .element.admin, #list .element.author {
-    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#303030), to(#000000));
-}
-
 #column1, #column2 {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#dddddd), to(#888888));
 }
 
-#column3 {
-    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#dddddd), to(#d0d0d0));
-}
-
-a.list {
+#column1 ul li, #column2 ul li {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#888888));
 }
 
-a.list.active {
+#column1 ul li.active a, #column1 ul li a:hover,
+#column2 ul li.active a, #column2 ul li a:hover {
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#08395c), to(#74b7e7));
 }
 
-#foot .left a {
-    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#808080));
+#column3 {
+    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#dddddd), to(#bbbbbb));
 }

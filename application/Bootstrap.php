@@ -89,6 +89,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $view = new Zend_View();
 
+        $css_theme = $options['babel']['properties']['css'];
+        
         $view->headTitle($options['babel']['properties']['title']);
         $view->doctype($options['resources']['view']['doctype']);
         $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
@@ -98,19 +100,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                            ->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'')
                            ->appendFile($view->baseUrl('/media/js/babel.js', 'text/javascript'));
 
-        $view->headLink()->appendStylesheet($view->baseUrl('/media/new_css/base.css'))
-                         ->appendStylesheet($view->baseUrl('/media/new_css/tipography.css'))
-                         ->appendStylesheet($view->baseUrl('/media/new_css/colors.css'));
+        $view->headLink()->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/base.css'))
+                         ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/tipography.css'))
+                         ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/colors.css'))
+                         ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/shadows.css'));
 
         // Browser semi-detection
         if (isset($_SERVER) && isset($_SERVER['HTTP_USER_AGENT'])) {
             if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/new_css/firefox.css'));
+                $view->headLink()->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/firefox.css'));
             } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/new_css/webkit.css'));
-            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'konqueror')) {
-//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/compat.css'));
-//                $view->headLink()->appendStylesheet($view->baseUrl('/media/css/konqueror.css'));
+                $view->headLink()->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/webkit.css'));
             }
         }
 

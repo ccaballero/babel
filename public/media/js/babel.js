@@ -12,9 +12,9 @@ var width=function(){
     }};
 var resize=function(){
     $('#column2').css('min-height',$('#column1').height()+'px');
-    $('#column3').css('min-height',Math.max( $('#columns').height()-22, $('#column2').height() )+'px');
+    $('#column3').css('min-height',Math.max($('#columns').height()-30,$('#column2').height())+'px');
 
-    $('#column3').css('width',($('#columns').width()-$('#column1').width()-$('#column2').width()-20)+'px');
+    $('#column3').css('width',($('#columns').width()-$('#column1').width()-$('#column2').width()-25)+'px');
 
     if(($('#column1').height())==$('#column2').height()){$('#column2').addClass('square');}else{$('#column2').removeClass('square');}
     if(($('#column2').height())==$('#column3').height()){$('#column3').addClass('square');}else{$('#column3').removeClass('square');}
