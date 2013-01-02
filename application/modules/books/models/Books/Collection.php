@@ -21,6 +21,7 @@ class Books_Collection extends Babel_Models_Table
                $this->select()->setIntegrityCheck(false)
                    ->from($this, array('hash', 'directory', 'file'))
                    ->joinLeft('babel_books_meta', 'babel_books_collection.hash = babel_books_meta.book', array('title', 'author', 'publisher', 'year', 'language'))
-                   ->where('babel_books_collection.published = ?', true));
+                   ->where('babel_books_collection.published = ?', true)
+                   ->order('title ASC'));
     }
 }
