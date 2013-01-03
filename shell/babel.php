@@ -19,6 +19,7 @@ class Shell_Babel extends Yachay_Console
         'directory|d=s' => 'set directory for scanning',
         'regex|r=i'     => 'set the regex type for use',
         'generate|g'    => 'generation meta books.',
+        'metas|m=s'     => 'set of metas in collection',
         'thumbs|t'      => 'generation thumbnails.',
         'publish|p'     => 'publish the books',
         'font|f=s'      => 'generation of figlet',
@@ -76,7 +77,7 @@ class Shell_Babel extends Yachay_Console
         return false;
     }
 
-    public function directory($bootstrap, $getopt) {
+    public function directory($getopt) {
         $this->directory = realpath($getopt->getOption('directory'));
         echo str_pad('Set the directory to: ' . $this->directory, $this->count, $this->separator);
 
@@ -92,7 +93,7 @@ class Shell_Babel extends Yachay_Console
         return true;
     }
 
-    public function regex($bootstrap, $getopt) {
+    public function regex($getopt) {
         $this->regex_type = intval($getopt->getOption('regex'));
         echo str_pad('Set the regex to: ' . $this->regex[$this->regex_type], $this->count, $this->separator);
         
@@ -123,6 +124,49 @@ class Shell_Babel extends Yachay_Console
                 }
 
                 $meta->title = $split['title'];
+                $meta->save();
+
+                echo $this->ok;
+            }
+
+            return true;
+        } catch (Exception $e) {
+            $this->messages[] = $e->getMessage();
+        }
+
+        $this->__dump();
+        return false;
+    }
+
+    // Directory required
+    public function metas($getopt) {
+        try {
+            $metas = $getopt->getOption('metas');
+
+            echo str_pad('Setting metas in collection', $this->count, $this->separator);
+            echo $this->ok;
+
+            $json = json_decode($metas);
+            foreach($json as $property => $value) {
+                echo "    $property -> $value" . PHP_EOL;
+            }
+
+            $model_meta = new Books_Meta();
+
+            foreach ($this->files as $file) {
+                echo str_pad('Setting metas for ' . $file->file, $this->count, $this->separator);
+
+                $hash = $file->hash;
+
+                $meta = $model_meta->findByHash($hash);
+                if (empty($meta)) {
+                    $meta = $model_meta->createRow();
+                    $meta->book = $hash;
+                }
+
+                foreach($json as $property => $value) {
+                    $meta->{$property} = $value;
+                }
                 $meta->save();
 
                 echo $this->ok;
@@ -196,7 +240,7 @@ class Shell_Babel extends Yachay_Console
         return false;
     }
     
-    public function figlet($bootstrap, $getopt) {
+    public function figlet($getopt) {
         $font_default = APPLICATION_PATH . '/../data/utils/figlet/mini.flf';
         if (!empty($this->font)) {
             $font_default = $this->font;
@@ -213,7 +257,7 @@ class Shell_Babel extends Yachay_Console
         return true;
     }
 
-    public function font($bootstrap, $getopt) {
+    public function font($getopt) {
         $this->font = $getopt->getOption('font');
         return true;
     }

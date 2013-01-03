@@ -2,12 +2,7 @@
     background: -webkit-gradient(linear, 0 0%, 0 100%, from(#606060), to(#909090));
 }
 
-.color1 { background: -webkit-gradient(linear, 0 0%, 0 100%, from(#202020), to(#909090)); }
-
-.color2,
-.color3,
-.color4 {
-    background: -moz-linear-gradient(top, #707070, #e0e0e0);
-    background: -webkit-gradient(linear, 0 0%, 0 100%, from(#707070), to(#e0e0e0));
-}
-
+.color1 { background: -webkit-gradient(linear, 0 0%, 0 100%, from(#5a065d), to(#e36de7)); }
+.color2 { background: -webkit-gradient(linear, 0 0%, 0 100%, from(#9f5509), to(#f7be74)); }
+.color3 { background: -webkit-gradient(linear, 0 0%, 0 100%, from(#758a08), to(#e1f673)); }
+.color4 { background: -webkit-gradient(linear, 0 0%, 0 100%, from(#08395c), to(#74b7e7)); }

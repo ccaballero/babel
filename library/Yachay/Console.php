@@ -96,7 +96,7 @@ class Yachay_Console
             $command = $param[0];
 
             if ($this->getopt->getOption($command)) {
-                $result = $this->{$command}($bootstrap, $this->getopt);
+                $result = $this->{$command}($this->getopt, $bootstrap);
                 $flag_used = true;
 
                 if ($result) {

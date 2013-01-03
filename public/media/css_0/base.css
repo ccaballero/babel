@@ -232,6 +232,16 @@ table {
 
 #form input[type="text"],
 #form input[type="password"],
+#form input[type="file"],
+#form input[type="submit"],
+#form select,
+#form textarea,
+button {
+    margin: 0px 0px 4px 0px;
+}
+
+#form input[type="text"],
+#form input[type="password"],
 #form input[type="file"] {
     width: 308px;
     height: 26px;

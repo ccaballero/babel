@@ -14,13 +14,10 @@ tr.odd { background-color: #ffffff; }
 
 /*============================================================================*/
 /* palette colors */
-.color1 { background-color: #202020; }
-
-.color2,
-.color3,
-.color4 {
-    background-color: #707070;
-}
+.color1 { background-color: #5a065d; }
+.color2 { background-color: #8f5509; }
+.color3 { background-color: #758a08; }
+.color4 { background-color: #08395c; }
 
 /*============================================================================*/
 /* fundamental structure */
