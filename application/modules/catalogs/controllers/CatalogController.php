@@ -37,27 +37,27 @@ class Catalogs_CatalogController extends Babel_Action
             $url = new Zend_Controller_Action_Helper_Url();
 
             if ($form->isValid($request->getPost())) {
-                $catalog->label = $form->getSubForm('information')->getElement('catalog')->getValue();
-                $catalog->mode = $form->getSubForm('information')->getElement('mode')->getValue();
-                $catalog->type = $form->getSubForm('information')->getElement('type')->getValue();
-                $catalog->description = $form->getSubForm('information')->getElement('description')->getValue();
+                $catalog->label = $form->getElement('catalog')->getValue();
+                $catalog->mode = $form->getElement('mode')->getValue();
+                $catalog->type = $form->getElement('type')->getValue();
+                $catalog->description = $form->getElement('description')->getValue();
                 $catalog->save();
 
                 $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('Catalog %s was updated'), $catalog->label));
 
-                if ($form->getSubForm('photo')->getElement('photo')->receive()) {
-                    $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
-
-                    if (!empty($filename) && file_exists($filename)) {
-                        $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
-                        unlink($filename);
-
-                        if ($avatar) {
-                            $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
-                        }
-                    }
-                }
+//                if ($form->getSubForm('photo')->getElement('photo')->receive()) {
+//                    $filename = $form->getSubForm('photo')->getElement('photo')->getFileName();
+//
+//                    if (!empty($filename) && file_exists($filename)) {
+//                        $thumbnail = new Yachay_Helpers_Thumbnail();
+//                        $avatar = $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/img/thumbnails/catalogs/' . $catalog->ident . '.jpg', 100, 100);
+//                        unlink($filename);
+//
+//                        if ($avatar) {
+//                            $this->_helper->flashMessenger->addMessage(sprintf($this->translate->_('The photo of catalog %s was updated successfully'), $catalog->label));
+//                        }
+//                    }
+//                }
 
                 if (empty($catalog->parent)) {
                     $this->_helper->redirector('index', 'index', 'catalogs');
