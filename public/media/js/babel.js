@@ -97,8 +97,9 @@ $(document).ready(function(){
                 $('#book_publisher').html(json.book.publisher);
                 $('#book_language').html(json.book.language);
                 $('#book_year').html(json.book.year);
-                $('#book_download').attr('href',json.book.url.download);
                 $('#book_catalog').attr('href',json.book.url.catalog);
+                $('#book_preview').attr('href',json.book.url.preview);
+                $('#book_download').attr('href',json.book.url.download);
             });
         }});
 

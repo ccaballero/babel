@@ -193,7 +193,8 @@ class Shell_Babel extends Yachay_Console
                     try {
                         $image = new Imagick($file->getPath() . '[0]');
 
-                        $image->setImageFormat('jpg');
+                        $image->setImageFormat('jpeg');
+                        $image->setImageType (imagick::IMGTYPE_TRUECOLOR);
                         $image->thumbnailImage(0, 390);
                         $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg');
 

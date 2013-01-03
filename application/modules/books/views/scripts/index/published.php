@@ -3,11 +3,15 @@
         <h1><?php echo $this->translate->_('Books published') ?></h1>
         <form method="post" action="" accept-charset="utf-8">
             <div class="tool-panel">
+            <?php if ($this->user->role == 'admin') { ?>
                 <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
+            <?php } ?>
             </div>
             <table>
                 <tr>
+                <?php if ($this->user->role == 'admin') { ?>
                     <th style="width:20px;"><input type="checkbox" class="groupall" /></th>
+                <?php } ?>
                     <th><?php echo $this->translate->_('Title') ?></th>
                     <th><?php echo $this->translate->_('Author') ?></th>
                     <th><?php echo $this->translate->_('Publisher') ?></th>
@@ -18,11 +22,15 @@
                     <th style="width:20px;"><img src="<?php echo $this->baseUrl('/media/img/icons/photo.png') ?>" alt="<?php echo $this->translate->_('Thumbnail generate') ?>" title="<?php echo $this->translate->_('Thumbnail generate') ?>" /></th>
                     <th style="width:20px;">&nbsp;</th>
                     <th style="width:20px;">&nbsp;</th>
+                    <th style="width:20px;">&nbsp;</th>
+                    <th style="width:20px;">&nbsp;</th>
                 </tr>
                 <?php foreach ($this->books as $book) { ?>
                     <tr class="<?php echo $this->cycle(array("even", "odd"))->next()?>">
+                    <?php if ($this->user->role == 'admin') { ?>
                         <td class="text-center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
-                        <td class="text-left"><?php echo $book->title ?></td>
+                    <?php } ?>
+                        <td class="text-left" style="padding-left: 4px;"><?php echo $book->title ?></td>
                         <td class="text-left"><?php echo $book->author ?></td>
                         <td class="text-center"><?php echo $book->publisher ?></td>
                         <td class="text-center"><?php echo $book->year ?></td>
@@ -42,11 +50,15 @@
                         </td>
                         <td><a class="update_book" name="edit_<?php echo $book->hash ?>" rel="#update_book"><img src="<?php echo $this->baseUrl('/media/img/icons/pencil.png') ?>" alt="<?php echo $this->translate->_('Edit') ?>" title="<?php echo $this->translate->_('Edit') ?>" /></a></td>
                         <td><a href="<?php echo $this->url(array('book' => $book->hash), 'books_book_catalog') ?>"><img src="<?php echo $this->baseUrl('/media/img/icons/tag_blue.png') ?>" alt="<?php echo $this->translate->_('Catalogs') ?>" title="<?php echo $this->translate->_('Catalogs') ?>" /></a></td>
+                        <td><a href="<?php echo $this->url(array('book' => $book->hash), 'books_book_preview') ?>"><img src="<?php echo $this->baseUrl('/media/img/icons/eye.png') ?>" alt="<?php echo $this->translate->_('Preview') ?>" title="<?php echo $this->translate->_('Preview') ?>" /></a></td>
+                        <td><a href="<?php echo $this->url(array('book' => $book->hash), 'books_book_download') ?>"><img src="<?php echo $this->baseUrl('/media/img/icons/disk.png') ?>" alt="<?php echo $this->translate->_('Download') ?>" title="<?php echo $this->translate->_('Download') ?>" /></a></td>
                     </tr>
                 <?php } ?>
             </table>
             <div class="tool-panel">
+            <?php if ($this->user->role == 'admin') { ?>
                 <input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" />
+            <?php } ?>
             </div>
         </form>
     </div>

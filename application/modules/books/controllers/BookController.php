@@ -39,7 +39,9 @@ class Books_BookController extends Babel_Action
             }
 
             $class->url = new stdClass();
+            $class->url->edit = $url->url(array('book' => $book->book), 'books_book_edit');
             $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
+            $class->url->preview = $url->url(array('book' => $book->book), 'books_book_preview');
             $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
             $class->url->thumb = $this->view->baseUrl($file->getUrlPhoto());
         }
@@ -279,10 +281,12 @@ class Books_BookController extends Babel_Action
 
         if (!empty($book)) {
             try {
-                $this->getResponse()->setHeader('Content-Type', 'image/png');
+                $this->getResponse()->setHeader('Content-Type', 'image/jpeg');
 
                 $image = new Imagick($book->getPath() . '[' . $page . ']');
-                $image->setImageFormat('png');
+
+                $image->setImageFormat('jpeg');
+                $image->setImageType (imagick::IMGTYPE_TRUECOLOR);
                 $image->thumbnailImage($width, $height);
                 echo $image;
             } catch (Exception $e) {}
@@ -358,7 +362,9 @@ class Books_BookController extends Babel_Action
                 if (!$file->hasThumb()) {
                     try {
                         $image = new Imagick($file->getPath() . '[0]');
-                        $image->setImageFormat('jpg');
+
+                        $image->setImageFormat('jpeg');
+                        $image->setImageType (imagick::IMGTYPE_TRUECOLOR);
                         $image->thumbnailImage(0, 390);
                         $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '.jpg');
 

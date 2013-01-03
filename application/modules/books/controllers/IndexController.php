@@ -7,13 +7,15 @@ class Books_IndexController extends Babel_Action
     }
 
     public function publishedAction() {
-        $this->requireAdmin();
+        $this->requireLogin();
 
         $model_collection = new Books_Collection();
         $books = $model_collection->selectWithMetas();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $this->requireAdmin();
+
             $hashes = $request->getParam('books');
             if ($request->getParam('unpublish')) {
                 foreach ($hashes as $hash) {
@@ -164,7 +166,9 @@ class Books_IndexController extends Babel_Action
                     if (!$file->hasThumb()) {
                         try {
                             $image = new Imagick($file->getPath() . '[0]');
-                            $image->setImageFormat('jpg');
+                            
+                            $image->setImageFormat('jpeg');
+                            $image->setImageType (imagick::IMGTYPE_TRUECOLOR);
                             $image->thumbnailImage(0, 390);
                             $image->writeImage(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg');
 
