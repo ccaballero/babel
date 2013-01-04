@@ -123,8 +123,10 @@ class Shell_Babel extends Yachay_Console
                     $meta->book = $hash;
                 }
 
-                $meta->title = $split['title'];
-                $meta->save();
+                if (empty($meta->title)) {
+                    $meta->title = $split['title'];
+                    $meta->save();
+                }
 
                 echo $this->ok;
             }
@@ -165,7 +167,9 @@ class Shell_Babel extends Yachay_Console
                 }
 
                 foreach($json as $property => $value) {
-                    $meta->{$property} = $value;
+                    if (empty($meta->{$property})) {
+                        $meta->{$property} = $value;
+                    }
                 }
                 $meta->save();
 
