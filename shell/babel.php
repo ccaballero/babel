@@ -4,18 +4,22 @@ include_once('__header.php');
 
 class Shell_Babel extends Yachay_Console
 {
+    public $override = false;
     public $directory = '';
     public $files = array();
     
     public $regex_type = 0;
     public $regex = array(
-        '', // because fuck you, that's why
-        '/(?<title>.*)\.pdf/',
-        '/(?<title>.*) \(ISBN - (?<isbn>[0-9X]*)\)\.pdf/',
+        '', // because fuck you, that's why                             // 0
+        '/(?<title>.*)\.pdf/',                                          // 1
+        '/(?<title>.*) \(ISBN - (?<isbn>[0-9X]*)\)\.pdf/',              // 2
+        '/(?<author>.*) - (?<title>.*)\.pdf/',                          // 3
+        '/\((?<year>[0-9]{4})\) (?<author>.*) - (?<title>.*)\.pdf/',      // 4
     );
 
     protected $specific_options = array(
         'index|i'       => 'lucene indexation for books.',
+        'override|o'    => 'override setting meta-information in books',
         'directory|d=s' => 'set directory for scanning',
         'regex|r=i'     => 'set the regex type for use',
         'generate|g'    => 'generation meta books.',
@@ -76,6 +80,14 @@ class Shell_Babel extends Yachay_Console
         $this->__dump();
         return false;
     }
+    
+    public function override() {
+        $this->override = true;
+        echo str_pad('Set the override behavior', $this->count, $this->separator);
+        
+        echo $this->ok;
+        return true;
+    }
 
     public function directory($getopt) {
         $this->directory = realpath($getopt->getOption('directory'));
@@ -114,8 +126,12 @@ class Shell_Babel extends Yachay_Console
                 $split = array();
                 preg_match($regex, $file->file, $split);
 
-                $label = iconv('UTF8', 'ASCII//TRANSLIT', $split['title']);
-                echo str_pad($label, $this->count * 2, $this->separator);
+                $title = $split['title'];
+                $author = isset($split['author']) ? $split['author'] : null;
+                $year = isset($split['year']) ? $split['year'] : null;
+
+                $label = iconv('UTF8', 'ASCII//TRANSLIT', $title);
+                echo str_pad($label, $this->count, $this->separator);
 
                 $hash = $file->hash;
 
@@ -125,8 +141,17 @@ class Shell_Babel extends Yachay_Console
                     $meta->book = $hash;
                 }
 
-                if (empty($meta->title)) {
-                    $meta->title = $split['title'];
+                if ($this->override || empty($meta->title)) {
+                    $meta->title = $title;
+
+                    if ($this->override || (empty($meta->author) && !empty($author))) {
+                        $meta->author = $author;
+                    }
+
+                    if ($this->override || (empty($meta->year) && !empty($year))) {
+                        $meta->year = $year;
+                    }
+
                     $meta->save();
                 }
 
@@ -170,7 +195,7 @@ class Shell_Babel extends Yachay_Console
                 }
 
                 foreach($json as $property => $value) {
-                    if (empty($meta->{$property})) {
+                    if ($this->override || empty($meta->{$property})) {
                         $meta->{$property} = $value;
                     }
                 }
@@ -198,7 +223,7 @@ class Shell_Babel extends Yachay_Console
                 $label = iconv('UTF8', 'ASCII//TRANSLIT', $file->file);
                 echo str_pad('Thumbnail for ' . $label, $this->count, $this->separator);
 
-                if (!$file->hasThumb()) {
+                if ($this->override || !$file->hasThumb()) {
                     try {
                         $image = new Imagick($file->getPath() . '[0]');
 
