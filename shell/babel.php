@@ -113,7 +113,9 @@ class Shell_Babel extends Yachay_Console
             foreach ($this->files as $file) {
                 $split = array();
                 preg_match($regex, $file->file, $split);
-                echo str_pad($split['title'], $this->count * 2, $this->separator);
+
+                $label = iconv('UTF8', 'ASCII//TRANSLIT', $split['title']);
+                echo str_pad($label, $this->count * 2, $this->separator);
 
                 $hash = $file->hash;
 
@@ -156,7 +158,8 @@ class Shell_Babel extends Yachay_Console
             $model_meta = new Books_Meta();
 
             foreach ($this->files as $file) {
-                echo str_pad('Setting metas for ' . $file->file, $this->count, $this->separator);
+                $label = iconv('UTF8', 'ASCII//TRANSLIT', $file->file);
+                echo str_pad('Setting metas for ' . $label, $this->count, $this->separator);
 
                 $hash = $file->hash;
 
@@ -192,7 +195,9 @@ class Shell_Babel extends Yachay_Console
             echo $this->ok;
 
             foreach ($this->files as $file) {
-                echo str_pad('Thumbnail for ' . $file->file, $this->count, $this->separator);
+                $label = iconv('UTF8', 'ASCII//TRANSLIT', $file->file);
+                echo str_pad('Thumbnail for ' . $label, $this->count, $this->separator);
+
                 if (!$file->hasThumb()) {
                     try {
                         $image = new Imagick($file->getPath() . '[0]');
@@ -227,7 +232,9 @@ class Shell_Babel extends Yachay_Console
             echo $this->ok;
 
             foreach ($this->files as $file) {
-                echo str_pad('Publish ' . $file->file, $this->count, $this->separator);
+                $label = iconv('UTF8', 'ASCII//TRANSLIT', $file->file);
+                echo str_pad('Publish ' . $label, $this->count, $this->separator);
+                
                 if (!$file->published) {
                     $file->tsregister = time();
                     $file->published = true;
@@ -266,7 +273,6 @@ class Shell_Babel extends Yachay_Console
         $this->font = $getopt->getOption('font');
         return true;
     }
-
 }
 
 $command = new Shell_Babel();
