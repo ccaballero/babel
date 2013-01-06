@@ -27,11 +27,9 @@
     <li id="books_menu" class="primary color4">
         <a href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Books') ?></a>
     </li>
-    <?php if ($this->user->role == 'admin') { ?>
     <li class="books_item <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>">
         <a href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Files') ?></a>
     </li>
-    <?php } ?>
     <li class="books_item <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>">
         <a href="<?php echo $this->url(array(), 'books_published') ?>"><?php echo $this->translate->_('Published') ?></a>
     </li>

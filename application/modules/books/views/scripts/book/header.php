@@ -18,3 +18,12 @@
         <dd><?php echo $this->none($this->book->year) ?></dd>
     </dl>
 </div>
+
+<div>
+    <dl>
+        <dt><?php echo $this->translate->_('Size') ?>:</dt>
+        <dd><?php echo $this->size($this->file->size) ?></dd>
+        <dt><?php echo $this->translate->_('Number of pages') ?>:</dt>
+        <dd><?php echo $this->pages($this->file->getPath()) ?></dd>
+    </dl>
+</div>

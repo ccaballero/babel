@@ -19,7 +19,7 @@
             <?php foreach ($this->taxonomies as $root) { ?>
                 <?php if (!empty($this->availables[$root->ident])) { ?>
                 <tr>
-                    <td><?php echo $root->label ?>: </td>
+                    <td style="padding-right: 20px;"><?php echo $root->label ?>:</td>
                     <td>
                         <select name="catalogs[<?php echo $root->ident ?>]">
                             <option value="0">----------</option>
@@ -43,7 +43,7 @@
         <table>
         <?php foreach ($this->folksonomies as $root) { ?>
             <tr>
-                <td><?php echo $root->label ?>: </td>
+                <td style="padding-right: 20px;"><?php echo $root->label ?>:</td>
                 <td><button onclick="javascript:location.href='<?php echo $this->url(array('book' => $this->file->hash, 'catalog' => $root->ident), 'books_book_folksonomy') ?>';"><?php echo $this->translate->_('Update') ?></button></td>
             </tr>
         <?php } ?>

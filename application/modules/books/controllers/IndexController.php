@@ -67,7 +67,7 @@ class Books_IndexController extends Babel_Action
     }
 
     public function examineAction() {
-        $this->requireAdmin();
+        $this->requireLogin();
         $request = $this->getRequest();
 
         $index_bookstore = intval($request->getParam('bookstore'));
@@ -252,7 +252,7 @@ class Books_IndexController extends Babel_Action
                 $filename = $form->getElement('file')->getFileName();
 
                 $_override = $form->getElement('override')->getValue();
-                $override = empty($_override);
+                $override = !empty($_override);
 
                 $csv = new File_CSV_DataSource;
                 $csv->load($filename);

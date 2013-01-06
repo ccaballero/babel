@@ -65,7 +65,7 @@ class Books_BookController extends Babel_Action
         if (!empty($file)) {
             // Taxonomies Management
             $root_catalogs_1 = $model_catalogs->selectRootsByType('t');
-            
+
             $root_catalogs_2 = array();
             foreach ($root_catalogs_1 as $root_catalog) {
                 if ($root_catalog->mode == 'open' || $root_catalog->owner == $this->user->ident) {
@@ -173,7 +173,7 @@ class Books_BookController extends Babel_Action
         $file = $model_collection->findByHash($hash);
         $book = $model_metas->findByHash($hash);
         $root_catalog = $model_catalogs->findByIdent($ident_catalog);
-        
+
         if (!empty($file) && !empty($root_catalog)) {
             $catalogs_1 = $model_catalogs->selectElementsByRoot($root_catalog->ident);
             $catalogs_2 = array();
@@ -188,14 +188,14 @@ class Books_BookController extends Babel_Action
             foreach ($books_catalog_1 as $book_catalog) {
                 $books_catalog_2[] = $book_catalog->catalog;
             }
-            
+
             if ($request->isPost()) {
                 $catalogs = $request->getParam('catalogs');
 
                 foreach ($catalogs_2 as $catalog) {
                     $new_assign = array_key_exists($catalog->ident, $catalogs) ? true : false;
                     $old_assign = in_array($catalog->ident, $books_catalog_2) ? true : false;
-                    
+
                     if ($new_assign <> $old_assign) {
                         if ($new_assign) {
                             // add book to catalog
@@ -388,13 +388,13 @@ class Books_BookController extends Babel_Action
                     }
                 }
             }
-            
+
             $return = $request->getParam('return');
             if (!empty($return)) {
                 $this->_redirect($return);
             }
         }
-        
+
         $this->view->file = $file;
         $this->view->book = $book;
         $this->view->form = $form;
@@ -403,17 +403,25 @@ class Books_BookController extends Babel_Action
     public function previewAction() {
         $request = $this->getRequest();
 
+        $model_collection = new Books_Collection();
         $model_metas = new Books_Meta();
 
         $hash = $request->getParam('book');
         $book = $model_metas->findByHash($hash);
+        $file = $model_collection->findByHash($hash);
 
-        $_page = intval($request->getParam('page', 0));
+        $pages = new Yachay_Helpers_Pages();
+        $max_page = $pages->pages($file->getPath()) - 1;
+                
+        $_page = intval($request->getParam('page'));
         $page = $_page <= 0 ? 0 : $_page;
-        
+        $page = $page <= $max_page ? $page : $max_page;
+
         if (!empty($book)) {
             $this->view->book = $book;
+            $this->view->file = $file;
             $this->view->page = $page;
+            $this->view->max_page = $max_page + 1;
         } else {
             $this->_helper->flashMessenger->addMessage($this->translate->_('Book not found'));
             $this->_helper->redirector('index', 'index', 'frontpage');
