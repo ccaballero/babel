@@ -1,3 +1,29 @@
+<div class="left hidden">
+    <ul>
+        <li>
+            <a id="first_page" href="">
+                <img src="<?php echo $this->baseUrl('/media/img/icons/book.png') ?>" 
+                     alt="<?php echo $this->translate->_('First page') ?>" 
+                     title="<?php echo $this->translate->_('First page') ?>" />
+            </a>
+        </li>
+        <li>
+            <a id="previous_page" href="">
+                <img src="<?php echo $this->baseUrl('/media/img/icons/book_previous.png') ?>" 
+                     alt="<?php echo $this->translate->_('Previous page') ?>" 
+                     title="<?php echo $this->translate->_('Previous page') ?>" />
+            </a>
+        </li>
+        <li>
+            <a id="next_page" href="">
+                <img src="<?php echo $this->baseUrl('/media/img/icons/book_next.png') ?>" 
+                     alt="<?php echo $this->translate->_('Next page') ?>" 
+                     title="<?php echo $this->translate->_('Next page') ?>" />
+            </a>
+        </li>
+    </ul>
+</div>
+        
 <div class="right">
     <ul>
     <?php if ($this->auth->hasIdentity()) { ?>

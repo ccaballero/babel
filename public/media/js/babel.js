@@ -16,8 +16,8 @@ var resize=function(){
 
     $('#column3').css('width',($('#columns').width()-$('#column1').width()-$('#column2').width()-25)+'px');
 
-    if(($('#column1').height())==$('#column2').height()){$('#column2').addClass('square');}else{$('#column2').removeClass('square');}
-    if(($('#column2').height())==$('#column3').height()){$('#column3').addClass('square');}else{$('#column3').removeClass('square');}
+    if(($('#column1').height())===$('#column2').height()){$('#column2').addClass('square');}else{$('#column2').removeClass('square');}
+    if(($('#column2').height())===$('#column3').height()){$('#column3').addClass('square');}else{$('#column3').removeClass('square');}
 };
 
 $(window).resize(resize);
@@ -59,7 +59,7 @@ $(document).ready(function(){
         });
     $('input[type="text"].focus').focus();
     $('.closeable').click(function(){$(this).parent().fadeOut();});
-    $('input[class="groupall"]').click(function(){if($(this).attr('checked')=='checked'){$('input[class="check"]').attr('checked','checked');}else{$('input[class="check"]').removeAttr('checked');}});
+    $('input[class="groupall"]').click(function(){if($(this).attr('checked')==='checked'){$('input[class="check"]').attr('checked','checked');}else{$('input[class="check"]').removeAttr('checked');}});
 
     var book='';
     $('.update_file').click(function(){book=$(this).attr('name');});
@@ -111,10 +111,10 @@ $(document).ready(function(){
             $('#description').html('');
             $('#return').attr('value',window.location.pathname);
             action=window.location.pathname;
-            if(action.match('^[/new/?]')==null){
+            if(action.match('^[/new/?]')===null){
                 $('#form_catalog').attr('action',action);
             }else{
-                if(action.substring(action.length-1,action.length)=='/'){
+                if(action.substring(action.length-1,action.length)==='/'){
                     $('#form_catalog').attr('action',action+'new');
                 }else{
                     $('#form_catalog').attr('action',action+'/new');

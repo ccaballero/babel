@@ -20,5 +20,28 @@
             ), 'books_book_thumb') ?>" alt="" title="" /></div>
         </div>
     </div>
-
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#details div.hidden').removeClass('hidden');
+    $('#first_page').click(function() {
+        var params=$('#preview img').attr('src').split('/');
+        params[4]='0';
+        $('#preview img').attr('src',params.join('/'));
+        return false;
+    });
+    $('#previous_page').click(function() {
+        var params=$('#preview img').attr('src').split('/');
+        params[4]=parseInt(params[4]) - 1;
+        $('#preview img').attr('src',params.join('/'));
+        return false;
+    });
+    $('#next_page').click(function() {
+        var params=$('#preview img').attr('src').split('/');
+        params[4]=parseInt(params[4]) + 1;
+        $('#preview img').attr('src',params.join('/'));
+        return false;
+    });
+});
+</script>
