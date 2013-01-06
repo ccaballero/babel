@@ -242,18 +242,26 @@ class Books_BookController extends Babel_Action
             $stats->save();
 
             try {
-                header("HTTP/1.1 200 OK");
-                header("Status: 200 OK");
-                header('Content-Type: application/pdf');
-                header('Content-Disposition: attachment; filename=' . urlencode($file->file) . ';');
+                $zip = new Babel_Utils_Zip();
+                $zip->add_file($file->getPath(), $file->file);
+                $flow = $zip->file();
+
+                header('HTTP/1.1 200 OK');
+                header('Status: 200 OK');
+                header('Content-Type: application/octet-stream');
                 header('Content-Transfer-Encoding: binary');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
-                header('Content-Length: '. $file->size);
+                header('Content-length: ' . strlen($flow));
+                header('Content-Disposition: attachment; filename=' . strtolower(substr($file->hash, 0, 16)) . '.zip;');
+
                 ob_clean();
                 flush();
-                readfile($file->getPath());
-            } catch (Exception $e) {}
+
+                echo $flow;
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
 
             $this->_helper->layout->disableLayout();
             $this->_helper->viewRenderer->setNoRender();
@@ -267,14 +275,14 @@ class Books_BookController extends Babel_Action
         $request = $this->getRequest();
         $hash = $request->getParam('book');
 
-        $page = intval($request->getParam('page', 0));
-        $page = $page < 0 ? 0 : $page;
+        $_page = intval($request->getParam('page', 0));
+        $page = $_page < 0 ? 0 : $_page;
 
-        $height = intval($request->getParam('height', 0));
-        $height = $height < 0 ? 0 : $height;
+        $_height = intval($request->getParam('height', 0));
+        $height = $_height < 0 ? 0 : $_height;
 
-        $width = intval($request->getParam('width', 0));
-        $width = $width < 0 ? 0 : $width;
+        $_width = intval($request->getParam('width', 0));
+        $width = $_width < 0 ? 0 : $_width;
 
         $model_collection = new Books_Collection();
         $book = $model_collection->findByHash($hash);
@@ -289,7 +297,9 @@ class Books_BookController extends Babel_Action
                 $image->setImageType (imagick::IMGTYPE_TRUECOLOR);
                 $image->thumbnailImage($width, $height);
                 echo $image;
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
         }
 
         $this->_helper->layout->disableLayout();
@@ -373,6 +383,7 @@ class Books_BookController extends Babel_Action
                                               APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $book->book . '-small.jpg', 0, 100);
                         $this->_helper->flashMessenger->addMessage($this->translate->_('The thumb was generated successfully'));
                     } catch (Exception $e) {
+                        $e->getMessage();
                         $this->_helper->flashMessenger->addMessage($this->translate->_('The thumb wasn\'t generated'));
                     }
                 }
@@ -391,16 +402,14 @@ class Books_BookController extends Babel_Action
 
     public function previewAction() {
         $request = $this->getRequest();
-        $hash = $request->getParam('book');
 
         $model_metas = new Books_Meta();
 
         $hash = $request->getParam('book');
         $book = $model_metas->findByHash($hash);
 
-        $page = $request->getParam('page', 0);
-        $page = intval($page);
-        $page = $page <= 0 ? 0 : $page;
+        $_page = intval($request->getParam('page', 0));
+        $page = $_page <= 0 ? 0 : $_page;
         
         if (!empty($book)) {
             $this->view->book = $book;

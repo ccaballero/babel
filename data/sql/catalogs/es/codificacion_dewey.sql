@@ -1,6 +1,6 @@
 DELETE FROM `babel_catalogs`;
 INSERT INTO `babel_catalogs` (`tsregister`, `mode`, `type`, `root`, `parent`, `code`, `level`, `label`, `owner`) VALUES
-(UNIX_TIMESTAMP(), 'open', 't', NULL, NULL, 'clasificacion-decimal-dewey', 0, 'Clasificación Decimal Dewey', 1),
+(UNIX_TIMESTAMP(), 'close', 't', NULL, NULL, 'clasificacion-decimal-dewey', 0, 'Clasificación Decimal Dewey', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  1, '0',  1, 'Generalidades', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  1, '1',  1, 'Filosofía y disciplinas relacionadas', 1),
 (UNIX_TIMESTAMP(), 'open', 't', 1,  1, '2',  1, 'Religion', 1),
