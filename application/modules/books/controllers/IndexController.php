@@ -245,11 +245,14 @@ class Books_IndexController extends Babel_Action
         $form = new Books_Form_Import();
 
         if ($request->isPost()) {
-            if ($form->getElement('file')->receive()) {
+            if ($form->isValid($request->getPost()) && 
+                $form->getElement('file')->receive()) {
                 $model_meta = new Books_Meta();
                 
                 $filename = $form->getElement('file')->getFileName();
-                $override = boolval($form->getElement('override')->getValue());
+
+                $_override = $form->getElement('override')->getValue();
+                $override = empty($_override);
 
                 $csv = new File_CSV_DataSource;
                 $csv->load($filename);

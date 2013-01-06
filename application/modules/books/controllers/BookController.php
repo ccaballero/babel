@@ -39,10 +39,10 @@ class Books_BookController extends Babel_Action
             }
 
             $class->url = new stdClass();
-            $class->url->edit = $url->url(array('book' => $book->book), 'books_book_edit');
-            $class->url->catalog = $url->url(array('book' => $book->book), 'books_book_catalog');
-            $class->url->preview = $url->url(array('book' => $book->book), 'books_book_preview');
-            $class->url->download = $url->url(array('book' => $book->book), 'books_book_download');
+            $class->url->edit = $url->url(array('book' => $file->hash), 'books_book_edit');
+            $class->url->catalog = $url->url(array('book' => $file->hash), 'books_book_catalog');
+            $class->url->preview = $url->url(array('book' => $file->hash), 'books_book_preview');
+            $class->url->download = $url->url(array('book' => $file->hash), 'books_book_download');
             $class->url->thumb = $this->view->baseUrl($file->getUrlPhoto());
         }
 
