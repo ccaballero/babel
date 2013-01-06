@@ -73,8 +73,8 @@ class Books_IndexController extends Babel_Action
         $index_bookstore = intval($request->getParam('bookstore'));
         $index_directory = intval($request->getParam('directory'));
 
-        $bookstores = Zend_Registry::get('config')->babel->properties->bookstores;
-        $bookstores = $bookstores->toArray();
+        $_bookstores = Zend_Registry::get('config')->babel->properties->bookstores;
+        $bookstores = $_bookstores->toArray();
 
         if (!isset($bookstores[$index_bookstore])) {
             $index_bookstore = 0;
@@ -176,6 +176,7 @@ class Books_IndexController extends Babel_Action
                             $thumbnail->thumbnail(APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '.jpg',
                                                   APPLICATION_PATH . '/../public/media/img/thumbnails/books/' . $file->hash . '-small.jpg', 0, 100);
                         } catch (Exception $e) {
+                            $e->getMessage();
                         }
                     }
                 }
@@ -246,7 +247,9 @@ class Books_IndexController extends Babel_Action
         if ($request->isPost()) {
             if ($form->getElement('file')->receive()) {
                 $model_meta = new Books_Meta();
+                
                 $filename = $form->getElement('file')->getFileName();
+                $override = boolval($form->getElement('override')->getValue());
 
                 $csv = new File_CSV_DataSource;
                 $csv->load($filename);
@@ -261,11 +264,11 @@ class Books_IndexController extends Babel_Action
                         $book->book = $hash;
                     }
 
-                    if (empty($book->title)) { $book->title = $row['title']; }
-                    if (empty($book->author)) { $book->author = $row['author']; }
-                    if (empty($book->year)) { $book->year = $row['year']; }
-                    if (empty($book->publisher)) { $book->publisher = $row['publisher']; }
-                    if (empty($book->language)) { $book->language = $row['language']; }
+                    if ($override || empty($book->title)) { $book->title = $row['title']; }
+                    if ($override || empty($book->author)) { $book->author = $row['author']; }
+                    if ($override || empty($book->year)) { $book->year = $row['year']; }
+                    if ($override || empty($book->publisher)) { $book->publisher = $row['publisher']; }
+                    if ($override || empty($book->language)) { $book->language = $row['language']; }
 
                     $book->save();
                 }

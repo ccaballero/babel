@@ -14,7 +14,7 @@ class Shell_Babel extends Yachay_Console
         '/(?<title>.*)\.pdf/',                                          // 1
         '/(?<title>.*) \(ISBN - (?<isbn>[0-9X]*)\)\.pdf/',              // 2
         '/(?<author>.*) - (?<title>.*)\.pdf/',                          // 3
-        '/\((?<year>[0-9]{4})\) (?<author>.*) - (?<title>.*)\.pdf/',      // 4
+        '/\((?<year>[0-9]{4})\) (?<author>.*) - (?<title>.*)\.pdf/',    // 4
     );
 
     protected $specific_options = array(

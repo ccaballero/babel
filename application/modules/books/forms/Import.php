@@ -14,7 +14,11 @@ class Books_Form_Import extends Zend_Form
               ->addValidator('Size', false, 2097152)
               ->addValidator('Extension', false, 'csv');
 
+        $override = $this->createElement('checkbox', 'override');
+        $override->setLabel('Allow override metas');
+
         $this->addElement($meta);
+        $this->addElement($override);
         $this->addElement('submit', 'submit', array('ignore' => true, 'label' => 'Import'));
     }
 }
