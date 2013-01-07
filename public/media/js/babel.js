@@ -1,3 +1,15 @@
+var gallery=function() {
+    $.getJSON(baseUrl+'/image.json',function(json){
+        var photo=new Image();
+        $(photo)
+            .load(function(){
+                $('img.switcher').attr('src',$(this).attr('src')).animate({opacity: 1.0},1000);
+            })
+            .error(function(){})
+            .attr('src',json.image);
+    });
+};
+
 var height=function(){
     if(window.innerHeight){
         return window.innerHeight;
