@@ -111,7 +111,8 @@ class Books_IndexController extends Babel_Action
             $model_meta = new Books_Meta();
 
             $hashes = $request->getParam('books');
-            if ($request->getParam('add') && $this->IamAdmin()) {
+            
+            if ($request->has('add') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     if (empty($adapters[$hash]->tsregister)) {
                         $adapters[$hash]->tsregister = time();
@@ -120,13 +121,13 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books added successfully'));
             }
-            if ($request->getParam('delete') && $this->IamAdmin()) {
+            if ($request->has('delete') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     $adapters[$hash]->delete();
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books removed successfully'));
             }
-            if ($request->getParam('publish') && $this->IamAdmin()) {
+            if ($request->has('publish') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     if (empty($adapters[$hash]->tsregister)) {
                         $adapters[$hash]->tsregister = time();
@@ -143,7 +144,7 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books published successfully'));
             }
-            if ($request->getParam('unpublish') && $this->IamAdmin()) {
+            if ($request->has('unpublish') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     if (empty($adapters[$hash]->tsregister)) {
                         $adapters[$hash]->tsregister = time();
@@ -160,7 +161,7 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books unpublished successfully'));
             }
-            if ($request->getParam('thumb') && $this->IamAdmin()) {
+            if ($request->has('thumb') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     $file = $adapters[$hash];
                     if (!$file->hasThumb()) {

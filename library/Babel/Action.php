@@ -81,6 +81,6 @@ class Babel_Action extends Zend_Controller_Action
     }
     
     public function IamAdmin() {
-        return $this->user->role <> 'admin';
+        return $this->user->role == 'admin';
     }
 }
