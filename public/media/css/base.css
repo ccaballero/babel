@@ -33,6 +33,10 @@ table {
     border-collapse: collapse;
 }
 
+table tr td {
+    padding: 3px 0px 3px 4px;
+}
+
 /*============================================================================*/
 /* generic behaviors */
 .left { float: left; }
@@ -274,6 +278,10 @@ button {
     padding: 3px 10px;
     border-radius: 7px;
     border: none;
+}
+
+input[type="file"] {
+    display: block;
 }
 
 #form input.find,
@@ -537,6 +545,10 @@ button {
 #return-label,
 #return-element {
     display: none;
+}
+
+.tool-panel {
+    margin-top: 5px;
 }
 
 .tool-panel input[type="submit"] {

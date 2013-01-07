@@ -1,7 +1,7 @@
 <?php echo $this->partial('books/views/scripts/book/tools.php', array(
-    'user' => $this->user, 
-    'book' => $this->book, 
-    'file' => $this->file, 
+    'user' => $this->user,
+    'book' => $this->book,
+    'file' => $this->file,
     'translate' => $this->translate,
     'auth' => $this->auth
 )) ?>

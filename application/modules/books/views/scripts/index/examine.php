@@ -20,11 +20,15 @@
     <div id="column3">
         <h1><?php echo $this->translate->_('Books directories') ?></h1>
         <form method="post" action="" accept-charset="utf-8">
-            <div class="tool-panel"><input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" /><input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" /><input type="submit" name="publish" value="<?php echo $this->translate->_('Publish the book') ?>" /><input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" /><input type="submit" name="thumb" value="<?php echo $this->translate->_('Generate thumbs') ?>" /></div>
+            <?php echo $this->partial('books/views/scripts/index/tools.php', array(
+                'translate' => $this->translate,
+                'user' => $this->user,
+            )) ?>
             <table>
                 <tr>
+                <?php if ($this->user->role == 'admin') { ?>
                     <th style="width:20px;"><input type="checkbox" class="groupall" /></th>
-                    
+                <?php } ?>
                     <th><?php echo $this->translate->_('Directory') ?></th>
                     <th><?php echo $this->translate->_('File') ?></th>
                     <th><?php echo $this->translate->_('Hash') ?></th>
@@ -44,8 +48,9 @@
                 </tr>
             <?php foreach ($this->books as $book) { ?>
                 <tr class="<?php echo $this->cycle(array("even", "odd"))->next()?>">
+                <?php if ($this->user->role == 'admin') { ?>
                     <td class="text-center"><input type="checkbox" class="check" name="books[]" value="<?php echo $book->hash ?>" /></td>
-
+                <?php } ?>
                     <td class="text-left"><?php echo $this->escape($book->directory) ?></td>
                     <td class="text-left"><?php echo $book->file ?></td>
                     <td class="text-center"><?php echo strtolower(substr($book->hash, 0, 16)) ?></td>
@@ -87,7 +92,10 @@
                 </tr>
             <?php } ?>
             </table>
-            <div class="tool-panel"><input type="submit" name="add" value="<?php echo $this->translate->_('Add to collection') ?>" /><input type="submit" name="delete" value="<?php echo $this->translate->_('Remove from collection') ?>" /><input type="submit" name="publish" value="<?php echo $this->translate->_('Publish the book') ?>" /><input type="submit" name="unpublish" value="<?php echo $this->translate->_('Unpublish the book') ?>" /><input type="submit" name="thumb" value="<?php echo $this->translate->_('Generate thumbs') ?>" /></div>
+            <?php echo $this->partial('books/views/scripts/index/tools.php', array(
+                'translate' => $this->translate,
+                'user' => $this->user,
+            )) ?>
         </form>
     </div>
 </div>

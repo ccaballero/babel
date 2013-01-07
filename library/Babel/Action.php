@@ -74,9 +74,13 @@ class Babel_Action extends Zend_Controller_Action
     public function requireAdmin() {
         $this->requireLogin();
 
-        if ($this->user->role <> 'admin') {
+        if ($this->IamAdmin()) {
             $this->_helper->flashMessenger->addMessage($this->translate->_('You must be admin'));
             $this->_helper->redirector('in', 'index', 'auth');
         }
+    }
+    
+    public function IamAdmin() {
+        return $this->user->role <> 'admin';
     }
 }

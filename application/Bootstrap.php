@@ -100,7 +100,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                            ->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'')
                            ->appendFile($view->baseUrl('/media/js/babel.js', 'text/javascript'));
 
-        $view->headLink()->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/base.css'))
+        $view->headLink()->appendStylesheet($view->baseUrl('/media/css/base.css'))
                          ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/tipography.css'))
                          ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/colors.css'))
                          ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/shadows.css'));

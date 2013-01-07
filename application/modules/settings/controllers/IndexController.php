@@ -74,7 +74,7 @@ class Settings_IndexController extends Babel_Action
                         $user_ftp->save();
 
                         if (!Babel_Utils_FTPDirectoryManager::createAccount($this->user->username)) {
-                            $this->_helper->flashMessenger->addMessage($this->translate->_('FTP account could not be created, Contact with the Administrator'));
+                            $this->_helper->flashMessenger->addMessage($this->translate->_('FTP account could not be created. Contact with the Administrator'));
                         }
 
                         $this->_helper->flashMessenger->addMessage($this->translate->_('You FTP account is on'));

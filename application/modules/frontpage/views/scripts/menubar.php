@@ -28,6 +28,9 @@
         <a href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Books') ?></a>
     </li>
     <li class="books_item <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>">
+        <a href="<?php echo $this->url(array(), 'books_upload') ?>"><?php echo $this->translate->_('Upload') ?></a>
+    </li>
+    <li class="books_item <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>">
         <a href="<?php echo $this->url(array(), 'books_examine') ?>"><?php echo $this->translate->_('Files') ?></a>
     </li>
     <li class="books_item <?php echo $this->isHidden($this->route, 'books') ? 'showed' : 'hidden' ?>">

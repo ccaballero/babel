@@ -104,7 +104,6 @@
 "The book was edited successfully","El libro fue editado correctamente"
 "The file can not be found in: %s","El archivo no pudo ser encontrado en: %s"
 "The files were removed","Los archivos fueron removidos"
-
 "The photo of catalog %s was updated successfully","El avatar del catálogo %s fue actualizado correctamente"
 "The thumb was generated successfully","La miniatura fue generada correctamente"
 "The thumb wasn't generated","La miniatura no pudo ser generada"
@@ -152,4 +151,8 @@
 "You FTP account is off","Tu cuenta FTP fue desactivada"
 "You FTP Password was updated successfully","La contraseña de tu cuenta FTP fue actualizada"
 "File '%value%' was only partially uploaded","El archivo fue interrumpido repentinamente"
-"FTP account could not be created, Contact with the Administrator","Tu cuenta FTP no pudo ser creada, Por favor contactate con el administrador"
+"FTP account could not be created. Contact with the Administrator","Tu cuenta FTP no pudo ser creada. Por favor contactate con el administrador"
+"Upload","Subir"
+"Upload files","Subir archivos"
+"Upload directory cannot be created. Contact with the Administrator","La carpeta para subir archivos no pudo ser creada. Por favor contactate con el administrador"
+"The files were uploaded successfully","Los archivos se subieron exitosamente"

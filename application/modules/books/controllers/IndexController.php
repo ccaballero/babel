@@ -111,7 +111,7 @@ class Books_IndexController extends Babel_Action
             $model_meta = new Books_Meta();
 
             $hashes = $request->getParam('books');
-            if ($request->getParam('add')) {
+            if ($request->getParam('add') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     if (empty($adapters[$hash]->tsregister)) {
                         $adapters[$hash]->tsregister = time();
@@ -120,13 +120,13 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books added successfully'));
             }
-            if ($request->getParam('delete')) {
+            if ($request->getParam('delete') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     $adapters[$hash]->delete();
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books removed successfully'));
             }
-            if ($request->getParam('publish')) {
+            if ($request->getParam('publish') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     if (empty($adapters[$hash]->tsregister)) {
                         $adapters[$hash]->tsregister = time();
@@ -143,7 +143,7 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books published successfully'));
             }
-            if ($request->getParam('unpublish')) {
+            if ($request->getParam('unpublish') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     if (empty($adapters[$hash]->tsregister)) {
                         $adapters[$hash]->tsregister = time();
@@ -160,7 +160,7 @@ class Books_IndexController extends Babel_Action
                 }
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Books unpublished successfully'));
             }
-            if ($request->getParam('thumb')) {
+            if ($request->getParam('thumb') && $this->IamAdmin()) {
                 foreach ($hashes as $hash) {
                     $file = $adapters[$hash];
                     if (!$file->hasThumb()) {
@@ -280,6 +280,29 @@ class Books_IndexController extends Babel_Action
                 $this->_helper->flashMessenger->addMessage($this->translate->_('Meta-information uploaded successfully'));
                 $this->_helper->redirector('index', 'index', 'frontpage');
             }
+        }
+
+        $this->view->form = $form;
+    }
+    
+    public function uploadAction() {
+        $this->requireLogin();
+
+        $request = $this->getRequest();
+        
+        if (!Babel_Utils_FTPDirectoryManager::createAccount($this->user->username)) {
+            $this->_helper->flashMessenger->addMessage($this->translate->_('Upload directory cannot be created. Contact with the Administrator'));
+            $this->_helper->redirector('index', 'index', 'frontpage');
+        }
+        
+        $form = new Books_Form_Upload();
+        $form->setDestination($this->user->username);
+
+        if ($request->isPost() && $form->isValid($request->getPost())) {
+            $adapter = $form->files->getTransferAdapter();
+            $adapter->receive();
+
+            $this->_helper->flashMessenger->addMessage($this->translate->_('The files were uploaded successfully'));
         }
 
         $this->view->form = $form;
