@@ -2,7 +2,7 @@
 
 class Babel_Utils_DirectoryScanner
 {
-    public function scan_collection($bookstore, &$adapters = null, &$warnings = null, &$metas = null) {
+    public function scan_collection($bookstore, &$adapters = null, &$warnings = null, &$metas = null, &$repeated = null) {
         $model_collection = new Books_Collection();
         $model_meta = new Books_Meta();
 
@@ -31,6 +31,11 @@ class Babel_Utils_DirectoryScanner
             $hashes[] = $file['hash'];
 
             if (isset($adapters)) {
+                if (isset($adapters[$book->hash])) {
+                    if (isset($repeated)) {
+                        $repeated[$book->getPath()] = true;
+                    }
+                }
                 $adapters[$book->hash] = $book;
             }
         }

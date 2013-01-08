@@ -24,4 +24,19 @@ class Books_Collection extends Babel_Models_Table
                    ->where('babel_books_collection.published = ?', true)
                    ->order('title ASC'));
     }
+
+    public function countPublished() {
+        $result = $this->fetchRow(
+                  $this->select()
+                       ->from($this, array('count(*) as count'))
+                       ->where('babel_books_collection.published = ?', true));
+        return $result->count;
+    }
+    
+    public function countCollection() {
+        $result = $this->fetchRow(
+                  $this->select()
+                       ->from($this, array('count(*) as count')));
+        return $result->count;
+    }
 }

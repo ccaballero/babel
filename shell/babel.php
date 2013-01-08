@@ -7,7 +7,7 @@ class Shell_Babel extends Yachay_Console
     public $override = false;
     public $directory = '';
     public $files = array();
-    
+
     public $regex_type = 0;
     public $regex = array(
         '', // because fuck you, that's why                             // 0
@@ -28,14 +28,15 @@ class Shell_Babel extends Yachay_Console
         'publish|p'     => 'publish the books',
         'font|f=s'      => 'generation of figlet',
         'figlet|l=s'    => 'generation of figlet',
+        'stats|s'       => 'statistical information about babel',
     );
-    
-    public $path_font = null; 
+
+    public $path_font = null;
 
     public function index() {
         try {
             echo str_pad('indexing the books', $this->count, $this->separator);
-            
+
             $config = Zend_Registry::get('config');
             $index = Zend_Search_Lucene::create($config->babel->properties->lucene);
 
@@ -80,11 +81,11 @@ class Shell_Babel extends Yachay_Console
         $this->__dump();
         return false;
     }
-    
+
     public function override() {
         $this->override = true;
         echo str_pad('Set the override behavior', $this->count, $this->separator);
-        
+
         echo $this->ok;
         return true;
     }
@@ -100,7 +101,7 @@ class Shell_Babel extends Yachay_Console
 
         $scanner = new Babel_Utils_DirectoryScanner();
         $this->files = $scanner->scan_collection($this->directory, $adapters, $warnings, $metas);
-        
+
         echo $this->ok;
         return true;
     }
@@ -108,7 +109,7 @@ class Shell_Babel extends Yachay_Console
     public function regex($getopt) {
         $this->regex_type = intval($getopt->getOption('regex'));
         echo str_pad('Set the regex to: ' . $this->regex[$this->regex_type], $this->count, $this->separator);
-        
+
         echo $this->ok;
         return true;
     }
@@ -249,7 +250,7 @@ class Shell_Babel extends Yachay_Console
         $this->__dump();
         return false;
     }
-    
+
     // Directory required
     public function publish() {
         try {
@@ -259,7 +260,7 @@ class Shell_Babel extends Yachay_Console
             foreach ($this->files as $file) {
                 $label = iconv('UTF8', 'ASCII//TRANSLIT', $file->file);
                 echo str_pad('Publish ' . $label, $this->count, $this->separator);
-                
+
                 if (!$file->published) {
                     $file->tsregister = time();
                     $file->published = true;
@@ -276,7 +277,7 @@ class Shell_Babel extends Yachay_Console
         $this->__dump();
         return false;
     }
-    
+
     public function figlet($getopt) {
         $font_default = APPLICATION_PATH . '/../data/utils/figlet/mini.flf';
         if (!empty($this->font)) {
@@ -296,6 +297,59 @@ class Shell_Babel extends Yachay_Console
 
     public function font($getopt) {
         $this->font = $getopt->getOption('font');
+        return true;
+    }
+
+    public function stats() {
+        $model_collection = new Books_Collection();
+
+        echo str_pad('Generating statistics', $this->count, $this->separator);
+        echo $this->ok;
+        echo PHP_EOL;
+
+        echo str_repeat('-', $this->count) . PHP_EOL;
+        echo str_pad('Published books:', $this->count - 5);
+        echo str_pad($model_collection->countPublished(), 5, ' ', STR_PAD_LEFT) . PHP_EOL;
+        echo str_pad('Books in collection:', $this->count - 5);
+        echo str_pad($model_collection->countCollection(), 5, ' ', STR_PAD_LEFT) . PHP_EOL;
+        echo str_repeat('-', $this->count) . PHP_EOL;
+        echo str_pad('Bookstores details:', $this->count) . PHP_EOL;
+
+        $config = Zend_Registry::get('config');
+        $scanner = new Babel_Utils_DirectoryScanner();
+
+        $bookstores = $config->babel->properties->bookstores;
+        foreach ($bookstores as $bookstore) {
+            $adapters = array();
+            $warnings = array();
+            $metas = array();
+            $repeated = array();
+
+            $files = $scanner->scan_collection($bookstore, $adapters, $warnings, $metas, $repeated);
+
+            $published = 0;
+            $thumbs = 0;
+
+            foreach ($adapters as $book) {
+                if ($book->inSearch()) {
+                    $published++;
+                    $thumbs++;
+                }
+            }
+
+            $counts = array(
+                str_pad(count($files),    5, ' ', STR_PAD_LEFT),      // physical files
+                str_pad(count($adapters), 5, ' ', STR_PAD_LEFT),      // adapters files (no repeated files)
+                str_pad(count($warnings), 5, ' ', STR_PAD_LEFT),      // books already in collection
+                str_pad(count($metas),    5, ' ', STR_PAD_LEFT),      // books with meta-informacion
+                str_pad($published,       5, ' ', STR_PAD_LEFT),      // published books
+                str_pad($thumbs,          5, ' ', STR_PAD_LEFT),      // thumbnails for books
+            );
+
+            echo str_pad($bookstore, $this->count - ((count($counts) + 1) * 5)) . ' ' . implode(' ', $counts) . PHP_EOL;
+        }
+        echo PHP_EOL;
+
         return true;
     }
 }

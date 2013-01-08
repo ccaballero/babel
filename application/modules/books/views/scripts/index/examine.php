@@ -57,6 +57,11 @@
                     <td class="text-right"><?php echo $this->size($book->size) ?></td>
 
                     <td>
+                    <?php if (isset($this->repeated[$book->getPath()])) { ?>
+                        <img src="<?php echo $this->baseUrl('/media/img/icons/bug.png"') ?>"
+                             alt="<?php echo $this->translate->_('Repeated checksum') . ' ('. $this->repeated[$book->getPath()] . ')' ?>"
+                             title="<?php echo $this->translate->_('Repeated checksum') . ' ('. $this->repeated[$book->getPath()] . ')' ?>" />
+                    <?php } ?>
                     <?php if ($book->inCollection()) { ?>
                         <img src="<?php echo $this->baseUrl('/media/img/icons/tick_cut.png') ?>" alt="" title="" />
                     <?php } ?>

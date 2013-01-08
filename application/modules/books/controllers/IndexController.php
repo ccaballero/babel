@@ -98,11 +98,12 @@ class Books_IndexController extends Babel_Action
         $adapters = array();
         $warnings = array();
         $metas = array();
+        $repeated = array();
 
         if (!empty($directories)) {
             $directory = $directories[$index_directory];
             $scanner = new Babel_Utils_DirectoryScanner();
-            $books = $scanner->scan_collection("$bookstore/$directory", $adapters, $warnings, $metas);
+            $books = $scanner->scan_collection("$bookstore/$directory", $adapters, $warnings, $metas, $repeated);
         } else {
             $books = array();
         }
@@ -192,8 +193,10 @@ class Books_IndexController extends Babel_Action
         $this->view->directories = $directories;
         $this->view->directory = $index_directory;
         $this->view->books = $books;
-        $this->view->metas = $metas;
+        $this->view->adapters = $adapters;
         $this->view->warnings = $warnings;
+        $this->view->metas = $metas;
+        $this->view->repeated = $repeated;
         $this->view->form = new Books_Form_Meta();
     }
 
