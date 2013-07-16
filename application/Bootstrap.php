@@ -13,7 +13,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 array('namespace' => ucfirst($module), 'basePath' => APPLICATION_PATH . '/modules/' . $module, 'resourceTypes' => $resourceTypes)
             ));
         }
-        
+
         $loader->pushAutoloader(new Babel_Models_Loader());
         return $loader;
     }
@@ -47,15 +47,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initTranslate() {
         $this->bootstrap(array('session'));
-        
+
         $i18n = APPLICATION_PATH . '/../data/i18n/';
         $language = Zend_Registry::get('lang');
-        
+
         if (!file_exists($i18n . $language . '.csv')) {
             $language = 'en';
         }
         $content = $i18n . $language . '.csv';
-        
+
         Zend_Registry::set('lang', $language);
 
         $translate = new Zend_Translate(array(
@@ -79,7 +79,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initView() {
         $this->bootstrap('frontController');
-        
+
         // Use the php suffix in views
         $renderer = new Zend_Controller_Action_Helper_ViewRenderer();
         $renderer->setViewSuffix('php');
@@ -90,7 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view = new Zend_View();
 
         $css_theme = $options['babel']['properties']['css'];
-        
+
         $view->headTitle($options['babel']['properties']['title']);
         $view->doctype($options['resources']['view']['doctype']);
         $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
