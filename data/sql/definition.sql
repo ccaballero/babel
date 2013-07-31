@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS `babel_users`;
 CREATE TABLE `babel_users` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `role`              enum('user','admin')                                        NOT NULL,
-    `contact`           int unsigned                                                NOT NULL DEFAULT 0,
+    `contact`           int unsigned                                                NULL,
     `username`          varchar(128)                                                NOT NULL,
     `password`          varchar(40)                                                 NOT NULL,
     `fullname`          varchar(128)                                                NOT NULL DEFAULT '',
