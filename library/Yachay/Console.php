@@ -54,7 +54,7 @@ class Yachay_Console
     public function __construct() {
         $this->ok .= PHP_EOL;
         $this->fail .= PHP_EOL;
-        
+
         $cols = exec('tput cols');
         if (!empty($cols)) {
             $this->count = $cols - 4;
@@ -80,37 +80,42 @@ class Yachay_Console
         $env = $this->getopt->getOption('env');
         defined('APPLICATION_ENV') || define('APPLICATION_ENV', (null === $env) ? 'development' : $env);
 
-        // Initialize Zend_Application
-        $application = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
-        $bootstrap = $application->getBootstrap();
-        $bootstrap->bootstrap();
-
         if ($this->getopt->getOption('h')) {
             $flag_used = true;
             echo $this->getopt->getUsageMessage();
             return true;
         }
 
-        foreach ($this->specific_options as $option => $description) {
-            $param = explode('|', $option);
-            $command = $param[0];
+        // Initialize Zend_Application
+        try {
+            $application = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+            $bootstrap = $application->getBootstrap();
+            $bootstrap->bootstrap();
 
-            if ($this->getopt->getOption($command)) {
-                $result = $this->{$command}($this->getopt, $bootstrap);
-                $flag_used = true;
+            foreach ($this->specific_options as $option => $description) {
+                $param = explode('|', $option);
+                $command = $param[0];
 
-                if ($result) {
-                    echo $command . ' was completed successfully' . PHP_EOL;
-                } else {
-                    echo 'you must correct errors found' . PHP_EOL;
-                    $this->__dump();
+                if ($this->getopt->getOption($command)) {
+                    $result = $this->{$command}($this->getopt, $bootstrap);
+                    $flag_used = true;
+
+                    if ($result) {
+                        echo $command . ' was completed successfully' . PHP_EOL;
+                    } else {
+                        echo 'you must correct errors found' . PHP_EOL;
+                        $this->__dump();
+                    }
+
+                    if (!$flag_used) {
+                        echo $this->getopt->getUsageMessage();
+                    }
                 }
-
             }
-        }
-
-        if (!$flag_used) {
+        } catch (Exception $e) {
+            echo 'Su archivo INI no esta configurado adecuadamente' . PHP_EOL;
             echo $this->getopt->getUsageMessage();
+            return;
         }
 
         return true;

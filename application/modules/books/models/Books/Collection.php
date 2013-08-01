@@ -32,7 +32,7 @@ class Books_Collection extends Babel_Models_Table
                        ->where('babel_books_collection.published = ?', true));
         return $result->count;
     }
-    
+
     public function countCollection() {
         $result = $this->fetchRow(
                   $this->select()

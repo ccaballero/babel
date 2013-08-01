@@ -29,6 +29,7 @@ class Shell_Babel extends Yachay_Console
         'font|f=s'      => 'generation of figlet',
         'figlet|l=s'    => 'generation of figlet',
         'stats|s'       => 'statistical information about babel',
+        'check|c=s'     => 'scan and check a external directory',
     );
 
     public $path_font = null;
@@ -93,7 +94,6 @@ class Shell_Babel extends Yachay_Console
     public function directory($getopt) {
         $this->directory = realpath($getopt->getOption('directory'));
         echo str_pad('Set the directory to: ' . $this->directory, $this->count, $this->separator);
-
 
         $adapters = array();
         $warnings = array();
@@ -350,6 +350,44 @@ class Shell_Babel extends Yachay_Console
         }
         echo PHP_EOL;
 
+        return true;
+    }
+
+    public function check($getopt) {
+        $this->directory = realpath($getopt->getOption('check'));
+        echo str_pad('Scan the directory: ' . $this->directory, $this->count, $this->separator);
+        echo $this->ok;
+        echo PHP_EOL;
+
+        $scanner = new Babel_Utils_DirectoryScanner();
+        $this->files = $scanner->scan_files($this->directory);
+
+        $hashes = array();
+        foreach ($this->files as $file) {
+            $hashes[] = $file['hash'];
+        }
+        
+        $sql = '
+            SELECT hash
+            FROM babel_books_collection
+            WHERE hash IN (\'' . implode('\',\'', $hashes) . '\')';
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $result = $db->query($sql)->fetchAll();
+
+        $hashes_selected = array();
+        foreach ($result as $hash) {
+            $hashes_selected[] = $hash['hash'];
+        }
+        
+        foreach ($this->files as $file) {
+            echo str_pad($file['file'], 70, ' ');
+            echo str_pad(substr($file['hash'], 0, 10), 11, ' ');
+            echo (in_array($file['hash'], $hashes_selected) ? '' : 'no');
+            echo PHP_EOL;
+        }
+
+        echo PHP_EOL;
         return true;
     }
 }
