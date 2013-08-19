@@ -1,0 +1,67 @@
+\documentclass[letter,11pt,twoside,spanish]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{anysize}
+\usepackage{multicol}
+
+\usepackage[
+pdfauthor={Carlos Caballero},%
+pdftitle={Babel},%
+colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+%urlcolor=black
+pdftex]{hyperref}
+
+\marginsize{2.5cm}{2.5cm}{2.5cm}{2.5cm}
+\renewcommand{\baselinestretch}{1.5}
+
+%opening
+\title{Reducción de las brechas de acceso a la información a partir del
+intercambio libre de recursos de aprendizaje}
+\date{19 de Agosto del 2013}
+\author{\emph{Carlos Caballero}\\
+Documento de Investigación\\
+Universidad Mayor de San Simón\\
+cijkb.j at gmail.com\\}
+\begin{document}
+\begin{multicols}{2}
+\maketitle
+\pagestyle{empty}
+Se hablará acerca del proceso de investigación llevado a cabo para la
+construcción de una solución factible al problema del intercambio de
+información entre personas. A partir del desarrollo de un sistema web
+al que me referiré como: 'Babel'.
+
+\emph{Babel} es una de las piezas de software desarrolladas en la sociedad científica
+de sistemas e informática (UMSS); que esta encaminada a reducir las brechas de
+acceso a la información que se han percibido entre la comunidad estudiantil.
+Esencialmente consiste en un sitio web desarrollado en el lenguaje de
+programación PHP, donde los usuarios pueden compartir, ordenar, clasificar, y
+catalogar archivos en formato PDF.
+
+Esta solución ha sido concebida con un lógica descentralizada de intercambio, es
+decir, esta diseñada para crear multiples conexiones con otras instancias, ya
+sean publicas o privadas, de modo que el rango de búsqueda pueda propagarse a
+una variedad aún mayor que la de una única instancia (P2P).
+
+Se ha estructurado el proyecto en cuatro grandes tareas:
+
+\begin{itemize}
+\item Busqueda de documentos
+\item Intercambio de documentos
+\item Clasificación de documentos
+\item Valoración de documentos
+\end{itemize}
+
+Despues de muchos meses de desarrollo y refactorización de las funciones, se
+obtuvo una versión estable del sistema. Este se encuentra alojado actualmente
+en el sitio \url{http://babel.scesi.org}, y se ha publicado el codigo fuente del
+mismo en el sitio \url{https://github.com/ccaballero/babel} para la instalación
+libre de otras instancias descentralizadas.
+\end{multicols}
+\end{document}
