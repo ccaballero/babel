@@ -227,7 +227,6 @@ class Shell_Babel extends Yachay_Console
                 if ($this->override || !$file->hasThumb()) {
                     try {
                         $image = new Imagick($file->getPath() . '[0]');
-
                         $image->setImageFormat('jpeg');
                         $image->setImageType (imagick::IMGTYPE_TRUECOLOR);
                         $image->thumbnailImage(0, 390);
