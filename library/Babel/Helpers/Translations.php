@@ -3,7 +3,7 @@
 class Babel_Helpers_Translations
 {
     public function translations() {
-        $i18n = APPLICATION_PATH . '/../data/i18n/';
+        $i18n = APPLICATION_PATH . '/data/i18n/';
         $langs = array();
         
         $files = @scandir($i18n);

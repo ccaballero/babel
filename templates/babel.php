@@ -1,5 +1,5 @@
 <?php echo $this->doctype() ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
         <?php echo $this->headTitle() ?>
         <?php echo $this->headMeta() ?>

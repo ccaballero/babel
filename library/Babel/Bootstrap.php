@@ -37,7 +37,7 @@ class Babel_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initRouter() {
         $options = $this->getOptions();
-        
+
         $ctrl = Zend_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
 
@@ -92,46 +92,61 @@ class Babel_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     protected function _initView() {
-        $this->bootstrap('frontController');
+        $this->bootstrap(array('config', 'frontController'));
+
+        $view = new Zend_View();
+        $config = Zend_Registry::get('config');
 
         // Use the php suffix in views
         $renderer = new Zend_Controller_Action_Helper_ViewRenderer();
-        $renderer->setViewSuffix('php');
-        Zend_Controller_Action_HelperBroker::addHelper($renderer);
+        $renderer->setView($view)
+                 ->setViewSuffix('php');
 
-        $options = $this->getOptions();
-
-        $view = new Zend_View();
-
-        $css_theme = $options['babel']['properties']['css'];
-
-        $view->headTitle($options['babel']['properties']['title']);
-        $view->doctype($options['resources']['view']['doctype']);
-        $view->headMeta()->appendHttpEquiv(
-            'Content-Type', 'text/html; charset=utf-8');
-        $view->headLink(array(
-            'rel' => 'icon',
-            'href' => $view->baseUrl('/babel-small.png'))
+        $view->setScriptPath(
+            $config->resources->layout->layoutPath .
+            $config->resources->layout->layout . '/'
+        );
+        $view->setHelperPath(
+            APPLICATION_PATH . '/library/Yachay/View/Helper',
+            'Yachay_View_Helper'
         );
 
-        $view->headScript()->appendFile($view->baseUrl('/media/js/jquery-1.6.2.min.js'), 'text/javascript')
-                           ->appendFile($view->baseUrl('/media/js/jquery.tools.min.js'), 'text/javascript')
-                           ->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'')
-                           ->appendFile($view->baseUrl('/media/js/babel.js', 'text/javascript'));
+        Zend_Controller_Action_HelperBroker::addHelper($renderer);
 
-        $view->headLink()->appendStylesheet($view->baseUrl('/media/css/base.css'))
-                         ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/tipography.css'))
-                         ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/colors.css'))
-                         ->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/shadows.css'));
+        $baseUrl = $config->resources->frontController->baseUrl;
 
-        // Browser semi-detection
-        if (isset($_SERVER) && isset($_SERVER['HTTP_USER_AGENT'])) {
-            if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'firefox')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/firefox.css'));
-            } else if (strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'chrome')) {
-                $view->headLink()->appendStylesheet($view->baseUrl('/media/' . $css_theme . '/webkit.css'));
-            }
+        $view->media_url = $baseUrl . '/media';
+
+        $view->doctype($config->resources->view->doctype);
+        $view->headTitle($config->babel->properties->title);
+
+        $equivs = $config->template->httpEquiv;
+        foreach ($equivs as $key => $content) {
+            $view->headMeta()->appendHttpEquiv($key, $content);
         }
+        $metas = $config->template->meta;
+        foreach ($metas as $key => $content) {
+            $view->headMeta()->appendName($key, $content);
+        }
+
+        $view->headLink(array(
+            'rel' => 'icon',
+            'type' => 'image/x-icon',
+            'href' => $view->baseUrl($view->media_url . '/favicon.ico')));
+
+        $css_styles = $config->template->css;
+        foreach ($css_styles as $css_style) {
+             $view->headLink()->appendStylesheet($view->media_url . $css_style);
+        }
+
+        $view->headScript()->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'');
+        $js_scripts = $config->template->js;
+        foreach ($js_scripts as $js_script) {
+            $view->headScript()->appendFile($view->media_url . $js_script, 'text/javascript');
+        }
+
+        $auth = Zend_Auth::getInstance();
+        $view->auth = $auth;
 
         return $view;
     }
