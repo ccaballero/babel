@@ -1,0 +1,43 @@
+a {
+    font-family: Century Gothic, Apple Gothic, sans-serif;
+    font-size: 0.9em;
+}
+
+header, footer {
+    left: 0px;
+    right: 0px;
+    background-color: #ccdd00;
+}
+
+header {
+    position: absolute;
+    top: 0px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+}
+
+header > nav:nth-child(1),
+footer > nav:nth-child(1) {
+    float: left;
+}
+
+header > nav:nth-child(2),
+footer > nav:nth-child(2) {
+    float: right;
+}
+
+header > nav > ul > li > ul {
+    display: none;
+}
+
+header > nav > ul > li,
+footer > nav > ul > li {
+    float: left;
+}
+
+section {
+    display: none;
+}
