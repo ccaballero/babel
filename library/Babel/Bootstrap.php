@@ -1,16 +1,33 @@
 <?php
 
-class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+class Babel_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    protected function _initConfig() {
+        $config = new Zend_Config($this->getOptions());
+        Zend_Registry::set('config', $config);
+        return $config;
+    }
+
     protected function _initAutoload() {
         $loader = Zend_Loader_Autoloader::getInstance();
 
-        $resourceTypes = array('form' => array('path' => 'forms/', 'namespace' => 'Form',),);
-        $modules = array('auth', 'books', 'catalogs', 'frontpage', 'help', 'search', 'settings', 'tags', 'users');
+        $resourceTypes = array(
+            'form' => array(
+                'path' => 'forms/',
+                'namespace' => 'Form',
+            ),
+        );
+        $modules = array(
+            'auth', 'books', 'catalogs', 'frontpage',
+            'help', 'search', 'settings', 'tags', 'users');
 
         foreach ($modules as $module) {
             $loader->pushAutoloader(new Zend_Application_Module_Autoloader(
-                array('namespace' => ucfirst($module), 'basePath' => APPLICATION_PATH . '/modules/' . $module, 'resourceTypes' => $resourceTypes)
+                array(
+                    'namespace' => ucfirst($module),
+                    'basePath' => APPLICATION_PATH . '/apps/' . $module,
+                    'resourceTypes' => $resourceTypes
+                )
             ));
         }
 
@@ -19,10 +36,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     protected function _initRouter() {
+        $options = $this->getOptions();
+        
         $ctrl = Zend_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
 
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/routes.ini');
+        $router_file = $options['resources']['router'];
+        $config = new Zend_Config_Ini($router_file);
         $router->addConfig($config, 'production');
 
         return $router;
@@ -48,7 +68,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initTranslate() {
         $this->bootstrap(array('session'));
 
-        $i18n = APPLICATION_PATH . '/../data/i18n/';
+        $i18n = APPLICATION_PATH . '/data/i18n/';
         $language = Zend_Registry::get('lang');
 
         if (!file_exists($i18n . $language . '.csv')) {
@@ -71,12 +91,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $translate;
     }
 
-    protected function _initConfig() {
-        $config = new Zend_Config($this->getOptions());
-        Zend_Registry::set('config', $config);
-        return $config;
-    }
-
     protected function _initView() {
         $this->bootstrap('frontController');
 
@@ -93,8 +107,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $view->headTitle($options['babel']['properties']['title']);
         $view->doctype($options['resources']['view']['doctype']);
-        $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
-        $view->headLink(array('rel' => 'icon', 'href' => $view->baseUrl('/babel-small.png')));
+        $view->headMeta()->appendHttpEquiv(
+            'Content-Type', 'text/html; charset=utf-8');
+        $view->headLink(array(
+            'rel' => 'icon',
+            'href' => $view->baseUrl('/babel-small.png'))
+        );
+
         $view->headScript()->appendFile($view->baseUrl('/media/js/jquery-1.6.2.min.js'), 'text/javascript')
                            ->appendFile($view->baseUrl('/media/js/jquery.tools.min.js'), 'text/javascript')
                            ->appendScript('var baseUrl=\'' . $view->baseUrl() . '\'')

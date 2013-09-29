@@ -32,15 +32,20 @@ class Babel_Action extends Zend_Controller_Action
             }
             $this->view->user = $this->user;
 
-            $this->view->addScriptPath(APPLICATION_PATH . '/modules');
-            $this->view->addScriptPath(APPLICATION_PATH . '/../docs/manual/');
+            $this->view->addScriptPath(APPLICATION_PATH . '/apps');
+            $this->view->addScriptPath(APPLICATION_PATH . '/docs/manual/');
 
-            $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
-            $this->view->addHelperPath(APPLICATION_PATH . '/../library/Babel/Helpers', 'Babel_Helpers');
+            $this->view->addHelperPath(
+                APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
+            $this->view->addHelperPath(
+                APPLICATION_PATH . '/library/Babel/Helpers', 'Babel_Helpers');
 
-            $this->view->route = $this->getFrontController()->getRouter()->getCurrentRouteName();
+            $this->view->route = $this->getFrontController()
+                                      ->getRouter()
+                                      ->getCurrentRouteName();
             $this->route = $this->view->route;
-            $this->url = $request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri();
+            $this->url = $request->getScheme() . '://'
+                       . $request->getHttpHost() . $request->getRequestUri();
 
             $this->view->language = Zend_Registry::get('lang');
             $this->view->translate = Zend_Registry::get('Zend_Translate');
@@ -50,7 +55,10 @@ class Babel_Action extends Zend_Controller_Action
 
     public function postDispatch() {
         if (!$this->_useForward) {
-            $this->view->messages = array_merge($this->_flashMessenger->getCurrentMessages(), $this->_flashMessenger->getMessages());
+            $this->view->messages = array_merge(
+                $this->_flashMessenger->getCurrentMessages(),
+                $this->_flashMessenger->getMessages()
+            );
             $this->_helper->getHelper('FlashMessenger')->clearCurrentMessages();
             $this->_helper->getHelper('FlashMessenger')->clearMessages();
 
@@ -66,7 +74,9 @@ class Babel_Action extends Zend_Controller_Action
 
     public function requireLogin() {
         if ($this->auth == null) {
-            $this->_helper->flashMessenger->addMessage($this->translate->_('You must be logged'));
+            $this->_helper
+                 ->flashMessenger
+                 ->addMessage($this->translate->_('You must be logged'));
             $this->_helper->redirector('in', 'index', 'auth');
         }
     }
@@ -75,7 +85,9 @@ class Babel_Action extends Zend_Controller_Action
         $this->requireLogin();
 
         if (!$this->IamAdmin()) {
-            $this->_helper->flashMessenger->addMessage($this->translate->_('You must be admin'));
+            $this->_helper
+                 ->flashMessenger
+                 ->addMessage($this->translate->_('You must be admin'));
             $this->_helper->redirector('in', 'index', 'auth');
         }
     }

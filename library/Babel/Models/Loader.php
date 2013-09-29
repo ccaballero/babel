@@ -9,6 +9,7 @@ class Babel_Models_Loader implements Zend_Loader_Autoloader_Interface
         } else {
             $module = strtolower(substr($class, 0, $position));
         }
-        Zend_Loader::loadClass($class, APPLICATION_PATH . '/modules/' . $module . '/models');
+        Zend_Loader::loadClass($class,
+            APPLICATION_PATH . '/apps/' . $module . '/models');
     }
 }
